@@ -1,0 +1,14 @@
+# Colab (VLM 추론 + SmolVLA 파인튜닝)
+# 설치:  pip install -r requirements-colab.txt
+mujoco>=3.2,<4.0
+numpy>=1.26
+h5py>=3.10
+imageio>=2.34
+imageio-ffmpeg>=0.4
+Pillow>=10.0
+matplotlib>=3.8
+transformers>=4.50
+accelerate>=0.34
+num2words                # SmolVLM2 프로세서가 요구
+# LeRobot / SmolVLA — GitHub 최신본을 쓰세요:
+#   pip install "lerobot[smolvla] @ git+https://github.com/huggingface/lerobot.git"

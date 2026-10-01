@@ -1,0 +1,15 @@
+{
+  "x": 0,
+  "invert_x": false,
+  "y": 1,
+  "invert_y": true,
+  "z": "hat0_y",
+  "invert_z": false,
+  "yaw": 2,
+  "invert_yaw": true,
+  "btn_grip": 0,
+  "btn_record": 15,
+  "btn_reset": 14,
+  "btn_discard": 10,
+  "btn_slow": 4
+}

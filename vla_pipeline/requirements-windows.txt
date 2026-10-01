@@ -1,0 +1,17 @@
+# 윈도우 로컬 (씬 편집 + 게임패드 텔레옵 + 녹화)
+# 설치:  pip install -r requirements-windows.txt
+#
+# 여기에는 torch 가 없습니다. MuJoCo 시뮬·IK·규칙 플래너·텔레옵·역재생까지는
+# 이것만으로 전부 돌아갑니다. VLM/VLA 추론이 필요하면 SETUP_STUDENT.md 5절을 보세요.
+mujoco>=3.2,<4.0
+numpy>=1.26
+h5py>=3.10
+imageio>=2.34
+imageio-ffmpeg>=0.4
+Pillow>=10.0
+matplotlib>=3.8
+
+# 게임패드. Python 3.13+ 에는 pygame 휠이 없어 소스 빌드로 넘어가 실패합니다
+# (distutils 제거 때문). pygame-ce 는 import 이름이 그대로 `pygame` 이라 코드는 그대로 씁니다.
+pygame>=2.5 ; python_version < "3.13"
+pygame-ce>=2.5 ; python_version >= "3.13"

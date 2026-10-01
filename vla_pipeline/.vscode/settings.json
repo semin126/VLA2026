@@ -1,0 +1,12 @@
+{
+  "//": "이 폴더를 VSCode 로 열면 .venv 를 자동으로 인터프리터로 잡는다.",
+  "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.extraPaths": ["${workspaceFolder}"],
+  "files.encoding": "utf8",
+  "files.eol": "\n",
+
+  "terminal.integrated.env.windows": {
+    "CLAUDE_CONFIG_DIR": "${env:USERPROFILE}\\.claude-work"
+  }
+}

@@ -1,0 +1,5 @@
+assets/franka_emika_panda/
+data/
+outputs/
+__pycache__/
+*.pyc
