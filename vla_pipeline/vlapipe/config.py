@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import os
+import re
 import subprocess
 import tempfile
 from pathlib import Path
@@ -200,6 +201,8 @@ def zone_center(name: str) -> tuple[float, float]:
 
 
 # --------------------------------------------------------------------------
+# 물체 세트 1 — 색 + 모양으로 구분 (color). 기준 조건.
+#
 # 물체 10개 (260827 문서의 3가지 크기 = 전체 치수 [m]; MuJoCo size 는 half-extent)
 #   0.06 x 0.04 x 0.04  x5
 #   0.05 x 0.05 x 0.05  x3
@@ -207,7 +210,7 @@ def zone_center(name: str) -> tuple[float, float]:
 # home_zone = '정돈된 상태'에서 이 물체가 있어야 할 구역.
 # grasp_axis = 그리퍼가 물체를 물 때 벌어지는 방향 (물체 로컬 축). Panda 최대 개폐 0.08 m.
 # --------------------------------------------------------------------------
-OBJECTS: list[dict] = [
+COLOR_OBJECTS: list[dict] = [
     # 긴 블록 5개 -> 오른쪽 보관 구역
     {"name": "red_block",    "full": (0.06, 0.04, 0.04), "rgba": "0.90 0.14 0.14 1", "home_zone": "right_zone", "grasp_axis": "y", "color_en": "red",    "color_ko": "빨간"},
     {"name": "orange_block", "full": (0.06, 0.04, 0.04), "rgba": "0.95 0.52 0.10 1", "home_zone": "right_zone", "grasp_axis": "y", "color_en": "orange", "color_ko": "주황"},
@@ -222,8 +225,108 @@ OBJECTS: list[dict] = [
     {"name": "green_tile",   "full": (0.04, 0.04, 0.03), "rgba": "0.10 0.55 0.30 1", "home_zone": "left_zone",  "grasp_axis": "y", "color_en": "green",  "color_ko": "초록"},
     {"name": "brown_tile",   "full": (0.04, 0.04, 0.03), "rgba": "0.45 0.30 0.18 1", "home_zone": "left_zone",  "grasp_axis": "y", "color_en": "brown",  "color_ko": "갈색"},
 ]
+
+# --------------------------------------------------------------------------
+# 지시 대상 표현(referring expression) — "물체를 무엇으로 가리키는가"
+#
+# 이 실험에서 바꾸는 것은 이 단서뿐이고, 씬·로봇·액션 규격은 전부 같게 둔다.
+# 그래야 "색/모양으로 가리킬 때"와 "숫자로 가리킬 때"를 같은 조건에서 비교할 수 있다.
+#   ref_en / ref_ko  : 지시문에 들어가는 이름 ("red block" / "빨간 물체")
+#   ref_brief_en     : 장애물 치우기 문장용 짧은 이름 ("red object")
+#   patterns         : VLM 출력에서 이 물체를 찾아내는 정규식 — 강한 단서
+#   weak_patterns    : 강한 단서가 하나도 안 맞을 때만 쓰는 폴백
+# 색 세트의 문장은 기존 실측값과 비교 가능해야 하므로 글자까지 그대로 유지한다.
+# --------------------------------------------------------------------------
+def _shape_en(full) -> str:
+    return "block" if full[0] != full[1] else ("cube" if full[2] == full[0] else "tile")
+
+
+for _o in COLOR_OBJECTS:
+    _o["ref_en"] = f"{_o['color_en']} {_shape_en(_o['full'])}"
+    _o["ref_brief_en"] = f"{_o['color_en']} object"
+    _o["ref_ko"] = f"{_o['color_ko']} 물체"
+    _o["patterns"] = [rf"\b{_o['color_en']}\b", re.escape(_o["color_ko"]), re.escape(_o["name"])]
+    _o["weak_patterns"] = []
+
+
+# --------------------------------------------------------------------------
+# 물체 세트 2 — 숫자로 구분 (number)
+#
+# 색도 모양도 크기도 전부 똑같은 정육면체 10개를 놓고, 면에 1~10 숫자만 찍는다.
+# 숫자 말고는 구별할 방법이 없으므로
+#   1단계 VLM : 숫자를 '읽어야' 계획을 세울 수 있다
+#   2단계 VLA : 지시문에 적힌 숫자로 대상을 찾아야 한다
+# 숫자 텍스처 생성과 씬 등록은 vlapipe/numbered.py 가 한다.
+# 이름(name)으로 구분하는 세 번째 조건도 여기에 세트를 하나 더 두면 된다.
+# --------------------------------------------------------------------------
+NUMBER_COUNT = 10
+NUMBER_FULL = (0.05, 0.05, 0.05)   # 전부 같은 치수 = 크기/모양이 단서가 되지 않게
+NUMBER_SPLIT = 5                   # 1~5 -> 오른쪽, 6~10 -> 왼쪽 (좌우 5개씩, tidy 격자와 맞음)
+NUMBER_TEX_PX = 256                # 숫자 텍스처 한 변 [px]
+NUMBER_FACE_RGB = (242, 242, 240)  # 면 바탕색 (테이블 0.82 보다 밝게)
+NUMBER_DIGIT_RGB = (18, 18, 18)    # 숫자 색
+NUMBER_EDGE_RGB = (70, 70, 72)     # 테두리 — 밝은 테이블 위에서 물체 윤곽이 보이도록
+
+
+def number_home_zone(n: int) -> str:
+    """숫자 규칙 — 색 세트의 '모양 규칙'(긴 블록=오른쪽)과 같은 자리를 차지한다."""
+    return "right_zone" if n <= NUMBER_SPLIT else "left_zone"
+
+
+def _number_patterns(n: int) -> list[str]:
+    """'object 7' · 'cube 7' · 'no.7' · '#7' · 'object_7' · '7번' 을 잡는다.
+    (?<!\\d)7(?!\\d) 로 둘러싸서 '7' 이 '17'·'70' 에 걸리지 않게 한다."""
+    d = str(n)
+    return [
+        rf"(?:object|cube|block|box|number|no\.?|#)[\s_]*(?<!\d){d}(?!\d)",
+        rf"(?<!\d){d}(?!\d)\s*번",
+    ]
+
+
+NUMBER_OBJECTS: list[dict] = [
+    {
+        "name": f"object_{n}", "number": n, "full": NUMBER_FULL,
+        "rgba": "0.95 0.95 0.94 1",         # 텍스처를 못 만들었을 때의 폴백 색
+        "material": f"num_{n:02d}_mat",     # scene.py 가 이 재질로 그린다
+        "home_zone": number_home_zone(n), "grasp_axis": "y",
+        # "Pick up the cube number 7 and place it ..." / "7번 물체를 집어 ..."
+        # 'cube' 는 10개가 전부 정육면체라 구분 단서가 되지 않는다 — 숫자만 단서다.
+        "ref_en": f"cube number {n}", "ref_brief_en": f"cube number {n}",
+        "ref_ko": f"{n}번 물체",
+        "patterns": _number_patterns(n),
+        # VLM 이 설명 없이 숫자만 ["7", "3"] 처럼 내놓는 경우의 폴백
+        "weak_patterns": [rf"(?<!\d){n}(?!\d)"],
+    }
+    for n in range(1, NUMBER_COUNT + 1)
+]
+
+
+# --------------------------------------------------------------------------
+# 활성 물체 세트. 기본은 색 세트(기존 동작 그대로).
+# --------------------------------------------------------------------------
+OBJECT_SETS = {"color": COLOR_OBJECTS, "number": NUMBER_OBJECTS}
+ACTIVE_OBJECT_SET = "color"
+
+OBJECTS: list[dict] = COLOR_OBJECTS
 OBJECT_NAMES = [o["name"] for o in OBJECTS]
 OBJECT_BY_NAME = {o["name"]: o for o in OBJECTS}
+
+
+def use_object_set(name: str) -> list[dict]:
+    """활성 물체 세트를 바꾼다.
+
+    **SortingEnv 를 만들기 전에** 불러야 한다. env 가 생성 시점에 물체 이름으로
+    MuJoCo 조인트 주소를 잡아 두기 때문에, 나중에 바꾸면 이름이 맞지 않는다.
+    숫자 세트는 vlapipe/numbered.py 의 activate() 를 쓰는 편이 낫다(텍스처까지 챙긴다).
+    """
+    global OBJECTS, OBJECT_NAMES, OBJECT_BY_NAME, ACTIVE_OBJECT_SET
+    if name not in OBJECT_SETS:
+        raise ValueError(f"모르는 물체 세트: {name!r} (가능: {sorted(OBJECT_SETS)})")
+    OBJECTS = OBJECT_SETS[name]
+    OBJECT_NAMES = [o["name"] for o in OBJECTS]
+    OBJECT_BY_NAME = {o["name"]: o for o in OBJECTS}
+    ACTIVE_OBJECT_SET = name
+    return OBJECTS
 
 
 def half_size(obj: dict) -> tuple[float, float, float]:

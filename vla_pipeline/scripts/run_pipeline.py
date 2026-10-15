@@ -8,6 +8,8 @@
   python scripts/run_pipeline.py --layout messy --seed 3
   python scripts/run_pipeline.py --planner vlm            # SmolVLM2 로 계획
   python scripts/run_pipeline.py --policy smolvla --checkpoint outputs/ckpt/last
+  python scripts/run_pipeline.py --objects number         # 색/모양이 아니라 숫자로 물체 구분
+  python scripts/run_pipeline.py --objects number --planner vlm
 """
 import _bootstrap  # noqa: F401
 import argparse
@@ -18,6 +20,7 @@ from pathlib import Path
 import numpy as np
 
 from vlapipe import config as C
+from vlapipe import numbered           # 임포트만으로 숫자용 프롬프트가 등록된다
 from vlapipe.env import SortingEnv
 from vlapipe.planner import PROMPTS, RulePlanner, VLMPlanner, plan_accuracy
 from vlapipe.policy import ScriptedSortingPolicy
@@ -30,8 +33,16 @@ def parse_args():
                     choices=["messy", "random", "tidy", "cluttered"])
     ap.add_argument("--seed", type=int, default=3)
     ap.add_argument("--command", default="테이블을 정리하시오")
+    # 물체를 무엇으로 구분하는가 = 이 실험의 변수.
+    #   color  : 색 + 모양 (기준 조건)
+    #   number : 똑같은 흰 정육면체 10개, 면에 찍힌 1~10 숫자만 다르다
+    ap.add_argument("--objects", default="color", choices=["color", "number"])
     ap.add_argument("--planner", default="rule", choices=["rule", "vlm"])
-    ap.add_argument("--prompt-style", default="json", choices=list(PROMPTS))
+    ap.add_argument("--prompt-style", default=None, choices=sorted(PROMPTS),
+                    help="생략하면 물체 세트에 맞는 기본값(color->json, number->number)")
+    ap.add_argument("--vlm-image-size", type=int, default=0,
+                    help="VLM 에 넣는 agentview 이미지 한 변 [px]. "
+                         "0 이면 color=--image-size, number=512 (숫자가 너무 작게 찍히지 않게)")
     ap.add_argument("--policy", default="scripted", choices=["scripted", "smolvla"])
     ap.add_argument("--checkpoint", default=None)
     ap.add_argument("--passes", type=int, default=2, help="실패한 물체를 다시 시도할 횟수")
@@ -45,13 +56,23 @@ def parse_args():
 
 def main() -> int:
     args = parse_args()
-    out = Path(args.out) / f"run_{args.layout}{args.seed}_{args.planner}_{args.policy}"
+    # 물체 세트 교체는 env 를 만들기 전에 해야 한다 (env 가 물체 이름으로 조인트를 잡는다).
+    if args.objects == "number":
+        numbered.activate()
+    tag = "" if args.objects == "color" else f"_{args.objects}"
+    out = Path(args.out) / f"run_{args.layout}{args.seed}{tag}_{args.planner}_{args.policy}"
     out.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
 
     env = SortingEnv(layout=args.layout, seed=args.seed, image_size=args.image_size)
     rule = RulePlanner(env)
-    vlm = VLMPlanner(prompt_style=args.prompt_style) if args.planner == "vlm" else None
+    style = args.prompt_style or ("number" if args.objects == "number" else "json")
+    # 숫자는 윗면 몇 px 안에 들어가므로 VLM 입력은 관측 해상도보다 크게 렌더한다.
+    vlm_px = args.vlm_image_size or (512 if args.objects == "number" else args.image_size)
+    vlm = VLMPlanner(prompt_style=style) if args.planner == "vlm" else None
+    if vlm is not None:
+        print(f"[VLM] 프롬프트 '{style}', 입력 이미지 {vlm_px}x{vlm_px} px "
+              f"(물체 윗면 약 {numbered.face_pixels(vlm_px):.0f} px, 계산값)")
 
     if args.policy == "smolvla":
         from vlapipe.policy import SmolVLAPolicy
@@ -74,7 +95,7 @@ def main() -> int:
             break
         gold = rule.plan(args.command)
         if vlm is not None:
-            plan = vlm.plan(env.render("agentview"), args.command)
+            plan = vlm.plan(env.render("agentview", vlm_px, vlm_px), args.command)
             if p == 0:
                 report["planner_eval"] = plan_accuracy(plan, gold)
                 report["vlm_plan"] = plan

@@ -148,7 +148,8 @@ vla_pipeline/
 ├── README.md             상세 문서 — 규격·실측값·문제해결
 ├── setup_assets.py       Panda 에셋 다운로드 + 손목카메라/TCP 패치 (보통 불필요)
 ├── vlapipe/
-│   ├── config.py         ★ 모든 수치 (씬 규격·액션 규격·경로·한글경로 우회)
+│   ├── config.py         ★ 모든 수치 (씬 규격·액션 규격·경로·한글경로 우회·물체 세트)
+│   ├── numbered.py       숫자로 물체를 구분하는 조건 (텍스처 생성·씬 에셋·VLM 프롬프트)
 │   ├── scene.py          MJCF 생성, tidy/messy/random/cluttered 배치
 │   ├── accessibility.py  가림·도달 판정 — 과제명의 '물체 접근성' 구현부
 │   ├── metrics.py        정량 지표 5군 + Wilson CI + 짝지은 부트스트랩
@@ -164,6 +165,7 @@ vla_pipeline/
 ├── scripts/
 │   ├── check_env.py      설치 점검
 │   ├── smoke_test.py     ★ 전 구간 자동 검증 (에이전트가 쓰기 좋음)
+│   ├── check_numbers.py  숫자 조건 점검 (텍스처·파싱·렌더·짧은 롤아웃)
 │   ├── run_pipeline.py   엔드투엔드 실행
 │   ├── teleop_record.py  텔레옵 녹화 (GUI — 사람이 필요)
 │   ├── build_dataset.py  역재생 + 검증 + LeRobot 변환
@@ -195,6 +197,20 @@ vla_pipeline/
 | 역재생 액션 적분 오차 | **0.000 mm** |
 | `smoke_test.py` | 5/5 (`--vlm` 시 6/6) |
 | 한글 경로에서 재실행 | 5/5 통과 (정션 우회 동작 확인) |
+
+### 숫자 조건 (`--objects number`) — 2026-10-08
+
+> ⚠️ 이 줄들은 **GPU 없는 임시 CPU 환경**(mujoco 3.15, 소프트웨어 렌더)에서 쟀습니다.
+> **성공 횟수는 비교할 수 있지만 걸린 시간은 위 표와 비교하면 안 됩니다.**
+
+| 항목 | 값 |
+|---|---|
+| `run_pipeline --objects number --layout messy --seed 3` (규칙 플래너) | 서브태스크 **5/5**, 정리완료 True, 726 스텝 |
+| 〃 같은 시드 색 조건 (대조군) | 서브태스크 5/6, 정리완료 True, 1182 스텝 |
+| `smoke_test.py` (색 조건, 숫자 기능 추가 후) | 5/5 통과 — 기준 조건 회귀 없음 |
+| `check_numbers.py` 글/파싱 검사 | 지시문 왕복 40/40, VLM 출력 모양 7/7 |
+| 숫자 판독(사람 눈, agentview) | 512px 렌더에서 또렷함 / **256px 에서는 읽기 어려움** |
+| VLM(SmolVLM2) 숫자 조건 계획 정확도 | **아직 안 쟀음** — GPU 있는 환경에서 `--planner vlm` 로 측정할 것 |
 
 ### 리눅스 데스크톱 (앞선 측정, RTX 4080)
 | 항목 | 값 |
@@ -289,3 +305,40 @@ SmolVLM2 는 이 과제를 제대로 못 합니다. **이건 고칠 버그가 �
 
 `--layout` 은 `tidy` / `messy` / `random` / `cluttered`(가림 있음) 중에서 고릅니다.
 `--seed` 를 바꾸면 배치가 달라집니다. 비교 실험은 **반드시 같은 시드**로 하세요.
+
+```powershell
+.\.venv\Scripts\python.exe scripts\check_numbers.py                          # 숫자 조건 점검
+.\.venv\Scripts\python.exe scripts\run_pipeline.py --objects number          # 숫자로 물체 구분
+.\.venv\Scripts\python.exe scripts\run_pipeline.py --objects number --planner vlm
+```
+
+---
+
+## 10. 물체를 무엇으로 구분하는가 — `--objects`
+
+이 연구의 또 하나의 변수입니다. **구분 단서만 바꾸고 나머지는 전부 같게** 둡니다.
+
+| `--objects` | 물체 | 정돈 규칙 | 지시문 |
+|---|---|---|---|
+| `color` (기본) | 색·모양이 다른 10개 | 긴 블록→오른쪽, 정육면체·타일→왼쪽 | "Pick up the red block …" |
+| `number` | **똑같은** 정육면체 10개, 면에 1~10 숫자 | 1~5→오른쪽, 6~10→왼쪽 | "Pick up the cube number 7 …" |
+
+숫자 조건에서는 색·크기·모양이 전부 같으므로 **숫자를 읽지 못하면 아무것도 구분할 수 없습니다.**
+`vlapipe/numbered.py` 가 숫자 텍스처를 만들어 씬에 붙이고, 물체 세트를 갈아끼웁니다.
+
+- 세트 교체(`numbered.activate()`)는 **`SortingEnv` 를 만들기 전에** 해야 합니다.
+  env 가 생성 시점에 물체 이름으로 MuJoCo 조인트 주소를 잡아 두기 때문입니다.
+- 물체 정의·숫자 규칙은 전부 `config.py` 의 `NUMBER_*` 에 있습니다.
+- 이름(name)으로 구분하는 세 번째 조건은 `config.OBJECT_SETS` 에 세트를 하나 더 두면 됩니다.
+  (`ref_en`/`ref_ko`/`patterns` 만 채우면 플래너·정책은 그대로 돌아갑니다.)
+- 숫자용 VLM 프롬프트는 두 가지입니다.
+  `number`(숫자 읽기 + 규칙 적용) / `number_read`(가운데에 있는 숫자만 읽게 하고 목적지는 코드가 결정).
+  **두 프롬프트의 점수 차이가 "숫자를 못 읽는 것"과 "규칙을 못 쓰는 것"을 갈라 줍니다.**
+
+### 숫자가 몇 픽셀로 찍히는가 (중요)
+
+agentview(top-down)에서 물체 윗면 한 변은 **256px 렌더에서 13.6px, 512px 에서 27.2px**
+(카메라 기하 계산값). 숫자 높이는 그 70% 정도입니다.
+**256px 렌더에서는 사람 눈으로도 숫자가 잘 안 읽힙니다.** 그래서 `run_pipeline.py` 는
+숫자 조건에서 VLM 입력만 512px 로 렌더합니다(`--vlm-image-size` 로 조절).
+관측(obs)·학습 데이터 해상도는 LIBERO 기본값 그대로 두었습니다.

@@ -14,23 +14,16 @@ from pathlib import Path
 from . import config as C
 
 # --------------------------------------------------------------------------
-# 조명
-#   기준: 260827 문서 (주광 = 로봇 뒤쪽 상단에서 작업구역을 향해 45도,
-#                      보조광 = 반대편에서 30% 세기, 그림자 소프트닝)
-#   260910 변경: 조명 위치에 따라 물체 색이 급변하는 문제를 줄이려고 문서 기준에서 조정
-#     - 보조광 세기 30% → 약 60% (diffuse 0.36 / 0.60): 암부를 더 밝게 채움
-#     - exponent 10→3, 6→2 / cutoff 60→70, 75→80: 스팟 가장자리 감쇠를 완만하게
-#     - specular 0.22→0.08, 0.04→0.02: 하이라이트가 물체 고유색을 덮지 않도록
-#     - ambient 추가 (0.10 / 0.08): 직접광을 받지 않는 면의 색 유지
-#   그림자: 주광만 투사(castshadow). 보조광과 ambient가 암부를 채워 부드럽게 보이게 함
+# 조명 (260827 문서: 주광 = 로봇 뒤쪽 상단에서 작업구역을 향해 45도,
+#                    보조광 = 반대편에서 30% 세기, 그림자 소프트닝)
 # --------------------------------------------------------------------------
 _LIGHTS = """
     <light name="key_light" pos="0 -0.90 2.00" dir="0 0.7071 -0.7071" directional="false"
-           castshadow="true" ambient="0.10 0.10 0.10" diffuse="0.60 0.60 0.58"
-           specular="0.08 0.08 0.08" cutoff="70" exponent="3"/>
+           castshadow="true" diffuse="0.72 0.71 0.69" specular="0.22 0.22 0.22"
+           cutoff="60" exponent="10"/>
     <light name="fill_light" pos="0 1.55 1.90" dir="0 -0.737 -0.676" directional="false"
-           castshadow="false" ambient="0.08 0.08 0.08" diffuse="0.36 0.36 0.37"
-           specular="0.02 0.02 0.02" cutoff="80" exponent="2"/>
+           castshadow="false" diffuse="0.22 0.22 0.24" specular="0.04 0.04 0.04"
+           cutoff="75" exponent="6"/>
 """
 
 # 카메라.
@@ -64,15 +57,23 @@ def _zone_geoms() -> str:
     return "\n    ".join(out)
 
 
+# 물체 세트가 추가로 필요로 하는 <texture>/<material> 정의가 들어가는 자리.
+# 숫자 세트(numbered.activate())가 숫자 텍스처 10개를 여기에 채운다.
+# 색 세트는 빈 문자열이라 씬 XML 이 예전과 완전히 같다.
+EXTRA_ASSETS = ""
+
+
 def _object_body(obj: dict, xy: tuple[float, float], yaw: float = 0.0) -> str:
     hx, hy, hz = C.half_size(obj)
     z = C.TABLE_TOP_Z + hz + 0.0015
     qw, qz = math.cos(yaw / 2.0), math.sin(yaw / 2.0)
+    # material 이 있으면 그 재질(=숫자 텍스처)로, 없으면 단색 rgba 로 그린다.
+    look = f'material="{obj["material"]}"' if obj.get("material") else f'rgba="{obj["rgba"]}"'
     return f"""
     <body name="{obj['name']}" pos="{xy[0]:.4f} {xy[1]:.4f} {z:.4f}" quat="{qw:.5f} 0 0 {qz:.5f}">
       <freejoint name="{obj['name']}_freejoint"/>
       <geom name="{obj['name']}_geom" type="box" size="{hx:.4f} {hy:.4f} {hz:.4f}"
-            rgba="{obj['rgba']}" mass="0.060" condim="4"
+            {look} mass="0.060" condim="4"
             friction="1.6 0.10 0.003" solimp="0.95 0.99 0.001" solref="0.004 1"/>
     </body>"""
 
@@ -106,6 +107,7 @@ def build_scene_xml(layout: dict[str, tuple[float, float, float]]) -> str:
     <material name="floor_mat" texture="floor_tex" texuniform="true" texrepeat="6 6" reflectance="0.03"/>
     <material name="table_mat" rgba="0.82 0.80 0.76 1" specular="0.12" shininess="0.10" reflectance="0.0"/>
     <material name="pedestal_mat" rgba="0.24 0.25 0.28 1" specular="0.2" shininess="0.2"/>
+{EXTRA_ASSETS}
   </asset>
 
   <worldbody>

@@ -4,9 +4,5 @@
   "python.terminal.activateEnvironment": true,
   "python.analysis.extraPaths": ["${workspaceFolder}"],
   "files.encoding": "utf8",
-  "files.eol": "\n",
-
-  "terminal.integrated.env.windows": {
-    "CLAUDE_CONFIG_DIR": "${env:USERPROFILE}\\.claude-work"
-  }
+  "files.eol": "\n"
 }

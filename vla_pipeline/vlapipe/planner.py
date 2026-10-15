@@ -33,12 +33,18 @@ ZONE_ALIASES = {
 
 
 def instruction_text(obj_name: str, zone: str) -> tuple[str, str]:
+    """물체를 가리키는 말은 config 의 ref_* 에서 온다.
+
+    색 세트면 "red block"/"빨간 물체", 숫자 세트면 "object 7"/"7번 물체".
+    지시문 틀(앞뒤 문장)은 두 조건에서 완전히 같아야 비교가 성립한다.
+    """
     o = C.OBJECT_BY_NAME[obj_name]
-    shape_en = "block" if o["full"][0] != o["full"][1] else ("cube" if o["full"][2] == o["full"][0] else "tile")
-    en = (f"Pick up the {o['color_en']} {shape_en} and place it "
-          f"in the {C.ZONES[zone]['label_en']}.")
-    ko = f"{o['color_ko']} 물체를 집어 {C.ZONES[zone]['label_ko']}에 놓으시오."
+    en = f"Pick up the {o['ref_en']} and place it in the {C.ZONES[zone]['label_en']}."
+    ko = f"{o['ref_ko']}를 집어 {C.ZONES[zone]['label_ko']}에 놓으시오."
     return en, ko
+
+
+_LIST_MARKER = re.compile(r"^\s*\d+\s*[.)]\s*")
 
 
 def parse_instruction(text: str) -> dict | None:
@@ -49,9 +55,16 @@ def parse_instruction(text: str) -> dict | None:
     """
     low = text.lower()
     obj = None
-    for o in C.OBJECTS:
-        if re.search(rf"\b{o['color_en']}\b", low) or o["color_ko"] in text or o["name"] in low:
-            obj = o["name"]
+    # 강한 단서(patterns) 를 먼저 다 돌고, 하나도 안 맞을 때만 폴백(weak_patterns).
+    # 숫자 세트에서 "1. move object 10 ..." 같은 줄의 목록 번호 '1.' 을 물체로
+    # 오인하지 않게 하려고 두 단계로 나눈다 (폴백 단계에서는 목록 번호를 떼고 본다).
+    for tier in ("patterns", "weak_patterns"):
+        body = _LIST_MARKER.sub("", text) if tier == "weak_patterns" else text
+        for o in C.OBJECTS:
+            if any(re.search(p, body, re.IGNORECASE) for p in o.get(tier, ())):
+                obj = o["name"]
+                break
+        if obj is not None:
             break
     zone = None
     for zname, aliases in ZONE_ALIASES.items():
@@ -66,10 +79,10 @@ def parse_instruction(text: str) -> dict | None:
 def clear_instruction(obj_name: str, mode: str) -> tuple[str, str]:
     o = C.OBJECT_BY_NAME[obj_name]
     if mode == "push":
-        return (f"Push the {o['color_en']} object aside to clear the way.",
-                f"{o['color_ko']} 물체를 옆으로 밀어 길을 트시오.")
-    return (f"Move the {o['color_en']} object out of the way first.",
-            f"{o['color_ko']} 물체를 먼저 치워 길을 트시오.")
+        return (f"Push the {o['ref_brief_en']} aside to clear the way.",
+                f"{o['ref_ko']}를 옆으로 밀어 길을 트시오.")
+    return (f"Move the {o['ref_brief_en']} out of the way first.",
+            f"{o['ref_ko']}를 먼저 치워 길을 트시오.")
 
 
 def to_subtask(obj_name: str, zone: str, step: int, action: str = "transport",
@@ -204,33 +217,10 @@ Write only those lines, nothing else.
 Lines:"""
 
 
-_PROMPT_SEMIN = """You are the vision module of a robot that tidies a table.
-
-The image is a top-down view of a table with three zones:
-- LEFT part of the image  = left storage zone
-- MIDDLE of the image     = center workspace -- this must end up EMPTY
-- RIGHT part of the image = right storage zone
-
-Look ONLY at the MIDDLE area of the image. Ignore objects already sitting in the
-left or right zones -- they are fine where they are.
-
-List every object currently in the middle area. Answer with a JSON array of
-strings, one per object, like ["red block", "blue cube"]. If the middle area
-is empty, answer []. Do not include a target zone -- just say what you see.
-
-User command: "{command}"
-
-JSON:"""
-
-
 # 실측(SmolVLM2-500M, messy 씬 3개): json recall 0.23 / lines recall 0.00.
 # 'lines' 는 모델이 한 줄만 쓰고 멈춰 버려서 기본값은 'json' 으로 둔다.
-# 'semin' 은 "가운데에 뭐가 있나"만 묻고 목적지 구역은 코드 쪽 규칙(home_zone)에
-# 맡긴다 — parse_instruction() 이 문장에 구역 언급이 없으면 이미 home_zone 으로
-# 폴백하므로 파싱 코드를 더 안 건드려도 된다. VLM 이 "잘못 놓였는지 판단"까지
-# 하지 않아도 되니 recall 이 오르는지 확인해 보는 것이 이 프롬프트의 실험 목적.
 # 프롬프트 배틀 미니과제에서 학생들이 이 표를 갱신하게 할 것.
-PROMPTS = {"json": _PROMPT, "lines": _PROMPT_LINES, "semin": _PROMPT_SEMIN}
+PROMPTS = {"json": _PROMPT, "lines": _PROMPT_LINES}
 
 
 class VLMPlanner:
