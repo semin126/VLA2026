@@ -1,0 +1,192 @@
+{
+  "repository": "semin126/VLA2026",
+  "release_tag": "dataset-full-20261104",
+  "archive_name": "VLM_VLA_ALL_TOPICS_20261104.zip",
+  "archive_bytes": 50515727574,
+  "archive_sha256": "b405feff9bcf7a56a66e8c7bac3164599b6b0811ad40bd9e3b6ace4c018f6fe2",
+  "source_mtime_ns": 1793803193702136700,
+  "parts": [
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.001",
+      "offset": 0,
+      "bytes": 1992294400,
+      "sha256": "eefc5db2118d1e4907c46f45cc247dcf5792ea3b80117ce86e30b7ecb3a48c97",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.001"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.002",
+      "offset": 1992294400,
+      "bytes": 1992294400,
+      "sha256": "76123782cad9a6a193de4f382efd50d6aae9aee5d4b2d98911ee92fd7dee71f4",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.002"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.003",
+      "offset": 3984588800,
+      "bytes": 1992294400,
+      "sha256": "3a92ddbac32ef3e1ce8f9404d2460796bb9415bccacf6a18eea6787898eb1b24",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.003"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.004",
+      "offset": 5976883200,
+      "bytes": 1992294400,
+      "sha256": "6c8b4f850ccaf1fea73da8952913d43abc048439961a954b6cae5e20e426ea96",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.004"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.005",
+      "offset": 7969177600,
+      "bytes": 1992294400,
+      "sha256": "f2cb65781018e058e41fabcbf2ead81fe45f9bfc8aa46a050493430a38a5698a",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.005"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.006",
+      "offset": 9961472000,
+      "bytes": 1992294400,
+      "sha256": "2a0c827a81a86d064f7f4fe0ac8cb1a260f1a29b6deffe2939b2b80b3fe2d6d0",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.006"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.007",
+      "offset": 11953766400,
+      "bytes": 1992294400,
+      "sha256": "88654ddce0b7592b40c0043f93fd224d2da565f6868b31671feb21b77688b03f",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.007"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.008",
+      "offset": 13946060800,
+      "bytes": 1992294400,
+      "sha256": "f01d8fbd0b9a1e3654e6b7c3d759a6b25691e4ee6bf74b5b4e05e91c60a59b83",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.008"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.009",
+      "offset": 15938355200,
+      "bytes": 1992294400,
+      "sha256": "bc7b962b84e5d6ae8995b84c93ea50fe87a59da5a286ee2e3e6dcdf5f1f7d1e2",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.009"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.010",
+      "offset": 17930649600,
+      "bytes": 1992294400,
+      "sha256": "c261f835f2563b8a989fb59ee86cef93ad35d29a9d9e44ce4f6d7b9f3255eb78",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.010"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.011",
+      "offset": 19922944000,
+      "bytes": 1992294400,
+      "sha256": "086f4dec305c4cf72f2cc535b843434cf3b3b999b7de94b1817602f8b4cbf335",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.011"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.012",
+      "offset": 21915238400,
+      "bytes": 1992294400,
+      "sha256": "1e6acf49b524e79f3a481ebc22fb55db7a83c215e0ad9d981eb26c258e727caa",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.012"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.013",
+      "offset": 23907532800,
+      "bytes": 1992294400,
+      "sha256": "f386c0d3baf30fe0190fb26db11dba6d3241cc850a6045b55bc8b0a0b8bd2477",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.013"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.014",
+      "offset": 25899827200,
+      "bytes": 1992294400,
+      "sha256": "2cdff27638f3f076ca6fc92dde2507c6e5fa6cafaa6580e7eb67aa3eafbcbfbe",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.014"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.015",
+      "offset": 27892121600,
+      "bytes": 1992294400,
+      "sha256": "6149fc69a2f89ef06800f44200b7af9507ee5f2875268ac0828a66746d253088",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.015"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.016",
+      "offset": 29884416000,
+      "bytes": 1992294400,
+      "sha256": "8167ddd70c240ad42d9fd37bbaf30b84ba8e01a212db2c84fdbb576a8f8c24e3",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.016"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.017",
+      "offset": 31876710400,
+      "bytes": 1992294400,
+      "sha256": "53e05cd6dde6701ad621f1b75567c928e7bed158ef5b50fb4f0aa7db6bc30d42",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.017"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.018",
+      "offset": 33869004800,
+      "bytes": 1992294400,
+      "sha256": "fd4f012196fd80e20b72301f957ef1a7efe4746d20971810a3305eb3bc69e157",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.018"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.019",
+      "offset": 35861299200,
+      "bytes": 1992294400,
+      "sha256": "725aeda3977d43a2abbbf025f5d931831a17323e56918a5becc3ba38083bc2f7",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.019"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.020",
+      "offset": 37853593600,
+      "bytes": 1992294400,
+      "sha256": "77921d816099cf8d1eca374c85b6aa59d3cac2dfd66bebf212f1624cc8c8bcf8",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.020"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.021",
+      "offset": 39845888000,
+      "bytes": 1992294400,
+      "sha256": "9aa397d361b83a60f7b18fbcac06669620d8960d46bb6896a45e45d9871ac19e",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.021"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.022",
+      "offset": 41838182400,
+      "bytes": 1992294400,
+      "sha256": "4b6c41c993003a361355e4f15e308f5235365d005858b4181d993c7e0000dcf2",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.022"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.023",
+      "offset": 43830476800,
+      "bytes": 1992294400,
+      "sha256": "4727e210a501dc05d503d4e741fbb5f4a54b7260fdf00316b89d459b8c356847",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.023"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.024",
+      "offset": 45822771200,
+      "bytes": 1992294400,
+      "sha256": "0d661df88c6cf1f00d7d560e8ec66888e92bb432c0c9f7eae91b940132b9e466",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.024"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.025",
+      "offset": 47815065600,
+      "bytes": 1992294400,
+      "sha256": "83d1200c38afa48236a69fc9c087201600cd0f5076e48db478508f641b668fa9",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.025"
+    },
+    {
+      "name": "VLM_VLA_ALL_TOPICS_20261104.zip.026",
+      "offset": 49807360000,
+      "bytes": 708367574,
+      "sha256": "cc7d337275fd72cb4e4204175642d9fb73c8c719897a131a1ee4180022ebcd16",
+      "url": "https://github.com/semin126/VLA2026/releases/download/dataset-full-20261104/VLM_VLA_ALL_TOPICS_20261104.zip.026"
+    }
+  ]
+}

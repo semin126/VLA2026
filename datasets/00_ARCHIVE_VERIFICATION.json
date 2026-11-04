@@ -1,0 +1,25 @@
+{
+  "all_original_zip_entries_crc_verified": true,
+  "all_added_zip_entries_crc_verified": true,
+  "outputs_snapshot_cutoff_utc": "2026-11-04T14:39:51.660168+00:00",
+  "original_source_files": 98894,
+  "new_source_files_added": 25,
+  "updated_source_copies_added": 4,
+  "unique_source_files_in_latest_manifest": 98919,
+  "original_outputs_top_level_items": 155,
+  "missing_dataset_image_references": 0,
+  "dataset_image_references_checked": 2597,
+  "vla_accepted_episodes": [
+    {
+      "split": "train",
+      "accepted_episodes": 20,
+      "action_frames": 15880
+    },
+    {
+      "split": "validation",
+      "accepted_episodes": 5,
+      "action_frames": 3706
+    }
+  ],
+  "snapshot_note": "A separate VLA comparison was running during packaging. New and updated records observed at the collection cutoff are included. Later future results are outside this snapshot."
+}

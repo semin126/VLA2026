@@ -1,0 +1,144 @@
+{
+  "missing_image_references": [],
+  "datasets": [
+    {
+      "dataset": "outputs/pretest_qwen_data",
+      "counts": {
+        "train": 181,
+        "val": 30,
+        "test": 15
+      },
+      "image_references_checked": 226,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/qwen_final_data",
+      "counts": {
+        "train": 39,
+        "val": 11,
+        "test": 33
+      },
+      "image_references_checked": 83,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/qwen_fresh_holdout_clean_data",
+      "counts": {
+        "train": 0,
+        "val": 0,
+        "test": 330
+      },
+      "image_references_checked": 330,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/qwen_fresh_holdout_data",
+      "counts": {
+        "train": 0,
+        "val": 0,
+        "test": 330
+      },
+      "image_references_checked": 330,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/qwen_scale_data",
+      "counts": {
+        "train": 425,
+        "val": 70,
+        "test": 330
+      },
+      "image_references_checked": 825,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/qwen_scale_pilot_data",
+      "counts": {
+        "train": 14,
+        "val": 14,
+        "test": 14
+      },
+      "image_references_checked": 42,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/qwen_scale_probe_data",
+      "counts": {
+        "train": 14,
+        "val": 14,
+        "test": 14
+      },
+      "image_references_checked": 42,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/qwen_stratified_data",
+      "counts": {
+        "train": 115,
+        "val": 22,
+        "test": 33
+      },
+      "image_references_checked": 170,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/qwen_stratified_noempty_data",
+      "counts": {
+        "train": 110,
+        "val": 22,
+        "test": 33
+      },
+      "image_references_checked": 165,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/qwen_training_schema_clean_data",
+      "counts": {
+        "train": 109,
+        "val": 22,
+        "test": 33
+      },
+      "image_references_checked": 164,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/session10_smolvlm2_20261104",
+      "counts": {
+        "train": 5
+      },
+      "image_references_checked": 5,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/session10_improvement_20261104/short5",
+      "counts": {
+        "train": 5
+      },
+      "image_references_checked": 5,
+      "absolute_image_paths": 0
+    },
+    {
+      "dataset": "outputs/session10_improvement_20261104/augmented",
+      "counts": {
+        "train": 120,
+        "val": 30,
+        "test": 60
+      },
+      "image_references_checked": 210,
+      "absolute_image_paths": 0
+    }
+  ],
+  "vla_accepted_episodes": [
+    {
+      "split": "train",
+      "accepted_episodes": 20,
+      "action_frames": 15880
+    },
+    {
+      "split": "validation",
+      "accepted_episodes": 5,
+      "action_frames": 3706
+    }
+  ],
+  "source_changed_while_copying": []
+}
