@@ -283,22 +283,40 @@ def _number_patterns(n: int) -> list[str]:
     ]
 
 
-NUMBER_OBJECTS: list[dict] = [
-    {
-        "name": f"object_{n}", "number": n, "full": NUMBER_FULL,
-        "rgba": "0.95 0.95 0.94 1",         # 텍스처를 못 만들었을 때의 폴백 색
-        "material": f"num_{n:02d}_mat",     # scene.py 가 이 재질로 그린다
-        "home_zone": number_home_zone(n), "grasp_axis": "y",
-        # "Pick up the cube number 7 and place it ..." / "7번 물체를 집어 ..."
-        # 'cube' 는 10개가 전부 정육면체라 구분 단서가 되지 않는다 — 숫자만 단서다.
-        "ref_en": f"cube number {n}", "ref_brief_en": f"cube number {n}",
-        "ref_ko": f"{n}번 물체",
-        "patterns": _number_patterns(n),
-        # VLM 이 설명 없이 숫자만 ["7", "3"] 처럼 내놓는 경우의 폴백
-        "weak_patterns": [rf"(?<!\d){n}(?!\d)"],
-    }
-    for n in range(1, NUMBER_COUNT + 1)
-]
+def _build_number_objects() -> list[dict]:
+    """NUMBER_COUNT/NUMBER_SPLIT 에 맞춰 숫자 물체 목록을 생성한다."""
+    return [
+        {
+            "name": f"object_{n}", "number": n, "full": NUMBER_FULL,
+            "rgba": "0.95 0.95 0.94 1",
+            "material": f"num_{n:02d}_mat",
+            "home_zone": number_home_zone(n), "grasp_axis": "y",
+            "ref_en": f"cube number {n}", "ref_brief_en": f"cube number {n}",
+            "ref_ko": f"{n}번 물체",
+            "patterns": _number_patterns(n),
+            "weak_patterns": [rf"(?<!\d){n}(?!\d)"],
+        }
+        for n in range(1, NUMBER_COUNT + 1)
+    ]
+
+
+NUMBER_OBJECTS: list[dict] = _build_number_objects()
+
+
+def set_number_count(count: int) -> None:
+    """숫자 물체 수를 바꾼다. numbered.activate() 보다 먼저 부를 것.
+
+    10/20/30 같은 짝수를 권장한다 (좌우 균등 분배).
+    """
+    global NUMBER_COUNT, NUMBER_SPLIT, NUMBER_OBJECTS
+    if count < 2:
+        raise ValueError(f"물체 수는 2 이상이어야 합니다: {count}")
+    NUMBER_COUNT = count
+    NUMBER_SPLIT = count // 2
+    NUMBER_OBJECTS = _build_number_objects()
+    OBJECT_SETS["number"] = NUMBER_OBJECTS
+    if ACTIVE_OBJECT_SET == "number":
+        use_object_set("number")
 
 
 # --------------------------------------------------------------------------

@@ -147,13 +147,62 @@ def _reachable(x: float, y: float) -> bool:
     return C.REACH_MIN <= d <= C.REACH_MAX
 
 
+# 색 세트(10개, 좌우 5개씩)에서 검증된 격자 — 회귀를 피하기 위해 그대로 둔다.
+_GRID_10 = {
+    "left_zone": [(-0.33, 0.14), (-0.20, 0.14), (-0.33, 0.26), (-0.20, 0.26), (-0.33, 0.38)],
+    "right_zone": [(0.20, 0.14), (0.33, 0.14), (0.20, 0.26), (0.33, 0.26), (0.20, 0.38)],
+}
+
+
+def _zone_grid(zone_name: str, count: int) -> list[tuple[float, float]]:
+    """zone 안에 count 개 물체를 놓을 격자 좌표를 자동 생성한다."""
+    z = C.ZONES[zone_name]
+    x0, x1 = z["x"]
+    y0, y1 = z["y"]
+
+    obj_w = max((o["full"][0] for o in C.OBJECTS), default=0.05)
+    sep = obj_w + obj_w * 0.8       # 중심 간 최소 간격
+
+    mx = obj_w * 0.6                # 구역 가장자리 여유
+    my_lo = 0.09                    # 로봇 베이스 쪽 여유
+    my_hi = 0.04
+
+    ux = (x1 - x0) - 2 * mx
+    uy = (y1 - y0) - my_lo - my_hi
+
+    cols = max(1, min(count, int(ux / sep) + 1))
+    rows = math.ceil(count / cols)
+
+    dx = ux / max(1, cols - 1) if cols > 1 else 0
+    dy = uy / max(1, rows - 1) if rows > 1 else 0
+
+    pts: list[tuple[float, float]] = []
+    for r in range(rows):
+        for c in range(cols):
+            if len(pts) >= count:
+                break
+            pts.append((round(x0 + mx + c * dx, 4),
+                        round(y0 + my_lo + r * dy, 4)))
+    return pts[:count]
+
+
 def tidy_layout() -> dict[str, tuple[float, float, float]]:
     """정돈된 상태 — 모든 물체가 home_zone 안에 격자로 놓이고 가운데는 비어 있다."""
     layout: dict[str, tuple[float, float, float]] = {}
-    grids = {
-        "left_zone": [(-0.33, 0.14), (-0.20, 0.14), (-0.33, 0.26), (-0.20, 0.26), (-0.33, 0.38)],
-        "right_zone": [(0.20, 0.14), (0.33, 0.14), (0.20, 0.26), (0.33, 0.26), (0.20, 0.38)],
-    }
+
+    per_zone: dict[str, int] = {}
+    for obj in C.OBJECTS:
+        per_zone[obj["home_zone"]] = per_zone.get(obj["home_zone"], 0) + 1
+
+    total = len(C.OBJECTS)
+    use_hardcoded = (total == 10
+                     and all(per_zone.get(z, 0) == 5 for z in _GRID_10))
+
+    if use_hardcoded:
+        grids = _GRID_10
+    else:
+        grids = {z: _zone_grid(z, n) for z, n in per_zone.items()}
+
     used = {k: 0 for k in grids}
     for obj in C.OBJECTS:
         z = obj["home_zone"]
@@ -169,17 +218,21 @@ def messy_layout(seed: int = 0, n_moved: int | None = None) -> dict[str, tuple[f
     layout = tidy_layout()
     names = list(C.OBJECT_NAMES)
     rng.shuffle(names)
-    k = n_moved if n_moved is not None else rng.randint(3, 6)
+    n = len(names)
+    k = n_moved if n_moved is not None else rng.randint(max(3, n * 3 // 10), max(6, n * 6 // 10))
+
+    obj_w = max((o["full"][0] for o in C.OBJECTS), default=0.05)
+    min_spacing = obj_w + max(0.03, 0.06 - 0.002 * max(0, n - 10))
     placed: list[tuple[float, float]] = []
 
     cz = C.ZONES["center_zone"]
     for name in names[:k]:
-        for _ in range(200):
+        for _ in range(400):
             x = rng.uniform(cz["x"][0] + 0.05, cz["x"][1] - 0.05)
             y = rng.uniform(max(cz["y"][0] + 0.05, 0.12), cz["y"][1] - 0.05)
             if not _reachable(x, y):
                 continue
-            if all(math.hypot(x - px, y - py) > 0.11 for px, py in placed):
+            if all(math.hypot(x - px, y - py) > min_spacing for px, py in placed):
                 placed.append((x, y))
                 layout[name] = (x, y, rng.uniform(-math.pi / 2, math.pi / 2))
                 break
@@ -187,17 +240,20 @@ def messy_layout(seed: int = 0, n_moved: int | None = None) -> dict[str, tuple[f
 
 
 def domain_randomized_layout(seed: int = 0) -> dict[str, tuple[float, float, float]]:
-    """도메인 랜덤화 — 물체 10개를 작업 영역 전체에 무작위로 배치."""
+    """도메인 랜덤화 — 물체를 작업 영역 전체에 무작위로 배치."""
     rng = random.Random(seed)
     layout: dict[str, tuple[float, float, float]] = {}
     placed: list[tuple[float, float]] = []
+    n = len(C.OBJECTS)
+    obj_w = max((o["full"][0] for o in C.OBJECTS), default=0.05)
+    min_spacing = obj_w + max(0.02, 0.05 - 0.002 * max(0, n - 10))
     for obj in C.OBJECTS:
-        for _ in range(400):
+        for _ in range(600):
             x = rng.uniform(C.WORK_X[0] + 0.05, C.WORK_X[1] - 0.05)
             y = rng.uniform(C.WORK_Y[0] + 0.06, C.WORK_Y[1] - 0.05)
             if not _reachable(x, y):
                 continue
-            if all(math.hypot(x - px, y - py) > 0.10 for px, py in placed):
+            if all(math.hypot(x - px, y - py) > min_spacing for px, py in placed):
                 placed.append((x, y))
                 layout[obj["name"]] = (x, y, rng.uniform(-math.pi, math.pi))
                 break

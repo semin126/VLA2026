@@ -159,13 +159,21 @@ def asset_xml() -> str:
 # --------------------------------------------------------------------------
 # 켜기 / 끄기
 # --------------------------------------------------------------------------
-def activate(regenerate: bool = False) -> list[dict]:
+def activate(regenerate: bool = False, count: int | None = None) -> list[dict]:
     """숫자 조건으로 바꾼다. **SortingEnv 를 만들기 전에** 불러야 한다.
+
+    Parameters
+    ----------
+    count : int, optional
+        물체 수 (기본 10). 20이나 30을 넣으면 그만큼의 숫자 큐브를 쓴다.
 
     env 는 생성 시점에 물체 이름으로 MuJoCo 조인트 주소를 잡아 두기 때문에,
     env 를 만든 뒤에 세트를 바꾸면 이름이 맞지 않아 KeyError 가 난다.
     """
-    write_number_textures(force=regenerate)
+    if count is not None:
+        C.set_number_count(count)
+    write_number_textures(force=regenerate or count is not None)
+    _update_prompts()
     scene_mod.EXTRA_ASSETS = asset_xml()
     return C.use_object_set("number")
 
@@ -260,6 +268,16 @@ def _fill(template: str) -> str:
 
 PROMPT_NUMBER = _fill(_PROMPT_NUMBER)
 PROMPT_NUMBER_READ = _fill(_PROMPT_NUMBER_READ)
+
+
+def _update_prompts() -> None:
+    """NUMBER_COUNT 가 바뀌었을 때 프롬프트를 다시 만든다."""
+    global PROMPT_NUMBER, PROMPT_NUMBER_READ
+    PROMPT_NUMBER = _fill(_PROMPT_NUMBER)
+    PROMPT_NUMBER_READ = _fill(_PROMPT_NUMBER_READ)
+    planner_mod.PROMPTS["number"] = PROMPT_NUMBER
+    planner_mod.PROMPTS["number_read"] = PROMPT_NUMBER_READ
+
 
 # VLMPlanner(prompt_style=...) 에서 바로 고를 수 있게 등록한다.
 planner_mod.PROMPTS["number"] = PROMPT_NUMBER
