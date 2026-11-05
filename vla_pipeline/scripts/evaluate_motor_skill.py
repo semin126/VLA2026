@@ -19,9 +19,11 @@ from vlapipe.final_project_v2.common import task_text,public_task
 from vlapipe.metrics import wilson_interval
 
 def evaluate(checkpoint,scenes,out,system='hier',max_steps=240,overfit=False,cached_actions=None,
-             evaluation_split='validation',record_video=False,full_horizon=False):
+             evaluation_split='validation',record_video=False,full_horizon=False,policy_seed=None):
     if max_steps < 1:
         raise ValueError('max_steps must be positive')
+    if policy_seed is not None and (type(policy_seed) is not int or not 0<=policy_seed<2**63):
+        raise ValueError('policy_seed must be a nonnegative integer below 2**63')
     scenes=list(scenes)
     if not scenes:
         raise ValueError('Need at least one evaluation scene')
@@ -42,7 +44,8 @@ def evaluate(checkpoint,scenes,out,system='hier',max_steps=240,overfit=False,cac
         destination=C.OBJECT_BY_NAME[target]['home_zone']
         case=out/spec['id']
         case.mkdir()
-        torch.manual_seed(42+i)
+        trial_policy_seed=42+i if policy_seed is None else policy_seed
+        torch.manual_seed(trial_policy_seed)
         policy.reset()
         started=time.perf_counter()
         import imageio.v2 as imageio
@@ -91,7 +94,7 @@ def evaluate(checkpoint,scenes,out,system='hier',max_steps=240,overfit=False,cac
                    'transport' if not transported else 'release' if detail['held'] else
                    'dropped_or_misplaced' if detail['zone']!=destination else 'unstable')
             Image.fromarray(env.render('agentview',512,512)).save(case/'after.png')
-            row={'scene':spec['id'],'seed':spec['seed'],'object':target,'system':system,
+            row={'scene':spec['id'],'seed':spec['seed'],'policy_seed':trial_policy_seed,'object':target,'system':system,
                  'success':success,'lifted':lift,'transported':transported,'placed':placed,
                  'failure_stage':stage,'strict_success':bool(success and not damaged and not wrong_lifted),
                  'wrong_objects_lifted':sorted(wrong_lifted),
@@ -126,6 +129,7 @@ if __name__=='__main__':
     p.add_argument('--system',choices=['single','hier'],default='hier')
     p.add_argument('--max-steps',type=int,default=240)
     p.add_argument('--cached-actions',type=int,help='Explicit diagnostic override; record and keep identical in B/C')
+    p.add_argument('--policy-seed',type=int,help='Optional fixed policy noise for paired same-scene/different-instruction diagnostics; default remains 42+case_index')
     p.add_argument('--scene-pattern',help='Explicit filename glob for a separate motor validation/qualification suite')
     p.add_argument('--evaluation-split',choices=['validation','sft_test'],default='validation')
     p.add_argument('--video',action='store_true')
@@ -142,4 +146,4 @@ if __name__=='__main__':
     shared_lock=Path(__file__).resolve().parents[1]/'outputs/.vlm_gpu_exclusive.lock'
     shared_lock.parent.mkdir(parents=True,exist_ok=True)
     with FileLock(str(shared_lock)):
-        print(json.dumps(evaluate(a.checkpoint,files,a.out,a.system,a.max_steps,a.allow_train_overfit,a.cached_actions,a.evaluation_split,a.video,a.full_horizon),indent=2))
+        print(json.dumps(evaluate(a.checkpoint,files,a.out,a.system,a.max_steps,a.allow_train_overfit,a.cached_actions,a.evaluation_split,a.video,a.full_horizon,a.policy_seed),indent=2))
