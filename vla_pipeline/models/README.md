@@ -22,3 +22,14 @@ download the release; changing the source alone cannot train a base model.
 Weights are excluded from ordinary Git. Code and the release manifest are tracked;
 inference ZIP archives are distributed through GitHub Releases. See the manifest
 for measured scope and checksums; preview weights are not a 60% performance claim.
+
+To install a newer release into the default folders while preserving old weights:
+
+```powershell
+python scripts/download_models.py --upgrade
+```
+
+Each new bundle is fully downloaded and verified before the previous role folder
+is moved under `models/_previous/`. Without `--upgrade`, a different existing
+version is preserved and replacement is refused. Unchanged roles can reference
+their original immutable release through `bundle_release` in the manifest.

@@ -7,6 +7,7 @@ from pathlib import Path
 import shutil
 import stat
 import tempfile
+import time
 import urllib.request
 from urllib.parse import urlparse
 import zipfile
@@ -33,7 +34,7 @@ def verify_bundle(bundle,role,release):
         if digest!=record['sha256']:
             raise ValueError(role+': file mismatch '+rel)
 
-def download(manifest_path,models,roles):
+def download(manifest_path,models,roles,*,upgrade=False):
     manifest=json.loads(Path(manifest_path).read_text(encoding='utf-8-sig'))
     models=Path(models).absolute()
     models.mkdir(parents=True,exist_ok=True)
@@ -41,14 +42,23 @@ def download(manifest_path,models,roles):
         if role not in ('vlm','vla_single','vla_hier'):
             raise ValueError('Unsupported model role: '+role)
         asset=manifest['models'][role]
+        release=asset.get('bundle_release',manifest['release'])
         target=models/role
         if target.exists():
             info=target/'pretrained_model/model_info.json'
-            if info.is_file() and json.loads(info.read_text(encoding='utf-8-sig')).get('release')==manifest['release']:
-                verify_bundle(target/'pretrained_model',role,manifest['release'])
-                print(role,'already installed and verified; leaving it unchanged')
-                continue
-            raise FileExistsError('Existing model is preserved. Choose --models-dir with a new path: '+str(target))
+            if info.is_file() and json.loads(info.read_text(encoding='utf-8-sig')).get('release')==release:
+                try:
+                    verify_bundle(target/'pretrained_model',role,release)
+                except (ValueError,FileNotFoundError):
+                    if not upgrade:
+                        raise
+                else:
+                    print(role,'already installed and verified; leaving it unchanged')
+                    continue
+            if not upgrade:
+                raise FileExistsError('Existing model is preserved. Use --upgrade to back it up, or --models-dir with a new path: '+str(target))
+            if target.is_symlink() or target.is_junction() or target.resolve().parent!=models.resolve():
+                raise ValueError('Refusing to replace a model link or a path outside models/: '+str(target))
         with tempfile.TemporaryDirectory(prefix='vla_download_',dir=models) as tmp:
             stage=Path(tmp)
             assert stage.resolve().is_relative_to(models.resolve())
@@ -77,9 +87,23 @@ def download(manifest_path,models,roles):
                         with z.open(item) as src,dest.open('wb') as out:
                             shutil.copyfileobj(src,out,length=1024*1024)
             bundle=extracted/role/'pretrained_model'
-            verify_bundle(bundle,role,manifest['release'])
+            verify_bundle(bundle,role,release)
             assert target.resolve().is_relative_to(models.resolve())
-            (extracted/role).rename(target)
+            backup=None
+            if target.exists():
+                backup=models/'_previous'/f'{role}_{time.time_ns()}'
+                if not backup.resolve().is_relative_to(models.resolve()):
+                    raise ValueError('Backup path must stay inside models/')
+                backup.parent.mkdir(exist_ok=True)
+                target.rename(backup)
+            try:
+                (extracted/role).rename(target)
+            except BaseException:
+                if backup is not None and not target.exists():
+                    backup.rename(target)
+                raise
+            if backup is not None:
+                print('Preserved previous model at',backup,flush=True)
             print('Installed',target,flush=True)
 
 if __name__=='__main__':
@@ -87,5 +111,6 @@ if __name__=='__main__':
     p.add_argument('--manifest',type=Path,default=PROJECT/'models/release_manifest.json')
     p.add_argument('--models-dir',type=Path,default=PROJECT/'models')
     p.add_argument('--roles',default='vlm,vla_single,vla_hier')
+    p.add_argument('--upgrade',action='store_true',help='Verify the new download, then preserve the previous role folder under models/_previous/ before replacement.')
     a=p.parse_args()
-    download(a.manifest,a.models_dir,a.roles.split(','))
+    download(a.manifest,a.models_dir,a.roles.split(','),upgrade=a.upgrade)

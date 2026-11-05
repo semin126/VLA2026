@@ -24,6 +24,17 @@ with tempfile.TemporaryDirectory() as tmp:
     path.write_text(json.dumps(manifest))
     download(path,root/'models',['vlm'])
     weight=root/'models/vlm/pretrained_model/model.safetensors'
+    # A model set can reference an unchanged asset from an earlier release.
+    manifest['release']='fixture-set-2'
+    manifest['models']['vlm']['bundle_release']='fixture'
+    path.write_text(json.dumps(manifest))
+    download(path,root/'models',['vlm'])
+    weight.write_bytes(b'y'*len(content))
+    download(path,root/'models',['vlm'],upgrade=True)
+    assert weight.read_bytes()==content
+    backups=list((root/'models/_previous').glob('vlm_*/pretrained_model/model.safetensors'))
+    assert len(backups)==1 and backups[0].read_bytes()==b'y'*len(content)
+    weight=root/'models/vlm/pretrained_model/model.safetensors'
     weight.write_bytes(b'x'*len(content))
     try:
         download(path,root/'models',['vlm'])
@@ -41,4 +52,13 @@ with tempfile.TemporaryDirectory() as tmp:
     except ValueError:
         pass
     assert not (root/'bad_models/vlm').exists()
-print('PASS: release fixture, archive/file hashes, repeat install, rejected corruption')
+    manifest['models']['vlm']['bundle_release']='fixture-next'
+    path.write_text(json.dumps(manifest))
+    try:
+        download(path,root/'models',['vlm'],upgrade=True)
+        raise AssertionError('Corrupt upgrade was installed')
+    except ValueError:
+        pass
+    assert weight.read_bytes()==content
+    assert len(list((root/'models/_previous').iterdir()))==1
+print('PASS: archive/file hashes, repeat install, corruption rejected, per-asset release, verified upgrade preserves old weights')

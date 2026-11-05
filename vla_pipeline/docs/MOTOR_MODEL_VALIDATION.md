@@ -60,3 +60,5 @@ A는 같은 원본 시연에 전체 과제 라벨을 붙여 별도로 학습하�
 새 버전은 다른 immutable Release에 배포하며, 기존 모델은 자동으로 덮어쓰지 않습니다.
 새 폴더에 설치하려면 `download_models.py --models-dir <새 경로>`를 사용하고
 노트북의 모델 폴더도 같은 경로로 지정하세요.
+기본 `models/` 경로를 유지하며 새 버전을 받으려면 `download_models.py --upgrade`를 사용하세요.
+새 번들 검증이 끝난 뒤 기존 모델을 `models/_previous/`에 백업하고 교체합니다.
