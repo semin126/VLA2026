@@ -72,6 +72,19 @@ preview 배포는 빠른 실험과 실패 분석용입니다. release_manifest�
 
 수집 시 `collect-actions --accelerated`는 물리 궤적을 빠르게 만드는 용도이며 A~E 시간 비교에 사용하지 않습니다. 정식 비교는 기존 20Hz 상한·동일한 wall-time 예산을 유지합니다.
 
+## 2026-11-06 planner r2: VLM만 추가 학습
+
+[planner r2 공개 파일](https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r2)은
+로컬 RTX3090Ti에서 초기·재계획·완료 문맥으로 300업데이트 추가 학습한 VLM입니다.
+층화 validation 12개에서 JSON 형식 11/12, 계획 pair F1 0.7885,
+접근성 라벨 정확도 0.9000, done 정확도 11/12였습니다.
+한 단일 운반 씬에서는 반복 출력 뒤 JSON이 잘렸습니다.
+씬 안의 여러 행이 포함되고 자동 생성 라벨이므로 독립적인 12개 과제 성공률로 해석하지 않습니다.
+
+이 Release는 VLM만 새로 제공합니다. A/B/C용 VLA는 r1 파일을 그대로 참조하며
+아래의 0/10 운반 결과도 그대로입니다. 새 VLM의 Colab 52행 검증은 별도로 진행합니다.
+`DOWNLOAD_MODELS=True`, `UPGRADE_MODELS=True`로 새 VLM을 받고 이전 버전을 보존할 수 있습니다.
+
 ## 2026-11-06 preview r1의 실제 결과
 
 **이 VLA는 아직 운반이 가능한 기준 모델이 아닙니다.** 체크포인트 로드, 학생 전략과의 연결, 실패 분석을 위한 미리보기입니다. 이 가중치로 얻은 A/B/C 차이를 계층 전략의 효과라고 결론 내리지 마세요.
