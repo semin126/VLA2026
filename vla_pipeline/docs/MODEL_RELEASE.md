@@ -14,6 +14,11 @@ run.run('scripts/download_models.py', '--models-dir', MODELS_DIR)
 
 명령줄에서는 `python scripts/download_models.py`를 사용합니다. B/C만 필요하면 `--roles vlm,vla_hier`로 다운로드 용량을 줄일 수 있습니다. archive SHA256과 폴더 안 파일 해시를 확인한 후 설치합니다.
 
+이미 받은 모델을 새 버전으로 교체할 때는 노트북에서 `DOWNLOAD_MODELS=True`,
+`UPGRADE_MODELS=True`를 함께 설정하세요. 명령줄에서는
+`python scripts/download_models.py --upgrade`를 사용합니다. 새 파일을 모두 검증한 뒤
+기존 모델을 `models/_previous/`에 백업하고 교체합니다. 새 파일 검증이 실패하면 기존 모델을 그대로 둡니다.
+
 폴더 구조:
 
 ```text
@@ -79,6 +84,16 @@ preview 배포는 빠른 실험과 실패 분석용입니다. release_manifest�
 
 VLM 정답은 기하 기반 교사의 자동 라벨이며, 사람 검토·숫자 인식·실제 운반 성공의 점수가 아닙니다. 두 번째 VLA 라운드는 첫 라운드의 가중치에서 시작하되 optimizer는 새로 초기화했습니다. 검증 씬은 각 번호 한 번씩을 포함하며, 다른 아홉 개가 처음부터 정리되어 있어도 성공으로 가산하지 않았습니다. 원래 학습한 단일 씬에 대한 추가 진단도 별도 기록합니다. 전체 씬·가림 씬에 대한 성공률은 아직 확보하지 못했습니다.
 
-Releases의 `evaluation_and_recipe.zip`에는 검증 요약·전후 이미지·씬 정의·학습 명령과 재현 보조 코드를 제공합니다. 원본 HDF5와 optimizer 체크포인트는 로컬 `outputs/model_release_20261106_round1/`에 보존합니다. 이번 모델의 Colab GPU 실추론은 아직 별도 확인이 필요합니다. 로컬 커널에서 세 노트북의 실행·짧은 학습·체크포인트 재로딩을 검사한 것과 구분합니다.
+Releases의 `evaluation_and_recipe.zip`에는 검증 요약·전후 이미지·씬 정의·학습 명령과 재현 보조 코드를 제공합니다. 원본 HDF5와 optimizer 체크포인트는 로컬 `outputs/model_release_20261106_round1/`에 보존합니다.
+
+**후속 실제 Colab 확인:** 공개 r1 ZIP을 다운로드해 SHA256을 확인하고,
+RTX PRO6000 Blackwell 약96GB에서 A/B용 VLA의 CUDA 추론과 유한한 action7 출력을 확인했습니다.
+최신 정밀도 보존 로더(`5b1e518`)에서도 통과했습니다. 이 확인은 T4 검증이나 물리 운반 성공을 뜻하지 않습니다.
+VLM은 학생의 `valid_open` 초기 문맥에서 반복 응답 후 JSON이 잘린 사례가 있어,
+위의 16행 라벨 평가만으로 실제 전략 문맥의 응답 계약까지 통과했다고 판단하지 않습니다.
+새 모델의 측정 범위는 `models/release_manifest.json`과 해당 Release 설명에서 확인하세요.
+
+학습 가중치의 FP32 보장, 텐서별 추론 정밀도 복원, 추가 행동 타깃과 엄격한 운반 평가는
+[운반 모델 검증 안내](MOTOR_MODEL_VALIDATION.md)에 설명되어 있습니다.
 
 다음 학습의 통과 기준은 (1) 한 시연 씬의 실제 파지·운반·놓기를 재현하고, (2) 학습하지 않은 단일 운반에서 모든 번호·양쪽 목적지를 검증한 뒤, (3) B/C 공통 모델을 전체 씬으로 확장하는 것입니다. 학습 loss만 감소하면 통과한 것으로 보지 않습니다.
