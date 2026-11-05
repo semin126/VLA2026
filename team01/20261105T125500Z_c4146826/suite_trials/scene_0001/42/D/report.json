@@ -1,0 +1,389 @@
+{
+  "protocol": "final_project_v2.0",
+  "condition": "D",
+  "variant": "D-state",
+  "diagnostic": false,
+  "scene_id": "valid_blocked_2001",
+  "family": "valid_blocked",
+  "split": "validation",
+  "scene_sha256": "ef3187785ab3698017a0830925dcc33cca6d3effea4ff8e60b6dd15bb6eadd0c",
+  "input_scene_sha256": "ef3187785ab3698017a0830925dcc33cca6d3effea4ff8e60b6dd15bb6eadd0c",
+  "initial_state_sha256": "d06681bd2ee155a2552dd30433621de72577af9053453095d98e0867ad519a07",
+  "task_sha256": "40aacb1d9d6832c1972f0625921af154cfb5ba0d45433db5f7d14ce6d3a79544",
+  "configuration": {
+    "condition": "D",
+    "seconds": 12.0,
+    "max_steps": 2400,
+    "action_steps": 240,
+    "observer_steps": 60,
+    "max_calls": 8,
+    "max_attempts": 3,
+    "image_size": 128,
+    "planner_image_size": 512,
+    "planner_tokens": 1024,
+    "seed": 42,
+    "checkpoint": null,
+    "vlm_model": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "strategy": null,
+    "operator": "",
+    "input_kind": "gamepad",
+    "gamepad_map": "gamepad_map.json",
+    "video": true,
+    "device": "auto",
+    "final_test": false,
+    "command": null
+  },
+  "strategy": null,
+  "events": [],
+  "status": "completed",
+  "feedback_source": "images_and_nonprivileged_execution_metadata",
+  "perception": "oracle_state",
+  "timing_note": "20 Hz maximum; inference counted; synchronous calls may overrun but late actions are discarded",
+  "hardware": {
+    "system": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "python": "3.12.15 (main, Oct 14 2026, 01:05:27) [Clang 23.1.3 ]",
+    "machine": "6e901dbba932",
+    "packages": {
+      "mujoco": "3.17.0",
+      "numpy": "2.2.6",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.22.1",
+      "lerobot": "0.6.2"
+    },
+    "cuda": true,
+    "gpu": "Tesla T4"
+  },
+  "implementation_sha256": "7e7345f1e0d6361de7559d55f01e80a27c5a5d7782e80cc7c2285528ad4cd256",
+  "restored_state_sha256": "d06681bd2ee155a2552dd30433621de72577af9053453095d98e0867ad519a07",
+  "initial": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "center_zone",
+      "object_2": "center_zone",
+      "object_3": "center_zone",
+      "object_4": "center_zone",
+      "object_5": "center_zone",
+      "object_6": "center_zone",
+      "object_7": "center_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "center_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.027499972344764968,
+          0.19000000002887613,
+          0.8249708981978092
+        ]
+      },
+      "object_2": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.027499997320916986,
+          0.27000008730444836,
+          0.8249708981978091
+        ]
+      },
+      "object_3": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.027499812369564728,
+          0.3500000000008437,
+          0.8249708981978092
+        ]
+      },
+      "object_4": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.027500187630514223,
+          0.4299999999721037,
+          0.8249708981978092
+        ]
+      },
+      "object_5": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.02750000666968184,
+          0.5099997839927066,
+          0.8249708981978092
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.027500027680585334,
+          0.19000000002887638,
+          0.8249708981978092
+        ]
+      },
+      "object_7": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.02749997229048343,
+          0.27000008730731806,
+          0.8249708981978092
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.027500189468841436,
+          0.3499999999991584,
+          0.8249708981978092
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.02749991949859149,
+          0.4300000004323045,
+          0.8249708981978092
+        ]
+      },
+      "object_10": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.02750012424623702,
+          0.509999902154024,
+          0.8249708981978092
+        ]
+      }
+    },
+    "acc": 0.0,
+    "macro_f1": 0.0,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      },
+      "right_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      }
+    },
+    "n_objects": 10
+  },
+  "initial_image_sha256": "1faf03358acd06ca014349cf7adf3b90731d743c36a64754ec9af19abdfc6b66",
+  "model_load_seconds": 0.0001590619999660703,
+  "setup_wall_seconds": 0.6860709350000889,
+  "stop_reason": "plan_exhausted",
+  "final": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "center_zone",
+      "object_2": "center_zone",
+      "object_3": "center_zone",
+      "object_4": "center_zone",
+      "object_5": "center_zone",
+      "object_6": "center_zone",
+      "object_7": "center_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "center_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.027499972344764968,
+          0.19000000002887613,
+          0.8249708981978092
+        ]
+      },
+      "object_2": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.027499997320916986,
+          0.27000008730444836,
+          0.8249708981978091
+        ]
+      },
+      "object_3": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.027499812369564728,
+          0.3500000000008437,
+          0.8249708981978092
+        ]
+      },
+      "object_4": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.027500187630514223,
+          0.4299999999721037,
+          0.8249708981978092
+        ]
+      },
+      "object_5": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.02750000666968184,
+          0.5099997839927066,
+          0.8249708981978092
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.027500027680585334,
+          0.19000000002887638,
+          0.8249708981978092
+        ]
+      },
+      "object_7": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.02749997229048343,
+          0.27000008730731806,
+          0.8249708981978092
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.027500189468841436,
+          0.3499999999991584,
+          0.8249708981978092
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.02749991949859149,
+          0.4300000004323045,
+          0.8249708981978092
+        ]
+      },
+      "object_10": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.02750012424623702,
+          0.509999902154024,
+          0.8249708981978092
+        ]
+      }
+    },
+    "acc": 0.0,
+    "macro_f1": 0.0,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      },
+      "right_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      }
+    },
+    "n_objects": 10
+  },
+  "summary": {
+    "total_wall_seconds": 0.0021017500000652944,
+    "deadline_seconds": 12.0,
+    "deadline_overrun_seconds": 0,
+    "simulation_seconds": 0.0,
+    "steps": 0,
+    "planner_calls": 0,
+    "planner_seconds": 0.0,
+    "vla_inference_seconds": 0.0,
+    "attempts": {}
+  },
+  "history": [],
+  "video": "process.mp4",
+  "artifact_render_seconds": 0.597093809999933,
+  "end_to_end_wall_seconds": 1.358026998000014
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "final_project_scene_v2",
+  "id": "student_mixed_f855a973",
+  "seed": 102,
+  "family": "development_mixed_102",
+  "split": "development",
+  "category": "mixed",
+  "object_set": "number",
+  "count": 10,
+  "command": "Tidy up the table: put every numbered object in its designated storage zone.",
+  "research_targets": [
+    "object_6",
+    "object_2",
+    "object_3",
+    "object_8"
+  ],
+  "layout": {
+    "object_6": [
+      0.09971497315817067,
+      0.2387414786043867,
+      0.0
+    ],
+    "object_1": [
+      0.17471497315817067,
+      0.2387414786043867,
+      1.5707963267948966
+    ],
+    "object_2": [
+      -0.11028502684182932,
+      0.40371088918643916,
+      0.0
+    ],
+    "object_7": [
+      -0.18528502684182932,
+      0.40371088918643916,
+      1.5707963267948966
+    ],
+    "object_3": [
+      0.006375208421256228,
+      0.195,
+      1.5707963267948966
+    ],
+    "object_8": [
+      0.0032349747827241405,
+      0.495,
+      1.5707963267948966
+    ],
+    "object_4": [
+      0.33,
+      0.26,
+      0.0
+    ],
+    "object_9": [
+      -0.2,
+      0.26,
+      0.0
+    ],
+    "object_5": [
+      0.2,
+      0.38,
+      0.0
+    ],
+    "object_10": [
+      -0.33,
+      0.38,
+      0.0
+    ]
+  },
+  "note": "Geometric diagnostic, not a proof that a physical grasp is impossible.",
+  "settled_diagnostics": {
+    "errors": [],
+    "warnings": [],
+    "diagnostic_category": "mixed",
+    "accessibility": {
+      "object_1": {
+        "accessible": true,
+        "blockers": []
+      },
+      "object_2": {
+        "accessible": false,
+        "blockers": [
+          "object_7"
+        ]
+      },
+      "object_3": {
+        "accessible": true,
+        "blockers": []
+      },
+      "object_4": {
+        "accessible": true,
+        "blockers": []
+      },
+      "object_5": {
+        "accessible": true,
+        "blockers": []
+      },
+      "object_6": {
+        "accessible": false,
+        "blockers": [
+          "object_1"
+        ]
+      },
+      "object_7": {
+        "accessible": true,
+        "blockers": []
+      },
+      "object_8": {
+        "accessible": true,
+        "blockers": []
+      },
+      "object_9": {
+        "accessible": true,
+        "blockers": []
+      },
+      "object_10": {
+        "accessible": true,
+        "blockers": []
+      }
+    },
+    "physical_solvability": "unverified; inspect and execute D-state/human trials"
+  }
+}

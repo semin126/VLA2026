@@ -1,0 +1,78 @@
+[
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_b392ff26/vla_pipeline/scripts/check_env.py"
+    ],
+    "log": "logs/000_check_env.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_b392ff26/vla_pipeline/scripts/final_project_v2.py",
+      "freeze",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/valid_specs/valid_open.json",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/valid_frozen/valid_open.json"
+    ],
+    "log": "logs/001_final_project_v2.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_b392ff26/vla_pipeline/scripts/final_project_v2.py",
+      "freeze",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/valid_specs/valid_blocked.json",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/valid_frozen/valid_blocked.json"
+    ],
+    "log": "logs/002_final_project_v2.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_b392ff26/vla_pipeline/scripts/final_project_v2.py",
+      "freeze",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/valid_specs/valid_mixed.json",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/valid_frozen/valid_mixed.json"
+    ],
+    "log": "logs/003_final_project_v2.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_b392ff26/vla_pipeline/scripts/final_project_v2.py",
+      "register-scenes",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/my_valid_suite",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/valid_frozen/valid_open.json",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/valid_frozen/valid_blocked.json",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/valid_frozen/valid_mixed.json"
+    ],
+    "log": "logs/004_final_project_v2.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_b392ff26/vla_pipeline/scripts/check_student_strategy_loop.py",
+      "--scenes",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/my_valid_suite",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T134609Z_db29be4a/check_c_loop_18b9de"
+    ],
+    "log": "logs/005_check_student_strategy_loop.log",
+    "returncode": 0
+  }
+]

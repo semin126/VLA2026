@@ -1,0 +1,95 @@
+[
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_c276d939/vla_pipeline/scripts/check_env.py"
+    ],
+    "log": "logs/000_check_env.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_c276d939/vla_pipeline/scripts/final_project_v2.py",
+      "freeze",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/valid_specs/valid_open.json",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/valid_frozen/valid_open.json"
+    ],
+    "log": "logs/001_final_project_v2.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_c276d939/vla_pipeline/scripts/final_project_v2.py",
+      "freeze",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/valid_specs/valid_blocked.json",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/valid_frozen/valid_blocked.json"
+    ],
+    "log": "logs/002_final_project_v2.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_c276d939/vla_pipeline/scripts/final_project_v2.py",
+      "freeze",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/valid_specs/valid_mixed.json",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/valid_frozen/valid_mixed.json"
+    ],
+    "log": "logs/003_final_project_v2.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_c276d939/vla_pipeline/scripts/final_project_v2.py",
+      "register-scenes",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/my_valid_suite",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/valid_frozen/valid_open.json",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/valid_frozen/valid_blocked.json",
+      "--scene",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/valid_frozen/valid_mixed.json"
+    ],
+    "log": "logs/004_final_project_v2.log",
+    "returncode": 0
+  },
+  {
+    "command": [
+      "/content/Final_project_v2/python312/bin/python",
+      "/content/fpv2_checkout_c276d939/vla_pipeline/scripts/final_project_v2.py",
+      "suite",
+      "--scenes",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/my_valid_suite",
+      "--split",
+      "validation",
+      "--conditions",
+      "D",
+      "--out",
+      "/content/Final_project_v2/team01/20261105T125500Z_c4146826/suite_trials",
+      "--seconds",
+      "12.0",
+      "--max-steps",
+      "2400",
+      "--action-steps",
+      "240",
+      "--observer-steps",
+      "60",
+      "--max-calls",
+      "8",
+      "--repeat-seeds",
+      "42"
+    ],
+    "log": "logs/005_final_project_v2.log",
+    "returncode": 0
+  }
+]

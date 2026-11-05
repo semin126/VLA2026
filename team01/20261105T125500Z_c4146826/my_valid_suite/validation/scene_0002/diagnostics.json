@@ -1,0 +1,58 @@
+{
+  "errors": [],
+  "warnings": [],
+  "diagnostic_category": "mixed",
+  "accessibility": {
+    "object_1": {
+      "accessible": false,
+      "blockers": [
+        "object_6"
+      ]
+    },
+    "object_2": {
+      "accessible": true,
+      "blockers": []
+    },
+    "object_3": {
+      "accessible": false,
+      "blockers": [
+        "object_8"
+      ]
+    },
+    "object_4": {
+      "accessible": true,
+      "blockers": []
+    },
+    "object_5": {
+      "accessible": false,
+      "blockers": [
+        "object_10"
+      ]
+    },
+    "object_6": {
+      "accessible": true,
+      "blockers": []
+    },
+    "object_7": {
+      "accessible": false,
+      "blockers": [
+        "object_2"
+      ]
+    },
+    "object_8": {
+      "accessible": true,
+      "blockers": []
+    },
+    "object_9": {
+      "accessible": false,
+      "blockers": [
+        "object_4"
+      ]
+    },
+    "object_10": {
+      "accessible": true,
+      "blockers": []
+    }
+  },
+  "physical_solvability": "unverified; inspect and execute D-state/human trials"
+}

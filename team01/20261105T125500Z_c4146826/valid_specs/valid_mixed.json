@@ -1,0 +1,76 @@
+{
+  "schema": "final_project_scene_v2",
+  "id": "valid_mixed_2002",
+  "seed": 2002,
+  "family": "valid_mixed",
+  "split": "validation",
+  "category": "mixed",
+  "object_set": "number",
+  "count": 10,
+  "command": "Tidy up the table: put every numbered object in its designated storage zone.",
+  "research_targets": [
+    "object_1",
+    "object_2",
+    "object_3",
+    "object_4",
+    "object_5",
+    "object_6",
+    "object_7",
+    "object_8",
+    "object_9",
+    "object_10"
+  ],
+  "layout": {
+    "object_1": [
+      -0.04,
+      0.19,
+      0.0
+    ],
+    "object_2": [
+      0.04,
+      0.27,
+      0.7853981633974483
+    ],
+    "object_3": [
+      -0.04,
+      0.35,
+      0.0
+    ],
+    "object_4": [
+      0.04,
+      0.43,
+      0.7853981633974483
+    ],
+    "object_5": [
+      -0.04,
+      0.51,
+      0.0
+    ],
+    "object_6": [
+      0.04,
+      0.19,
+      0.7853981633974483
+    ],
+    "object_7": [
+      -0.04,
+      0.27,
+      0.0
+    ],
+    "object_8": [
+      0.04,
+      0.35,
+      0.7853981633974483
+    ],
+    "object_9": [
+      -0.04,
+      0.43,
+      0.0
+    ],
+    "object_10": [
+      0.04,
+      0.51,
+      0.7853981633974483
+    ]
+  },
+  "note": "From accessibility_scene_pack_20261105; geometric diagnostic, not a grasp-impossibility proof."
+}

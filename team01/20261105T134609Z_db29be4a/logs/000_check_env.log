@@ -1,0 +1,32 @@
+Python   : 3.12.15
+Platform : Linux-6.6.159+-x86_64-with-glibc2.39
+MUJOCO_GL: egl
+
+[필수 패키지]
+  OK  mujoco
+  OK  numpy
+  OK  h5py
+  OK  imageio
+  OK  PIL
+
+[선택 패키지]
+  OK  pygame         (게임패드 텔레옵)
+  OK  torch          (VLM/VLA 추론·학습)
+  OK  transformers   (SmolVLM2 플래너)
+  OK  lerobot        (SmolVLA 학습(Colab))
+  OK  matplotlib     (그래프)
+
+[연산 장치]
+  torch 2.11.0+cu128, CUDA 사용 가능
+  OK  Tesla T4
+
+[에셋]
+  OK  Panda 원본: /content/fpv2_checkout_b392ff26/vla_pipeline/assets/franka_emika_panda/panda.xml
+  OK  패치본: /content/fpv2_checkout_b392ff26/vla_pipeline/assets/franka_emika_panda/panda_vla.xml
+
+[렌더링 테스트]
+  OK  agentview (128, 128, 3), 평균밝기 118.5
+  OK  물체 10개, 잘못 놓인 것 4개
+
+모두 정상입니다. 다음은 실제로 도는지 확인하세요:
+  /content/Final_project_v2/python312/bin/python scripts/smoke_test.py

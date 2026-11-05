@@ -1,0 +1,27 @@
+{
+  "schema": "final_project_scene_v2",
+  "scenes": [
+    {
+      "path": "validation/scene_0000.json",
+      "family": "valid_open",
+      "split": "validation",
+      "state_sha256": "b60c6de505f8fab554faa14a77605b74df01e3d43a029b487d1351a95fdb4903",
+      "preview": "validation/scene_0000/scene.png"
+    },
+    {
+      "path": "validation/scene_0001.json",
+      "family": "valid_blocked",
+      "split": "validation",
+      "state_sha256": "d06681bd2ee155a2552dd30433621de72577af9053453095d98e0867ad519a07",
+      "preview": "validation/scene_0001/scene.png"
+    },
+    {
+      "path": "validation/scene_0002.json",
+      "family": "valid_mixed",
+      "split": "validation",
+      "state_sha256": "370d3810b314386de5a883a7ec9e62e0188cbe6aa57ae89df6fff2af47c6d0ca",
+      "preview": "validation/scene_0002/scene.png"
+    }
+  ],
+  "source": "student_authored"
+}

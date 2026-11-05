@@ -1,0 +1,39 @@
+{
+  "method": 2,
+  "scenes_checked": 3,
+  "per_scene": [
+    {
+      "scene": "valid_open",
+      "status": "completed",
+      "planner_calls": 2,
+      "stop_reason": "student_stopped",
+      "acc": 0.0,
+      "guidance_initial": false,
+      "guidance_replan": true,
+      "student_feedback_in_replan": true
+    },
+    {
+      "scene": "valid_blocked",
+      "status": "completed",
+      "planner_calls": 2,
+      "stop_reason": "student_stopped",
+      "acc": 0.0,
+      "guidance_initial": false,
+      "guidance_replan": true,
+      "student_feedback_in_replan": true
+    },
+    {
+      "scene": "valid_mixed",
+      "status": "completed",
+      "planner_calls": 2,
+      "stop_reason": "student_stopped",
+      "acc": 0.0,
+      "guidance_initial": false,
+      "guidance_replan": true,
+      "student_feedback_in_replan": true
+    }
+  ],
+  "B_calls": 1,
+  "B_C_initial_prompt_identical": true,
+  "note": "Fake idle VLA / fixed-plan VLM; validates C-loop wiring, not model performance."
+}

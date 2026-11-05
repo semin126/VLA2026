@@ -1,0 +1,5 @@
+{
+  "backend": "egl",
+  "vendor_policy": "explicit",
+  "vendor_file": "/tmp/vlapipe_nvidia_egl_pvnnutbo.json"
+}

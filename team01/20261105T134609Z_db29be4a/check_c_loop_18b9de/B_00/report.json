@@ -1,0 +1,480 @@
+{
+  "protocol": "final_project_v2.0",
+  "condition": "B",
+  "variant": "B",
+  "diagnostic": true,
+  "scene_id": "valid_open_2000",
+  "family": "valid_open",
+  "split": "validation",
+  "scene_sha256": "b5a08bdee1d7c372e068a64a9610b32abd82e8b985ca702d25ac71bef7d57a83",
+  "input_scene_sha256": "b5a08bdee1d7c372e068a64a9610b32abd82e8b985ca702d25ac71bef7d57a83",
+  "initial_state_sha256": "b60c6de505f8fab554faa14a77605b74df01e3d43a029b487d1351a95fdb4903",
+  "task_sha256": "40aacb1d9d6832c1972f0625921af154cfb5ba0d45433db5f7d14ce6d3a79544",
+  "configuration": {
+    "condition": "B",
+    "seconds": 30,
+    "max_steps": 40,
+    "action_steps": 2,
+    "observer_steps": 2,
+    "max_calls": 2,
+    "max_attempts": 3,
+    "image_size": 128,
+    "planner_image_size": 512,
+    "planner_tokens": 1024,
+    "seed": 42,
+    "checkpoint": "diagnostic",
+    "vlm_model": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+    "strategy": "/content/fpv2_checkout_b392ff26/vla_pipeline/final_project_v2/baseline_strategy.py",
+    "operator": "",
+    "input_kind": "gamepad",
+    "gamepad_map": "gamepad_map.json",
+    "video": false,
+    "device": "auto",
+    "final_test": false,
+    "command": "Tidy up the table: put every numbered object in its designated storage zone."
+  },
+  "strategy": {
+    "sha256": "c3133db2709ade474c9915a0ae0fe9a8fc98e8a9d551d1f80c9d26fbcf49d598",
+    "path": "/content/fpv2_checkout_b392ff26/vla_pipeline/final_project_v2/baseline_strategy.py"
+  },
+  "events": [
+    {
+      "event": "plan_received",
+      "step": 0,
+      "wall": 0.03281133200016484,
+      "call": 1,
+      "plan": [],
+      "assessments": []
+    },
+    {
+      "event": "action_started",
+      "step": 0,
+      "wall": 0.03324316700036434,
+      "instruction": "Pick up the cube number 1 and place it in the right storage zone.",
+      "action": {
+        "object": "object_1",
+        "target_zone": "right_zone",
+        "reason": "diagnostic"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 2,
+      "wall": 0.09289927900044859,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 1 and place it in the right storage zone.",
+        "action": {
+          "object": "object_1",
+          "target_zone": "right_zone",
+          "reason": "diagnostic"
+        },
+        "steps": 2,
+        "termination": "fixed_action_horizon"
+      }
+    },
+    {
+      "event": "action_started",
+      "step": 2,
+      "wall": 0.13350812400040013,
+      "instruction": "Pick up the cube number 2 and place it in the right storage zone.",
+      "action": {
+        "object": "object_2",
+        "target_zone": "right_zone",
+        "reason": "diagnostic"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 4,
+      "wall": 0.1927682810000988,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 2 and place it in the right storage zone.",
+        "action": {
+          "object": "object_2",
+          "target_zone": "right_zone",
+          "reason": "diagnostic"
+        },
+        "steps": 2,
+        "termination": "fixed_action_horizon"
+      }
+    }
+  ],
+  "status": "completed",
+  "feedback_source": "images_and_nonprivileged_execution_metadata",
+  "perception": "camera_images_and_robot_proprioception",
+  "timing_note": "20 Hz maximum; inference counted; synchronous calls may overrun but late actions are discarded",
+  "hardware": {
+    "system": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "python": "3.12.15 (main, Oct 14 2026, 01:05:27) [Clang 23.1.3 ]",
+    "machine": "6e901dbba932",
+    "packages": {
+      "mujoco": "3.17.0",
+      "numpy": "2.2.6",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.22.1",
+      "lerobot": "0.6.2"
+    },
+    "cuda": true,
+    "gpu": "Tesla T4"
+  },
+  "implementation_sha256": "7e7345f1e0d6361de7559d55f01e80a27c5a5d7782e80cc7c2285528ad4cd256",
+  "restored_state_sha256": "b60c6de505f8fab554faa14a77605b74df01e3d43a029b487d1351a95fdb4903",
+  "initial": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "center_zone",
+      "object_2": "center_zone",
+      "object_3": "center_zone",
+      "object_4": "center_zone",
+      "object_5": "center_zone",
+      "object_6": "center_zone",
+      "object_7": "center_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "center_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.06999991990864252,
+          0.19000000000001585,
+          0.8249708981978092
+        ]
+      },
+      "object_2": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.07000002210511219,
+          0.2700000873061474,
+          0.8249708981978092
+        ]
+      },
+      "object_3": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.07000004894988308,
+          0.35000000000246,
+          0.8249708981978092
+        ]
+      },
+      "object_4": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.0700000513522483,
+          0.430000000444977,
+          0.8249708981978092
+        ]
+      },
+      "object_5": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.07000003357536988,
+          0.5099997839727765,
+          0.8249708981978092
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.06999983458146652,
+          0.19000000026281333,
+          0.8249708981978092
+        ]
+      },
+      "object_7": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.0699998849848261,
+          0.27000008654863444,
+          0.8249708981978092
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.07000005135345581,
+          0.3500000000126728,
+          0.8249708981978092
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.07000005150264653,
+          0.42999999991843285,
+          0.8249708981978092
+        ]
+      },
+      "object_10": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.06999999418182652,
+          0.5099997839927332,
+          0.8249708981978092
+        ]
+      }
+    },
+    "acc": 0.0,
+    "macro_f1": 0.0,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      },
+      "right_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      }
+    },
+    "n_objects": 10
+  },
+  "initial_image_sha256": "c4f5b61001ea32d842add2c02ebf94bf4cd7d57cf57ed7fbca906df011d4541a",
+  "model_load_seconds": 0.00012511600016296143,
+  "setup_wall_seconds": 0.6164979249997486,
+  "initial_prompt_sha256": "cf9b7c312706ab5c96888858516d524085f8a07a37c167e3c925d92f15392651",
+  "stop_reason": "plan_exhausted",
+  "final": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "center_zone",
+      "object_2": "center_zone",
+      "object_3": "center_zone",
+      "object_4": "center_zone",
+      "object_5": "center_zone",
+      "object_6": "center_zone",
+      "object_7": "center_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "center_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.06999991990790784,
+          0.190000000000016,
+          0.8249709075743703
+        ]
+      },
+      "object_2": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.07000002210531499,
+          0.27000008730694863,
+          0.8249709075743704
+        ]
+      },
+      "object_3": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.07000004895038824,
+          0.3500000000024601,
+          0.8249709075743704
+        ]
+      },
+      "object_4": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.07000005135271942,
+          0.4300000004449808,
+          0.8249709075743703
+        ]
+      },
+      "object_5": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.07000003357581697,
+          0.5099997839699,
+          0.8249709075743704
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.0699998345786432,
+          0.1900000002628177,
+          0.8249709075743704
+        ]
+      },
+      "object_7": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.06999988498377085,
+          0.2700000865494287,
+          0.8249709075743703
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.07000005135392684,
+          0.35000000001267256,
+          0.8249709075743703
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.07000005150317841,
+          0.42999999991843224,
+          0.8249709075743704
+        ]
+      },
+      "object_10": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.06999999418174875,
+          0.5099997839898565,
+          0.8249709075743704
+        ]
+      }
+    },
+    "acc": 0.0,
+    "macro_f1": 0.0,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      },
+      "right_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      }
+    },
+    "n_objects": 10
+  },
+  "summary": {
+    "total_wall_seconds": 0.2338763170000675,
+    "deadline_seconds": 30,
+    "deadline_overrun_seconds": 0,
+    "simulation_seconds": 0.2,
+    "steps": 4,
+    "planner_calls": 1,
+    "planner_seconds": 0.030268885999248596,
+    "vla_inference_seconds": 0.011186117000761442,
+    "attempts": {
+      "object_1": 1,
+      "object_2": 1
+    }
+  },
+  "history": [
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 1 and place it in the right storage zone.",
+      "action": {
+        "object": "object_1",
+        "target_zone": "right_zone",
+        "reason": "diagnostic"
+      },
+      "steps": 2,
+      "termination": "fixed_action_horizon"
+    },
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 2 and place it in the right storage zone.",
+      "action": {
+        "object": "object_2",
+        "target_zone": "right_zone",
+        "reason": "diagnostic"
+      },
+      "steps": 2,
+      "termination": "fixed_action_horizon"
+    }
+  ],
+  "end_to_end_wall_seconds": 0.9223802200003774
+}

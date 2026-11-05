@@ -1,0 +1,44 @@
+{
+  "protocol": "final_project_v2.0",
+  "groups": [
+    {
+      "cohort": "740c75820f47",
+      "condition": "D-state",
+      "n": 3,
+      "errors": 0,
+      "acc": 0.06666666666666667,
+      "macro_f1": 0.1111111111111111,
+      "scene_success": 0.0,
+      "total_wall_seconds": 8.000861804666783,
+      "planner_calls": 0.0,
+      "note": "Error trials retained at their actual final physical score; do not hide infrastructure errors."
+    }
+  ],
+  "paired": [],
+  "warnings": [],
+  "scheduled_coverage": [
+    {
+      "scene": "validation/scene_0000.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0000/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "validation/scene_0001.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0001/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "validation/scene_0002.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0002/42/D",
+      "report_exists": true
+    }
+  ],
+  "excluded_diagnostic_reports": [],
+  "note": "Compare within cohorts. E is usually a different hardware cohort. Ten scenes give exploratory evidence."
+}

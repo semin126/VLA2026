@@ -1,0 +1,153 @@
+{
+  "schema": "final_project_scene_v2",
+  "scenes": [
+    {
+      "path": "development/development_open_100.json",
+      "family": "development_open_100",
+      "split": "development",
+      "state_sha256": "1bd9d6484cc58ad57bb918d5e088f8083fed2531f44e3088f199e1516b1d67d2",
+      "preview": "development/development_open_100/scene.png"
+    },
+    {
+      "path": "development/development_blocked_101.json",
+      "family": "development_blocked_101",
+      "split": "development",
+      "state_sha256": "044deb2a2d7d92eab9448081987534ef2cce0eee807a445ec7570573a7a9c112",
+      "preview": "development/development_blocked_101/scene.png"
+    },
+    {
+      "path": "development/development_mixed_102.json",
+      "family": "development_mixed_102",
+      "split": "development",
+      "state_sha256": "808983089f9e39576c391023a7d1ea1d82b58084776d2490461f0fae8e1980e8",
+      "preview": "development/development_mixed_102/scene.png"
+    },
+    {
+      "path": "train/train_mixed_1000.json",
+      "family": "train_mixed_1000",
+      "split": "train",
+      "state_sha256": "eae9a9d74739ec37390aafe6b7188a02c97d8db395e3573ebb9a6e90dad8bc14",
+      "preview": "train/train_mixed_1000/scene.png"
+    },
+    {
+      "path": "train/train_mixed_1001.json",
+      "family": "train_mixed_1001",
+      "split": "train",
+      "state_sha256": "84e1eb8119e4f9d28b715945437e21a7416e3ef6acea4f9651e34045a0c93764",
+      "preview": "train/train_mixed_1001/scene.png"
+    },
+    {
+      "path": "train/train_mixed_1002.json",
+      "family": "train_mixed_1002",
+      "split": "train",
+      "state_sha256": "f085d8690c741b2dc06d2b051d84caadc637f770b28a59b3a23476550490683e",
+      "preview": "train/train_mixed_1002/scene.png"
+    },
+    {
+      "path": "train/train_mixed_1003.json",
+      "family": "train_mixed_1003",
+      "split": "train",
+      "state_sha256": "38b4ad8142a0fe7de2744709545250b0993468c8e047788509372f9b24b3b480",
+      "preview": "train/train_mixed_1003/scene.png"
+    },
+    {
+      "path": "validation/validation_mixed_2000.json",
+      "family": "validation_mixed_2000",
+      "split": "validation",
+      "state_sha256": "da3a8f1304a19bdf25b0b02003b2da9517c0d4ce3edcc4b55ab4676b6555c7ef",
+      "preview": "validation/validation_mixed_2000/scene.png"
+    },
+    {
+      "path": "validation/validation_mixed_2001.json",
+      "family": "validation_mixed_2001",
+      "split": "validation",
+      "state_sha256": "f819f6d4334dd8ae452fabd6643cd38ce24d69c33431291cd9f7f1a7b750b9d1",
+      "preview": "validation/validation_mixed_2001/scene.png"
+    },
+    {
+      "path": "sft_test/sft_test_mixed_2500.json",
+      "family": "sft_test_mixed_2500",
+      "split": "sft_test",
+      "state_sha256": "02d3664f80d4df1a06439024a4a2b3a83fd544ad8bd4ca66d4d80700a6c7d852",
+      "preview": "sft_test/sft_test_mixed_2500/scene.png"
+    },
+    {
+      "path": "sft_test/sft_test_mixed_2501.json",
+      "family": "sft_test_mixed_2501",
+      "split": "sft_test",
+      "state_sha256": "5669556dd66472ab9e6f7d21798e7dea804c1fd88b5e83d47735c1391101bac0",
+      "preview": "sft_test/sft_test_mixed_2501/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3000.json",
+      "family": "test_mixed_3000",
+      "split": "test",
+      "state_sha256": "4ade7d499bab41465435b34008953caadbb92b464a61c2f42a5562905cd1256c",
+      "preview": "test/test_mixed_3000/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3001.json",
+      "family": "test_mixed_3001",
+      "split": "test",
+      "state_sha256": "604dac33ca723dc3d63697ccfee1012174863639d645e11d2b652006de9894dd",
+      "preview": "test/test_mixed_3001/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3002.json",
+      "family": "test_mixed_3002",
+      "split": "test",
+      "state_sha256": "8ac74b524da0de17e48b31f4ce487024fdc185a6b365605f562690dbefeb9575",
+      "preview": "test/test_mixed_3002/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3003.json",
+      "family": "test_mixed_3003",
+      "split": "test",
+      "state_sha256": "cd52cd909b59852945e64e9a9478c533d6ced9e238d6d47b7af512e77a848416",
+      "preview": "test/test_mixed_3003/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3004.json",
+      "family": "test_mixed_3004",
+      "split": "test",
+      "state_sha256": "b4b32d60219167b8fe3496fbad824b7a6439a28160af282adac01bcef83d3693",
+      "preview": "test/test_mixed_3004/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3005.json",
+      "family": "test_mixed_3005",
+      "split": "test",
+      "state_sha256": "a3e39f408361811318e0fcd7cae2d79519237a3d6c4e170ab6dc8b70e27753eb",
+      "preview": "test/test_mixed_3005/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3006.json",
+      "family": "test_mixed_3006",
+      "split": "test",
+      "state_sha256": "9e85f307a8e0ebcfe02e7af3a300eb9485b063a102e6f3c43b3a00d3d3c92107",
+      "preview": "test/test_mixed_3006/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3007.json",
+      "family": "test_mixed_3007",
+      "split": "test",
+      "state_sha256": "6370f2ec9a1b94e1c7930d6bc622998350848ddf2fe799168daec2617c165ee7",
+      "preview": "test/test_mixed_3007/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3008.json",
+      "family": "test_mixed_3008",
+      "split": "test",
+      "state_sha256": "27e3c0bd845a6036916f2249dd69f3e6343cf6ee67a9fdaac552c6428dd8649d",
+      "preview": "test/test_mixed_3008/scene.png"
+    },
+    {
+      "path": "test/test_mixed_3009.json",
+      "family": "test_mixed_3009",
+      "split": "test",
+      "state_sha256": "d20ed9508c6ce1d6db4ccd8d20a1d3861186ae353ff24b53051ae8fe52161d5a",
+      "preview": "test/test_mixed_3009/scene.png"
+    }
+  ],
+  "note": "Starter generator uses one pair-based layout family. Broaden student-designed tests."
+}

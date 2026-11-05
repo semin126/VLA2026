@@ -1,0 +1,47 @@
+{
+  "trials": [
+    {
+      "scene": "validation/scene_0000.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0000/42/D"
+    },
+    {
+      "scene": "validation/scene_0001.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0001/42/D"
+    },
+    {
+      "scene": "validation/scene_0002.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0002/42/D"
+    }
+  ],
+  "configuration": {
+    "D": {
+      "condition": "D",
+      "seconds": 12.0,
+      "max_steps": 2400,
+      "action_steps": 240,
+      "observer_steps": 60,
+      "max_calls": 8,
+      "max_attempts": 3,
+      "image_size": 128,
+      "planner_image_size": 512,
+      "planner_tokens": 1024,
+      "seed": 42,
+      "checkpoint": null,
+      "vlm_model": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct",
+      "strategy": null,
+      "operator": "",
+      "input_kind": "gamepad",
+      "gamepad_map": "gamepad_map.json",
+      "video": true,
+      "device": "auto",
+      "final_test": false,
+      "command": null
+    }
+  }
+}
