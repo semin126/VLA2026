@@ -51,3 +51,8 @@ This changes the local VLM used by both B and C. Record the chosen version and
 keep it identical for those conditions. To restore R2, use the default manifest
 with `--roles vlm --upgrade`. [R3 release and raw responses](https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r3)
 include the expanded 92-row check and the matched 52-row comparison.
+
+On an additional 40 independent initial layouts, R2/R3 pair F1 was 0.4297/0.5765;
+neither produced a complete plan on any of the 20 layouts containing 10 targets.
+Both planners remain previews with incomplete coverage. The manifests include
+these measurements and the release contains all 80 raw comparison responses.

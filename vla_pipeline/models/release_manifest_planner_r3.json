@@ -88,6 +88,36 @@
           ]
         ],
         "extra": []
+      },
+      "novel_initial40_validation": {
+        "validation": {
+          "task": "VLM planning labels, not robot success",
+          "n": 40,
+          "format_accuracy": 0.95,
+          "plan_pair_f1": 0.5764527139527139,
+          "geometric_accessibility_acc": 0.95,
+          "done_accuracy": 0.95,
+          "exact_plan_accuracy": 0.05
+        },
+        "by_target_count": {
+          "ten_targets": {
+            "n": 20,
+            "plan_pair_f1": 0.5855769230769231,
+            "format_accuracy": 0.9,
+            "exact_plan_accuracy": 0.0
+          },
+          "one_to_nine_targets": {
+            "n": 20,
+            "plan_pair_f1": 0.5673285048285048,
+            "format_accuracy": 1.0,
+            "exact_plan_accuracy": 0.1
+          }
+        },
+        "seconds": 133.88582766500008,
+        "recipe_sha256": "cf6b911d9b15d94ff9711b37b99963567d7b4b3f7e794066d35601f40122c1f0",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r3/balanced_initial_comparison_evidence.zip",
+        "scope": "Independent locally generated initial scenes, not completed-state context or physical success"
       }
     },
     "vla_single": {

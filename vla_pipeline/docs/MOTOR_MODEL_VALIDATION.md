@@ -111,3 +111,18 @@ R3의 확장 validation92개에서는 JSON92/92, pair F1 .9114입니다.
 `--manifest models/release_manifest_planner_r3.json --roles vlm --upgrade`로 명시적으로 선택하세요.
 B/C에서 같은 버전을 사용하고 실제 선택 기록을 남겨야 합니다.
 [R3 배포와 원본 응답](https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r3)을 확인할 수 있습니다.
+
+대상 개수·번호·배치를 바꿔 로컬에서 만든 별도 초기 씬40개도 동일 Colab GPU에서 비교했습니다.
+이 세트에는 완료 문맥이 없고, 20개는 정리 대상10개, 나머지20개는1~9개입니다.
+
+| 새로운 초기 씬40개 | R2 | R3 |
+|---|---:|---:|
+| JSON 형식 | 27/40 | 38/40 |
+| 계획 pair F1 | 0.4297 | 0.5765 |
+| 대상10개인20씬의 완전한 계획 | 0/20 | 0/20 |
+
+R3가 이 세트의 평균은 더 높지만 두 모델 모두 새 배치에서 대상 누락이 남습니다.
+학생 시작 씬 하나의 결과와 이40개 평균을 구분하세요. 기본R2와 선택형R3 모두 프리뷰입니다.
+기존52/92개와 이40개의 구성이 달라, 서로의 점수 차이를 모델 개선율로 해석하지 않습니다.
+이40개는 독립 검증용 기하 교사 라벨이며 모델 학습이나 최종 mixed benchmark에 사용하지 않았습니다.
+[원본80개 응답과 결과](https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r3/balanced_initial_comparison_evidence.zip)도 공개했습니다.
