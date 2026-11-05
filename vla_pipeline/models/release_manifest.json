@@ -5,7 +5,7 @@
   "release_url": "https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r2",
   "models": {
     "vlm": {
-      "url": "https://github.com/semin126/VLA2026/releases/download/untagged-0172981b7f26a08731ab/models-planner-20261106-r2_vlm_inference.zip",
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/models-planner-20261106-r2_vlm_inference.zip",
       "sha256": "8d3e5062d44cb870b2c807c0fbbcf42c0be6335f164233fce5fd7d79fcfc3ade",
       "bytes": 813764502,
       "bundle_release": "models-planner-20261106-r2",
@@ -48,7 +48,7 @@
     }
   },
   "planner_validation_recipe": {
-    "url": "https://github.com/semin126/VLA2026/releases/download/untagged-0172981b7f26a08731ab/models-planner-20261106-r2_validation_recipe.zip",
+    "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/models-planner-20261106-r2_validation_recipe.zip",
     "sha256": "0edae7963da356dd83b52f992223fa94559253d1ac98a9450c8d24b50ccf4af7",
     "n": 52
   }
