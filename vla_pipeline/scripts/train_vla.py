@@ -57,10 +57,17 @@ def main():
     ap.add_argument('--start-frames',type=int,default=8)
     ap.add_argument('--train-vlm',action='store_true',help='Also adapt the VLA visual-language backbone; independent of the upper-level planner VLM')
     ap.add_argument('--train-vision',action='store_true',help='Also adapt the image encoder (implies --train-vlm)')
+    ap.add_argument('--expert-only',action='store_true',help='Explicitly freeze the visual-language backbone, including when the base checkpoint previously trained it')
+    ap.add_argument('--chunk-size',type=int,help='Optional predicted action horizon; independent of cached actions and the simulator subtask budget')
+    ap.add_argument('--vision-cache',type=Path,help='Cache real frozen RGB encoder features for expert-only image training; disables image augmentation, inference remains native')
     ap.add_argument('--wait-for-gpu',action='store_true',help='Wait for this checkout model-training lock instead of rejecting a concurrent launch')
     ap.add_argument('--policy-action-steps','--action-steps',dest='policy_action_steps',type=int,default=10,
                     help='VLA cached actions before re-observing; distinct from the trial subtask horizon')
     args = ap.parse_args()
+    if args.expert_only and (args.train_vlm or args.train_vision):
+        ap.error('--expert-only cannot be combined with --train-vlm/--train-vision')
+    if args.chunk_size is not None and args.chunk_size<1:
+        ap.error('--chunk-size must be positive')
     episode_indices=[int(x) for x in args.episodes.split(',')] if args.episodes else None
     if episode_indices is not None and (not episode_indices or min(episode_indices)<0):
         ap.error('Episode indices must be nonnegative')
@@ -84,6 +91,12 @@ def main():
         print(f'Train sampler: first {args.start_frames} frames weighted {args.start_frame_weight}; validation remains unchanged',flush=True)
 
     policy = SmolVLAConfig.from_pretrained(args.base)
+    bundled_metadata=Path(args.base)/'backbone_metadata'
+    if bundled_metadata.is_dir():
+        policy.vlm_model_name=str(bundled_metadata.resolve())
+    if args.expert_only:
+        policy.train_expert_only=True
+        policy.freeze_vision_encoder=True
     if args.train_vlm or args.train_vision:
         policy.train_expert_only=False
         policy.freeze_vision_encoder=not args.train_vision
@@ -97,6 +110,8 @@ def main():
     policy.optimizer_lr = args.learning_rate
     policy.scheduler_warmup_steps = min(args.warmup_steps, max(1, args.steps // 4))
     policy.scheduler_decay_steps = max(args.steps, policy.scheduler_warmup_steps + 1)
+    if args.chunk_size is not None:
+        policy.chunk_size=args.chunk_size
     policy.n_action_steps = args.policy_action_steps
     if not 1 <= policy.n_action_steps <= policy.chunk_size or args.learning_rate <= 0 or args.warmup_steps < 1:
         ap.error('Require positive learning rate/warmup and action-steps within chunk_size')
@@ -110,6 +125,10 @@ def main():
     )
     cfg.trackio.enable = False
     cfg.accelerator.mixed_precision=args.mixed_precision
+    if args.vision_cache is not None:
+        from vlapipe.training_vision_cache import install_frozen_vision_training
+        cfg.dataset.image_transforms.enable=False
+        install_frozen_vision_training(lerobot_train,cfg,args.vision_cache,compute=args.mixed_precision)
     import json
     from vlapipe.action_targets import descriptor
     representation_file=args.dataset_root/'action_representation.json'

@@ -22,6 +22,9 @@ def evaluate(checkpoint,scenes,out,system='hier',max_steps=240,overfit=False,cac
              evaluation_split='validation',record_video=False,full_horizon=False):
     if max_steps < 1:
         raise ValueError('max_steps must be positive')
+    scenes=list(scenes)
+    if not scenes:
+        raise ValueError('Need at least one evaluation scene')
     out=Path(out)
     out.mkdir(parents=True,exist_ok=False)
     policy=SmolVLAPolicy(str(checkpoint),device='cuda')
@@ -101,6 +104,7 @@ def evaluate(checkpoint,scenes,out,system='hier',max_steps=240,overfit=False,cac
         (case/'report.json').write_text(json.dumps(row,indent=2),encoding='utf-8')
         results.append(row)
         summary={'n':len(results),'successes':sum(r['success'] for r in results),
+                 'expected_n':len(scenes),'completed':len(results)==len(scenes),
                  'transfer_success_rate':sum(r['success'] for r in results)/len(results),
                  'strict_success_rate':sum(r['strict_success'] for r in results)/len(results),
                  'transfer_wilson_95':list(wilson_interval(sum(r['success'] for r in results),len(results))),
@@ -134,4 +138,8 @@ if __name__=='__main__':
         files=files[:a.limit]
     if not files:
         raise SystemExit('No held-out single-transfer scenes found')
-    print(json.dumps(evaluate(a.checkpoint,files,a.out,a.system,a.max_steps,a.allow_train_overfit,a.cached_actions,a.evaluation_split,a.video,a.full_horizon),indent=2))
+    from filelock import FileLock
+    shared_lock=Path(__file__).resolve().parents[1]/'outputs/.vlm_gpu_exclusive.lock'
+    shared_lock.parent.mkdir(parents=True,exist_ok=True)
+    with FileLock(str(shared_lock)):
+        print(json.dumps(evaluate(a.checkpoint,files,a.out,a.system,a.max_steps,a.allow_train_overfit,a.cached_actions,a.evaluation_split,a.video,a.full_horizon),indent=2))

@@ -73,6 +73,7 @@ def main():
     ap.add_argument('--device', choices=['auto', 'cuda', 'cpu'], default='auto')
     ap.add_argument('--autocast-bf16', action='store_true', help='Optional CUDA mixed precision; trainable parameters and optimizer stay FP32.')
     ap.add_argument('--gradient-checkpointing', action='store_true', help='Trade extra computation for lower activation memory on small GPUs.')
+    ap.add_argument('--freeze-vision', action='store_true', help='Freeze the SmolVLM image encoder while adapting its connector and language decoder.')
     ap.add_argument('--dry-run', action='store_true')
     ap.add_argument('--wait-for-gpu', action='store_true', help='Wait for the shared local VLM/VLA training lock.')
     args = ap.parse_args()
@@ -105,10 +106,20 @@ def main():
         raise SystemExit('--autocast-bf16 requires a CUDA device supporting BF16.')
     processor = AutoProcessor.from_pretrained(args.model)
     model = AutoModelForImageTextToText.from_pretrained(args.model, torch_dtype=dtype).to(device)
+    if args.freeze_vision:
+        vision=getattr(getattr(model,'model',None),'vision_model',None)
+        if vision is None:
+            raise SystemExit('--freeze-vision expects a SmolVLM model.vision_model; no guessed module freezing.')
+        for parameter in vision.parameters():
+            parameter.requires_grad_(False)
+    trainable=[p for p in model.parameters() if p.requires_grad]
+    if not trainable or any(p.dtype!=torch.float32 for p in trainable):
+        raise RuntimeError('Planner master parameters must be nonempty and FP32')
+    print('Trainable parameter elements:',sum(p.numel() for p in trainable),flush=True)
     model.config.use_cache = False
     if args.gradient_checkpointing:
         model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant': False})
-    optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
+    optimizer = torch.optim.AdamW(trainable, lr=args.learning_rate)
     args.out.mkdir(parents=True, exist_ok=False)
     config = {k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()}
     config.update({'torch': torch.__version__, 'transformers': transformers.__version__,
@@ -172,6 +183,11 @@ if __name__ == '__main__':
     except Timeout as exc:
         raise SystemExit('Another VLM/VLA trainer is active in this checkout; preserve it and wait.') from exc
     try:
-        raise SystemExit(main())
+        # Variable-length VLM batches can occupy almost the entire GPU. Share
+        # this second lock with motor evaluation; VLA-only training remains
+        # allowed to overlap one small inference job.
+        inference_lock=FileLock(str(lock_path.with_name('.vlm_gpu_exclusive.lock')))
+        with inference_lock:
+            raise SystemExit(main())
     finally:
         training_lock.release()
