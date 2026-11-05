@@ -29,6 +29,8 @@ ACTION_NAMES = ["dx", "dy", "dz", "drx", "dry", "drz", "gripper"]
 
 def episode_frames(ep: Episode) -> list[dict]:
     """에피소드를 LeRobot 프레임 리스트로. 액션 T개에 맞춰 관측도 앞 T개만 쓴다."""
+    if not getattr(ep,'images_loaded',True):
+        raise ValueError('Load the real images before generating training frames')
     T = len(ep)
     states = ep.state_vectors()[:T]
     agent = ep.obs.get("agentview_image")
@@ -68,7 +70,7 @@ def validate(paths: list[Path]) -> dict:
     if not paths:
         report["problems"].append("에피소드가 없습니다. 먼저 성공한 시연 데이터를 수집하세요.")
     for p in paths:
-        ep = Episode(p)
+        ep = Episode(p,load_images=False)
         T = len(ep)
         if T < 5:
             report["problems"].append(f"{p.name}: 프레임이 {T}개뿐입니다.")
@@ -111,7 +113,7 @@ def validate(paths: list[Path]) -> dict:
 
 
 def convert(paths: list[Path], repo_id: str, root: Path, fps: int = C.CONTROL_HZ,
-            use_videos: bool = True, robot_type: str = "panda_vla_sorting"):
+            use_videos: bool = True, robot_type: str = "panda_vla_sorting",action_representation='delta'):
     """실제 LeRobot 데이터셋 생성. lerobot 이 설치된 환경(Colab)에서 실행."""
     try:
         from lerobot.datasets.lerobot_dataset import LeRobotDataset
@@ -121,18 +123,27 @@ def convert(paths: list[Path], repo_id: str, root: Path, fps: int = C.CONTROL_HZ
     report = validate(paths)
     if not report["ok"]:
         raise ValueError("데이터 검증 실패: " + "; ".join(report["problems"]))
-    first = Episode(paths[0])
+    first = Episode(paths[0],load_images=False)
 
+    from .action_targets import descriptor,encode_episode_actions
+    import json
+    representation=descriptor(action_representation)
     root = Path(root)
+    features=build_features(first,use_videos=use_videos)
+    if action_representation=='absolute_position':
+        features[KEY_ACTION]['names']=['target_x_normalized','target_y_normalized','target_z_normalized',*ACTION_NAMES[3:]]
     ds = LeRobotDataset.create(
         repo_id=repo_id, fps=fps, root=root, robot_type=robot_type,
-        features=build_features(first, use_videos=use_videos), use_videos=use_videos,
+        features=features, use_videos=use_videos,
+        image_writer_threads=4,
     )
     import inspect
     task_argument = "task" in inspect.signature(ds.add_frame).parameters
     for path in paths:
         ep = Episode(path)
-        for frame in episode_frames(ep):
+        targets=encode_episode_actions(ep,representation)
+        for index,frame in enumerate(episode_frames(ep)):
+            frame[KEY_ACTION]=targets[index]
             task = frame.pop("task")
             if task_argument:
                 ds.add_frame(frame, task=task)
@@ -144,4 +155,5 @@ def convert(paths: list[Path], repo_id: str, root: Path, fps: int = C.CONTROL_HZ
         ds.consolidate()
     if hasattr(ds, "finalize"):
         ds.finalize()                  # v3 writer must flush parquet footers
+    (root/'action_representation.json').write_text(json.dumps(representation,indent=2),encoding='utf-8')
     return ds

@@ -5,8 +5,9 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import tempfile
 
-def bundle(source, destination, role, *, extra=None):
+def _bundle(source, destination, role, *, extra=None):
     source,destination=Path(source).resolve(strict=True),Path(destination).absolute()
     if destination.exists():
         raise FileExistsError('Choose a fresh model bundle directory: '+str(destination))
@@ -16,7 +17,7 @@ def bundle(source, destination, role, *, extra=None):
             continue
         if path.is_dir():
             shutil.copytree(path,destination/path.name)
-        elif path.suffix in ('.json','.safetensors','.model','.txt','.jinja','.bin'):
+        elif path.suffix in ('.json','.safetensors','.model','.txt','.jinja'):
             shutil.copy2(path,destination/path.name)
     info={'role':role,'stage':'preview','source_weights_sha256':None,
           'license':'apache-2.0',
@@ -45,6 +46,9 @@ def bundle(source, destination, role, *, extra=None):
             if path.is_file() and path.suffix in ('.json','.txt','.model','.jinja'):
                 shutil.copy2(path,target/path.name)
         with safe_open(source/'model.safetensors',framework='pt',device='cpu') as tensors:
+            from collections import Counter
+            info['checkpoint_tensor_dtypes']=dict(Counter(tensors.get_slice(k).get_dtype() for k in tensors.keys()))
+            info['precision_loading']='Restore each tensor dtype before loading; do not cast the whole backbone to one dtype.'
             key=next(k for k in tensors.keys() if '.vlm.' in k)
             info['backbone_dtype']={'BF16':'bfloat16','F16':'float16','F32':'float32'}[tensors.get_slice(key).get_dtype()]
         config['vlm_model_name']='backbone_metadata'
@@ -62,6 +66,20 @@ def bundle(source, destination, role, *, extra=None):
             with path.open('rb') as f:
                 manifest[path.relative_to(destination).as_posix()]={'bytes':path.stat().st_size,'sha256':hashlib.file_digest(f,'sha256').hexdigest()}
     (destination/'files_manifest.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
+    return info
+
+
+def bundle(source,destination,role,*,extra=None):
+    destination=Path(destination).absolute()
+    if destination.exists():
+        raise FileExistsError('Choose a fresh model bundle directory: '+str(destination))
+    destination.parent.mkdir(parents=True,exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='bundle_partial_',dir=destination.parent) as tmp:
+        stage=Path(tmp).resolve()
+        assert stage.is_relative_to(destination.parent.resolve())
+        ready=stage/'pretrained_model'
+        info=_bundle(source,ready,role,extra=extra)
+        ready.rename(destination)
     return info
 
 if __name__=='__main__':

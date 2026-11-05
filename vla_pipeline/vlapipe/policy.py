@@ -298,7 +298,7 @@ class SmolVLAPolicy:
     """
 
     def __init__(self, checkpoint: str, device: str = C.DEFAULT_DEVICE):
-        from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy as _P  # noqa
+        from .model_loading import CheckpointPrecisionSmolVLA as _P
         from lerobot.policies.factory import make_pre_post_processors
         from lerobot.policies.smolvla.configuration_smolvla import SmolVLAConfig
         import torch
@@ -320,16 +320,17 @@ class SmolVLAPolicy:
             from huggingface_hub import snapshot_download
             checkpoint = snapshot_download(checkpoint)
         self.loaded_checkpoint = str(Path(checkpoint).resolve())
+        from .action_targets import descriptor,validate_descriptor
+        action_file=Path(checkpoint)/'action_representation.json'
+        self.action_representation=(json.loads(action_file.read_text(encoding='utf-8-sig'))
+                                    if action_file.is_file() else descriptor())
+        validate_descriptor(self.action_representation)
+        self._controller_target=None
         metadata = Path(checkpoint)/'backbone_metadata'
         if metadata.is_dir():
             saved.vlm_model_name = str(metadata.resolve())
-            saved.load_vlm_weights = False  # complete checkpoint already contains the backbone weights
+        saved.load_vlm_weights = False  # complete checkpoint already contains the backbone weights
         self.policy = _P.from_pretrained(checkpoint, config=saved).to(device).eval()
-        info = Path(checkpoint)/'model_info.json'
-        if metadata.is_dir() and info.is_file():
-            backbone_dtype = json.loads(info.read_text(encoding='utf-8')).get('backbone_dtype')
-            if backbone_dtype in ('bfloat16','float16','float32'):
-                self.policy.model.vlm_with_expert.vlm.to(dtype=getattr(torch,backbone_dtype))
         self.policy.config.device = device
         self.image_size = max((max(tuple(f.shape)[-2:]) for k, f in self.policy.config.input_features.items()
                                if k.startswith('observation.images.')), default=C.IMAGE_SIZE)
@@ -341,8 +342,16 @@ class SmolVLAPolicy:
         )
 
     def reset(self) -> None:
+        self._controller_target=None
         if hasattr(self.policy, "reset"):
             self.policy.reset()
+
+    def set_controller_target(self,position) -> None:
+        """Actuator bookkeeping only; never passed into the neural input features."""
+        position=np.asarray(position,dtype=np.float64)
+        if position.shape!=(3,) or not np.isfinite(position).all():
+            raise ValueError('Controller target must be a finite robot XYZ vector')
+        self._controller_target=position.copy()
 
     def select_action(self, observation: dict) -> np.ndarray:
         torch = self.torch
@@ -382,6 +391,7 @@ class SmolVLAPolicy:
         action = action.squeeze(0).float().cpu().numpy()
         if action.shape != (C.ACTION_DIM,) or not np.isfinite(action).all():
             raise ValueError(f"Expected finite {C.ACTION_DIM}D simulator action, got {action.shape}")
-        action = np.clip(action, -1, 1)
-        action[6] = C.GRIPPER_CLOSE_CMD if action[6] >= 0 else C.GRIPPER_OPEN_CMD
-        return action.astype(np.float32)
+        from .action_targets import to_environment_action
+        result=to_environment_action(action,self.action_representation,self._controller_target)
+        self._controller_target=None
+        return result

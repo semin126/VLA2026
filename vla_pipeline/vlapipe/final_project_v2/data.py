@@ -220,7 +220,7 @@ actually stepped during the trial. This is not a reversed or imagined demo.
     return manifest
 
 
-def prepare_action_data(collections, system, out, *, convert=False, repo_id='dshs2026/final_project_v2'):
+def prepare_action_data(collections, system, out, *, convert=False, repo_id='dshs2026/final_project_v2',action_representation='delta'):
     """Enforce v2 family/state/split provenance before the existing converter runs."""
     import subprocess
     import sys
@@ -230,7 +230,7 @@ def prepare_action_data(collections, system, out, *, convert=False, repo_id='dsh
     owners = {'family': {}, 'state_sha256': {}, 'seed': {}}
     rows, accepted_dirs, holdout = [], set(), set()
     for path in Path(collections).glob('*/'+label+'/accepted/*.hdf5'):
-        ep = Episode(path)
+        ep = Episode(path,load_images=False)
         require_training_demo(ep, task_level=label)
         split = ep.meta.get('split')
         if split not in DATA_SPLITS:
@@ -250,7 +250,7 @@ def prepare_action_data(collections, system, out, *, convert=False, repo_id='dsh
         raise ValueError('Need successful training and independent holdout episodes')
     script = Path(__file__).resolve().parents[2] / 'scripts' / 'prepare_vla_training.py'
     command = [sys.executable, str(script), '--system', system, '--holdout-seeds', ','.join(map(str, sorted(holdout))),
-               '--out', str(out), '--repo-id', repo_id]
+               '--out', str(out), '--repo-id', repo_id,'--action-representation',action_representation]
     for folder in sorted(accepted_dirs):
         command += ['--input-dir', str(folder)]
     if convert:

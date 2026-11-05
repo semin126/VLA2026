@@ -207,6 +207,8 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
         strategy_info = {'sha256': file_hash(config.strategy), 'path': str(Path(config.strategy).resolve())}
     diagnostic = planner_adapter is not None or policy_adapter is not None
     implementation = {p.name: file_hash(p) for p in Path(__file__).parent.glob('*.py')}
+    for name in ('policy.py','model_loading.py','action_targets.py','controller.py','config.py','env.py','numbered.py'):
+        implementation['core/'+name]=file_hash(Path(__file__).parent.parent/name)
     report = {'protocol': PROTOCOL if config.realtime else 'final_project_v2_collection', 'condition': config.condition, 'variant': 'D-state' if config.condition == 'D' else config.condition,
               'diagnostic': diagnostic, 'scene_id': spec['id'], 'family': spec['family'], 'split': spec['split'],
               'scene_sha256': digest(spec), 'input_scene_sha256': input_scene_sha256,
@@ -246,6 +248,7 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                 report.setdefault('models', {})['vla'] = choice.to_dict()
                 torch.manual_seed(config.seed)
                 learned = SmolVLAPolicy(config.checkpoint, device=config.device)
+                report['models']['vla']['action_representation']=learned.action_representation['name']
             if config.condition in 'BC' and model is None:
                 model = ImagePlanner(config.vlm_model, device=config.device, max_new_tokens=config.planner_tokens,
                                      source=config.vlm_source or config.model_source, models_dir=config.models_dir, hub_id=config.vlm_hub_id)
@@ -433,6 +436,8 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                 else:
                     t = time.perf_counter()
                     env.image_size = max(config.image_size, getattr(learned, 'image_size', config.image_size))
+                    if hasattr(learned,'set_controller_target'):
+                        learned.set_controller_target(env.ctrl.target_pos)
                     action = learned.select_action({**env.get_obs(), 'task': task_label})
                     synchronize()
                     action_inference_seconds += time.perf_counter()-t

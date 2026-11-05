@@ -2,6 +2,7 @@
 import _bootstrap  # noqa: F401
 from pathlib import Path
 import tempfile
+import json
 from vlapipe.final_project_v2.model_sources import resolve_model
 
 with tempfile.TemporaryDirectory() as tmp:
@@ -27,4 +28,23 @@ with tempfile.TemporaryDirectory() as tmp:
         raise AssertionError('Missing strict-local checkpoint accepted')
     except FileNotFoundError:
         pass
+    for name,files in [('empty',{}),('tokenizer_only',{'tokenizer.json':'{}'}),
+                       ('normalizer_only',{'config.json':'{}','policy_preprocessor_step_5_normalizer_processor.safetensors':'stats'}),
+                       ('zero_weights',{'config.json':'{}','model.safetensors':''}),
+                       ('wrong_role',{'config.json':'{}','model.safetensors':'fixture','model_info.json':json.dumps({'role':'vla_single'})})]:
+        folder=root/name
+        folder.mkdir()
+        for file,content in files.items():
+            (folder/file).write_text(content)
+        try:
+            resolve_model('vlm',reference=str(folder))
+            raise AssertionError('Invalid explicit directory accepted: '+name)
+        except ValueError:
+            pass
+    for invalid in ('runs/nope/pretrained_model',r'runs\nope\pretrained_model'):
+        try:
+            resolve_model('vlm',reference=invalid)
+            raise AssertionError('Missing path treated as Hub ID')
+        except FileNotFoundError:
+            pass
 print('PASS: all three roles, local priority, missing/partial models, explicit local/Hub')

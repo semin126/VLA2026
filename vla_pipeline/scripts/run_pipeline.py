@@ -154,6 +154,7 @@ def main() -> int:
                     a = policy.select_action(obs)
                     done = policy.done
                 else:
+                    policy.set_controller_target(env.ctrl.target_pos)
                     a = policy.select_action({**obs, "task": st["instruction"]})
                     # 학습된 정책은 '끝났다' 신호를 주지 않는다.
                     # 목표 구역에 들어갔고 그리퍼가 열려 있으면(= 놓았으면) 성공으로 보고 넘어간다.

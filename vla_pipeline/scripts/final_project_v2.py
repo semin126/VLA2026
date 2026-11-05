@@ -90,6 +90,7 @@ def parser():
     p.add_argument('--image-size', type=int, default=128)
     p.add_argument('--accelerated', action='store_true', help='Unpaced D-state demonstrations; not benchmark timing')
     p = sub.add_parser('prepare-actions')
+    p.add_argument('--action-representation',choices=['delta','absolute_position'],default='delta')
     p.add_argument('--collections', type=Path, required=True)
     p.add_argument('--system', choices=['single', 'hier'], required=True)
     p.add_argument('--out', type=Path, required=True)
@@ -199,7 +200,8 @@ def main():
                                            image_size=args.image_size, accelerated=args.accelerated), indent=2))
     elif args.command == 'prepare-actions':
         from vlapipe.final_project_v2.data import prepare_action_data
-        prepare_action_data(args.collections, args.system, args.out, convert=args.convert, repo_id=args.repo_id)
+        prepare_action_data(args.collections, args.system, args.out, convert=args.convert, repo_id=args.repo_id,
+                            action_representation=args.action_representation)
     elif args.command == 'evaluate-vlm':
         from vlapipe.final_project_v2.data import evaluate_vlm
         print(json.dumps(evaluate_vlm(args.dataset, args.split, args.model, args.out, device=args.device), indent=2))

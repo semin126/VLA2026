@@ -52,6 +52,9 @@ def aggregate(root, out=None, include_diagnostic=False):
                                           for n in r['final']['objects']),
                **r['summary'], 'diagnostic': r['diagnostic'],
                'checkpoint': cfg.get('checkpoint'), 'vlm_model': cfg.get('vlm_model') if r['condition'] in 'BC' else '',
+               'vla_source': (r.get('models',{}).get('vla',{}).get('source','injected' if r['diagnostic'] else 'legacy_explicit') if r['condition'] in 'ABC' else ''),
+               'vlm_source': (r.get('models',{}).get('vlm',{}).get('source','injected' if r['diagnostic'] else 'legacy_explicit') if r['condition'] in 'BC' else ''),
+               'action_representation':r.get('models',{}).get('vla',{}).get('action_representation','delta') if r['condition'] in 'ABC' else '',
                'strategy_sha256': (r.get('strategy') or {}).get('sha256', ''),
                'initial_prompt_sha256': r.get('initial_prompt_sha256', ''),
                'model_load_seconds': r.get('model_load_seconds', 0),
@@ -59,6 +62,7 @@ def aggregate(root, out=None, include_diagnostic=False):
                'end_to_end_wall_seconds': r.get('end_to_end_wall_seconds', 0),
                'report': os.path.relpath(r['_path'], out).replace(os.sep, '/')}
         row['attempts'] = json.dumps(row['attempts'], sort_keys=True)
+        row['acc_gain']=row['acc']-row['initial_acc']
         rows.append(row)
         grouped[(cohort, r['variant'])].append(row)
         paired[(cohort, r['scene_sha256'], cfg['seed'])][r['condition']] = r
@@ -71,8 +75,13 @@ def aggregate(root, out=None, include_diagnostic=False):
         summaries.append({'cohort': cohort, 'condition': condition, 'n': len(group),
                           'errors': sum(r['status'] == 'error' for r in group),
                           **{k: float(np.mean([r[k] for r in group])) for k in
-                             ('acc', 'macro_f1', 'scene_success', 'total_wall_seconds', 'planner_calls')},
-                          'note': 'Error trials retained at their actual final physical score; do not hide infrastructure errors.'})
+                             ('initial_acc','acc','acc_gain','new_correct_objects','macro_f1', 'scene_success', 'total_wall_seconds', 'planner_calls')},
+                          'completed_only': {'n':sum(r['status']=='completed' for r in group),
+                              **{k:float(np.mean([r[k] for r in group if r['status']=='completed']))
+                                 if any(r['status']=='completed' for r in group) else None
+                                 for k in ('acc','acc_gain','macro_f1','scene_success')}},
+                          'model_sources':sorted({(r['vla_source'],r['vlm_source']) for r in group}),
+                          'note': 'Initial correct objects are included in ACC; compare ACC gain as well. Error trials retained; completed-only means also shown.'})
     deltas, warnings = [], []
     for left, right in [('A', 'B'), ('B', 'C'), ('A', 'C')]:
         by_cohort = defaultdict(list)
@@ -80,6 +89,11 @@ def aggregate(root, out=None, include_diagnostic=False):
             if left not in group or right not in group:
                 continue
             l, r = group[left], group[right]
+            left_rep=l.get('models',{}).get('vla',{}).get('action_representation','delta')
+            right_rep=r.get('models',{}).get('vla',{}).get('action_representation','delta')
+            if left_rep!=right_rep:
+                warnings.append(f'{cohort}: neural action representations differ; pair omitted')
+                continue
             def initial_prompt_hash(report):
                 if report.get('initial_prompt_sha256'):
                     return report['initial_prompt_sha256']
@@ -111,7 +125,8 @@ def aggregate(root, out=None, include_diagnostic=False):
                'excluded_diagnostic_reports': skipped,
                'note': 'Compare within cohorts. E is usually a different hardware cohort. Ten scenes give exploratory evidence.'}
     dump(out / 'summary.json', summary)
-    columns = ('cohort', 'condition', 'scene', 'status', 'acc', 'macro_f1', 'total_wall_seconds', 'planner_calls')
+    columns = ('cohort', 'condition', 'scene', 'status','initial_acc','acc','acc_gain','new_correct_objects',
+               'macro_f1','vla_source','vlm_source','action_representation','total_wall_seconds', 'planner_calls')
     parts = ['<!doctype html><meta charset="utf-8"><title>Final project ver2.0</title>',
              '<style>body{font:16px sans-serif;max-width:1400px;margin:30px auto}td,th{padding:8px;border:1px solid #ddd}table{border-collapse:collapse}video{max-width:640px}</style>',
              '<h1>Final project ver2.0</h1><p>MP4: simulation-time playback. Task timing: CSV wall seconds. Inference pauses: events and trace.</p>',

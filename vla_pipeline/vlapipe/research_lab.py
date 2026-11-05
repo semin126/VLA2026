@@ -274,6 +274,7 @@ def run_trial(*, mode='A', case='open', seed=0, out: Path, design_path=None,
             n, stable = 0, 0
             while n < limit:
                 if learned:
+                    learned.set_controller_target(env.ctrl.target_pos)
                     action = learned.select_action({**env.get_obs(), 'task': chosen['instruction']})
                 else:
                     action = teacher.select_action()

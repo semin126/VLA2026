@@ -11,6 +11,7 @@ from __future__ import annotations
 import json
 from datetime import datetime
 from pathlib import Path
+from dataclasses import dataclass
 
 import h5py
 import numpy as np
@@ -87,10 +88,12 @@ class EpisodeWriter:
 class Episode:
     """읽기용."""
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, *, load_images: bool = True):
         self.path = Path(path)
+        self.images_loaded=load_images
         with h5py.File(self.path, "r") as f:
-            self.obs = {k: f["obs"][k][:] for k in f["obs"]}
+            self.obs = {k: (ImageHeader(tuple(f['obs'][k].shape),f['obs'][k].dtype)
+                           if not load_images and k.endswith('_image') else f['obs'][k][:]) for k in f['obs']}
             self.actions = f["actions"][:]
             self.qpos = f["qpos"][:]
             self.qvel = f["qvel"][:] if "qvel" in f else None
@@ -111,6 +114,8 @@ class Episode:
                               axis=1).astype(np.float32)
 
     def save(self, path: Path) -> Path:
+        if not getattr(self,'images_loaded',True):
+            raise ValueError('A header-only episode cannot be saved or used as image training data')
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
         with h5py.File(path, "w") as f:
@@ -132,3 +137,17 @@ class Episode:
             f.attrs["created"] = datetime.now().isoformat(timespec="seconds")
             f.attrs["meta"] = json.dumps(self.meta, ensure_ascii=False)
         return path
+
+
+@dataclass(frozen=True)
+class ImageHeader:
+    """Shape/dtype only for provenance checks; never supplies synthetic pixels."""
+    shape: tuple
+    dtype: np.dtype
+
+    @property
+    def ndim(self):
+        return len(self.shape)
+
+    def __len__(self):
+        return self.shape[0]

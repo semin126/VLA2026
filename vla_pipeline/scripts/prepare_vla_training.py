@@ -24,6 +24,7 @@ def main():
     ap.add_argument('--repo-id', default='dshs2026/vla_training')
     ap.add_argument('--convert', action='store_true')
     ap.add_argument('--images', action='store_true', help='Image dataset; avoids video codec dependency')
+    ap.add_argument('--action-representation',choices=['delta','absolute_position'],default='delta')
     ap.add_argument('--allow-unverified-reversed', action='store_true', help='Exploratory reversal experiment only')
     args = ap.parse_args()
     holdout_seeds = {int(s) for s in args.holdout_seeds.split(',')}
@@ -32,7 +33,7 @@ def main():
     rows = []
     fingerprints = set()
     for path in paths:
-        ep = Episode(path)
+        ep = Episode(path,load_images=False)
         seed = require_training_demo(ep, task_level=expected,
                                     allow_unverified_reversed=args.allow_unverified_reversed)
         # Byte-identical duplicates must not receive extra weight in the training set.
@@ -63,7 +64,8 @@ def main():
     (args.out / 'train_manifest.txt').write_text('\n'.join(map(str, train)) + '\n', encoding='utf-8')
     (args.out / f'holdout_{args.system}.txt').write_text('\n'.join(map(str, holdout)) + '\n', encoding='utf-8')
     if args.convert:
-        convert(train, repo_id=args.repo_id, root=args.out / 'lerobot', use_videos=not args.images)
+        convert(train, repo_id=args.repo_id, root=args.out / 'lerobot', use_videos=not args.images,
+                action_representation=args.action_representation)
     print(json.dumps({k: v for k, v in manifest.items() if k != 'episodes'}, indent=2))
     print('Split manifest:', args.out.resolve() / 'split.json')
 

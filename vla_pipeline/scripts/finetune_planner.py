@@ -10,6 +10,7 @@ from contextlib import nullcontext
 import hashlib
 import json
 import random
+import sys
 from pathlib import Path
 
 
@@ -73,6 +74,7 @@ def main():
     ap.add_argument('--autocast-bf16', action='store_true', help='Optional CUDA mixed precision; trainable parameters and optimizer stay FP32.')
     ap.add_argument('--gradient-checkpointing', action='store_true', help='Trade extra computation for lower activation memory on small GPUs.')
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--wait-for-gpu', action='store_true', help='Wait for the shared local VLM/VLA training lock.')
     args = ap.parse_args()
     if args.max_steps < 1 or args.gradient_accumulation < 1:
         raise SystemExit('Step and accumulation counts must be positive.')
@@ -159,4 +161,17 @@ def main():
 
 
 if __name__ == '__main__':
-    raise SystemExit(main())
+    if any(flag in sys.argv for flag in ('--help','-h','--dry-run')):
+        raise SystemExit(main())
+    from filelock import FileLock, Timeout
+    lock_path=Path(__file__).resolve().parents[1]/'outputs/.vla_training.lock'
+    lock_path.parent.mkdir(parents=True,exist_ok=True)
+    training_lock=FileLock(str(lock_path))
+    try:
+        training_lock.acquire(timeout=-1 if '--wait-for-gpu' in sys.argv else 0)
+    except Timeout as exc:
+        raise SystemExit('Another VLM/VLA trainer is active in this checkout; preserve it and wait.') from exc
+    try:
+        raise SystemExit(main())
+    finally:
+        training_lock.release()
