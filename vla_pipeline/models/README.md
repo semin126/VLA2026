@@ -23,6 +23,29 @@ Weights are excluded from ordinary Git. Code and the release manifest are tracke
 inference ZIP archives are distributed through GitHub Releases. See the manifest
 for measured scope and checksums; preview weights are not a 60% performance claim.
 
+The current **B/C motor preview is r2**: the same10 frozen single-target scenes
+gave4/10 final stable transfers locally and5/10 on actual Colab RTX PRO6000.
+These repeat evaluations use the same weights and scenes; they are not20
+independent cases or a training improvement. This remains below the60% target.
+[Weights, recipe, and measured evidence](https://github.com/semin126/VLA2026/releases/tag/models-motor-preview-20261106-r2)
+are public. All fitting and training-data generation used the local RTX3090Ti.
+
+**A remains the old r1 debug model (0/10).** Its training is not matched to this
+B/C preview, so this combination cannot establish a hierarchy effect in A/B.
+B and C share the exact same `vla_hier` model. Both planner manifests select this
+same motor; choosing the optional R3 planner will not revert the motor to r1.
+
+To update only B/C while preserving old weights and the chosen planner:
+
+```powershell
+python scripts/download_models.py --roles vla_hier --upgrade
+```
+
+The r2 motor uses internal absolute-position targets with the same external
+delta7 actions. Provided executors handle the adapter. Direct policy loops must
+call `policy.set_controller_target(env.ctrl.target_pos)` before each action.
+See [motor validation](../docs/MOTOR_MODEL_VALIDATION.md) for scope and examples.
+
 To install a newer release into the default folders while preserving old weights:
 
 ```powershell
