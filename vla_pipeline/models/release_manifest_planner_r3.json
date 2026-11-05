@@ -1,0 +1,125 @@
+{
+  "release": "models-planner-20261106-r3",
+  "stage": "planner-preview-motor-not-qualified",
+  "validated_motor_policy": false,
+  "release_url": "https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r3",
+  "models": {
+    "vlm": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r3/models-planner-20261106-r3_vlm_inference.zip",
+      "sha256": "4386f537bebb0b362ba2748011bc1b1e0288c3800cba3dead426c29812fcf343",
+      "bytes": 813765676,
+      "bundle_release": "models-planner-20261106-r3",
+      "metrics": {
+        "task": "VLM planning labels, not robot success",
+        "n": 12,
+        "format_accuracy": 1.0,
+        "plan_pair_f1": 0.8630952380952381,
+        "geometric_accessibility_acc": 1.0,
+        "done_accuracy": 1.0,
+        "exact_plan_accuracy": 0.5833333333333334
+      },
+      "use": "Physical-context planner label preview; not robot success",
+      "colab_validation": {
+        "task": "VLM planning labels, not robot success",
+        "n": 92,
+        "format_accuracy": 1.0,
+        "plan_pair_f1": 0.9113792750301704,
+        "geometric_accessibility_acc": 1.0,
+        "done_accuracy": 1.0,
+        "exact_plan_accuracy": 0.7934782608695652,
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "peak_allocated_bytes": 1476099584,
+        "code_commit": "5f5a923bc6023f512ff1297419f89d118eb51631",
+        "scope": "Expanded 92-row public validation, correlated within scenes; not motor success",
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r3/planner_r3_colab_evidence.zip"
+      },
+      "colab_common52_validation": {
+        "task": "VLM planning labels, not robot success",
+        "n": 52,
+        "format_accuracy": 1.0,
+        "plan_pair_f1": 0.899629169849758,
+        "geometric_accessibility_acc": 1.0,
+        "done_accuracy": 1.0,
+        "exact_plan_accuracy": 0.6923076923076923,
+        "recipe_sha256": "0edae7963da356dd83b52f992223fa94559253d1ac98a9450c8d24b50ccf4af7",
+        "previous_r2": {
+          "task": "VLM planning labels, not robot success",
+          "n": 52,
+          "format_accuracy": 0.8269230769230769,
+          "plan_pair_f1": 0.7481331533963113,
+          "geometric_accessibility_acc": 0.823076923076923,
+          "done_accuracy": 0.8269230769230769,
+          "exact_plan_accuracy": 0.6346153846153846
+        },
+        "scope": "Identical previous public 52-row recipe; no data-composition change in this comparison",
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r3/planner_r3_colab_evidence.zip"
+      },
+      "student_initial_probe": {
+        "scene": "valid_open",
+        "format_ok": true,
+        "plan_length": 4,
+        "done": false,
+        "n_gold": 10,
+        "pair_f1": 0.5714285714285714,
+        "missing": [
+          [
+            "object_10",
+            "left_zone"
+          ],
+          [
+            "object_3",
+            "right_zone"
+          ],
+          [
+            "object_4",
+            "right_zone"
+          ],
+          [
+            "object_5",
+            "right_zone"
+          ],
+          [
+            "object_8",
+            "left_zone"
+          ],
+          [
+            "object_9",
+            "left_zone"
+          ]
+        ],
+        "extra": []
+      }
+    },
+    "vla_single": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vla_single_inference.zip",
+      "sha256": "ea36bb47ff933f84a1e2d91334f727f14bb9bb0c2648cfce762dcf1e0fb9c0f5",
+      "bytes": 726756312,
+      "metrics": {
+        "validation_n": 10,
+        "target_transfer_success_rate": 0.0,
+        "failure_stage": "grasp",
+        "training_updates": 1000
+      },
+      "use": "Loading/strategy diagnostics only; not a working motor baseline",
+      "bundle_release": "models-preview-20261106-r1"
+    },
+    "vla_hier": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vla_hier_inference.zip",
+      "sha256": "3be12aea4afe94d806e3494a3cabebb6803b0c921527ebdb5d3b4c8950c433d5",
+      "bytes": 726762120,
+      "metrics": {
+        "validation_n": 10,
+        "target_transfer_success_rate": 0.0,
+        "failure_stage": "grasp",
+        "training_updates": 1000
+      },
+      "use": "Loading/strategy diagnostics only; not a working motor baseline",
+      "bundle_release": "models-preview-20261106-r1"
+    }
+  },
+  "planner_validation_recipe": {
+    "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r3/models-planner-20261106-r3_validation_recipe.zip",
+    "sha256": "5a2b53cecc7c901f9bbf594f101c36303e3a7f0f59d595596e8485e62003973d",
+    "n": 92
+  }
+}
