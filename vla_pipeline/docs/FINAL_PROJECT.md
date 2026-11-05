@@ -1,5 +1,7 @@
 # Final_project 시작 안내
 
+> 이 문서는 기존 버전입니다. VLM 프롬프트·피드백 루프와 A~E 비교는 [Final project ver2.0 안내](FINAL_PROJECT_V2.md)를 사용하세요.
+
 실행 파일은 [notebooks/Final_project.ipynb](../notebooks/Final_project.ipynb)입니다. 연구에서 스스로 결정할 부분은 [여섯 가지 판단 지점](RESEARCH_DECISIONS.md)에 정리했습니다. 설치와 파일 형식 문제를 연구의 핵심 과제로 삼을 필요는 없습니다.
 
 ## 어디에서 무엇이 실행될까?

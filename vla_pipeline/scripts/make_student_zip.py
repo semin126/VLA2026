@@ -14,6 +14,7 @@
 """
 import _bootstrap  # noqa: F401
 import argparse
+import os
 import zipfile
 from pathlib import Path
 
@@ -22,12 +23,22 @@ from vlapipe import config as C
 ROOT = Path(C.PROJECT_DIR)
 
 # 통째로 뺄 디렉터리 이름 (경로 어디에 있든)
-EXCLUDE_DIRS = {".venv", "outputs", "data", "__pycache__", ".git", ".pytest_cache",
-                ".ipynb_checkpoints", ".mypy_cache"}
+EXCLUDE_DIRS = {".venv", ".venv-ui", "outputs", "data", "__pycache__", ".git", ".pytest_cache",
+                ".ipynb_checkpoints", ".mypy_cache", ".ruff_cache"}
 EXCLUDE_SUFFIX = {".pyc", ".pyo", ".hdf5", ".zip"}
 
 # 이것들이 없으면 학생 PC 에서 반드시 문제가 생긴다 -> 빠졌으면 만들지 않는다.
 REQUIRED = [
+    "notebooks/Final_project_v2_0.ipynb",
+    "notebooks/Scene_designer_v2_0.ipynb",
+    "notebooks/Finetuning_data_v2_0.ipynb",
+    "final_project_v2/student_strategy.py",
+    "final_project_v2/baseline_strategy.py",
+    "final_project_v2/prompts/starter_strategy.txt",
+    "final_project_v2/loop_example.py",
+    "docs/FINAL_PROJECT_V2_STUDENT_GUIDE.md",
+    "vlapipe/final_project_v2/runner.py",
+    "docs/FINAL_PROJECT_V2.md",
     "README.md",
     "SETUP_STUDENT.md",
     "AGENTS.md",
@@ -56,15 +67,13 @@ def parse_args():
 
 def collect() -> list[Path]:
     files = []
-    for p in ROOT.rglob("*"):
-        if not p.is_file():
-            continue
-        rel = p.relative_to(ROOT)
-        if EXCLUDE_DIRS & set(rel.parts):
-            continue
-        if p.suffix.lower() in EXCLUDE_SUFFIX:
-            continue
-        files.append(p)
+    for directory, dirs, names in os.walk(ROOT):
+        dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS and not (Path(directory)/d).is_symlink()
+                   and not getattr(Path(directory)/d, 'is_junction', lambda: False)()]
+        for name in names:
+            p = Path(directory)/name
+            if p.is_file() and not p.is_symlink() and p.suffix.lower() not in EXCLUDE_SUFFIX:
+                files.append(p)
     return sorted(files)
 
 
@@ -103,7 +112,7 @@ def main() -> int:
     print(f"파일 {len(files)}개, 원본 {total / 1e6:.1f} MB")
     print(f"만들었습니다: {dst}  ({dst.stat().st_size / 1e6:.1f} MB)")
     print(f"\n압축을 풀면 '{top}' 폴더 하나가 나옵니다.")
-    print("학생에게는 SETUP_STUDENT.md의 2026-11-05 설치 기준 → STUDENT_RESEARCH.md 순서로 안내하세요.")
+    print("ver2.0은 docs/FINAL_PROJECT_V2.md → notebooks/Final_project_v2_0.ipynb 순서로 안내하세요.")
     return 0
 
 

@@ -1,5 +1,9 @@
 # AGENTS.md — `vla_pipeline` 에서 일하는 AI 에이전트를 위한 안내
 
+> **Final project ver2.0:** `docs/FINAL_PROJECT_V2.md`, `notebooks/Final_project_v2_0.ipynb`가 새 진입점입니다. 구현은 `vlapipe/final_project_v2/`, 학생 설계는 `final_project_v2/student_strategy.py`입니다. 기존 `research_lab.py` A/B/C/D와 새 A~E의 의미를 섞지 마세요. 조교 참조 전략은 가이드에 있으며 자동으로 불러오지 않습니다. 검증 범위는 `../../VLA2026_guide/FINAL_PROJECT_V2_VALIDATION.md`를 확인하세요.
+
+> **학생 안내 보완:** `docs/FINAL_PROJECT_V2_STUDENT_GUIDE.md`에 씬·시작 명령·내부 프롬프트·루프 입출력을 설명합니다. A·B·D는 완성 코드로 제공하며 B는 `final_project_v2/baseline_strategy.py`를 기본 사용합니다. 내부 전략은 B/C 공통 `prompts/starter_strategy.txt`, 학생 C 루프는 `student_strategy.py`입니다. `loop_example.py`는 명시 선택하는 연결 예제입니다.
+
 > **2026-11-05 조교 지원 업데이트:** 현재 사용자는 학생 실험을 지원하는 조교입니다. 사용자 지정 최신 코드 정본은 이 Git 저장소이며, 진단·검증·실행 안내는 `../../VLA2026_guide/README.md`에 있습니다. 아래 9월 수치와 미실행 상태는 과거 기록입니다. 직접 정리 수집·LeRobot 변환·VLM/VLA 학습 연결 검증의 최신 범위는 가이드의 `VALIDATION.md`를 우선하세요. 짧은 학습 연결 검증을 행동 학습 성공이나 계층 구조 우수성으로 확대하지 않습니다.
 
 > 이 폴더는 **단독 배포본**입니다. 상위 저장소 없이 이것만 있어도 돌아갑니다.
