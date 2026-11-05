@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import platform
 import shutil
@@ -17,7 +18,12 @@ from pathlib import Path
 def prepare_python(project, work, *, install=False, python_override=''):
     project, work = Path(project), Path(work)
     if python_override:
-        py = Path(python_override)
+        py = Path(python_override).expanduser()
+    elif (Path(sys.prefix) / 'conda-meta').is_dir():
+        if sys.version_info[:2] != (3, 12):
+            raise RuntimeError('Select the VLA2026 Python 3.12 conda kernel, or set FPV2_PYTHON explicitly')
+        # Respect the selected conda kernel instead of silently using project/.venv.
+        py = Path(sys.executable)
     elif platform.system() == 'Windows':
         py = project / '.venv' / 'Scripts' / 'python.exe'
         if not py.is_file():
@@ -48,6 +54,82 @@ def prepare_python(project, work, *, install=False, python_override=''):
     # Resolving a POSIX venv's python symlink selects the base interpreter and
     # discards the venv's site-packages in subsequent subprocesses.
     return str(py.absolute())
+
+
+def select_scene(project, scenes, registry, custom_scene=''):
+    """Choose a frozen development/validation scene, including validation-only suites."""
+    if custom_scene:
+        path = Path(custom_scene).expanduser()
+        if not path.is_absolute():
+            path = Path(project) / path
+    else:
+        rows = registry.get('scenes', [])
+        options = [r for split in ('development', 'validation') for r in rows if r['split'] == split]
+        if not options:
+            raise ValueError('No development/validation scene; set CUSTOM_SCENE explicitly for another split')
+        path = Path(scenes) / options[0]['path']
+    if not path.is_file():
+        raise FileNotFoundError('Scene JSON does not exist: ' + str(path))
+    return path.resolve()
+
+
+def source_version(project):
+    """Record actual source identity without changing an existing checkout."""
+    git = shutil.which('git')
+    if not git and platform.system() == 'Windows':
+        candidate = Path(os.environ.get('ProgramFiles', 'C:/Program Files'))/'Git/cmd/git.exe'
+        git = str(candidate) if candidate.is_file() else None
+    result = {'project': str(Path(project).resolve()), 'commit': None, 'branch': None}
+    if git:
+        for key, args in [('commit', ['rev-parse', 'HEAD']), ('branch', ['branch', '--show-current'])]:
+            proc = subprocess.run([git, '-C', str(project), *args], text=True, capture_output=True)
+            if proc.returncode == 0:
+                result[key] = proc.stdout.strip()
+        proc = subprocess.run([git, '-C', str(project), 'status', '--porcelain', '--untracked-files=no'],
+                              text=True, capture_output=True)
+        if proc.returncode == 0:
+            result['tracked_changes'] = bool(proc.stdout.strip())
+    strategy = Path(project)/'final_project_v2/student_strategy.py'
+    if strategy.is_file():
+        result['student_strategy_sha256'] = hashlib.sha256(strategy.read_bytes()).hexdigest()
+    return result
+
+
+def check_research_budget(conditions, seconds, max_steps, action_steps, max_calls, *, smoke=False, objects=10):
+    """Fail early when C cannot reach its first post-plan replan opportunity."""
+    if not conditions or any(not isinstance(c, str) or len(c) != 1 or c not in 'ABCDE' for c in conditions):
+        raise ValueError('Choose one or more of A, B, C, D, E')
+    if any(not math.isfinite(v) or v <= 0 for v in (seconds, max_steps, action_steps, max_calls)):
+        raise ValueError('Trial budgets must be positive')
+    if smoke or 'C' not in conditions:
+        return
+    # This student policy preserves the queue until the whole initial plan ends.
+    from .. import config as C
+    minimum_steps = objects * action_steps
+    if max_calls < 2 or max_steps <= minimum_steps or seconds <= minimum_steps / C.CONTROL_HZ:
+        raise ValueError('C needs >=2 VLM calls, more than %d steps, and wall time beyond %.1fs '
+                         'plus VLM inference. Use the research budget or set SMOKE_TEST=True '
+                         'for connection checks only.' % (minimum_steps, minimum_steps / C.CONTROL_HZ))
+
+
+def build_student_validation_suite(run):
+    """Freeze the submitted layouts into a fresh suite; never delete earlier results."""
+    definitions = run.project/'final_project_v2/scenes/validation_layouts.json'
+    specs = json.loads(definitions.read_text(encoding='utf-8'))
+    stage = run.root/('validation_'+uuid.uuid4().hex[:8])
+    stage.mkdir()
+    paths = []
+    for spec in specs:
+        source, frozen = stage/(spec['id']+'_editable.json'), stage/(spec['id']+'.json')
+        source.write_text(json.dumps(spec, ensure_ascii=False, indent=2), encoding='utf-8')
+        run.run('scripts/final_project_v2.py', 'freeze', '--scene', source, '--out', frozen)
+        paths.append(frozen)
+    suite = stage/'suite'
+    args = ['register-scenes', '--out', suite]
+    for path in paths:
+        args += ['--scene', path]
+    run.run('scripts/final_project_v2.py', *args)
+    return suite
 
 
 class NotebookRun:

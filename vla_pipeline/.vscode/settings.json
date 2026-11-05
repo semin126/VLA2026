@@ -1,6 +1,6 @@
 {
-  "//": "이 폴더를 VSCode 로 열면 .venv 를 자동으로 인터프리터로 잡는다.",
-  "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+  "//": "로컬 conda 실행. Colab은 노트북에서 별도 커널을 선택합니다.",
+  "python.defaultInterpreterPath": "${env:USERPROFILE}\\miniforge3\\envs\\vla2026\\python.exe",
   "python.terminal.activateEnvironment": true,
   "python.analysis.extraPaths": ["${workspaceFolder}"],
   "files.encoding": "utf8",

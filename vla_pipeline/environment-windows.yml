@@ -1,0 +1,8 @@
+name: vla2026
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12.16
+  - pip
+  - pip:
+      - -r requirements-windows-ml-lock.txt

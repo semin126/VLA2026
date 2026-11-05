@@ -32,8 +32,8 @@ from .scenes import environment, read_scene, state_of
 @dataclass
 class TrialConfig:
     condition: str = 'D'
-    seconds: float = 120.0
-    max_steps: int = 2400
+    seconds: float = C.FINAL_PROJECT_SECONDS
+    max_steps: int = C.FINAL_PROJECT_MAX_STEPS
     action_steps: int = 240
     observer_steps: int = 60
     max_calls: int = 8

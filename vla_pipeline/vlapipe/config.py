@@ -374,6 +374,10 @@ CONTROL_HZ = 20
 SIM_TIMESTEP = 0.002
 SIM_STEPS_PER_ACTION = int(round((1.0 / CONTROL_HZ) / SIM_TIMESTEP))  # 25
 
+# v2 research budget leaves room after ten 240-step transports for VLM replanning.
+FINAL_PROJECT_SECONDS = 300.0
+FINAL_PROJECT_MAX_STEPS = 6000
+
 MAX_DPOS = 0.05   # 한 제어 스텝당 최대 위치 변화 [m]
 MAX_DROT = 0.50   # 한 제어 스텝당 최대 회전 변화 [rad]
 

@@ -1,5 +1,7 @@
 # Final project ver2.0
 
+학생 씬의 지속적인 Git 공유 경로와 명령은 [씬 push/pull 안내](SCENE_GIT.md)를 따릅니다.
+
 이 버전의 학생 연구는 **VLM 프롬프트의 실행 전 검사·선택**과 **VLM–VLA 피드백 루프**입니다. 기존 `student_design.py`의 정답 좌표 기반 규칙 과제와 다릅니다. 기존 코드·노트북은 보존합니다.
 
 **학생은 [실행·수정 상세 안내](FINAL_PROJECT_V2_STUDENT_GUIDE.md)부터 읽으세요. A·B·D는 완성 코드이며 C의 빈칸과 독립 실행됩니다.** B와 C의 시작 전략은 `final_project_v2/prompts/starter_strategy.txt`에서 함께 읽고, C의 루프는 `final_project_v2/student_strategy.py`에 작성합니다.
@@ -13,9 +15,9 @@
 | [Finetuning_data_v2_0.ipynb](../notebooks/Finetuning_data_v2_0.ipynb) | 추가 데이터 생성·검토·학습 연결 |
 | [student_strategy.py](../final_project_v2/student_strategy.py) | 학생이 작성하는 프롬프트와 루프 |
 
-Windows 로컬에서는 기존 `.venv` 커널로 시작합니다. 학생 환경은 VS Code의 Google Colab·Jupyter 확장 → `Select Kernel → Colab` → GPU 서버입니다. 로컬 `.py` 변경은 Colab에 자동 반영되지 않습니다. Git push한 브랜치 또는 Upload to Colab 후 실제 원격 `SOURCE_ROOT`를 선택하세요. commit/push는 실행기가 하지 않습니다.
+Windows 로컬 GPU에서는 [conda 환경·커널 안내](LOCAL_CONDA.md)에 따라 `VLA2026 (conda, Python 3.12, CUDA)`를 선택합니다. 기존 `.venv`도 명시적으로 선택할 수 있습니다. 학생 원격 환경은 VS Code의 Google Colab·Jupyter 확장 → `Select Kernel → Colab` → GPU 서버입니다. 로컬 `.py` 변경은 Colab에 자동 반영되지 않습니다. 기본 체크아웃은 `c-loop-validation`이며, 수정본을 push하거나 Upload to Colab 후 실제 원격 `SOURCE_ROOT`를 선택하세요. commit/push는 실행기가 하지 않습니다.
 
-처음에는 기본 D만 실행해 설치·씬·기록을 확인합니다. 12초 기본값은 연결 검사이며 완전 정리 성능을 재는 연구 예산이 아닙니다. 모델 로딩 후의 과제 시간과 로딩 시간을 나누어 기록합니다.
+처음에는 기본 D만 실행해 설치·씬·기록을 확인합니다. 연구용 기본 예산은 300초·6000스텝이며 C가 최초 전체 계획 후 재계획할 여유를 둡니다. `SMOKE_TEST=True`의 12초는 연결 검사이며 연구 성능 예산이 아닙니다. 예비시험으로 공통 예산을 확정하세요. 모델 로딩 후의 과제 시간과 로딩 시간을 나누어 기록합니다.
 
 ## 비교 조건
 

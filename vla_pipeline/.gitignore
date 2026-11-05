@@ -1,5 +1,10 @@
 assets/franka_emika_panda/
 data/
+# Keep generated outputs private except explicitly shared scene bundles.
+/outputs/*
+!/outputs/valid_specs/
+!/outputs/valid_suite/
+!/outputs/shared_scenes/
 __pycache__/
 *.pyc
 .venv/

@@ -6,6 +6,7 @@ import random
 from dataclasses import asdict
 from pathlib import Path
 
+from vlapipe import config as C
 from vlapipe.final_project_v2.common import dump
 
 
@@ -39,8 +40,8 @@ def parser():
             p.add_argument('--a-checkpoint', help='Scene-command VLA for A; B/C share --checkpoint')
             p.add_argument('--b-strategy', type=Path, help='Complete B strategy; independent of the student C module')
             p.add_argument('--repeat-seeds', default='42', help='Policy seeds; same for all paired conditions')
-        p.add_argument('--seconds', type=float, default=120)
-        p.add_argument('--max-steps', type=int, default=2400)
+        p.add_argument('--seconds', type=float, default=C.FINAL_PROJECT_SECONDS)
+        p.add_argument('--max-steps', type=int, default=C.FINAL_PROJECT_MAX_STEPS)
         p.add_argument('--action-steps', type=int, default=240)
         p.add_argument('--observer-steps', type=int, default=60)
         p.add_argument('--max-calls', type=int, default=8)

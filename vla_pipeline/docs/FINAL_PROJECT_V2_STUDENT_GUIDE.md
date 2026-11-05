@@ -40,7 +40,7 @@ B는 학생 C 파일을 읽지 않고 자체 완성 파일을 사용합니다. C
 
 ## 3. 처음 실행하는 순서
 
-1. `notebooks/Final_project_v2_0.ipynb`를 엽니다. 로컬 확인은 프로젝트 `.venv`, 원격 학습·모델 실행은 `Select Kernel → Colab`의 GPU 커널을 선택합니다.
+1. `notebooks/Final_project_v2_0.ipynb`를 엽니다. 로컬 GPU는 [conda 안내](LOCAL_CONDA.md)의 `VLA2026 (conda, Python 3.12, CUDA)`, 원격은 `Select Kernel → Colab`의 GPU 커널을 선택합니다.
 2. 설정 셀에서 `TEAM`, `SOURCE_ROOT`, `RUN_CONDITIONS`, 모델 경로를 확인합니다. 첫 실행은 기본 `RUN_CONDITIONS=['D']`로 합니다.
 3. 설정 → bootstrap → scenes 셀을 순서대로 실행합니다. 출력된 `PROJECT`, `RUN`, `SCENES` 경로를 기록합니다.
 4. `one_scene` 셀에서 사용할 씬과 공통 실행 함수를 설정합니다.
@@ -322,7 +322,7 @@ def loop_decision(context):
     return 'continue'
 ```
 
-연결만 확인할 때는 bootstrap 이후 `C_STRATEGY=PROJECT/'final_project_v2/loop_example.py'`로 명시하고 C를 실행합니다. 예제는 동작 후마다 재호출하므로 비용이 큽니다. 언제 재호출해야 유리한지, 불필요한 재계획을 어떻게 줄일지는 학생이 설계·비교할 부분입니다. 기본 student_strategy의 빈칸을 자동으로 우회하지 않습니다.
+`c-loop-validation`의 student_strategy는 현재 계획을 소진한 뒤 재계획하도록 구현되어 있습니다. 개별 작업 종료마다 재계획하는 연결 예제와 비교하려면 bootstrap 이후 `C_STRATEGY=PROJECT/'final_project_v2/loop_example.py'`로 명시합니다. 예제는 호출 비용이 큽니다. 언제 재호출해야 유리한지, 불필요한 재계획을 어떻게 줄일지는 학생이 설계·비교할 부분입니다. 실행기는 학생 전략을 예제로 자동 대체하지 않습니다.
 
 ## 10. A·B·D부터 실행하는 설정 예
 
@@ -333,10 +333,12 @@ RUN_CONDITIONS = ['A', 'B', 'D']
 VLA_SCENE = '/content/drive/MyDrive/VLA2026/your_run/models/single/pretrained_model'
 VLA_SUBTASK = '/content/drive/MyDrive/VLA2026/your_run/models/hier/pretrained_model'
 TASK_COMMAND = 'Tidy up the table.'
-SECONDS = 120
+SMOKE_TEST = False
+SECONDS = 300
+MAX_STEPS = 6000
 ```
 
-설정 후 bootstrap → scenes → one_scene → A/B/D → results 순서로 실행합니다. 12초 기본값은 연결 검사입니다. 위120초도 연구의 정답 예산이 아니므로 예비시험으로 정하고 모든 조건에 고정합니다. 모델 경로를 비워 두면 A/B는 명확한 오류로 멈춥니다. 고전 제어로 바꿔서 VLA라고 표시하지 않습니다.
+설정 후 bootstrap → validation suite 생성 → scenes → one_scene → A/B/D → results 순서로 실행합니다. 연구 기본값은 300초·6000스텝이며 `SMOKE_TEST=True`의 12초는 연결 검사입니다. 위300초도 연구의 정답 예산은 아니므로 예비시험으로 정하고 모든 조건에 고정합니다. 현재 학생 C는 전체 계획 소진 후 재계획하므로 10개 작업×240스텝 이후의 여유가 필요합니다. 모델 경로를 비워 두면 A/B는 명확한 오류로 멈춥니다. 고전 제어로 바꿔서 VLA라고 표시하지 않습니다.
 
 CLI에서 B는 이제 학생 전략 경로 없이도 실행할 수 있습니다.
 

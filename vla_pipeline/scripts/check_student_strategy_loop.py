@@ -101,8 +101,25 @@ def main():
     assert bplan.calls[0] == cplan0.calls[0], 'B and C initial prompts differ'
     identical_initial = bplan.calls[0] == cplan0.calls[0]
 
+    # Regression: a full ten-action initial plan must leave room to replan.
+    from vlapipe.final_project_v2.notebook_runtime import check_research_budget
+    check_research_budget(['C'], 30, 12, 1, 2)
+    long_plan = FakePlanner()
+    long_plan.raw = json.dumps({'assessments': [], 'done': False, 'plan': [
+        {'object': f'object_{i}', 'target_zone': 'right_zone' if i <= 5 else 'left_zone'}
+        for i in range(1, 11)]})
+    long_report = run_trial(scenes[0][1], args.out/'C_ten_action_plan',
+        TrialConfig(condition='C', seconds=30, max_steps=12, action_steps=1,
+                    observer_steps=1, max_calls=2, checkpoint='diagnostic',
+                    strategy=str(STUDENT), video=False),
+        planner_adapter=long_plan, policy_adapter=IdlePolicy())
+    assert long_report['status'] == 'completed', long_report.get('error')
+    assert len(long_plan.calls) == 2, 'Ten-action plan never reached replan'
+    assert long_report['summary']['steps'] == 12
+
     summary = {'method': 2, 'scenes_checked': len(scenes), 'per_scene': results,
                'B_calls': len(bplan.calls), 'B_C_initial_prompt_identical': identical_initial,
+               'ten_action_plan_replanned': len(long_plan.calls) == 2,
                'note': 'Fake idle VLA / fixed-plan VLM; validates C-loop wiring, not model performance.'}
     (args.out / 'check_c_loop.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps(summary, ensure_ascii=False, indent=2))
