@@ -18,7 +18,21 @@
         "done_accuracy": 0.9166666666666666,
         "exact_plan_accuracy": 0.5
       },
-      "use": "Physical-context planner label preview; not robot success"
+      "use": "Physical-context planner label preview; not robot success",
+      "colab_validation": {
+        "task": "VLM planning labels, not robot success",
+        "n": 52,
+        "format_accuracy": 0.8269230769230769,
+        "plan_pair_f1": 0.7481331533963113,
+        "geometric_accessibility_acc": 0.823076923076923,
+        "done_accuracy": 0.8269230769230769,
+        "exact_plan_accuracy": 0.6346153846153846,
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "peak_allocated_bytes": 1475706368,
+        "code_commit": "f68a4f5718b6f974253dfb0534fcbc0ff60caaeb",
+        "scope": "Actual public artifact CUDA generation; correlated validation rows; no motor-success claim",
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/planner_r2_colab_evidence.zip"
+      }
     },
     "vla_single": {
       "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vla_single_inference.zip",

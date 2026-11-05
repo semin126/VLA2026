@@ -82,8 +82,16 @@ preview 배포는 빠른 실험과 실패 분석용입니다. release_manifest�
 씬 안의 여러 행이 포함되고 자동 생성 라벨이므로 독립적인 12개 과제 성공률로 해석하지 않습니다.
 
 이 Release는 VLM만 새로 제공합니다. A/B/C용 VLA는 r1 파일을 그대로 참조하며
-아래의 0/10 운반 결과도 그대로입니다. 새 VLM의 Colab 52행 검증은 별도로 진행합니다.
+아래의 0/10 운반 결과도 그대로입니다.
 `DOWNLOAD_MODELS=True`, `UPGRADE_MODELS=True`로 새 VLM을 받고 이전 버전을 보존할 수 있습니다.
+
+**공개 배포본 Colab 실측:** ZIP과 내부 파일 해시를 확인한 뒤 RTX PRO6000 Blackwell 약96GB에서
+52개 응답 생성을 완료했습니다. JSON 형식43/52(82.69%), 계획 pair F1 0.7481,
+done 정확도43/52였습니다. 형식 실패9개와 계획 누락이 남아 있습니다.
+학생의 실제 `valid_open` 시작 프롬프트는10개 대상 중6개를 올바르게 제안하고4개를 빠뜨렸습니다
+(그 한 씬 pair F1=0.75, 불필요한 추가 물체0).
+[Colab raw 응답과 측정 요약](https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/planner_r2_colab_evidence.zip)을 확인할 수 있습니다.
+Colab은 추론만 실행했으며, 학습·데이터 생성은 모두 로컬에서 진행했습니다.
 
 ## 2026-11-06 preview r1의 실제 결과
 
