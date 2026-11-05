@@ -153,7 +153,7 @@ def export_reviewed(candidate_dirs, out):
     return emitted
 
 
-def collect_action_data(scene_path, out, seconds=120, max_steps=2400, command=None):
+def collect_action_data(scene_path, out, seconds=120, max_steps=2400, command=None, *, image_size=128, accelerated=False):
     """D-state physical trajectories, exported with both scene and subtask labels.
 
 Images are rendered from recorded states offline. The control trajectory was
@@ -167,14 +167,15 @@ actually stepped during the trial. This is not a reversed or imagined demo.
     require_training_scene(spec)
     out = Path(out)
     out.mkdir(parents=True, exist_ok=False)
-    report = run_trial(scene_path, out / 'trial', TrialConfig(condition='D', seconds=seconds, max_steps=max_steps, command=command))
+    report = run_trial(scene_path, out / 'trial', TrialConfig(condition='D', seconds=seconds, max_steps=max_steps,
+                       command=command, realtime=not accelerated, video=not accelerated))
     spec = read_scene(out/'trial/scene.json')  # The effective command is used for scene-level VLA labels too.
     trace = np.load(out / 'trial' / 'trace.npz')
     meta = {'source': 'scripted_v2_physical_rollout', 'seed': spec['seed'], 'family': spec['family'],
             'split': spec['split'], 'scene_sha256': digest(spec), 'task_level': 'scene',
             'success': report['final']['scene_success'], 'state_sha256': spec['state_sha256']}
     manifest = []
-    with environment(spec) as env:
+    with environment(spec, image_size=image_size) as env:
         def pose(i):
             env.data.qpos[:] = trace['qpos'][i]
             env.data.qvel[:] = trace['qvel'][i]
@@ -276,9 +277,14 @@ def evaluate_vlm(dataset, split, model_id, out, device='auto'):
         image = np.asarray(Image.open(dataset/row['image']).convert('RGB'))
         raw = model.generate(image, row['prompt'], time.perf_counter()+120)
         gold = parse_response(row['completion'])
-        item = {'id': row['id'], 'raw': raw, 'format_ok': False, 'exact_plan': False, 'f1': 0.0}
+        item = {'id': row['id'], 'raw': raw, 'format_ok': False, 'exact_plan': False, 'f1': 0.0,
+                'accessibility_acc': 0.0, 'done_correct': False}
         try:
             predicted = parse_response(raw)
+            predicted_access={a['object']:a['accessible'] for a in predicted['assessments']}
+            item['accessibility_acc']=sum(predicted_access.get(a['object']) == a['accessible']
+                                           for a in gold['assessments'])/max(1,len(gold['assessments']))
+            item['done_correct']=predicted['done']==gold['done']
             p = {(x['object'], x['target_zone']) for x in predicted['plan']}
             g = {(x['object'], x['target_zone']) for x in gold['plan']}
             item.update(format_ok=True, exact_plan=[(x['object'], x['target_zone']) for x in predicted['plan']]
@@ -291,6 +297,8 @@ def evaluate_vlm(dataset, split, model_id, out, device='auto'):
     summary = {'task': 'VLM planning labels, not robot success', 'n': len(results),
                'format_accuracy': float(np.mean([r['format_ok'] for r in results])),
                'plan_pair_f1': float(np.mean([r['f1'] for r in results])),
+               'geometric_accessibility_acc': float(np.mean([r['accessibility_acc'] for r in results])),
+               'done_accuracy': float(np.mean([r['done_correct'] for r in results])),
                'exact_plan_accuracy': float(np.mean([r['exact_plan'] for r in results]))}
     dump(out/'summary.json', summary)
     return summary

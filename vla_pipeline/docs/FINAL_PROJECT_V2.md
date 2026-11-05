@@ -2,6 +2,8 @@
 
 학생 씬의 지속적인 Git 공유 경로와 명령은 [씬 push/pull 안내](SCENE_GIT.md)를 따릅니다.
 
+추론 모델은 [모델 배포·선택 안내](MODEL_RELEASE.md)를 따릅니다. 기본은 `models` 폴더 우선이며, 현재 preview의 VLA는 파지 실패를 분석하기 위한 모델입니다. 검증된 운반 기준 모델과 구분하세요.
+
 이 버전의 학생 연구는 **VLM 프롬프트의 실행 전 검사·선택**과 **VLM–VLA 피드백 루프**입니다. 기존 `student_design.py`의 정답 좌표 기반 규칙 과제와 다릅니다. 기존 코드·노트북은 보존합니다.
 
 **학생은 [실행·수정 상세 안내](FINAL_PROJECT_V2_STUDENT_GUIDE.md)부터 읽으세요. A·B·D는 완성 코드이며 C의 빈칸과 독립 실행됩니다.** B와 C의 시작 전략은 `final_project_v2/prompts/starter_strategy.txt`에서 함께 읽고, C의 루프는 `final_project_v2/student_strategy.py`에 작성합니다.

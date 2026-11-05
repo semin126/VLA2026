@@ -43,7 +43,13 @@ class TrialConfig:
     planner_tokens: int = 1024
     seed: int = 42
     checkpoint: str | None = None
-    vlm_model: str = 'HuggingFaceTB/SmolVLM2-500M-Video-Instruct'
+    vlm_model: str | None = None
+    model_source: str = 'auto'
+    vlm_source: str | None = None
+    vla_source: str | None = None
+    models_dir: str | None = None
+    vla_hub_id: str | None = None
+    vlm_hub_id: str | None = None
     strategy: str | None = None
     operator: str = ''
     input_kind: str = 'gamepad'
@@ -52,16 +58,21 @@ class TrialConfig:
     device: str = 'auto'
     final_test: bool = False
     command: str | None = None
+    realtime: bool = True
 
     def validate(self):
+        if not self.realtime and self.condition != 'D':
+            raise ValueError('Accelerated execution is only for D-state demonstration collection')
         if self.condition not in ('A', 'B', 'C', 'D', 'E'):
             raise ValueError('condition must be A/B/C/D/E')
         finite_positive(self.seconds, 'seconds')
         if min(self.max_steps, self.action_steps, self.observer_steps, self.max_calls,
                self.max_attempts, self.image_size, self.planner_image_size, self.planner_tokens) < 1:
             raise ValueError('All budgets/sizes must be positive')
-        if self.condition in 'ABC' and not self.checkpoint:
-            raise ValueError('A/B/C require an explicit trained VLA checkpoint; there is no classical fallback')
+        if self.model_source not in ('auto','local','hub'):
+            raise ValueError('model_source must be auto/local/hub')
+        if any(s is not None and s not in ('auto','local','hub') for s in (self.vlm_source,self.vla_source)):
+            raise ValueError('Per-model source must be auto/local/hub')
         if self.condition == 'B' and not self.strategy:
             self.strategy = str(Path(__file__).resolve().parents[2]/'final_project_v2/baseline_strategy.py')
         if self.condition == 'C' and not self.strategy:
@@ -196,14 +207,15 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
         strategy_info = {'sha256': file_hash(config.strategy), 'path': str(Path(config.strategy).resolve())}
     diagnostic = planner_adapter is not None or policy_adapter is not None
     implementation = {p.name: file_hash(p) for p in Path(__file__).parent.glob('*.py')}
-    report = {'protocol': PROTOCOL, 'condition': config.condition, 'variant': 'D-state' if config.condition == 'D' else config.condition,
+    report = {'protocol': PROTOCOL if config.realtime else 'final_project_v2_collection', 'condition': config.condition, 'variant': 'D-state' if config.condition == 'D' else config.condition,
               'diagnostic': diagnostic, 'scene_id': spec['id'], 'family': spec['family'], 'split': spec['split'],
               'scene_sha256': digest(spec), 'input_scene_sha256': input_scene_sha256,
               'initial_state_sha256': spec['state_sha256'], 'task_sha256': digest(task),
               'configuration': asdict(config), 'strategy': strategy_info, 'events': [], 'status': 'running',
               'feedback_source': 'images_and_nonprivileged_execution_metadata',
               'perception': 'oracle_state' if config.condition == 'D' else 'camera_images_and_robot_proprioception',
-              'timing_note': '20 Hz maximum; inference counted; synchronous calls may overrun but late actions are discarded',
+              'timing_note': ('20 Hz maximum; inference counted; synchronous calls may overrun but late actions are discarded'
+                              if config.realtime else 'Accelerated physical demonstrations; not a wall-time benchmark'),
               'hardware': hardware(), 'implementation_sha256': digest(implementation)}
     dump(out / 'task.json', task)
     steps = calls = 0
@@ -227,10 +239,19 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
             model = planner_adapter
             if config.condition in 'ABC' and learned is None:
                 import torch
+                from .model_sources import resolve_model
+                choice = resolve_model('vla_single' if config.condition == 'A' else 'vla_hier',
+                    source=config.vla_source or config.model_source, reference=config.checkpoint, models_dir=config.models_dir, hub_id=config.vla_hub_id)
+                config.checkpoint = choice.location
+                report.setdefault('models', {})['vla'] = choice.to_dict()
                 torch.manual_seed(config.seed)
                 learned = SmolVLAPolicy(config.checkpoint, device=config.device)
             if config.condition in 'BC' and model is None:
-                model = ImagePlanner(config.vlm_model, device=config.device, max_new_tokens=config.planner_tokens)
+                model = ImagePlanner(config.vlm_model, device=config.device, max_new_tokens=config.planner_tokens,
+                                     source=config.vlm_source or config.model_source, models_dir=config.models_dir, hub_id=config.vlm_hub_id)
+                config.vlm_model = model.choice.location
+                report.setdefault('models', {})['vlm'] = model.choice.to_dict()
+            report['configuration'] = asdict(config)
             if learned is not None:
                 learned.reset()
             random.seed(config.seed)
@@ -238,12 +259,17 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
             if config.condition in 'ABC' and not diagnostic:
                 import torch
                 torch.manual_seed(config.seed)
-                checkpoint = Path(config.checkpoint)
+                checkpoint = Path(getattr(learned, 'loaded_checkpoint', config.checkpoint))
                 if checkpoint.is_dir():
                     report['checkpoint_manifest'] = {p.name: file_hash(p) for p in sorted(checkpoint.iterdir())
                                                      if p.is_file() and p.suffix in ('.json', '.safetensors')}
                 report['vlm_revision'] = getattr(getattr(getattr(model, 'backend', None), 'model', None), 'config', None)
                 report['vlm_revision'] = getattr(report['vlm_revision'], '_commit_hash', None)
+                if config.condition in 'BC':
+                    vlm_directory = Path(config.vlm_model)
+                    report['vlm_checkpoint_manifest'] = ({p.name: file_hash(p) for p in sorted(vlm_directory.iterdir())
+                        if p.is_file() and p.suffix in ('.json','.safetensors')} if vlm_directory.is_dir()
+                        else {'hub_id':config.vlm_model,'revision':report['vlm_revision']})
             if config.condition == 'E':
                 print(task_text(task))
                 report['model_load_seconds'] = time.perf_counter()-load_start
@@ -406,6 +432,7 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                     action = teacher.select_action()
                 else:
                     t = time.perf_counter()
+                    env.image_size = max(config.image_size, getattr(learned, 'image_size', config.image_size))
                     action = learned.select_action({**env.get_obs(), 'task': task_label})
                     synchronize()
                     action_inference_seconds += time.perf_counter()-t
@@ -465,7 +492,7 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                         need_plan = True
                 # Common wall-time pacing avoids giving D accelerated physics and
                 # human E real time. Inference slower than 20 Hz is not hidden.
-                pause = min(tick + 1/C.CONTROL_HZ, deadline) - time.perf_counter()
+                pause = min(tick + 1/C.CONTROL_HZ, deadline) - time.perf_counter() if config.realtime else 0
                 if pause > 0:
                     time.sleep(pause)
             report['stop_reason'] = stop or 'step_limit'

@@ -63,7 +63,11 @@ class SortingEnv:
         else:
             self.scene_path = Path(scene_path)   # 이미 있는 씬 XML 을 그대로 사용
         # 경로에 한글이 있으면 MuJoCo 가 파일을 못 연다 -> config.mujoco_path 참고
-        self.model = mujoco.MjModel.from_xml_path(C.mujoco_path(self.scene_path))
+        from filelock import FileLock
+        texture_directory = C.ASSET_DIR/'number_textures'
+        texture_directory.mkdir(parents=True, exist_ok=True)
+        with FileLock(str(texture_directory/'.write.lock'), timeout=60):
+            self.model = mujoco.MjModel.from_xml_path(C.mujoco_path(self.scene_path))
         self.data = mujoco.MjData(self.model)
 
         self._jnt_adr = {

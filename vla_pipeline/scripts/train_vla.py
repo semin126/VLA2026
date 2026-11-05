@@ -47,7 +47,15 @@ def main():
     ap.add_argument('--batch-size', type=int, default=8)
     ap.add_argument('--device', default='cuda')
     ap.add_argument('--seed', type=int, default=1000)
+    ap.add_argument('--episodes',help='Optional comma-separated train dataset episode indices, for explicit overfit diagnostics')
+    ap.add_argument('--learning-rate', type=float, default=1e-4)
+    ap.add_argument('--warmup-steps', type=int, default=100)
+    ap.add_argument('--policy-action-steps','--action-steps',dest='policy_action_steps',type=int,default=10,
+                    help='VLA cached actions before re-observing; distinct from the trial subtask horizon')
     args = ap.parse_args()
+    episode_indices=[int(x) for x in args.episodes.split(',')] if args.episodes else None
+    if episode_indices is not None and (not episode_indices or min(episode_indices)<0):
+        ap.error('Episode indices must be nonnegative')
     if not (args.dataset_root / 'meta/info.json').is_file():
         ap.error('dataset-root must contain a converted train-only LeRobot dataset')
     if args.out.exists():
@@ -64,10 +72,16 @@ def main():
     policy.pretrained_path = args.base
     policy.device = args.device
     policy.push_to_hub = False
+    policy.optimizer_lr = args.learning_rate
+    policy.scheduler_warmup_steps = min(args.warmup_steps, max(1, args.steps // 4))
+    policy.scheduler_decay_steps = max(args.steps, policy.scheduler_warmup_steps + 1)
+    policy.n_action_steps = args.policy_action_steps
+    if not 1 <= policy.n_action_steps <= policy.chunk_size or args.learning_rate <= 0 or args.warmup_steps < 1:
+        ap.error('Require positive learning rate/warmup and action-steps within chunk_size')
     policy.input_features = {}  # factory derives image keys + state16 from OUR dataset
     policy.output_features = {}  # factory derives action7, retaining pretrained padded head
     cfg = TrainPipelineConfig(
-        dataset=DatasetConfig(repo_id=args.repo_id, root=str(args.dataset_root.resolve())),
+        dataset=DatasetConfig(repo_id=args.repo_id, root=str(args.dataset_root.resolve()),episodes=episode_indices),
         policy=policy, output_dir=args.out.resolve(), job_name=args.out.name,
         steps=args.steps, batch_size=args.batch_size, num_workers=0,
         seed=args.seed, log_freq=1, save_freq=args.steps,

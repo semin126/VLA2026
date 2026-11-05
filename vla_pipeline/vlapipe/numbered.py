@@ -45,6 +45,9 @@ from __future__ import annotations
 
 import math
 import re
+import os
+import tempfile
+import time
 from pathlib import Path
 
 from . import config as C
@@ -116,17 +119,38 @@ def _draw_number(n: int, size: int):
     return img
 
 
-def write_number_textures(size: int | None = None, force: bool = False) -> list[Path]:
+def _write_number_textures(size: int | None = None, force: bool = False) -> list[Path]:
     """1~10 숫자 텍스처를 assets/number_textures/ 에 쓴다. 이미 있으면 건너뛴다."""
     size = size or C.NUMBER_TEX_PX
     TEXTURE_DIR.mkdir(parents=True, exist_ok=True)
     paths = []
     for o in C.NUMBER_OBJECTS:
         p = TEXTURE_DIR / f"num_{o['number']:02d}.png"
-        if force or not p.exists():
-            _draw_number(o["number"], size).save(p)
+        if force or not p.exists() or p.stat().st_size == 0:
+            fd, name = tempfile.mkstemp(prefix=p.stem+'_',suffix='.png',dir=TEXTURE_DIR)
+            os.close(fd)
+            temporary = Path(name)
+            try:
+                _draw_number(o["number"], size).save(temporary)
+                for attempt in range(10):
+                    try:
+                        os.replace(temporary,p)
+                        break
+                    except PermissionError:
+                        if attempt == 9:
+                            raise
+                        time.sleep(.02)
+            finally:
+                temporary.unlink(missing_ok=True)
         paths.append(p)
     return paths
+
+
+def write_number_textures(size: int | None = None, force: bool = False) -> list[Path]:
+    from filelock import FileLock
+    TEXTURE_DIR.mkdir(parents=True, exist_ok=True)
+    with FileLock(str(TEXTURE_DIR/'.write.lock'), timeout=60):
+        return _write_number_textures(size,force)
 
 
 # --------------------------------------------------------------------------
@@ -172,7 +196,7 @@ def activate(regenerate: bool = False, count: int | None = None) -> list[dict]:
     """
     if count is not None:
         C.set_number_count(count)
-    write_number_textures(force=regenerate or count is not None)
+    write_number_textures(force=regenerate)
     _update_prompts()
     scene_mod.EXTRA_ASSETS = asset_xml()
     return C.use_object_set("number")

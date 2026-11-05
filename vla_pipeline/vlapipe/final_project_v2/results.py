@@ -87,7 +87,7 @@ def aggregate(root, out=None, include_diagnostic=False):
                 return digest(json.loads(plan.read_text(encoding='utf-8'))['prompt']) if plan.is_file() else None
             if left == 'B' and (not initial_prompt_hash(l) or initial_prompt_hash(l) != initial_prompt_hash(r)
                                 or l.get('checkpoint_manifest', l['configuration']['checkpoint']) != r.get('checkpoint_manifest', r['configuration']['checkpoint'])
-                                or l['configuration']['vlm_model'] != r['configuration']['vlm_model']):
+                                or l.get('vlm_checkpoint_manifest', l['configuration']['vlm_model']) != r.get('vlm_checkpoint_manifest', r['configuration']['vlm_model'])):
                 warnings.append(f'{cohort}: B/C initial prompt or models differ; pair omitted')
                 continue
             by_cohort[cohort].append((l, r))

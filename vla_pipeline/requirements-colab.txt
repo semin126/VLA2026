@@ -6,6 +6,7 @@ h5py>=3.10
 imageio>=2.34
 imageio-ffmpeg>=0.4
 Pillow>=10.0
+filelock>=3.16
 matplotlib>=3.8
 transformers>=4.50
 accelerate>=0.34

@@ -1,0 +1,44 @@
+{
+  "release": "models-preview-20261106-r1",
+  "stage": "prerelease-debug-preview",
+  "validated_motor_policy": false,
+  "release_url": "https://github.com/semin126/VLA2026/releases/tag/models-preview-20261106-r1",
+  "models": {
+    "vlm": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vlm_inference.zip",
+      "sha256": "91808a7e3babacf166a520914cd2e6207f4395b0b6faee700405b07e093ff0e7",
+      "bytes": 813764990,
+      "metrics": {
+        "validation_n": 16,
+        "plan_pair_f1": 0.8643939393939394,
+        "format_accuracy": 1.0,
+        "exact_plan_accuracy": 0.75
+      },
+      "use": "Planning-label preview; not physical success"
+    },
+    "vla_single": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vla_single_inference.zip",
+      "sha256": "ea36bb47ff933f84a1e2d91334f727f14bb9bb0c2648cfce762dcf1e0fb9c0f5",
+      "bytes": 726756312,
+      "metrics": {
+        "validation_n": 10,
+        "target_transfer_success_rate": 0.0,
+        "failure_stage": "grasp",
+        "training_updates": 1000
+      },
+      "use": "Loading/strategy diagnostics only; not a working motor baseline"
+    },
+    "vla_hier": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vla_hier_inference.zip",
+      "sha256": "3be12aea4afe94d806e3494a3cabebb6803b0c921527ebdb5d3b4c8950c433d5",
+      "bytes": 726762120,
+      "metrics": {
+        "validation_n": 10,
+        "target_transfer_success_rate": 0.0,
+        "failure_stage": "grasp",
+        "training_updates": 1000
+      },
+      "use": "Loading/strategy diagnostics only; not a working motor baseline"
+    }
+  }
+}

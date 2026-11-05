@@ -300,13 +300,39 @@ class SmolVLAPolicy:
     def __init__(self, checkpoint: str, device: str = C.DEFAULT_DEVICE):
         from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy as _P  # noqa
         from lerobot.policies.factory import make_pre_post_processors
+        from lerobot.policies.smolvla.configuration_smolvla import SmolVLAConfig
         import torch
+        import json
+        from pathlib import Path
 
         device = C.pick_device(device)   # GPU 없으면 CPU 로 (planner.VLMPlanner 와 동일)
         self.torch = torch
         self.device = device
-        self.policy = _P.from_pretrained(checkpoint).to(device).eval()
+        saved = SmolVLAConfig.from_pretrained(checkpoint)
+        cameras = {k for k in saved.input_features if k.startswith('observation.images.')}
+        if (tuple(getattr(saved.input_features.get('observation.state'), 'shape', ())) != (C.STATE_DIM,)
+                or tuple(getattr(saved.output_features.get('action'), 'shape', ())) != (C.ACTION_DIM,)
+                or cameras != {'observation.images.agentview','observation.images.wrist'}):
+            raise ValueError('This VLA checkpoint is not trained for the simulator camera/state16/action7 schema. '
+                             'Download the student model release or select a compatible finetuned Hub ID; '
+                             'the generic smolvla_base is a training initialization.')
+        if not Path(checkpoint).is_dir():
+            from huggingface_hub import snapshot_download
+            checkpoint = snapshot_download(checkpoint)
+        self.loaded_checkpoint = str(Path(checkpoint).resolve())
+        metadata = Path(checkpoint)/'backbone_metadata'
+        if metadata.is_dir():
+            saved.vlm_model_name = str(metadata.resolve())
+            saved.load_vlm_weights = False  # complete checkpoint already contains the backbone weights
+        self.policy = _P.from_pretrained(checkpoint, config=saved).to(device).eval()
+        info = Path(checkpoint)/'model_info.json'
+        if metadata.is_dir() and info.is_file():
+            backbone_dtype = json.loads(info.read_text(encoding='utf-8')).get('backbone_dtype')
+            if backbone_dtype in ('bfloat16','float16','float32'):
+                self.policy.model.vlm_with_expert.vlm.to(dtype=getattr(torch,backbone_dtype))
         self.policy.config.device = device
+        self.image_size = max((max(tuple(f.shape)[-2:]) for k, f in self.policy.config.input_features.items()
+                               if k.startswith('observation.images.')), default=C.IMAGE_SIZE)
         # Saved processors include the training statistics AND language tokenizer.
         # Raw task strings passed straight to select_action are not model inputs.
         self.preprocessor, self.postprocessor = make_pre_post_processors(

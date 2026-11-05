@@ -3,8 +3,11 @@ import time
 
 
 class ImagePlanner:
-    def __init__(self, model_id, device='auto', max_new_tokens=1024):
+    def __init__(self, model_id=None, device='auto', max_new_tokens=1024, *, source='auto', models_dir=None, hub_id=None):
         from ..planner import VLMPlanner
+        from .model_sources import resolve_model
+        self.choice = resolve_model('vlm', source=source, reference=model_id, models_dir=models_dir, hub_id=hub_id)
+        model_id = self.choice.location
         self.backend = VLMPlanner(model_id=model_id, device=device)
         self.max_new_tokens = max_new_tokens
 
@@ -30,7 +33,7 @@ class ImagePlanner:
             return ''
         inputs = inputs.to(b.device, dtype=b.model.dtype)
         with b.torch.inference_mode():
-            result = b.model.generate(**inputs, max_new_tokens=self.max_new_tokens, do_sample=False,
+            result = b.model.generate(**inputs, max_new_tokens=self.max_new_tokens, do_sample=False, use_cache=True,
                                       stopping_criteria=StoppingCriteriaList([Deadline()]))
         raw = b.processor.batch_decode(result[:, inputs['input_ids'].shape[-1]:], skip_special_tokens=True)[0]
         return raw.strip()

@@ -1,0 +1,5 @@
+{
+  "vlm": {"hub_id": "HuggingFaceTB/SmolVLM2-500M-Video-Instruct"},
+  "vla_single": {"hub_id": "lerobot/smolvla_base"},
+  "vla_hier": {"hub_id": "lerobot/smolvla_base"}
+}

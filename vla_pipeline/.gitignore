@@ -9,3 +9,10 @@ __pycache__/
 *.pyc
 .venv/
 .venv-ui/
+/models/*
+!/models/README.md
+!/models/model_sources.json
+!/models/release_manifest.json
+!/models/APACHE-2.0.txt
+!/models/THIRD_PARTY_NOTICES.md
+/assets/number_textures/.write.lock

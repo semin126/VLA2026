@@ -48,8 +48,14 @@ def parser():
         p.add_argument('--planner-tokens', type=int, default=1024)
         p.add_argument('--max-attempts', type=int, default=3)
         p.add_argument('--checkpoint')
+        p.add_argument('--model-source', choices=['auto','local','hub'], default='auto')
+        p.add_argument('--vlm-source', choices=['auto','local','hub'])
+        p.add_argument('--vla-source', choices=['auto','local','hub'])
+        p.add_argument('--models-dir')
+        p.add_argument('--vla-hub-id')
+        p.add_argument('--vlm-hub-id')
         p.add_argument('--task-command', help='Shared task command; omitted uses scene JSON command')
-        p.add_argument('--vlm-model', default='HuggingFaceTB/SmolVLM2-500M-Video-Instruct')
+        p.add_argument('--vlm-model')
         p.add_argument('--strategy', type=Path)
         p.add_argument('--seed', type=int, default=42)
         p.add_argument('--operator', default='')
@@ -81,6 +87,8 @@ def parser():
     p.add_argument('--seconds', type=float, default=120)
     p.add_argument('--max-steps', type=int, default=2400)
     p.add_argument('--task-command')
+    p.add_argument('--image-size', type=int, default=128)
+    p.add_argument('--accelerated', action='store_true', help='Unpaced D-state demonstrations; not benchmark timing')
     p = sub.add_parser('prepare-actions')
     p.add_argument('--collections', type=Path, required=True)
     p.add_argument('--system', choices=['single', 'hier'], required=True)
@@ -187,7 +195,8 @@ def main():
         export_reviewed(args.candidates, args.out)
     elif args.command == 'collect-actions':
         from vlapipe.final_project_v2.data import collect_action_data
-        print(json.dumps(collect_action_data(args.scene, args.out, args.seconds, args.max_steps, command=args.task_command), indent=2))
+        print(json.dumps(collect_action_data(args.scene, args.out, args.seconds, args.max_steps, command=args.task_command,
+                                           image_size=args.image_size, accelerated=args.accelerated), indent=2))
     elif args.command == 'prepare-actions':
         from vlapipe.final_project_v2.data import prepare_action_data
         prepare_action_data(args.collections, args.system, args.out, convert=args.convert, repo_id=args.repo_id)

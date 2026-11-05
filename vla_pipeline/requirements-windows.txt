@@ -9,6 +9,7 @@ h5py>=3.10
 imageio>=2.34
 imageio-ffmpeg>=0.4
 Pillow>=10.0
+filelock>=3.16
 matplotlib>=3.8
 
 # 게임패드. Python 3.13+ 에는 pygame 휠이 없어 소스 빌드로 넘어가 실패합니다
