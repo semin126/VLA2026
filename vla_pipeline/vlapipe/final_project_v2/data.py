@@ -251,8 +251,21 @@ def prepare_action_data(collections, system, out, *, convert=False, repo_id='dsh
     script = Path(__file__).resolve().parents[2] / 'scripts' / 'prepare_vla_training.py'
     command = [sys.executable, str(script), '--system', system, '--holdout-seeds', ','.join(map(str, sorted(holdout))),
                '--out', str(out), '--repo-id', repo_id,'--action-representation',action_representation]
-    for folder in sorted(accepted_dirs):
-        command += ['--input-dir', str(folder)]
+    # Hundreds of absolute Windows paths exceed CreateProcess's command-line
+    # limit. Keep a reproducible input manifest next to the fresh output instead.
+    out = Path(out)
+    if out.exists():
+        raise FileExistsError('Choose a fresh conversion directory: '+str(out))
+    out.parent.mkdir(parents=True, exist_ok=True)
+    input_file = out.with_name(out.name+'_input_dirs.json')
+    inputs = [str(folder) for folder in sorted(accepted_dirs)]
+    if input_file.exists():
+        if json.loads(input_file.read_text(encoding='utf-8-sig')) != inputs:
+            raise FileExistsError('Preserving a different prior input manifest: '+str(input_file))
+    else:
+        with input_file.open('x', encoding='utf-8') as stream:
+            json.dump(inputs, stream, ensure_ascii=False, indent=2)
+    command += ['--input-dirs-file', str(input_file.resolve())]
     if convert:
         command += ['--convert', '--images']
     subprocess.run(command, check=True)

@@ -17,7 +17,9 @@ from vlapipe.demo_validation import require_training_demo
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--input-dir', type=Path, action='append', required=True)
+    ap.add_argument('--input-dir', type=Path, action='append', default=[])
+    ap.add_argument('--input-dirs-file', type=Path,
+                    help='UTF-8 JSON list of directories; relative entries use this file\'s parent. Avoids Windows command-line limits.')
     ap.add_argument('--system', choices=['single', 'hier'], required=True)
     ap.add_argument('--holdout-seeds', required=True, help='Comma-separated original scene seeds, e.g. 5,6')
     ap.add_argument('--out', type=Path, required=True, help='Fresh output directory')
@@ -27,8 +29,21 @@ def main():
     ap.add_argument('--action-representation',choices=['delta','absolute_position'],default='delta')
     ap.add_argument('--allow-unverified-reversed', action='store_true', help='Exploratory reversal experiment only')
     args = ap.parse_args()
+    directories = list(args.input_dir)
+    if args.input_dirs_file:
+        names = json.loads(args.input_dirs_file.read_text(encoding='utf-8-sig'))
+        if not isinstance(names, list) or not all(isinstance(name, str) and name.strip() for name in names):
+            ap.error('--input-dirs-file must contain a JSON list of nonempty directory names')
+        for name in names:
+            directory = Path(name).expanduser()
+            directories.append(directory if directory.is_absolute() else args.input_dirs_file.parent/directory)
+    if not directories:
+        ap.error('Provide --input-dir or --input-dirs-file')
+    for directory in directories:
+        if not directory.is_dir():
+            raise FileNotFoundError('Demonstration directory does not exist: '+str(directory))
     holdout_seeds = {int(s) for s in args.holdout_seeds.split(',')}
-    paths = sorted({p.resolve() for d in args.input_dir for p in d.rglob('*.hdf5')})
+    paths = sorted({p.resolve() for d in directories for p in d.rglob('*.hdf5')})
     expected = 'scene' if args.system == 'single' else 'subtask'
     rows = []
     fingerprints = set()
