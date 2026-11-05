@@ -1,0 +1,11 @@
+# Python 3.12; install CUDA torch/torchvision separately for the available GPU.
+# Exact LeRobot source used for the 2026-11-05 integration audit.
+# Windows: image-backed datasets (--images) avoid video decoder setup.
+lerobot[smolvla,training] @ git+https://github.com/huggingface/lerobot.git@9e5ee9859480e425a97a6836bb3fee479539beb5
+mujoco==3.17.0
+h5py==3.16.0
+imageio==2.38.1
+imageio-ffmpeg==0.8.1
+num2words==0.5.14
+matplotlib>=3.8
+pygame-ce>=2.5

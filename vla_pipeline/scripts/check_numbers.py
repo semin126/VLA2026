@@ -130,7 +130,7 @@ def check_text(args) -> int:
         ('["cube #2", "no. 9"]', ["object_2", "object_9"]),
     ]
     for text, want in cases:
-        got = [s["object"] for s in P.parse_plan(text)]
+        got = [s["object"] for s in P.parse_plan(text, allow_default_zone=True)]
         ok = got == want
         fails += not ok
         flag = "OK " if ok else "!! "

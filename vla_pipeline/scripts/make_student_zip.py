@@ -31,6 +31,12 @@ REQUIRED = [
     "README.md",
     "SETUP_STUDENT.md",
     "AGENTS.md",
+    "STUDENT_RESEARCH.md",
+    "TELEOP_STUDENT.md",
+    "requirements-ml.txt",
+    "vlapipe/student_design.py",
+    "scripts/run_research_lab.py",
+    "scripts/preview_episode.py",
     "requirements-windows.txt",
     "vlapipe/config.py",
     "scripts/check_env.py",
@@ -84,6 +90,8 @@ def main() -> int:
 
     dst = Path(args.out) / args.name
     dst.parent.mkdir(parents=True, exist_ok=True)
+    if dst.exists():
+        raise FileExistsError(f"기존 배포본을 덮어쓰지 않습니다. 새 --name 또는 --out을 지정하세요: {dst}")
     # zip 안에서 한 겹 폴더(vla_pipeline/)로 감싼다. 압축을 풀면 폴더가 하나 나온다.
     top = ROOT.name
 
@@ -95,7 +103,7 @@ def main() -> int:
     print(f"파일 {len(files)}개, 원본 {total / 1e6:.1f} MB")
     print(f"만들었습니다: {dst}  ({dst.stat().st_size / 1e6:.1f} MB)")
     print(f"\n압축을 풀면 '{top}' 폴더 하나가 나옵니다.")
-    print("학생에게는 SETUP_STUDENT.md 부터 읽으라고 알려 주세요.")
+    print("학생에게는 SETUP_STUDENT.md의 2026-11-05 설치 기준 → STUDENT_RESEARCH.md 순서로 안내하세요.")
     return 0
 
 

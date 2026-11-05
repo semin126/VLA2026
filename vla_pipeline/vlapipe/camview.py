@@ -173,6 +173,12 @@ class CameraPanel:
                 mapped = ONESHOT.get(ev.key)
                 if mapped is not None:
                     cb(mapped)
+            if ev.type == self.pygame.KEYUP and hasattr(src, "key_release"):
+                mapped = ONESHOT.get(ev.key)
+                if mapped is not None:
+                    src.key_release(mapped)
+            if ev.type == getattr(self.pygame, "WINDOWFOCUSLOST", -1) and hasattr(src, "clear_keyboard_state"):
+                src.clear_keyboard_state()
 
         if cb is None:
             return
@@ -183,7 +189,9 @@ class CameraPanel:
 
         # SHIFT 를 누르고 있는 동안 정밀 모드. 누름/뗌이 아니라 '상태'라서 매 프레임 갱신한다.
         # 패드는 자기 btn_slow 를 스스로 보므로 건드리지 않는다.
-        if hasattr(src, "slow") and not hasattr(src, "js"):
+        if hasattr(src, "set_keyboard_modifiers"):
+            src.set_keyboard_modifiers(bool(self.pygame.key.get_mods() & self.pygame.KMOD_SHIFT))
+        elif hasattr(src, "slow") and not hasattr(src, "js"):
             src.slow = bool(self.pygame.key.get_mods() & self.pygame.KMOD_SHIFT)
 
     def focus_hint(self, input_kind: str = "keyboard") -> str:

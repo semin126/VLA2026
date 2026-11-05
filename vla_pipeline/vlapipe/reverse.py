@@ -66,10 +66,18 @@ def reverse_episode(ep: Episode, task: str | None = None) -> Episode:
     rev.direction = "tidy"
     rev.task = task or ep.meta.get("reverse_task") or "Tidy up the table."
     rev.meta = {**ep.meta, "reversed_from": str(ep.path.name), "original_task": str(ep.task)}
+    rev.meta["physical_replay_verified"] = False
+    rev.meta["reverse_validation_note"] = (
+        "Kinematic reversal only; free-motion screening does not prove physical replay or grasp success.")
 
     # 관측/qpos/타깃은 그대로 시간 역순
     rev.obs = {k: v[::-1].copy() for k, v in ep.obs.items()}
     rev.qpos = ep.qpos[::-1].copy()
+    # Physical time reversal changes velocities' sign. This still does not
+    # invert friction/contact dissipation or create a reverse grasp.
+    rev.qvel = -ep.qvel[::-1].copy() if getattr(ep, "qvel", None) is not None else None
+    rev.actuator_ctrl = (ep.actuator_ctrl[::-1].copy()
+                         if getattr(ep, "actuator_ctrl", None) is not None else None)
     rev.target_pos = ep.target_pos[::-1].copy()
     rev.target_quat = ep.target_quat[::-1].copy()
 
@@ -97,6 +105,8 @@ def reverse_file(src: Path, dst_dir: Path, object_adr: dict[str, int] | None = N
             return None, report
     rev = reverse_episode(ep, task=task)
     dst = Path(dst_dir) / (Path(src).stem + "_reversed.hdf5")
+    if dst.exists():
+        raise FileExistsError(f"Refusing to overwrite existing episode: {dst}")
     rev.save(dst)
     report["written"] = str(dst)
     return dst, report

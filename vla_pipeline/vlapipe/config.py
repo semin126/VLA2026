@@ -136,7 +136,10 @@ def pick_dtype(device: str, dtype: str | None = None) -> str:
     """CPU 에서는 bfloat16 이 느리고 일부 연산이 없어 float32 로 돌린다."""
     if dtype is not None:
         return dtype
-    return "bfloat16" if str(device).startswith("cuda") else "float32"
+    if str(device).startswith("cuda"):
+        import torch
+        return "bfloat16" if torch.cuda.is_bf16_supported(including_emulation=False) else "float16"
+    return "float32"
 
 
 # --------------------------------------------------------------------------

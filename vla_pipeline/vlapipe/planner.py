@@ -47,7 +47,7 @@ def instruction_text(obj_name: str, zone: str) -> tuple[str, str]:
 _LIST_MARKER = re.compile(r"^\s*\d+\s*[.)]\s*")
 
 
-def parse_instruction(text: str) -> dict | None:
+def parse_instruction(text: str, allow_default_zone: bool = False) -> dict | None:
     """자연어 지시문 -> {'object':..., 'target_zone':...}.
 
     VLM 이 낸 문장을 scripted VLA 가 실행할 수 있게 잇는 다리 역할.
@@ -72,6 +72,8 @@ def parse_instruction(text: str) -> dict | None:
             zone = zname
             break
     if obj is None:
+        return None
+    if zone is None and not allow_default_zone:
         return None
     return {"object": obj, "target_zone": zone or C.OBJECT_BY_NAME[obj]["home_zone"]}
 
@@ -134,7 +136,7 @@ class RulePlanner:
             return math.hypot(pos[n][0] - C.ROBOT_BASE_XY[0], pos[n][1] - C.ROBOT_BASE_XY[1])
 
         plan: list[dict] = []
-        for _ in range(self.MAX_STEPS):
+        for _ in range(max(self.MAX_STEPS, 4 * len(C.OBJECT_NAMES))):
             todo = [n for n in C.OBJECT_NAMES if not in_home(n)]
             if not todo:
                 break
@@ -281,14 +283,15 @@ class VLMPlanner:
         inputs = inputs.to(self.device, dtype=self.model.dtype)
         with self.torch.no_grad():
             out = self.model.generate(**inputs, max_new_tokens=max_new_tokens, do_sample=False)
-        text = self.processor.batch_decode(out, skip_special_tokens=True)[0]
-        for marker in ("Lines:", "JSON:", "Assistant:"):
-            if marker in text:
-                text = text.split(marker)[-1]
+        # Decoder-only generation contains the prompt too. Score only newly generated
+        # tokens: decoding the prompt can accidentally turn its examples into a plan.
+        prompt_len = inputs["input_ids"].shape[-1]
+        text = self.processor.batch_decode(out[:, prompt_len:], skip_special_tokens=True)[0]
         return text.strip()
 
     def plan(self, image, command: str = "Tidy up the table.") -> list[dict]:
-        return parse_plan(self.raw_response(image, command))
+        return parse_plan(self.raw_response(image, command),
+                          allow_default_zone=self.prompt_style == "number_read")
 
 
 def _repair_json_array(blob: str):
@@ -327,7 +330,7 @@ def _flatten(items):
     return out
 
 
-def parse_plan(text: str) -> list[dict]:
+def parse_plan(text: str, allow_default_zone: bool = False) -> list[dict]:
     """VLM 출력에서 계획을 뽑아낸다. JSON 실패 시 줄 단위로 재시도."""
     candidates: list[str] = []
     m = re.search(r"\[.*\]", text, re.S)          # 바깥쪽 배열 전체 (greedy)
@@ -342,7 +345,7 @@ def parse_plan(text: str) -> list[dict]:
     subtasks: list[dict] = []
     seen: set[str] = set()
     for line in candidates:
-        got = parse_instruction(line)
+        got = parse_instruction(line, allow_default_zone=allow_default_zone)
         if not got or got["object"] in seen:
             continue
         seen.add(got["object"])

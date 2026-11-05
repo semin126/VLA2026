@@ -26,6 +26,9 @@ if not os.environ.get("MUJOCO_GL"):
 
 import atexit  # noqa: E402
 
+from .render_setup import configure_headless_rendering  # noqa: E402
+
+configure_headless_rendering()
 import mujoco  # noqa: E402
 
 _OPEN_ENVS: list = []

@@ -65,6 +65,8 @@ def validate(paths: list[Path]) -> dict:
     """lerobot 없이도 돌아가는 사전 검증."""
     report = {"n_episodes": 0, "n_frames": 0, "tasks": {}, "problems": []}
     shapes = set()
+    if not paths:
+        report["problems"].append("에피소드가 없습니다. 먼저 성공한 시연 데이터를 수집하세요.")
     for p in paths:
         ep = Episode(p)
         T = len(ep)
@@ -73,15 +75,31 @@ def validate(paths: list[Path]) -> dict:
         if ep.direction != "tidy":
             report["problems"].append(
                 f"{p.name}: direction='{ep.direction}' — 학습에는 역재생된 'tidy' 만 쓰세요.")
-        if len(ep.obs["robot0_joint_pos"]) != T + 1:
+        if "robot0_joint_pos" in ep.obs and len(ep.obs["robot0_joint_pos"]) != T + 1:
             report["problems"].append(f"{p.name}: 관측 {len(ep.obs['robot0_joint_pos'])}개 / 액션 {T}개 불일치")
         a = ep.actions
-        if np.abs(a[:, :6]).max() > 1.0001:
+        valid_action_shape = a.shape == (T, C.ACTION_DIM)
+        if not valid_action_shape or not np.isfinite(a).all():
+            report["problems"].append(f"{p.name}: 액션 차원 또는 유한값 검사 실패")
+        if valid_action_shape and T and np.abs(a[:, :6]).max() > 1.0001:
             report["problems"].append(f"{p.name}: 액션이 [-1,1] 범위를 벗어났습니다.")
-        if not set(np.unique(a[:, 6])) <= {-1.0, 1.0}:
+        if valid_action_shape and not set(np.unique(a[:, 6])) <= {-1.0, 1.0}:
             report["problems"].append(f"{p.name}: 그리퍼 액션이 -1/+1 이 아닙니다.")
-        if "agentview_image" in ep.obs:
-            shapes.add(ep.obs["agentview_image"].shape[1:])
+        for camera_key in ("agentview_image", "robot0_eye_in_hand_image"):
+            if camera_key in ep.obs:
+                image = ep.obs[camera_key]
+                shapes.add(image.shape[1:])
+                if image.ndim != 4 or image.shape[-1] != 3 or image.dtype != np.uint8:
+                    report["problems"].append(f"{p.name}: {camera_key}는 uint8 THWC RGB여야 합니다")
+        for key in (*C.STATE_KEYS, "agentview_image", "robot0_eye_in_hand_image"):
+            if key not in ep.obs or len(ep.obs[key]) != T + 1:
+                report["problems"].append(f"{p.name}: {key} 관측은 T+1개여야 합니다")
+        if all(k in ep.obs and len(ep.obs[k]) == T + 1 for k in C.STATE_KEYS) and ep.state_vectors().shape != (T + 1, C.STATE_DIM):
+            report["problems"].append(f"{p.name}: state는 (T+1, {C.STATE_DIM})여야 합니다")
+        if any(not np.isfinite(ep.obs[k]).all() for k in C.STATE_KEYS if k in ep.obs):
+            report["problems"].append(f"{p.name}: state에 NaN 또는 무한값이 있습니다")
+        if not str(ep.task).strip():
+            report["problems"].append(f"{p.name}: task 지시문이 비어 있습니다")
         report["n_episodes"] += 1
         report["n_frames"] += T
         report["tasks"][str(ep.task)] = report["tasks"].get(str(ep.task), 0) + 1
@@ -100,24 +118,30 @@ def convert(paths: list[Path], repo_id: str, root: Path, fps: int = C.CONTROL_HZ
     except ImportError:
         from lerobot.common.datasets.lerobot_dataset import LeRobotDataset  # 구버전
 
-    eps = [Episode(p) for p in paths]
-    if not eps:
-        raise ValueError("변환할 에피소드가 없습니다.")
+    report = validate(paths)
+    if not report["ok"]:
+        raise ValueError("데이터 검증 실패: " + "; ".join(report["problems"]))
+    first = Episode(paths[0])
 
     root = Path(root)
     ds = LeRobotDataset.create(
         repo_id=repo_id, fps=fps, root=root, robot_type=robot_type,
-        features=build_features(eps[0], use_videos=use_videos), use_videos=use_videos,
+        features=build_features(first, use_videos=use_videos), use_videos=use_videos,
     )
-    for ep in eps:
+    import inspect
+    task_argument = "task" in inspect.signature(ds.add_frame).parameters
+    for path in paths:
+        ep = Episode(path)
         for frame in episode_frames(ep):
             task = frame.pop("task")
-            try:
+            if task_argument:
                 ds.add_frame(frame, task=task)
-            except TypeError:            # task 를 dict 안에 받는 버전
+            else:                       # task 를 dict 안에 받는 버전
                 frame["task"] = task
                 ds.add_frame(frame)
         ds.save_episode()
     if hasattr(ds, "consolidate"):       # 구버전에만 있는 마무리 단계
         ds.consolidate()
+    if hasattr(ds, "finalize"):
+        ds.finalize()                  # v3 writer must flush parquet footers
     return ds

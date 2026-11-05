@@ -1,5 +1,9 @@
 # VLA 계층적 파이프라인 — 실행 코드
 
+GPU 없는 Windows·VS Code 학생 시작: [Final_project.ipynb](notebooks/Final_project.ipynb) · [실행 안내](docs/FINAL_PROJECT.md) → [학생이 결정할 여섯 지점](docs/RESEARCH_DECISIONS.md) → [설계 워크시트](docs/WORKSHEETS.md). 자세한 [연구 원리](docs/STUDENT_RESEARCH_GUIDE.md), [Git·모델 전달](docs/GIT_AND_MODELS.md), [로컬 수집](TELEOP_STUDENT.md).
+
+> **2026-11-05 실행 연결 보완:** 현재 학생 실행 입구와 실제 확인 범위는 [Final_project 안내](docs/FINAL_PROJECT.md)에 있습니다. Colab에서는 `requirements-colab-lock.txt`로 별도 Python 3.12 환경을 설치합니다. 직접 정리 수집·VLM/VLA 학습·저장 모델 연결을 제공하며, 학생 설계와 실험 판단은 별도로 수행합니다. 아래 과거 상태와 수치는 현재 검증과 구분하세요.
+
 2026 대전과학고 심화자율연구 / NMAIL
 
 ```

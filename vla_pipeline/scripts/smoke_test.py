@@ -18,7 +18,9 @@ check_env.py 가 '설치되어 있는가'를 보는 반면, 이 스크립트는 
 """
 import _bootstrap  # noqa: F401
 import argparse
-import shutil
+import json
+from datetime import datetime
+import uuid
 import time
 import traceback
 from pathlib import Path
@@ -79,8 +81,8 @@ def main() -> int:
     args = parse_args()
     out = Path(args.out)
     if out.exists():
-        shutil.rmtree(out)
-    out.mkdir(parents=True, exist_ok=True)
+        out = out / (datetime.now().strftime("%Y%m%d_%H%M%S") + "_" + uuid.uuid4().hex[:6])
+    out.mkdir(parents=True, exist_ok=False)
 
     print(f"스모크 테스트 시작 — 결과물 {out}\n")
     ck = Checks()
@@ -227,6 +229,11 @@ def main() -> int:
     # ---- 요약 -------------------------------------------------------------
     print(f"\n{'=' * 58}")
     n_ok = sum(1 for _, ok, _ in ck.rows if ok)
+    (out / "checks.json").write_text(json.dumps({
+        "passed": n_ok, "total": len(ck.rows),
+        "checks": [{"name": name, "passed": ok, "detail": detail} for name, ok, detail in ck.rows],
+        "scope": "software connections; reverse integration is not physical replay proof",
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"{n_ok}/{len(ck.rows)} 통과")
     if ck.failed:
         print(f"실패: {', '.join(ck.failed)}")
@@ -237,7 +244,7 @@ def main() -> int:
         print(f"참고: 스크립트 정책 롤아웃에 역재생 위험 프레임 {rv['n_flagged']}개가 있습니다.")
         print("      검출기가 동작한다는 뜻이므로 정상입니다. 실제 텔레옵 녹화에서는")
         print("      던지지 말고 '집어서-옮겨서-내려놓기'로 하세요.")
-    print("\n전부 정상입니다. 다음:")
+    print("\n연결 검사를 통과했습니다. 역재생 물리 유효성·학습 성능은 별도 실험입니다. 다음:")
     print("  " + _bootstrap.cmd("scripts/run_pipeline.py", "--layout", "messy", "--seed", "3"))
     print("  " + _bootstrap.cmd("scripts/teleop_record.py", "--input", "keyboard"))
     return 0

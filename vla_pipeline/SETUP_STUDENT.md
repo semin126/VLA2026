@@ -1,9 +1,35 @@
 # 학생용 설치 안내 — vla_pipeline
 
+## 2026-11-05: 이번 연구 실습의 설치 기준
+
+**GPU 없는 Windows·VS Code 학생은 [Final_project.ipynb](notebooks/Final_project.ipynb)와 [Colab 실행 안내](docs/FINAL_PROJECT.md)를 먼저 사용하세요.** 아래 CUDA 설치 명령은 GPU가 있는 조교 PC용입니다. 학생 로컬 사람 시연 수집에는 [TELEOP_STUDENT.md](TELEOP_STUDENT.md)의 CPU 설치 경로를 사용합니다.
+
+새로 받은 학생 배포본은 **Python 3.12**를 사용합니다. 아래는 이번 조교 PC(Windows 11, RTX 3090 Ti)에서 실제 확인한 조합입니다. 기존 환경을 삭제하거나 덮어쓰는 명령이 아닙니다. `.venv`가 없는 새 배포 폴더에서 시작하세요. 이미 다른 Python의 가상환경이 있는 프로젝트라면 원본을 보존하고 새 사본에서 설치합니다.
+
+```powershell
+py -3.12 -m venv .venv
+$py = '.\.venv\Scripts\python.exe'
+& $py -m pip install --upgrade pip
+& $py -m pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cu128
+& $py -m pip install -r requirements-ml.txt
+& $py scripts/check_env.py
+& $py scripts/smoke_test.py --out outputs/my_install_check
+```
+
+Git과 Python 3.12가 먼저 설치되어 있어야 합니다. GPU가 다른 PC에서는 조교가 해당 PyTorch 설치 조합을 확인합니다. 배포 ZIP에는 로봇 에셋이 포함되지만 Python 가상환경·대형 모델·연구 데이터는 포함되지 않습니다. 모델 가중치는 처음 사용할 때 다운로드합니다.
+
+설치 후 [STUDENT_RESEARCH.md](STUDENT_RESEARCH.md)의 A 기준선을 먼저 실행하고, 수집은 [TELEOP_STUDENT.md](TELEOP_STUDENT.md)를 따라갑니다. 세 설계 빈칸은 환경 검사 이후에 채우는 연구 과제입니다.
+
+---
+
+## 아래는 기존 배포본의 참고 안내
+
+아래의 Python 3.14·과거 패키지·Colab 한정 설명보다 위 Python 3.12 학습 환경을 우선합니다. 설치 소요 시간은 네트워크와 GPU 환경에 따라 다릅니다.
+
 2026 대전과학고 심화자율연구 / NMAIL
 
 `vla_pipeline.zip` 을 받은 상태에서 **처음부터 끝까지 따라 하면 되는 문서**입니다.
-윈도우 노트북 + VSCode 기준이고, 30분이면 끝납니다.
+윈도우 노트북 + VSCode 기준입니다.
 
 막히면 **8절 문제 해결**을 먼저 보세요. 거기 없는 문제면 조교에게 알려 주세요.
 

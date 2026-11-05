@@ -299,12 +299,20 @@ class SmolVLAPolicy:
 
     def __init__(self, checkpoint: str, device: str = C.DEFAULT_DEVICE):
         from lerobot.policies.smolvla.modeling_smolvla import SmolVLAPolicy as _P  # noqa
+        from lerobot.policies.factory import make_pre_post_processors
         import torch
 
         device = C.pick_device(device)   # GPU 없으면 CPU 로 (planner.VLMPlanner 와 동일)
         self.torch = torch
         self.device = device
         self.policy = _P.from_pretrained(checkpoint).to(device).eval()
+        self.policy.config.device = device
+        # Saved processors include the training statistics AND language tokenizer.
+        # Raw task strings passed straight to select_action are not model inputs.
+        self.preprocessor, self.postprocessor = make_pre_post_processors(
+            self.policy.config, pretrained_path=checkpoint,
+            preprocessor_overrides={"device_processor": {"device": device}},
+        )
 
     def reset(self) -> None:
         if hasattr(self.policy, "reset"):
@@ -312,13 +320,42 @@ class SmolVLAPolicy:
 
     def select_action(self, observation: dict) -> np.ndarray:
         torch = self.torch
-        img = observation["observation.image"]
-        state = observation["observation.state"]
-        batch = {
-            "observation.image": torch.from_numpy(img).permute(2, 0, 1)[None].float().div(255).to(self.device),
-            "observation.state": torch.from_numpy(np.asarray(state, np.float32))[None].to(self.device),
-            "task": [observation["task"]],
+        from PIL import Image
+
+        aliases = {
+            "observation.images.agentview": "agentview_image",
+            "observation.images.wrist": "robot0_eye_in_hand_image",
         }
+        batch = {"task": str(observation["task"])}
+        for key, feature in self.policy.config.input_features.items():
+            shape = tuple(feature.shape)
+            if key.startswith("observation.images."):
+                raw_key = aliases.get(key, key)
+                image = observation.get(key, observation.get(raw_key))
+                if image is None:
+                    raise ValueError(f"Missing trained camera {key}; supply both recorded camera images")
+                image = np.asarray(image)
+                if image.ndim != 3 or image.shape[-1] != 3 or image.dtype != np.uint8:
+                    raise ValueError(f"{key}: expected uint8 HWC RGB, got {image.shape}/{image.dtype}")
+                h, w = shape[-2:]
+                if image.shape[:2] != (h, w):
+                    image = np.asarray(Image.fromarray(image).resize((w, h)))
+                batch[key] = torch.from_numpy(np.array(image, copy=True, order="C")).permute(2, 0, 1).float() / 255
+            elif key == "observation.state":
+                state = observation.get(key)
+                if state is None:
+                    state = np.concatenate([np.asarray(observation[k]).ravel() for k in C.STATE_KEYS])
+                state = np.asarray(state, np.float32)
+                if state.shape != shape:
+                    raise ValueError(f"State shape {state.shape} != trained shape {shape}; fine-tune on this simulator's 16D state")
+                batch[key] = torch.from_numpy(state)
+            else:
+                raise ValueError(f"Unsupported trained input {key}; explicit mapping is required")
         with torch.no_grad():
-            action = self.policy.select_action(batch)
-        return action.squeeze(0).float().cpu().numpy()[: C.ACTION_DIM]
+            action = self.postprocessor(self.policy.select_action(self.preprocessor(batch)))
+        action = action.squeeze(0).float().cpu().numpy()
+        if action.shape != (C.ACTION_DIM,) or not np.isfinite(action).all():
+            raise ValueError(f"Expected finite {C.ACTION_DIM}D simulator action, got {action.shape}")
+        action = np.clip(action, -1, 1)
+        action[6] = C.GRIPPER_CLOSE_CMD if action[6] >= 0 else C.GRIPPER_OPEN_CMD
+        return action.astype(np.float32)

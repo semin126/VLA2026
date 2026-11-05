@@ -1,13 +1,8 @@
 """텔레오퍼레이션 — 게임패드/키보드로 로봇을 직접 몰고, 그 결과를 녹화한다.
 
-수업에서의 사용 흐름:
-  1) 정돈된 씬에서 시작한다.
-  2) 사람이 물체를 집어 아무 데나 옮기며 **어지른다** (녹화).
-  3) build_dataset.py 가 이 녹화를 뒤집어 **정돈하는** 데모로 만든다.
-
-왜 어지르는 쪽을 녹화하나?
-  구역 안에 정확히 내려놓기는 손으로 하기 어렵지만, 구역에서 집어 아무 데나 놓기는 쉽다.
-  뒤집으면 '정밀 배치' 데모가 공짜로 생긴다.
+기준 학습 데이터는 직접 정리(tidy) 시연으로 수집한다.
+어지르기(mess) 시연의 역전은 별도 연구 조건이다. 목표 자세를 역순으로
+배치할 수 있다는 계산과 실제 파지·접촉을 실행할 수 있다는 사실은 다르다.
 
 주의: 물체를 던지거나 떨어뜨리면 역재생이 물리적으로 불가능한 장면이 된다.
       항상 '집어서 - 옮겨서 - 내려놓기'로 천천히 움직일 것.
@@ -79,15 +74,16 @@ class GamepadInput:
     AXIS_ROLES = ("x", "y", "z", "yaw")
     BUTTON_ROLES = ("btn_grip", "btn_record", "btn_reset", "btn_discard")
 
-    def __init__(self, index: int = 0, mapping: dict | None = None, speed: float = 0.6):
+    def __init__(self, index: int = 0, mapping: dict | None = None, speed: float = 0.6,
+                 joystick=None):
         import pygame
 
         self.pygame = pygame
         pygame.init()
         pygame.joystick.init()
-        if pygame.joystick.get_count() == 0:
+        if joystick is None and pygame.joystick.get_count() == 0:
             raise RuntimeError("게임패드를 찾지 못했습니다. USB 연결을 확인하거나 --input keyboard 를 쓰세요.")
-        self.js = pygame.joystick.Joystick(index)
+        self.js = joystick if joystick is not None else pygame.joystick.Joystick(index)
         self.js.init()
         self.map = {**self.DEFAULT_MAP, **(mapping or {})}
         self.speed = speed
@@ -445,6 +441,111 @@ def load_gamepad_map(path: Path | str | None) -> dict | None:
         raise ValueError(f"매핑 파일에 모르는 키가 있습니다: {sorted(unknown)}\n"
                          f"쓸 수 있는 키: {sorted(GamepadInput.DEFAULT_MAP)}")
     return m
+
+
+class KeyboardJoystick:
+    """Virtual raw joystick device; no alternate action-generation implementation.
+
+    Its raw axes/buttons/hats feed GamepadInput.poll, including the physical map,
+    deadzone, inversion, speed, per-axis gains, slow mode and button edge handling.
+    """
+    def __init__(self, mapping):
+        self.mapping = mapping
+        self.axes = [0.0] * 16
+        self.buttons = [0] * 32
+        self.hats = [(0, 0)] * 8
+    def init(self): pass
+    def get_name(self): return "Keyboard virtual joystick (not USB hardware)"
+    def get_numaxes(self): return len(self.axes)
+    def get_numbuttons(self): return len(self.buttons)
+    def get_numhats(self): return len(self.hats)
+    def get_axis(self, index): return self.axes[index]
+    def get_button(self, index): return self.buttons[index]
+    def get_hat(self, index): return self.hats[index]
+    def set_role(self, role, value):
+        raw = -value if self.mapping.get(f"invert_{role}") else value
+        index = self.mapping.get(role)
+        if index is None:
+            return
+        if isinstance(index, str):
+            h, component = index[3:].split("_")
+            current = list(self.hats[int(h)])
+            current[0 if component == "x" else 1] = int(raw)
+            self.hats[int(h)] = tuple(current)
+        else:
+            self.axes[index] = float(raw)
+    def clear(self):
+        self.axes[:] = [0.0] * len(self.axes)
+        self.buttons[:] = [0] * len(self.buttons)
+        self.hats[:] = [(0, 0)] * len(self.hats)
+
+
+class KeyboardGamepadInput(GamepadInput):
+    """Keyboard -> raw virtual joystick -> unchanged GamepadInput processing."""
+    HELP = ("[키보드 패드 에뮬레이션] W/S 앞뒤, A/D 좌우, Q/E 높이, Z/C 회전\n"
+            "SPACE 그리퍼, ENTER 녹화, R 리셋, X 폐기, SHIFT 정밀, P 배치, ESC 종료\n"
+            "카메라 뷰 창에 포커스를 두세요. USB 입력 검증과는 별도입니다.")
+    _ROLE_KEYS = {"W": ("y", 1), "S": ("y", -1), "D": ("x", 1), "A": ("x", -1),
+                  "Q": ("z", 1), "E": ("z", -1), "Z": ("yaw", 1), "C": ("yaw", -1)}
+    def __init__(self, mapping=None, speed=0.55):
+        merged = {**self.DEFAULT_MAP, **(mapping or {})}
+        if merged.get("btn_slow") is None:
+            merged["btn_slow"] = 31
+        virtual = KeyboardJoystick(merged)
+        super().__init__(mapping=merged, speed=speed, joystick=virtual)
+        self._frame_keys = set()
+        self._frame_buttons = set()
+        self._keyboard_slow = False
+    def key_callback(self, keycode):
+        if keycode in (257, 335):
+            self._frame_buttons.add("btn_record")
+            return
+        if keycode == 256:
+            self.quit = True
+            return
+        try:
+            ch = chr(keycode).upper()
+        except ValueError:
+            return
+        button = {" ": "btn_grip", "R": "btn_reset", "X": "btn_discard"}.get(ch)
+        if button:
+            self._frame_buttons.add(button)
+        elif ch in self._ROLE_KEYS:
+            self._frame_keys.add(ch)
+        elif ch == "P":
+            self.events.append("dump_layout")
+    def set_keyboard_modifiers(self, slow):
+        self._keyboard_slow = bool(slow)
+    def key_release(self, keycode):
+        if keycode in (257, 335):
+            self._frame_buttons.discard("btn_record")
+            return
+        try:
+            ch = chr(keycode).upper()
+        except ValueError:
+            return
+        button = {" ": "btn_grip", "R": "btn_reset", "X": "btn_discard"}.get(ch)
+        if button:
+            self._frame_buttons.discard(button)
+    def clear_keyboard_state(self):
+        self._frame_keys.clear()
+        self._frame_buttons.clear()
+        self._keyboard_slow = False
+    def poll(self):
+        self.js.clear()
+        # Opposite simultaneous keys cancel rather than depending on set order.
+        for role in self.AXIS_ROLES:
+            value = sum(sign for key, (r, sign) in self._ROLE_KEYS.items()
+                        if key in self._frame_keys and r == role)
+            self.js.set_role(role, max(-1, min(1, value)))
+        for key in self._frame_buttons:
+            self.js.buttons[self.map[key]] = 1
+        if self._keyboard_slow:
+            self.js.buttons[self.map["btn_slow"]] = 1
+        action = super().poll()
+        self._frame_keys.clear()
+        return action
+    def record_hint(self): return "ENTER (virtual joystick record button)"
 
 
 class KeyboardInput:
