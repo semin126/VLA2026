@@ -1,0 +1,42 @@
+{
+  "schema": "final_project_scene_v2",
+  "scenes": [
+    {
+      "path": "../../test/scene_0001.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710201",
+      "split": "test",
+      "state_sha256": "d5b2b2cbcd1073e1568405c887b590db1ca8333f33aa91a8f8254cd8d1356fa4",
+      "preview": "../../preview/scene_0001.png"
+    },
+    {
+      "path": "../../test/scene_0011.json",
+      "family": "instructor_test_v2_oneway_k04_p1_710401",
+      "split": "test",
+      "state_sha256": "8b51d46e7c37e00197dc1ee1d10ef0fe526cee3709475a9b90692b41fcc05b81",
+      "preview": "../../preview/scene_0011.png"
+    },
+    {
+      "path": "../../test/scene_0021.json",
+      "family": "instructor_test_v2_oneway_k06_p2_710601",
+      "split": "test",
+      "state_sha256": "1769a3b004b6fb457c4686c2c264391f03bcd526c2f139dca1a05fddf27be6c5",
+      "preview": "../../preview/scene_0021.png"
+    },
+    {
+      "path": "../../test/scene_0031.json",
+      "family": "instructor_test_v2_oneway_k08_p2_710801",
+      "split": "test",
+      "state_sha256": "c93f5ed614477a0ca324976dedf2c7188c341ae817231a0c9f05413d80556bad",
+      "preview": "../../preview/scene_0031.png"
+    },
+    {
+      "path": "../../test/scene_0041.json",
+      "family": "instructor_test_v2_oneway_k10_p2_711001",
+      "split": "test",
+      "state_sha256": "80fcd6c14c101bfcfe38fcaa34288e76ba0159efc8953ebccc732743175256e3",
+      "preview": "../../preview/scene_0041.png"
+    }
+  ],
+  "source": "instructor_generated",
+  "note": "Held-out instructor test scenes with blocked cubes. Selected only by layout rule and a D-state check; no learned model was run on them. Run with --split test --final-test after models and strategies are fixed. Colab split part2_oneway_b: five scenes, one per displaced-cube count, taken from the two core10 subsets."
+}

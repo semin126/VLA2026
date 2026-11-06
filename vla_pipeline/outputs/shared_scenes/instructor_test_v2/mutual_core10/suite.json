@@ -1,0 +1,77 @@
+{
+  "schema": "final_project_scene_v2",
+  "scenes": [
+    {
+      "path": "../test/scene_0050.json",
+      "family": "instructor_test_v2_mutual_k02_p1_715200",
+      "split": "test",
+      "state_sha256": "e058c42a93df36df340b06618c2c614a79180cbd55c661c323fd08ea85256dbe",
+      "preview": "../preview/scene_0050.png"
+    },
+    {
+      "path": "../test/scene_0051.json",
+      "family": "instructor_test_v2_mutual_k02_p1_715201",
+      "split": "test",
+      "state_sha256": "6f2850f42d1fefd8e670906c56b86e83a5ba6ba5ddbd2194af5be4a74faa9b24",
+      "preview": "../preview/scene_0051.png"
+    },
+    {
+      "path": "../test/scene_0060.json",
+      "family": "instructor_test_v2_mutual_k04_p2_715400",
+      "split": "test",
+      "state_sha256": "0ed8fa77b4bac62a8d2924e5f8e04f6ab01d24ae7be758e443133beade72c74e",
+      "preview": "../preview/scene_0060.png"
+    },
+    {
+      "path": "../test/scene_0061.json",
+      "family": "instructor_test_v2_mutual_k04_p2_715401",
+      "split": "test",
+      "state_sha256": "c69bcc16be3d85e98b14f5097fd5f92b184b1416925d6b82e7e6b7b3729fdb10",
+      "preview": "../preview/scene_0061.png"
+    },
+    {
+      "path": "../test/scene_0070.json",
+      "family": "instructor_test_v2_mutual_k06_p1_715600",
+      "split": "test",
+      "state_sha256": "4dbf4ca0505d455392f8f5a2a2e6a2da9f7ac50fd77773e33c9fc3bcde0881a3",
+      "preview": "../preview/scene_0070.png"
+    },
+    {
+      "path": "../test/scene_0071.json",
+      "family": "instructor_test_v2_mutual_k06_p1_715601",
+      "split": "test",
+      "state_sha256": "e127eb1f40740bf9d87d9e0811ec6351a1e7c54fd7dec81491e1d8773cf45896",
+      "preview": "../preview/scene_0071.png"
+    },
+    {
+      "path": "../test/scene_0080.json",
+      "family": "instructor_test_v2_mutual_k08_p2_715800",
+      "split": "test",
+      "state_sha256": "2d243e15f0bcdf7c6f1b6ed271871796bfc5805e9c0567c068332a4b91e94815",
+      "preview": "../preview/scene_0080.png"
+    },
+    {
+      "path": "../test/scene_0081.json",
+      "family": "instructor_test_v2_mutual_k08_p2_715801",
+      "split": "test",
+      "state_sha256": "9682e3314426bdbba30cc0e876fbe3a20eeef3afe363aa57ef5cc7731f26fdd1",
+      "preview": "../preview/scene_0081.png"
+    },
+    {
+      "path": "../test/scene_0090.json",
+      "family": "instructor_test_v2_mutual_k10_p1_716000",
+      "split": "test",
+      "state_sha256": "e00e2f8e2c0642dc1b03929a32a24b7e1f53359a6ca23f9b9f11d1cca828a14d",
+      "preview": "../preview/scene_0090.png"
+    },
+    {
+      "path": "../test/scene_0091.json",
+      "family": "instructor_test_v2_mutual_k10_p1_716001",
+      "split": "test",
+      "state_sha256": "701c4ccc019d9c01a73499fd2d0d1473c367720e62454744790f4b51f902434f",
+      "preview": "../preview/scene_0091.png"
+    }
+  ],
+  "source": "instructor_generated",
+  "note": "Held-out instructor test scenes with blocked cubes. Selected only by layout rule and a D-state check; no learned model was run on them. Run with --split test --final-test after models and strategies are fixed. Subset mutual_core10."
+}

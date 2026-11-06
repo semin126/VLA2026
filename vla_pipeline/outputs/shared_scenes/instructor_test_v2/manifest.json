@@ -1,0 +1,5245 @@
+{
+  "version": "instructor_test_v2",
+  "scenes": [
+    {
+      "path": "test/scene_0000.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710200",
+      "seed": 710200,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_4",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "c5ec581b148b2f76bfb92065916768246272099fcd5fcde866ee39b6f7d9ef03",
+      "scene_sha256": "ad5508b55d6d145ab40401534b885cf12a13fa7e6bad137c2335594bb16f4108",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 263,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_9",
+        "object_4"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2888,
+        "id": "balanced_initial_train_240132",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0001.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710201",
+      "seed": 710201,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_4",
+        "object_5"
+      ],
+      "category": "mixed",
+      "state_sha256": "d5b2b2cbcd1073e1568405c887b590db1ca8333f33aa91a8f8254cd8d1356fa4",
+      "scene_sha256": "2056428f2550f59f3088b934e2f28eac11a971840d06840fe54919a845a0c126",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 263,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_5",
+        "object_4"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1636,
+        "id": "balanced_initial_train_240111",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0002.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710202",
+      "seed": 710202,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_10",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_4",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "7b8985f8bcbf3e0d36c165ca7507de688d2784b492405fe565476509d1e6ceee",
+      "scene_sha256": "96a1143222e2789e048db485cbfbab4ce0ea6b1ad903ecd9a7ec7895f3225f68",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 285,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_4",
+        "object_10"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2107,
+        "id": "balanced_initial_train_240061",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0003.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710203",
+      "seed": 710203,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_6"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_3",
+        "object_6"
+      ],
+      "category": "mixed",
+      "state_sha256": "c724079c0570555905b136f0447d7b4e2b5e68b566c7c5731164f9d34394adb9",
+      "scene_sha256": "7b1782823da5455343ca861e262782ee487bcca0cd7a9d6eb9b0e32c19f76cc4",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 269,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_3",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2504,
+        "id": "release_train_single_11005",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0004.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710204",
+      "seed": 710204,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_3",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_3",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "626ef1f9c20a66138553297f54094bccaa443069d6da46bbda93b263611bda2d",
+      "scene_sha256": "69a41bf5bafa48d3806120858b180d597e3347a94e99f50b0facfb6b183dd950",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 279,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_10",
+        "object_3"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1219,
+        "id": "recovery_train_160029_p80",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0005.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710205",
+      "seed": 710205,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_5"
+      ],
+      "category": "mixed",
+      "state_sha256": "d5530979b794293ada5db5a8fbed137d8b6550168bbaa9e9c9b7d507fa8945e1",
+      "scene_sha256": "e67c0fc38dfdc6c2defa99406d4ab3d3a90101231266e4e98bcbbf25430419ef",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 353,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_5",
+        "object_1",
+        "object_1"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.0738,
+        "id": "balanced_initial_train_240039",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0006.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710206",
+      "seed": 710206,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_5"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_5",
+        "object_8"
+      ],
+      "category": "mixed",
+      "state_sha256": "09adba61466664af021729139257e8ad645e434d234a61a9d0555d3ce869fc5c",
+      "scene_sha256": "9185318ba8f401effc6866dd37efa5b1e7564094fab3dbb69362cb6d8184bf8d",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 268,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_8",
+        "object_5"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2212,
+        "id": "release_train_single_11007",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0007.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710207",
+      "seed": 710207,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_10",
+          "blocker": "object_1"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "084adbcc8184a53007a44671d4712151f57be0dcb0cadadd85cd7b38bec208f7",
+      "scene_sha256": "d6ed6b9afb9764c84b86479eb41aee672f5327f29f609dc7fd6ebc637e8bae86",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 281,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_1",
+        "object_10"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1928,
+        "id": "motor_r2_train_multi_120006",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0008.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710208",
+      "seed": 710208,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_7"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_3",
+        "object_7"
+      ],
+      "category": "mixed",
+      "state_sha256": "2cf7a2b70514ae15c50ecc8f7dca10b1e21972689a94dc8adf4da0d82f5dee12",
+      "scene_sha256": "93c9f0c4340d782ba374ed87f871b29a151280e84956304a531a1c46ec7088d5",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 264,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_3",
+        "object_7"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2544,
+        "id": "release_train_single_11006",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0009.json",
+      "id": "instructor_test_v2_oneway_k02_p1_710209",
+      "seed": 710209,
+      "blocking": "oneway",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_5"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_4",
+        "object_5"
+      ],
+      "category": "mixed",
+      "state_sha256": "c3c80db15f7349a5501b4223cf9f9bdff1cca4e6ea94b981c2516174e69b766c",
+      "scene_sha256": "06ef98dfddc2978e309f96a1e72534745e7fe32c046020413726d5c89a61e927",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 258,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_4",
+        "object_5"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1824,
+        "id": "motor_r2_goal_train_180034",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0010.json",
+      "id": "instructor_test_v2_oneway_k04_p2_710400",
+      "seed": 710400,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_10",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_2",
+          "blocker": "object_7"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_2"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_7",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "dfd49e521db9c246723788afa8c9d96d24116263fa2438aebf4d09f7823f1fba",
+      "scene_sha256": "37194063f625c32ad0c2016640acfaf71c6d837c40b430039e575a89b98f789c",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 550,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_1",
+        "object_10",
+        "object_7",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.15,
+        "id": "motor_validation_selection_140116",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0011.json",
+      "id": "instructor_test_v2_oneway_k04_p1_710401",
+      "seed": 710401,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_9",
+          "blocker": "object_7"
+        }
+      ],
+      "blocked_cubes": [
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_8",
+        "object_2"
+      ],
+      "targets": [
+        "object_2",
+        "object_7",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "8b51d46e7c37e00197dc1ee1d10ef0fe526cee3709475a9b90692b41fcc05b81",
+      "scene_sha256": "1c485095f9cb5f36fd5ceb3ad872d979a576d6e31b17b5896dba59981d8ea7bb",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 543,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_2",
+        "object_7",
+        "object_9",
+        "object_8"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2776,
+        "id": "balanced_initial_train_240094",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0012.json",
+      "id": "instructor_test_v2_oneway_k04_p1_710402",
+      "seed": 710402,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4"
+      ],
+      "free_cubes": [
+        "object_6",
+        "object_7"
+      ],
+      "targets": [
+        "object_3",
+        "object_4",
+        "object_6",
+        "object_7"
+      ],
+      "category": "mixed",
+      "state_sha256": "edc59446d2cb37b10191dc1bfc9c67c72d9dd2cbf61cc32bdc176dc425f1cfdf",
+      "scene_sha256": "6335d7fdda542594dabc5a0c0391b4a6775faf3d710755337b5600b28f51d7ef",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 544,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_3",
+        "object_4",
+        "object_7",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2793,
+        "id": "development_open_100",
+        "split": "development"
+      }
+    },
+    {
+      "path": "test/scene_0013.json",
+      "id": "instructor_test_v2_oneway_k04_p2_710403",
+      "seed": 710403,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_7"
+        },
+        {
+          "blocked": "object_3",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_3"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_3",
+        "object_4",
+        "object_7"
+      ],
+      "category": "mixed",
+      "state_sha256": "b7ea3c5859e4b08b438df9b337724bcd9705c9e52d373251a4bf719e3684dc6a",
+      "scene_sha256": "40964ae767247b9c545581026dbcaaad794cbe9849e0486fceaa16a4987d3eba",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 549,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_7",
+        "object_1",
+        "object_4",
+        "object_3"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2592,
+        "id": "motor_r2_train_multi_120014",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0014.json",
+      "id": "instructor_test_v2_oneway_k04_p2_710404",
+      "seed": 710404,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_8"
+        },
+        {
+          "blocked": "object_3",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3",
+        "object_5"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_3",
+        "object_5",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "255ee829a0fac09599f72dd0a8f627218442694f2a3dae09d758edb92cfab125",
+      "scene_sha256": "fae178ed04e6ce63f96852dae289f694bcfb96140ad2fa720f1d8f61c4639dbb",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 541,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_8",
+        "object_5",
+        "object_9",
+        "object_3"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2862,
+        "id": "balanced_initial_train_240067",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0015.json",
+      "id": "instructor_test_v2_oneway_k04_p1_710405",
+      "seed": 710405,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_2",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_2"
+      ],
+      "free_cubes": [
+        "object_4",
+        "object_8"
+      ],
+      "targets": [
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_8"
+      ],
+      "category": "mixed",
+      "state_sha256": "3a8e336c1fc24230953f476fb2510bb83bae5d98235eacd924fdd7f69d37a8ca",
+      "scene_sha256": "a1e63b3ce28eabff08a58e2ea903044141eea0ec90c81b9160e6a9d49999a482",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 586,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_3",
+        "object_2",
+        "object_8",
+        "object_4"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2722,
+        "id": "balanced_initial_validation_250009",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0016.json",
+      "id": "instructor_test_v2_oneway_k04_p2_710406",
+      "seed": 710406,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_9"
+        },
+        {
+          "blocked": "object_4",
+          "blocker": "object_7"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_5"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_4",
+        "object_5",
+        "object_7",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "80f5897022771888e8d4dc26c755ce02d3c9f3b3bc6f3645af695dc46d8ee5cb",
+      "scene_sha256": "12e88dcaf6f40f922eb2fb9c858d26186570e58cffa00b34c7975a1aea11d855",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 567,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_7",
+        "object_4",
+        "object_9",
+        "object_5"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2615,
+        "id": "release_train_single_11003",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0017.json",
+      "id": "instructor_test_v2_oneway_k04_p2_710408",
+      "seed": 710408,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_3"
+        },
+        {
+          "blocked": "object_10",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_10"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_3",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "eed2ce32eedc2194fc4201f5614a2a3b7cb49ac29c28e62f11ad33b30f35996d",
+      "scene_sha256": "44ef561318b60e643aa49b201849ae8ced9bf1405c278af8476b75786bfe0d0c",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 535,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_3",
+        "object_1",
+        "object_9",
+        "object_10"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2538,
+        "id": "motor_r2_goal_train_180006",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0018.json",
+      "id": "instructor_test_v2_oneway_k04_p2_710410",
+      "seed": 710410,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_7"
+        },
+        {
+          "blocked": "object_10",
+          "blocker": "object_1"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_6"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_6",
+        "object_7",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "8e02bfd18294c6be3a7c5b6aa70ee43a60402c6a486f64d66816c0977407b8e6",
+      "scene_sha256": "5afd1b4456f84e002c9151944c2315420325a4d9d4265f429734783b0a17c419",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 555,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_1",
+        "object_10",
+        "object_7",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2717,
+        "id": "balanced_initial_train_240053",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0019.json",
+      "id": "instructor_test_v2_oneway_k04_p1_710411",
+      "seed": 710411,
+      "blocking": "oneway",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_3",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3"
+      ],
+      "free_cubes": [
+        "object_7",
+        "object_6"
+      ],
+      "targets": [
+        "object_3",
+        "object_6",
+        "object_7",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "1c693fcdb2755a5b615cd31fb4de179ef9dd03ca2f2bc38808cf22e835c0e651",
+      "scene_sha256": "9e6fb6ef9e454140483b3b2085fee9a0908f182f58620291ae6bb202614510fe",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 542,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_7",
+        "object_9",
+        "object_3",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2756,
+        "id": "same_zone_validation_290009_target_object_6",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0020.json",
+      "id": "instructor_test_v2_oneway_k06_p3_710600",
+      "seed": 710600,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_9"
+        },
+        {
+          "blocked": "object_1",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_8",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_4",
+        "object_8"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_3",
+        "object_4",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "8f5663e5bc90275391023b38589b419291597ab76d65413b1dbac24ce9f6bdae",
+      "scene_sha256": "e4abfb9548e75bec08135c21ae029c69cbfc2361daf3970fa52e431335814352",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 862,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_6",
+        "object_1",
+        "object_9",
+        "object_4",
+        "object_3",
+        "object_8"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2583,
+        "id": "balanced_initial_train_240067",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0021.json",
+      "id": "instructor_test_v2_oneway_k06_p2_710601",
+      "seed": 710601,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_8",
+          "blocker": "object_10"
+        },
+        {
+          "blocked": "object_2",
+          "blocker": "object_7"
+        }
+      ],
+      "blocked_cubes": [
+        "object_2",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_6",
+        "object_9"
+      ],
+      "targets": [
+        "object_2",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "1769a3b004b6fb457c4686c2c264391f03bcd526c2f139dca1a05fddf27be6c5",
+      "scene_sha256": "d5ef65752b3f95b63eae458408942f8ae6e179fe3d75c029b79757af49e7996b",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 861,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_6",
+        "object_9",
+        "object_10",
+        "object_8",
+        "object_7",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2751,
+        "id": "release_validation_full_21011",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0022.json",
+      "id": "instructor_test_v2_oneway_k06_p2_710602",
+      "seed": 710602,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_9",
+          "blocker": "object_7"
+        },
+        {
+          "blocked": "object_4",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_3",
+        "object_6"
+      ],
+      "targets": [
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "f2d7a46d09800b56e2d441be0aecb6e8c5a89b2a168cd014d622122ef9f70370",
+      "scene_sha256": "6e01fcb6459f8b5f4530f1e7a5404284bd7081ac5901821b9575949740bb44ac",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 881,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_3",
+        "object_7",
+        "object_9",
+        "object_5",
+        "object_4",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2467,
+        "id": "motor_r2_train_multi_120001",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0023.json",
+      "id": "instructor_test_v2_oneway_k06_p2_710603",
+      "seed": 710603,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_8",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_5",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_10",
+        "object_1"
+      ],
+      "targets": [
+        "object_1",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "e88f501563d2c327015e94df0e223d4ad364b968937c9df8a467f38732a882af",
+      "scene_sha256": "8e03cfc3f9abc2e19570f5c966b936632235b24fb5842172a270acfd58eec5ce",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 855,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_6",
+        "object_8",
+        "object_10",
+        "object_4",
+        "object_5",
+        "object_1"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2717,
+        "id": "balanced_initial_train_240053",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0024.json",
+      "id": "instructor_test_v2_oneway_k06_p2_710604",
+      "seed": 710604,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_3",
+          "blocker": "object_7"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3",
+        "object_4"
+      ],
+      "free_cubes": [
+        "object_2",
+        "object_8"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_7",
+        "object_8"
+      ],
+      "category": "mixed",
+      "state_sha256": "f05a4fa49750f48f08eec797f94745a49fd705c10d171cf0e784f14598792c28",
+      "scene_sha256": "0ec9fd4837114836334a36d0b3e13d55ef17f13538f17a7301e58e4a2d74fe06",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 911,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_1",
+        "object_4",
+        "object_7",
+        "object_3",
+        "object_3",
+        "object_2",
+        "object_8"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.255,
+        "id": "balanced_initial_train_240105",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0025.json",
+      "id": "instructor_test_v2_oneway_k06_p1_710605",
+      "seed": 710605,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1"
+      ],
+      "free_cubes": [
+        "object_6",
+        "object_9",
+        "object_8",
+        "object_7"
+      ],
+      "targets": [
+        "object_1",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "e6a90cdf5d1de18ba35010def99b7c417c79e2c5844aac7a031e819c6b3518d9",
+      "scene_sha256": "42634f76aae088cf361c681a01d735ca87df083ff513ea3d86f17e4d9cf80a84",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 828,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_6",
+        "object_8",
+        "object_7",
+        "object_9",
+        "object_5",
+        "object_1"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2929,
+        "id": "balanced_initial_train_240100",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0026.json",
+      "id": "instructor_test_v2_oneway_k06_p1_710606",
+      "seed": 710606,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_10",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10"
+      ],
+      "free_cubes": [
+        "object_6",
+        "object_9",
+        "object_5",
+        "object_3"
+      ],
+      "targets": [
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "0b1f79c386491ffc862d6c3e198fc59475cfbd65ca71ec0b5f2f3dab661d365e",
+      "scene_sha256": "5cc58e80e0c4444240560216599e432eda162fd37f5f171edbfb90fb82bc2a93",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 867,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_3",
+        "object_4",
+        "object_10",
+        "object_5",
+        "object_9",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2512,
+        "id": "balanced_initial_train_240121",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0027.json",
+      "id": "instructor_test_v2_oneway_k06_p1_710607",
+      "seed": 710607,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1"
+      ],
+      "free_cubes": [
+        "object_6",
+        "object_10",
+        "object_7",
+        "object_9"
+      ],
+      "targets": [
+        "object_1",
+        "object_3",
+        "object_6",
+        "object_7",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "9a718d661251b868ea3276c0846327437f0376d163a52f285d17c16030673c60",
+      "scene_sha256": "ff9e6515591a487caae038a14ded566fc7f1997e69f32622dedd186085ce5485",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 817,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_9",
+        "object_7",
+        "object_3",
+        "object_1",
+        "object_10",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2656,
+        "id": "balanced_initial_train_240053",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0028.json",
+      "id": "instructor_test_v2_oneway_k06_p1_710609",
+      "seed": 710609,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_3",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3"
+      ],
+      "free_cubes": [
+        "object_1",
+        "object_8",
+        "object_2",
+        "object_9"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_5",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "68fcf1326fc1ea125d1cb24cf073c94e8a04d80b07b69596f34259a6006ff792",
+      "scene_sha256": "b1fe41e8fe8e8c395894692d39a33da47267d38f9abc08527127bb5bc5262a0d",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 872,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_5",
+        "object_3",
+        "object_1",
+        "object_9",
+        "object_2",
+        "object_8"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2787,
+        "id": "balanced_initial_train_240155",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0029.json",
+      "id": "instructor_test_v2_oneway_k06_p3_710610",
+      "seed": 710610,
+      "blocking": "oneway",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_7"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_3"
+        },
+        {
+          "blocked": "object_2",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_2",
+        "object_5"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_5",
+        "object_7",
+        "object_8"
+      ],
+      "category": "mixed",
+      "state_sha256": "ba701b2fa59cd471df434683d608c935e67ddb167daaeb0da2c002e2f18bba7a",
+      "scene_sha256": "5d06777b2a6c4fd37badffb1690ff54f756a8aea1bd31d748254422f04e4b975",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 839,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_8",
+        "object_2",
+        "object_3",
+        "object_5",
+        "object_7",
+        "object_1"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2795,
+        "id": "balanced_initial_train_240038",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0030.json",
+      "id": "instructor_test_v2_oneway_k08_p1_710800",
+      "seed": 710800,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_10",
+        "object_4",
+        "object_6",
+        "object_8",
+        "object_3",
+        "object_1"
+      ],
+      "targets": [
+        "object_1",
+        "object_3",
+        "object_4",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "403f6dec8493ed0f184502b7b5ff31f58641d91e03eb4a2a0b8278af8975330f",
+      "scene_sha256": "3fd52dee5086d615703ca8b727cc034b109931f5e7094fc00879cf5c7af3ac22",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1126,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_8",
+        "object_1",
+        "object_6",
+        "object_9",
+        "object_7",
+        "object_10",
+        "object_3",
+        "object_4"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2598,
+        "id": "balanced_initial_validation_250030",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0031.json",
+      "id": "instructor_test_v2_oneway_k08_p2_710801",
+      "seed": 710801,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_3",
+          "blocker": "object_2"
+        },
+        {
+          "blocked": "object_1",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_3"
+      ],
+      "free_cubes": [
+        "object_10",
+        "object_9",
+        "object_8",
+        "object_4"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "c93f5ed614477a0ca324976dedf2c7188c341ae817231a0c9f05413d80556bad",
+      "scene_sha256": "be7ec69816c8fa16617d82f73d7bb38b45814bed673a10852b4b1233f02b027f",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1156,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_10",
+        "object_8",
+        "object_2",
+        "object_3",
+        "object_9",
+        "object_5",
+        "object_1",
+        "object_4"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2498,
+        "id": "balanced_initial_validation_250017",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0032.json",
+      "id": "instructor_test_v2_oneway_k08_p3_710802",
+      "seed": 710802,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_8"
+        },
+        {
+          "blocked": "object_6",
+          "blocker": "object_3"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_5",
+        "object_6"
+      ],
+      "free_cubes": [
+        "object_2",
+        "object_10"
+      ],
+      "targets": [
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "0361733482c0c2d558fef69ccfe548093c7f725cc93faa169090b1f859a611c9",
+      "scene_sha256": "4e3eedfb329250620f300eb262ab27e2aef79e02f0d4ec1bb16d3160cb779403",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1149,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_9",
+        "object_5",
+        "object_10",
+        "object_8",
+        "object_4",
+        "object_3",
+        "object_6",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.202,
+        "id": "balanced_initial_train_240018",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0033.json",
+      "id": "instructor_test_v2_oneway_k08_p1_710803",
+      "seed": 710803,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_3",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3"
+      ],
+      "free_cubes": [
+        "object_6",
+        "object_2",
+        "object_4",
+        "object_9",
+        "object_7",
+        "object_10"
+      ],
+      "targets": [
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "8f9df88cde512230503f298cd4cc833763e4475ae20ba32388309789e52983bf",
+      "scene_sha256": "ea76ee4a8a79a620e9b38d025e00041f4fde6069f6bf88ffb961e6e8a3f808d2",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1220,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_8",
+        "object_3",
+        "object_4",
+        "object_9",
+        "object_2",
+        "object_10",
+        "object_6",
+        "object_7"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2402,
+        "id": "balanced_initial_train_240148",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0034.json",
+      "id": "instructor_test_v2_oneway_k08_p3_710804",
+      "seed": 710804,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_3"
+        },
+        {
+          "blocked": "object_1",
+          "blocker": "object_4"
+        },
+        {
+          "blocked": "object_10",
+          "blocker": "object_2"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_10",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_8",
+        "object_5"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_7",
+        "object_8",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "7e236e09cfde0741371792e166c8f3fa1980dd8dcae4c688c3a2437424e6d782",
+      "scene_sha256": "5471817ce333cf9596e6c702ef6d1eb6fd60da82165be629002bbbc87b62c670",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1145,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_2",
+        "object_10",
+        "object_4",
+        "object_1",
+        "object_3",
+        "object_7",
+        "object_8",
+        "object_5"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2626,
+        "id": "balanced_initial_train_240000",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0035.json",
+      "id": "instructor_test_v2_oneway_k08_p1_710805",
+      "seed": 710805,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4"
+      ],
+      "free_cubes": [
+        "object_5",
+        "object_1",
+        "object_6",
+        "object_2",
+        "object_10",
+        "object_7"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "51e5e4163b851cc00f97e94eb7f8a2323f9208124517d2771c4a22cb2e9d98df",
+      "scene_sha256": "89433c60cd83f9044499c7fd2c4d976c044bd0c79018141dd988b95d58832942",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1267,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_2",
+        "object_7",
+        "object_8",
+        "object_4",
+        "object_6",
+        "object_5",
+        "object_10",
+        "object_1"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2072,
+        "id": "balanced_initial_train_240020",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0036.json",
+      "id": "instructor_test_v2_oneway_k08_p1_710806",
+      "seed": 710806,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_6"
+      ],
+      "free_cubes": [
+        "object_2",
+        "object_1",
+        "object_3",
+        "object_10",
+        "object_4",
+        "object_9"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_6",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "fb5f78a0e724aedc48b58350ff12a6c8b2460689e8eb30cd5b6e4ca305688f8a",
+      "scene_sha256": "28746ab7597ca0a474bd2b4745b68be40dc9184007c1ad56f877756273a4fd80",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1140,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_1",
+        "object_4",
+        "object_3",
+        "object_8",
+        "object_6",
+        "object_10",
+        "object_2",
+        "object_9"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2139,
+        "id": "balanced_initial_train_240090",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0037.json",
+      "id": "instructor_test_v2_oneway_k08_p2_710807",
+      "seed": 710807,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_5"
+        },
+        {
+          "blocked": "object_7",
+          "blocker": "object_6"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_8",
+        "object_9",
+        "object_4",
+        "object_3"
+      ],
+      "targets": [
+        "object_1",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "ffcf8f7cae1a9ced8aec7850498ee2de5f3b6098299e49e4eb0d48c6a13204c1",
+      "scene_sha256": "2057dfe06b59f931123fea7b7a49b25f67a4dc9b7009e72afe93b240f4c244ee",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1139,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_4",
+        "object_3",
+        "object_5",
+        "object_1",
+        "object_8",
+        "object_9",
+        "object_6",
+        "object_7"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2921,
+        "id": "balanced_initial_train_240028",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0038.json",
+      "id": "instructor_test_v2_oneway_k08_p2_710808",
+      "seed": 710808,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_3",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_2",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_2",
+        "object_3"
+      ],
+      "free_cubes": [
+        "object_9",
+        "object_1",
+        "object_4",
+        "object_10"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "820918a616bb6bac64d764103635f07a0eccab6fb24dea6a1fb431acb4bc5f13",
+      "scene_sha256": "b0165805a3d603f83c74010a93c8bc90d6f45d0fd310bef13ccefde3476f7db5",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1070,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_10",
+        "object_9",
+        "object_6",
+        "object_3",
+        "object_1",
+        "object_5",
+        "object_2",
+        "object_4"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2592,
+        "id": "balanced_initial_train_240034",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0039.json",
+      "id": "instructor_test_v2_oneway_k08_p1_710809",
+      "seed": 710809,
+      "blocking": "oneway",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_2",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_2"
+      ],
+      "free_cubes": [
+        "object_9",
+        "object_6",
+        "object_1",
+        "object_3",
+        "object_7",
+        "object_8"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "0508885c41114428dc0d1a96ab99b31dc2d1b38132060f503daf6264d58df59f",
+      "scene_sha256": "4acd916db242f3a8c5875a090b584ef7710a38bd0dc75361a093f0a81264e50b",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1201,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_6",
+        "object_6",
+        "object_9",
+        "object_1",
+        "object_3",
+        "object_7",
+        "object_8",
+        "object_10",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2548,
+        "id": "balanced_initial_train_240068",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0040.json",
+      "id": "instructor_test_v2_oneway_k10_p2_711000",
+      "seed": 711000,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_10",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_9",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_8",
+        "object_7",
+        "object_2",
+        "object_6",
+        "object_5",
+        "object_4"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "3b39953862bb762f17ebe696bfe4aaae822b4b5acd125d0827ade6f236fae3e2",
+      "scene_sha256": "1b5c1b6554b824ee1544518ac3ead4f44d07c11117962b68c4bda0c5be5eac8d",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1407,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_3",
+        "object_9",
+        "object_2",
+        "object_7",
+        "object_6",
+        "object_8",
+        "object_5",
+        "object_4",
+        "object_1",
+        "object_10"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1625,
+        "id": "balanced_initial_train_240022",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0041.json",
+      "id": "instructor_test_v2_oneway_k10_p2_711001",
+      "seed": 711001,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_5"
+        },
+        {
+          "blocked": "object_8",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_10",
+        "object_6",
+        "object_1",
+        "object_9",
+        "object_7",
+        "object_2"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "80fcd6c14c101bfcfe38fcaa34288e76ba0159efc8953ebccc732743175256e3",
+      "scene_sha256": "0a91599b2d791b3a2bd045faf27b4c8518fcf707c7aa182ef44595e53d4ca06a",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1420,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_5",
+        "object_4",
+        "object_10",
+        "object_3",
+        "object_8",
+        "object_2",
+        "object_7",
+        "object_6",
+        "object_1",
+        "object_9"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.179,
+        "id": "balanced_initial_validation_250022",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0042.json",
+      "id": "instructor_test_v2_oneway_k10_p3_711002",
+      "seed": 711002,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_8"
+        },
+        {
+          "blocked": "object_6",
+          "blocker": "object_4"
+        },
+        {
+          "blocked": "object_9",
+          "blocker": "object_1"
+        }
+      ],
+      "blocked_cubes": [
+        "object_6",
+        "object_7",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_5",
+        "object_10",
+        "object_2",
+        "object_3"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "c882777a6ca361b303e591326d144740bc0ff7b1977d95437db0b6aa78638e1f",
+      "scene_sha256": "70fe5eae29510de07d14914a42ddf76f9fde01f050d04a6e9040193e8faa9615",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1419,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_4",
+        "object_6",
+        "object_2",
+        "object_5",
+        "object_8",
+        "object_7",
+        "object_3",
+        "object_1",
+        "object_9",
+        "object_10"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2062,
+        "id": "balanced_initial_validation_250026",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0043.json",
+      "id": "instructor_test_v2_oneway_k10_p1_711003",
+      "seed": 711003,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_10",
+          "blocker": "object_7"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10"
+      ],
+      "free_cubes": [
+        "object_3",
+        "object_1",
+        "object_8",
+        "object_4",
+        "object_9",
+        "object_5",
+        "object_6",
+        "object_2"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "ea2cf8de8564abd1b62baf4fea294a1988a31b3f9aef04aeab49901a7bd23248",
+      "scene_sha256": "a8f5b0a75ad63baff407fefc80027be43a76419471e80eda65303596d7e5897c",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1433,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_7",
+        "object_10",
+        "object_6",
+        "object_2",
+        "object_1",
+        "object_5",
+        "object_8",
+        "object_3",
+        "object_9",
+        "object_4"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1785,
+        "id": "balanced_initial_validation_250004",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0044.json",
+      "id": "instructor_test_v2_oneway_k10_p3_711004",
+      "seed": 711004,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_6",
+          "blocker": "object_9"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_2"
+        }
+      ],
+      "blocked_cubes": [
+        "object_5",
+        "object_6",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_4",
+        "object_8",
+        "object_3",
+        "object_10"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "d5e6d762916821b4bac44ee8abeaf8f41708dd8fd2e1798778c250da14bae95f",
+      "scene_sha256": "2d9e25168f10d89f06a887cf3d9cafe256c675607f55ca6e94c4a431a8f8fa56",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1884,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_2",
+        "object_5",
+        "object_3",
+        "object_8",
+        "object_10",
+        "object_4",
+        "object_9",
+        "object_6",
+        "object_2",
+        "object_1",
+        "object_7",
+        "object_9",
+        "object_7"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1901,
+        "id": "balanced_initial_validation_250018",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0045.json",
+      "id": "instructor_test_v2_oneway_k10_p2_711005",
+      "seed": 711005,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_7"
+        },
+        {
+          "blocked": "object_2",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_2"
+      ],
+      "free_cubes": [
+        "object_8",
+        "object_9",
+        "object_4",
+        "object_3",
+        "object_6",
+        "object_10"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "961de4d6718dc45e9e8f8102abead3faccc7de7f5c3b766c26a7ef0664f759d6",
+      "scene_sha256": "c7c443b79964dc79ac4ff28e9dbc0d337d28af2d1fa17cdd4c2ea1cb89ba0c80",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1527,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_3",
+        "object_4",
+        "object_7",
+        "object_1",
+        "object_8",
+        "object_10",
+        "object_5",
+        "object_2",
+        "object_6",
+        "object_9"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.188,
+        "id": "balanced_initial_train_240080",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0046.json",
+      "id": "instructor_test_v2_oneway_k10_p1_711006",
+      "seed": 711006,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_6"
+      ],
+      "free_cubes": [
+        "object_4",
+        "object_2",
+        "object_1",
+        "object_7",
+        "object_5",
+        "object_3",
+        "object_9",
+        "object_8"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "7e07f3dc9e016107b681f74a1d8b813d25fd4b383c17fd2b9cf672b45d6dd9a6",
+      "scene_sha256": "9b4344732ea01b7367d4a9e044cf9593a5d4e07ade9411b8c2a431e18b998288",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1411,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_9",
+        "object_5",
+        "object_10",
+        "object_6",
+        "object_1",
+        "object_3",
+        "object_7",
+        "object_4",
+        "object_2",
+        "object_8"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1765,
+        "id": "balanced_initial_train_240102",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0047.json",
+      "id": "instructor_test_v2_oneway_k10_p1_711007",
+      "seed": 711007,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_8",
+          "blocker": "object_6"
+        }
+      ],
+      "blocked_cubes": [
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_9",
+        "object_5",
+        "object_3",
+        "object_10",
+        "object_1",
+        "object_2",
+        "object_4",
+        "object_7"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "1ffeaf36be9ced266e9ad9a7f7f68aba7e5b5a71792e6a46c4a415806bd75d1f",
+      "scene_sha256": "e08b5b21e7eb7ab84902037d9219e57834c16281559ae4128973d705be087b92",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1412,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_4",
+        "object_3",
+        "object_7",
+        "object_6",
+        "object_8",
+        "object_1",
+        "object_9",
+        "object_5",
+        "object_10",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1766,
+        "id": "balanced_initial_train_240076",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0048.json",
+      "id": "instructor_test_v2_oneway_k10_p3_711008",
+      "seed": 711008,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_5"
+        },
+        {
+          "blocked": "object_7",
+          "blocker": "object_8"
+        },
+        {
+          "blocked": "object_3",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3",
+        "object_6",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_2",
+        "object_9",
+        "object_4",
+        "object_1"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "2d8f632f7e99a2d44ae31bf5d05607a60cc5cb5723bb9e50bb2d5c5c16b1272c",
+      "scene_sha256": "da522cf7d861952b969d16ce965e572c9af196771fa172ff6dbec3d9a56a342a",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1804,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_10",
+        "object_3",
+        "object_8",
+        "object_7",
+        "object_3",
+        "object_9",
+        "object_9",
+        "object_9",
+        "object_1",
+        "object_5",
+        "object_6",
+        "object_4",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1623,
+        "id": "balanced_initial_train_240052",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0049.json",
+      "id": "instructor_test_v2_oneway_k10_p3_711009",
+      "seed": 711009,
+      "blocking": "oneway",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_3",
+          "blocker": "object_7"
+        },
+        {
+          "blocked": "object_6",
+          "blocker": "object_2"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3",
+        "object_5",
+        "object_6"
+      ],
+      "free_cubes": [
+        "object_9",
+        "object_10",
+        "object_4",
+        "object_1"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "e92da500fc97edbda1473689dd9ae635dcfd8a7c7298c66708a9de657ac63d34",
+      "scene_sha256": "aab0f1c56e8ee38846a00b602037f93fc993129bcd321f6854e459284860068a",
+      "d_check_stop": "scene_completed",
+      "d_check_steps": 1453,
+      "d_check_final_acc": 1.0,
+      "d_check_order": [
+        "object_2",
+        "object_6",
+        "object_4",
+        "object_8",
+        "object_5",
+        "object_1",
+        "object_7",
+        "object_3",
+        "object_9",
+        "object_10"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.173,
+        "id": "balanced_initial_validation_250032",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0050.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715200",
+      "seed": 715200,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_7",
+        "object_8"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_7",
+        "object_8"
+      ],
+      "category": "blocked",
+      "state_sha256": "e058c42a93df36df340b06618c2c614a79180cbd55c661c323fd08ea85256dbe",
+      "scene_sha256": "738a72885123f14accb778a88d7becf1de989dd7be748fd1b73caffb0f6628e1",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1421,
+        "id": "motor_r2_goal_train_180052",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0051.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715201",
+      "seed": 715201,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_8",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_8",
+        "object_9"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_8",
+        "object_9"
+      ],
+      "category": "blocked",
+      "state_sha256": "6f2850f42d1fefd8e670906c56b86e83a5ba6ba5ddbd2194af5be4a74faa9b24",
+      "scene_sha256": "47a64257965a12fb11a602f74ab6a3b579098cf60bc2cca9128de90112c96d7c",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2316,
+        "id": "motor_r2_goal_train_180022",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0052.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715202",
+      "seed": 715202,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_10",
+          "blocker": "object_1"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_10"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_10"
+      ],
+      "category": "blocked",
+      "state_sha256": "d7bb70bdaa82bba896f39c26cb5c98ce2f24fb811ea72d69ed7a8f42acdb1c5a",
+      "scene_sha256": "5fb2dcd1a0f607f2c7c3e5fae4cdb3a8a50d78406861a2710e7fe40c966616df",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1931,
+        "id": "motor_r2_goal_train_180026",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0053.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715203",
+      "seed": 715203,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_8",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_5",
+        "object_8"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_5",
+        "object_8"
+      ],
+      "category": "blocked",
+      "state_sha256": "bd776829a39d440632982ce458a971b00277db501499adfe171fdabdab13af04",
+      "scene_sha256": "085ece61b06ed3f963ecbc947406bc74b6fb37d82756bd3aded065e59242979f",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2319,
+        "id": "motor_validation_selection_140104",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0054.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715204",
+      "seed": 715204,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_9",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3",
+        "object_9"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_3",
+        "object_9"
+      ],
+      "category": "blocked",
+      "state_sha256": "cc1c21727c7caf29b84508953b916b541dc852db985b379c77a76f9d9636690e",
+      "scene_sha256": "dd42504039b42bae9e786e6359626324d5296541cb7b9075880b58ebe5d3c1a3",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1917,
+        "id": "release_train_single_11002",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0055.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715205",
+      "seed": 715205,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_8"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_4",
+        "object_8"
+      ],
+      "category": "blocked",
+      "state_sha256": "5ed717bcfb873df0fb1060bfef901f2691938bbc06345e8a6f90703d850830ea",
+      "scene_sha256": "cf8a10993be9d3c2829ded06249e18cabb87f5c74a4712c3e599990ae8f63af3",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2245,
+        "id": "motor_validation_selection_140117",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0056.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715206",
+      "seed": 715206,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_7"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_4",
+        "object_7"
+      ],
+      "category": "blocked",
+      "state_sha256": "66414614c0601c36038ad869c589c446e8ed5df538b331b2ef5c66cd8f0fe6ee",
+      "scene_sha256": "adb2496ff8a4cc1beacfaa05d9883e5fd5441430864df69e072121f0b9a165a6",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.254,
+        "id": "balanced_initial_train_240095",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0057.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715207",
+      "seed": 715207,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_5"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_5",
+        "object_10"
+      ],
+      "category": "blocked",
+      "state_sha256": "c7dd4bad04f8df0e6036956312014a021f4cf9c98edf008e4351e418c55209fc",
+      "scene_sha256": "b877c612845867e2446cf55ca8985850a972d75386a5b04926a51a69166edab1",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2432,
+        "id": "motor_validation_selection_140119",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0058.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715208",
+      "seed": 715208,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_7",
+        "object_8"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_7",
+        "object_8"
+      ],
+      "category": "blocked",
+      "state_sha256": "ee3dd3e17fbb2fea544f55434a791ec816385b5f34341897f1af0aa32901f159",
+      "scene_sha256": "734f5cfb0f0fbf3900962b5153e9199f49443ee7cd515245a9cb25100bfc9681",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1421,
+        "id": "motor_r2_goal_train_180052",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0059.json",
+      "id": "instructor_test_v2_mutual_k02_p1_715209",
+      "seed": 715209,
+      "blocking": "mutual",
+      "k": 2,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_5",
+        "object_7"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_5",
+        "object_7"
+      ],
+      "category": "blocked",
+      "state_sha256": "6a6ddc73ea3ebacf14babfdd0c8dcf91c3bd821033f1e4738d7335c185930ea6",
+      "scene_sha256": "cb519bf2b9b595081b73817814b4a644e10b59f6ebdb9da4b13323c8ed5d8a80",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1342,
+        "id": "motor_validation_selection_140106",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0060.json",
+      "id": "instructor_test_v2_mutual_k04_p2_715400",
+      "seed": 715400,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_8",
+          "blocker": "object_2"
+        },
+        {
+          "blocked": "object_9",
+          "blocker": "object_6"
+        }
+      ],
+      "blocked_cubes": [
+        "object_2",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_2",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "category": "blocked",
+      "state_sha256": "0ed8fa77b4bac62a8d2924e5f8e04f6ab01d24ae7be758e443133beade72c74e",
+      "scene_sha256": "b8b611a03cdfb074664e6d2a01c0671be94faa2704ab826f756810695b998dfd",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2862,
+        "id": "balanced_initial_train_240088",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0061.json",
+      "id": "instructor_test_v2_mutual_k04_p2_715401",
+      "seed": 715401,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_2",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_2",
+        "object_5",
+        "object_9"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_5",
+        "object_9"
+      ],
+      "category": "blocked",
+      "state_sha256": "c69bcc16be3d85e98b14f5097fd5f92b184b1416925d6b82e7e6b7b3729fdb10",
+      "scene_sha256": "2ef4a210eaef46bfaa43d736da7be496455ffec1f040898d9c9a3c671d966830",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.186,
+        "id": "balanced_initial_train_240131",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0062.json",
+      "id": "instructor_test_v2_mutual_k04_p1_715402",
+      "seed": 715402,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_7",
+        "object_5"
+      ],
+      "targets": [
+        "object_4",
+        "object_5",
+        "object_7",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "7bd9a3f161a642d00593188a7d35a609bb2a76d870cfcec1e0f722b3ed25e681",
+      "scene_sha256": "5cfd39e65057c092fa780b44fd336213b1525b672f1ac2c58b5be9359e1ef0ce",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 272,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_7",
+        "object_5"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2278,
+        "id": "release_train_single_11003",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0063.json",
+      "id": "instructor_test_v2_mutual_k04_p2_715403",
+      "seed": 715403,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_9"
+        },
+        {
+          "blocked": "object_6",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_4",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "category": "blocked",
+      "state_sha256": "5d6a97041ee82c49ed05137d79491f14c632d1048bc1913666dff863020a339b",
+      "scene_sha256": "ee91b5c9142a32efa841ecd85661046e04f2dec393c497ffd2f9893a5117fdb6",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2583,
+        "id": "balanced_initial_train_240067",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0064.json",
+      "id": "instructor_test_v2_mutual_k04_p1_715404",
+      "seed": 715404,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_1"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_5"
+      ],
+      "free_cubes": [
+        "object_6",
+        "object_9"
+      ],
+      "targets": [
+        "object_1",
+        "object_5",
+        "object_6",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "82e376573821b0489bddb9dce02dee7c60c8968d043fdad4272d8cf6d164aa41",
+      "scene_sha256": "c20f50387f6c7a6808644832287299657c4c26357c3aa26e8bab4bd73ff53ea1",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 284,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_6",
+        "object_9"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2866,
+        "id": "motor_r2_goal_train_180046",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0065.json",
+      "id": "instructor_test_v2_mutual_k04_p1_715405",
+      "seed": 715405,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_3",
+          "blocker": "object_2"
+        }
+      ],
+      "blocked_cubes": [
+        "object_2",
+        "object_3"
+      ],
+      "free_cubes": [
+        "object_6",
+        "object_7"
+      ],
+      "targets": [
+        "object_2",
+        "object_3",
+        "object_6",
+        "object_7"
+      ],
+      "category": "mixed",
+      "state_sha256": "c5929505b0de6a98e768d6dfa936340b5f782911a66a7294cdfb3603c3645f24",
+      "scene_sha256": "6df4498265fcb017aece9b3cd3f59c4aaa00b476c8f773b0185b66e84fb4b6d0",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 278,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_7",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2529,
+        "id": "balanced_initial_train_240031",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0066.json",
+      "id": "instructor_test_v2_mutual_k04_p1_715406",
+      "seed": 715406,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_2",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_2",
+        "object_4"
+      ],
+      "free_cubes": [
+        "object_3",
+        "object_5"
+      ],
+      "targets": [
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5"
+      ],
+      "category": "mixed",
+      "state_sha256": "429f5342f53078e65de21d5b73750835b4f95509bff3dd8e2e4a406360ed474e",
+      "scene_sha256": "1e475e6e9806fefdd5e5d127232aaae19baedeeee85aa54b6bca2cc055edfc83",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 276,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_5",
+        "object_3"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2555,
+        "id": "motor_r2_train_multi_120007",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0067.json",
+      "id": "instructor_test_v2_mutual_k04_p1_715407",
+      "seed": 715407,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_6",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_7",
+        "object_1"
+      ],
+      "targets": [
+        "object_1",
+        "object_6",
+        "object_7",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "b31b0ae4bb038208f8398ce18d67d80bc9667c08b7040aa356eeb0504e304bc5",
+      "scene_sha256": "ef7545938a6c26ebce99e45e4a54b95f3db6e2069ff76ea171417de824c26019",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 275,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_7",
+        "object_1"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2588,
+        "id": "motor_validation_selection_140100",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0068.json",
+      "id": "instructor_test_v2_mutual_k04_p1_715408",
+      "seed": 715408,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_10"
+      ],
+      "free_cubes": [
+        "object_9",
+        "object_2"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "0f59e9be8c6fcc4afbb3f75a002d0827ab95c773113bf1504a00d411e860f47c",
+      "scene_sha256": "6f190c74767264b7a4703cb4fcd8528a73b75e1e62541ddccb83b42b2e1be41e",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 285,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_2",
+        "object_9"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2735,
+        "id": "motor_r2_train_multi_120003",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0069.json",
+      "id": "instructor_test_v2_mutual_k04_p1_715409",
+      "seed": 715409,
+      "blocking": "mutual",
+      "k": 4,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_5",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_2",
+        "object_10"
+      ],
+      "targets": [
+        "object_2",
+        "object_5",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "15db8d27a971565b7e988975902d222e73ee967b2e1bf11a03c0494fde113508",
+      "scene_sha256": "40d898e3368d4ff4555caf160d3bf11963c2c728bbb0c794885b347af45b7dbd",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 294,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_10",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2775,
+        "id": "balanced_initial_validation_250029",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0070.json",
+      "id": "instructor_test_v2_mutual_k06_p1_715600",
+      "seed": 715600,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3",
+        "object_6"
+      ],
+      "free_cubes": [
+        "object_10",
+        "object_1",
+        "object_2",
+        "object_9"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_6",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "4dbf4ca0505d455392f8f5a2a2e6a2da9f7ac50fd77773e33c9fc3bcde0881a3",
+      "scene_sha256": "cdba9066080632c08f5e0bef5b1c784462d6e0473be5e2bc46259c61093c6229",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 633,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_10",
+        "object_2",
+        "object_1",
+        "object_9"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2685,
+        "id": "balanced_initial_train_240049",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0071.json",
+      "id": "instructor_test_v2_mutual_k06_p1_715601",
+      "seed": 715601,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_3",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_7",
+        "object_1",
+        "object_5",
+        "object_8"
+      ],
+      "targets": [
+        "object_1",
+        "object_3",
+        "object_5",
+        "object_7",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "e127eb1f40740bf9d87d9e0811ec6351a1e7c54fd7dec81491e1d8773cf45896",
+      "scene_sha256": "428194e4664d6190854cac8fb9910327775dd94d80453664f5e5ce17d50c0083",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 565,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_5",
+        "object_8",
+        "object_7",
+        "object_1"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.3074,
+        "id": "balanced_initial_train_240026",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0072.json",
+      "id": "instructor_test_v2_mutual_k06_p3_715602",
+      "seed": 715602,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_2",
+          "blocker": "object_7"
+        },
+        {
+          "blocked": "object_6",
+          "blocker": "object_4"
+        },
+        {
+          "blocked": "object_3",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_6",
+        "object_7"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_6",
+        "object_7",
+        "object_10"
+      ],
+      "category": "blocked",
+      "state_sha256": "4e669e7d78a3a40aa9cf49faad8068cf23649a75d57e7c67032a8974b8a6d15c",
+      "scene_sha256": "4dd78cf06ba086de2775a8aeb1ef32f18fc02cef66f04565e41fe9236ce5c57b",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2732,
+        "id": "balanced_initial_train_240071",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0073.json",
+      "id": "instructor_test_v2_mutual_k06_p2_715603",
+      "seed": 715603,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_8",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_1",
+        "object_4"
+      ],
+      "targets": [
+        "object_1",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "12d387b966a65cd4a788684e9adc6fba2b99265f95990d62fd3f4736e6804d25",
+      "scene_sha256": "032a53dd121fa0b3a2f4724ce8477aef7cba0e6aebf47aa5e27d775b2d081370",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 343,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [
+        "object_4",
+        "object_1"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2795,
+        "id": "balanced_initial_train_240123",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0074.json",
+      "id": "instructor_test_v2_mutual_k06_p1_715604",
+      "seed": 715604,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_7"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_5",
+        "object_9",
+        "object_6",
+        "object_10"
+      ],
+      "targets": [
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "ce874955c563f99a268ad18b1f35f4ea4b2a02b42e813b8fb39f5525ccfa4179",
+      "scene_sha256": "554a91c777c80345c879cdfe5a55d80c0f6330096d1b79315fa0aced6f099e8a",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 571,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_10",
+        "object_9",
+        "object_6",
+        "object_5"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2512,
+        "id": "balanced_initial_train_240027",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0075.json",
+      "id": "instructor_test_v2_mutual_k06_p3_715605",
+      "seed": 715605,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_4"
+        },
+        {
+          "blocked": "object_8",
+          "blocker": "object_3"
+        },
+        {
+          "blocked": "object_9",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "category": "blocked",
+      "state_sha256": "85d0608bfb60cfb505f2318ab5d695eaa75971f29c1a34ae153378c45a762542",
+      "scene_sha256": "77df475f07522b69b12c962baf71740b442a166fdd333fc5630621d0d13d7aa4",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2583,
+        "id": "balanced_initial_train_240067",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0076.json",
+      "id": "instructor_test_v2_mutual_k06_p3_715606",
+      "seed": 715606,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_8"
+        },
+        {
+          "blocked": "object_2",
+          "blocker": "object_5"
+        },
+        {
+          "blocked": "object_10",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_2",
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_2",
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "blocked",
+      "state_sha256": "befbe1dfc2dad7c6721db23f1243d85f3b40d0b34fd73dee31529e3693fc47ce",
+      "scene_sha256": "509e0ccc2548f70b84e21e2c69aee4981c360496f869e4236d76d3409a9d3edd",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2874,
+        "id": "development_mixed_100",
+        "split": "development"
+      }
+    },
+    {
+      "path": "test/scene_0077.json",
+      "id": "instructor_test_v2_mutual_k06_p3_715607",
+      "seed": 715607,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_5"
+        },
+        {
+          "blocked": "object_1",
+          "blocker": "object_9"
+        },
+        {
+          "blocked": "object_6",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_9"
+      ],
+      "free_cubes": [],
+      "targets": [
+        "object_1",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_9"
+      ],
+      "category": "blocked",
+      "state_sha256": "00f4fab4032f4e1cbd040123ac6e41577011e1522415c630ed0da396641c6a02",
+      "scene_sha256": "718db57f001c2b174d6bdea581b2f8bed6a2f93e95976d2e0a0eca8103fe6571",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 0,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2325,
+        "id": "balanced_initial_validation_250007",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0078.json",
+      "id": "instructor_test_v2_mutual_k06_p2_715608",
+      "seed": 715608,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_2",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_10",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_10",
+        "object_2",
+        "object_4"
+      ],
+      "free_cubes": [
+        "object_7",
+        "object_8"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_4",
+        "object_7",
+        "object_8",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "444ca6b16f98e86e01cb6abc037b28344bf12ccea1ef81f76a3de997575871d6",
+      "scene_sha256": "0f5480e08c463e85deeb2f7fee191ceea33197ad110409c7985b874b4f7a26c9",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 292,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [
+        "object_7",
+        "object_8"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2311,
+        "id": "balanced_initial_train_240069",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0079.json",
+      "id": "instructor_test_v2_mutual_k06_p1_715609",
+      "seed": 715609,
+      "blocking": "mutual",
+      "k": 6,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_6"
+        }
+      ],
+      "blocked_cubes": [
+        "object_6",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_8",
+        "object_5",
+        "object_10",
+        "object_9"
+      ],
+      "targets": [
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "ca1c18d4367f519bf375c32fc522cb2eedcc092cd284d6068dfeda1374ec3a69",
+      "scene_sha256": "71e7589f029300e4afa99ce6bbe0dd455a57efdc6b4e7e8693b032d1470cda2e",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 582,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_5",
+        "object_8",
+        "object_10",
+        "object_9"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.26,
+        "id": "balanced_initial_train_240067",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0080.json",
+      "id": "instructor_test_v2_mutual_k08_p2_715800",
+      "seed": 715800,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_3",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_3",
+        "object_5",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_4",
+        "object_8",
+        "object_2",
+        "object_6"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "2d243e15f0bcdf7c6f1b6ed271871796bfc5805e9c0567c068332a4b91e94815",
+      "scene_sha256": "8af0df8c291ee1a04146f82744174eca6943982a06e955b3f11f5b7ab53de996",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 634,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [
+        "object_8",
+        "object_2",
+        "object_4",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2555,
+        "id": "balanced_initial_validation_250002",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0081.json",
+      "id": "instructor_test_v2_mutual_k08_p2_715801",
+      "seed": 715801,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_10",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_3",
+          "blocker": "object_8"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_3",
+        "object_6",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_4",
+        "object_9",
+        "object_2",
+        "object_5"
+      ],
+      "targets": [
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "9682e3314426bdbba30cc0e876fbe3a20eeef3afe363aa57ef5cc7731f26fdd1",
+      "scene_sha256": "b56198115909839f7e207dc4e699b9fdc5c4b9f9cc532efb143b940c4161cb4b",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 621,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [
+        "object_2",
+        "object_4",
+        "object_9",
+        "object_5"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1841,
+        "id": "release_train_full_11022",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0082.json",
+      "id": "instructor_test_v2_mutual_k08_p3_715802",
+      "seed": 715802,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_2"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_9",
+          "blocker": "object_6"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_2",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_3",
+        "object_8"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "f3f5d193657316e0c38b9d55ec76c42d48e6184046be5ebd08742fad9f452cff",
+      "scene_sha256": "a216019fbc62346efdf327221d2fc4b962a074b53b4bf2ae2f7166a0047c94b5",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 302,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [
+        "object_8",
+        "object_3"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2578,
+        "id": "balanced_initial_train_240068",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0083.json",
+      "id": "instructor_test_v2_mutual_k08_p1_715803",
+      "seed": 715803,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_7"
+        }
+      ],
+      "blocked_cubes": [
+        "object_6",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_8",
+        "object_10",
+        "object_9",
+        "object_4",
+        "object_5",
+        "object_3"
+      ],
+      "targets": [
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "e4fedbc279df920f8200bdb9fec103fb314515077686f9243d71bf577f463817",
+      "scene_sha256": "76cf4fa8920cc917c229ad559cc12b9a9602a3153ab7a18ebfba3bd0ab44a608",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 860,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_5",
+        "object_4",
+        "object_8",
+        "object_3",
+        "object_9",
+        "object_10"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2257,
+        "id": "balanced_initial_train_240067",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0084.json",
+      "id": "instructor_test_v2_mutual_k08_p3_715804",
+      "seed": 715804,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_8"
+        },
+        {
+          "blocked": "object_10",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_3",
+          "blocker": "object_1"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_10",
+        "object_3",
+        "object_5",
+        "object_6",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_7",
+        "object_2"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "7706a2997777a433f1ad8d4bcf912064605d5a6c2f0ebf245d34fae06f40c5e4",
+      "scene_sha256": "cafd76f3fb316b055d97bae56f60841cadc727f5b2ce52ba9dc457848de083c6",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 285,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [
+        "object_2",
+        "object_7"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1704,
+        "id": "balanced_initial_train_240143",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0085.json",
+      "id": "instructor_test_v2_mutual_k08_p1_715805",
+      "seed": 715805,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_5"
+      ],
+      "free_cubes": [
+        "object_10",
+        "object_4",
+        "object_9",
+        "object_2",
+        "object_3",
+        "object_6"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "7af2b223c69e676310b3ac4b922a92e92f7409218160b139d0d170154763f193",
+      "scene_sha256": "9b045b4616fc2d72959aef07df921d118ee28888c76c573fca7ee51941095ea1",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 874,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_3",
+        "object_10",
+        "object_4",
+        "object_9",
+        "object_6",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2424,
+        "id": "balanced_initial_train_240013",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0086.json",
+      "id": "instructor_test_v2_mutual_k08_p2_715806",
+      "seed": 715806,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_5",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_8",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_5",
+        "object_6",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_4",
+        "object_3",
+        "object_9",
+        "object_7"
+      ],
+      "targets": [
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "a75d31d5d2942331811bf7d9a2fc853d0fbfbdaadf2936770c1169aa3d168753",
+      "scene_sha256": "912050843200804a30e84d5277509d36bf20a368ab8d601b1494381d7822cb54",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 628,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [
+        "object_4",
+        "object_9",
+        "object_3",
+        "object_7"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2656,
+        "id": "release_train_full_11025",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0087.json",
+      "id": "instructor_test_v2_mutual_k08_p3_715807",
+      "seed": 715807,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_9",
+          "blocker": "object_4"
+        },
+        {
+          "blocked": "object_8",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_2",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_2",
+        "object_4",
+        "object_5",
+        "object_8",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_7",
+        "object_3"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_7",
+        "object_8",
+        "object_9"
+      ],
+      "category": "mixed",
+      "state_sha256": "f0358323af1c7bc1fe966a1a4c19c3b206ad3773c8635d604973b6638be46816",
+      "scene_sha256": "ea0e0efcaa0c935bee2ac30a20499bbd5525fe4662a268327ad2c2f673100423",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 321,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [
+        "object_3",
+        "object_7"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2626,
+        "id": "balanced_initial_train_240000",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0088.json",
+      "id": "instructor_test_v2_mutual_k08_p2_715808",
+      "seed": 715808,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_9",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_7",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_6",
+        "object_7",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_2",
+        "object_4",
+        "object_1",
+        "object_5"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "61c26eaa02c0de68bfd7fc6dad5e656a9f5cb327ff0d6622dbe21f0e6c4420f1",
+      "scene_sha256": "d35a1d3ff83053e06df99796126e6f59ca38fb97fd2be9df8b01d557730fef6f",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 676,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [
+        "object_5",
+        "object_4",
+        "object_1",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2207,
+        "id": "balanced_initial_train_240103",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0089.json",
+      "id": "instructor_test_v2_mutual_k08_p3_715809",
+      "seed": 715809,
+      "blocking": "mutual",
+      "k": 8,
+      "blocked_pairs": [
+        {
+          "blocked": "object_2",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_8",
+          "blocker": "object_5"
+        },
+        {
+          "blocked": "object_10",
+          "blocker": "object_3"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_10",
+        "object_2",
+        "object_3",
+        "object_5",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_9",
+        "object_7"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_5",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "6f7d63c07bc190e002379e02f0b110234e7355351a86e4ff464770396086194b",
+      "scene_sha256": "230d431b1e2af4c6d43e1855d352d11ed320ac54d1c5ea6c2af11497a2f77d57",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 285,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [
+        "object_7",
+        "object_9"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2599,
+        "id": "balanced_initial_train_240068",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0090.json",
+      "id": "instructor_test_v2_mutual_k10_p1_716000",
+      "seed": 716000,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_9",
+          "blocker": "object_2"
+        }
+      ],
+      "blocked_cubes": [
+        "object_2",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_3",
+        "object_7",
+        "object_5",
+        "object_1",
+        "object_10",
+        "object_4",
+        "object_6",
+        "object_8"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "e00e2f8e2c0642dc1b03929a32a24b7e1f53359a6ca23f9b9f11d1cca828a14d",
+      "scene_sha256": "26e5079fe67fc776aefeaf3ed4c827867f9585a43942bc8538dc82eae5c180a1",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 1143,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_6",
+        "object_1",
+        "object_4",
+        "object_5",
+        "object_8",
+        "object_7",
+        "object_3",
+        "object_10"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1812,
+        "id": "valid_blocked_2001",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0091.json",
+      "id": "instructor_test_v2_mutual_k10_p1_716001",
+      "seed": 716001,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_9",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_5",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_3",
+        "object_2",
+        "object_10",
+        "object_4",
+        "object_7",
+        "object_6",
+        "object_1",
+        "object_8"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "701c4ccc019d9c01a73499fd2d0d1473c367720e62454744790f4b51f902434f",
+      "scene_sha256": "b29ea3feca62268c596c8ef85737e51863e62337b626131e8028b90f4454fb04",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 1208,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_6",
+        "object_3",
+        "object_7",
+        "object_4",
+        "object_10",
+        "object_1",
+        "object_2",
+        "object_8"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1558,
+        "id": "balanced_initial_validation_250020",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0092.json",
+      "id": "instructor_test_v2_mutual_k10_p3_716002",
+      "seed": 716002,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_1"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_9"
+        },
+        {
+          "blocked": "object_2",
+          "blocker": "object_7"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_2",
+        "object_4",
+        "object_5",
+        "object_7",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_3",
+        "object_8",
+        "object_10",
+        "object_6"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "a3bb75e0f6ac3f696e02dc5b59ddb2203fb352ca8c858940402b1a49cfa31276",
+      "scene_sha256": "eadaffbbfefbd7aad74cd9d40e8187de93f1b686a4f658a1f2610c33c2402b71",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 584,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [
+        "object_3",
+        "object_8",
+        "object_10",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1589,
+        "id": "balanced_initial_train_240158",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0093.json",
+      "id": "instructor_test_v2_mutual_k10_p2_716003",
+      "seed": 716003,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_4",
+          "blocker": "object_2"
+        },
+        {
+          "blocked": "object_7",
+          "blocker": "object_1"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_2",
+        "object_4",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_9",
+        "object_3",
+        "object_10",
+        "object_8",
+        "object_6",
+        "object_5"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "67e89712b3bebc2ad563e7598a3c64cd58e49861c83e978b14e0d02be15a418f",
+      "scene_sha256": "1b0499b6328f1779d1691a0acb9c83c3f4b2d1b5a75b66bb66387729899f8bff",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 916,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [
+        "object_10",
+        "object_9",
+        "object_6",
+        "object_8",
+        "object_5",
+        "object_3"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.2035,
+        "id": "balanced_initial_validation_250036",
+        "split": "validation"
+      }
+    },
+    {
+      "path": "test/scene_0094.json",
+      "id": "instructor_test_v2_mutual_k10_p3_716005",
+      "seed": 716005,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_7"
+        },
+        {
+          "blocked": "object_2",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_9"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_2",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_9"
+      ],
+      "free_cubes": [
+        "object_3",
+        "object_8",
+        "object_4",
+        "object_10"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "f5c7f3da6486a128b0a7be886017113e4ac8daab4684b4f7e1b36e74e84ec079",
+      "scene_sha256": "94b7514170185d2cdba20da1d38b8f1da0f009d216abd672fbc0dbb91529fa60",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 590,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [
+        "object_4",
+        "object_10",
+        "object_8",
+        "object_3"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1697,
+        "id": "balanced_initial_train_240118",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0095.json",
+      "id": "instructor_test_v2_mutual_k10_p1_716006",
+      "seed": 716006,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_8",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_7",
+        "object_9",
+        "object_3",
+        "object_2",
+        "object_4",
+        "object_6",
+        "object_1",
+        "object_5"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "e656ecf87264a37ef7994c4ef09d4424487f5b98ef9722c65a8a087f5cda739e",
+      "scene_sha256": "de65a0389453e8c94b786c597de19ea00e8ec6d350f8a97c31653cfa622114f6",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 1180,
+      "d_check_final_acc": 0.8,
+      "d_check_order": [
+        "object_3",
+        "object_4",
+        "object_6",
+        "object_5",
+        "object_2",
+        "object_7",
+        "object_9",
+        "object_1"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1651,
+        "id": "balanced_initial_train_240100",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0096.json",
+      "id": "instructor_test_v2_mutual_k10_p3_716007",
+      "seed": 716007,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_1",
+          "blocker": "object_5"
+        },
+        {
+          "blocked": "object_8",
+          "blocker": "object_3"
+        },
+        {
+          "blocked": "object_10",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_10",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_6",
+        "object_9",
+        "object_7",
+        "object_2"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "536c1ffe57f61c3675524371f34905acdab354bd97b39e055261ccecf1142889",
+      "scene_sha256": "df2c6508350dd5fd12b28a0bdbf9680a07cc8eba42ff8792698942b5b3278f19",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 629,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [
+        "object_9",
+        "object_7",
+        "object_2",
+        "object_6"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1882,
+        "id": "balanced_initial_train_240030",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0097.json",
+      "id": "instructor_test_v2_mutual_k10_p2_716008",
+      "seed": 716008,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_5",
+          "blocker": "object_10"
+        }
+      ],
+      "blocked_cubes": [
+        "object_10",
+        "object_5",
+        "object_6",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_8",
+        "object_1",
+        "object_3",
+        "object_4",
+        "object_2",
+        "object_9"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "76ef5b68fccd2f16a75d882a65823192227b9c5c907f152abe74efb1e53c8865",
+      "scene_sha256": "48cbeb7da07d52f2ec0273e3e0e124a2b6c1c9850a2076708dd8bc3b422af14d",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 848,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [
+        "object_3",
+        "object_1",
+        "object_8",
+        "object_4",
+        "object_9",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1853,
+        "id": "balanced_initial_train_240154",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0098.json",
+      "id": "instructor_test_v2_mutual_k10_p3_716009",
+      "seed": 716009,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_7",
+          "blocker": "object_6"
+        },
+        {
+          "blocked": "object_1",
+          "blocker": "object_2"
+        },
+        {
+          "blocked": "object_8",
+          "blocker": "object_5"
+        }
+      ],
+      "blocked_cubes": [
+        "object_1",
+        "object_2",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8"
+      ],
+      "free_cubes": [
+        "object_4",
+        "object_10",
+        "object_3",
+        "object_9"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "b280c0b85739ce815cc3953656567feeb06c8adcca0e3b943f7866358891c561",
+      "scene_sha256": "0811567101195e4a030b3bbe97365825ae9cb97b766ddead2c73cd98f1a6160d",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 586,
+      "d_check_final_acc": 0.4,
+      "d_check_order": [
+        "object_4",
+        "object_3",
+        "object_10",
+        "object_9"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1818,
+        "id": "balanced_initial_train_240002",
+        "split": "train"
+      }
+    },
+    {
+      "path": "test/scene_0099.json",
+      "id": "instructor_test_v2_mutual_k10_p2_716010",
+      "seed": 716010,
+      "blocking": "mutual",
+      "k": 10,
+      "blocked_pairs": [
+        {
+          "blocked": "object_6",
+          "blocker": "object_5"
+        },
+        {
+          "blocked": "object_7",
+          "blocker": "object_4"
+        }
+      ],
+      "blocked_cubes": [
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7"
+      ],
+      "free_cubes": [
+        "object_3",
+        "object_2",
+        "object_8",
+        "object_1",
+        "object_10",
+        "object_9"
+      ],
+      "targets": [
+        "object_1",
+        "object_2",
+        "object_3",
+        "object_4",
+        "object_5",
+        "object_6",
+        "object_7",
+        "object_8",
+        "object_9",
+        "object_10"
+      ],
+      "category": "mixed",
+      "state_sha256": "2674b779d098ad6b2a0b88b9db5b574e20b4e00ee15d5a7357aef02cd3283c45",
+      "scene_sha256": "b27e3ba99773f35b51873c24ad2e11223b7d9febf91ac4070b8f7abef422c81c",
+      "d_check_stop": "plan_exhausted",
+      "d_check_steps": 853,
+      "d_check_final_acc": 0.6,
+      "d_check_order": [
+        "object_1",
+        "object_8",
+        "object_9",
+        "object_3",
+        "object_10",
+        "object_2"
+      ],
+      "nearest_seen_scene": {
+        "max_cube_distance_m": 0.1615,
+        "id": "balanced_initial_train_240144",
+        "split": "train"
+      }
+    }
+  ],
+  "subsets": {
+    "oneway": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49
+    ],
+    "oneway_core10": [
+      0,
+      1,
+      10,
+      11,
+      20,
+      21,
+      30,
+      31,
+      40,
+      41
+    ],
+    "mutual": [
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99
+    ],
+    "mutual_core10": [
+      50,
+      51,
+      60,
+      61,
+      70,
+      71,
+      80,
+      81,
+      90,
+      91
+    ]
+  },
+  "generator_sha256": {
+    "make_test_scenes_v2.py": "a8a49522f6aa11f4c5dfdc256736b22db6a1607f664f3f291351800d9a176433",
+    "make_test_scenes.py": "13f789df4272a5bcf7aee7d9d840b602196ac13c5ba53b83f9593daed1329066"
+  },
+  "design": {
+    "blocking": [
+      "oneway",
+      "mutual"
+    ],
+    "k": [
+      2,
+      4,
+      6,
+      8,
+      10
+    ],
+    "per_stratum": 10,
+    "seed_base": 710000,
+    "max_pairs": 3,
+    "area_x_m": [
+      -0.085,
+      0.085
+    ],
+    "area_y_m": [
+      0.195,
+      0.515
+    ],
+    "min_distance_m": 0.07,
+    "pair_distance_m": {
+      "oneway": [
+        0.07,
+        0.082
+      ],
+      "mutual": [
+        0.056,
+        0.072
+      ]
+    },
+    "pair_offset_y_m": 0.008,
+    "novelty_min_distance_m": 0.03
+  },
+  "d_check": {
+    "method": "D-state classical controller, accelerated physics, no rendering; mirrors run_trial D path",
+    "oneway_rule": "accepted only if D completes the scene",
+    "mutual_rule": "accepted only if D places exactly the unpaired cubes and then stops (plan_exhausted)",
+    "candidates_checked": 104,
+    "rejected_before_selection": [
+      {
+        "seed": 710407,
+        "blocking": "oneway",
+        "k": 4,
+        "reason": "d_not_completed: plan_exhausted"
+      },
+      {
+        "seed": 710409,
+        "blocking": "oneway",
+        "k": 4,
+        "reason": "d_not_completed: plan_exhausted"
+      },
+      {
+        "seed": 710608,
+        "blocking": "oneway",
+        "k": 6,
+        "reason": "d_not_completed: plan_exhausted"
+      },
+      {
+        "seed": 716004,
+        "blocking": "mutual",
+        "k": 10,
+        "reason": "d_did_not_place_exactly_the_free_cubes: plan_exhausted"
+      }
+    ],
+    "verified_but_unused_seeds": [
+      710210,
+      710211,
+      710212,
+      710213,
+      710214,
+      710215,
+      710412,
+      710413,
+      710414,
+      710415,
+      710611,
+      710612,
+      710613,
+      710614,
+      710615,
+      710810,
+      710811,
+      710812,
+      710813,
+      710814,
+      710815,
+      711010,
+      711011,
+      711012,
+      711013,
+      711014,
+      711015,
+      715210,
+      715211,
+      715212,
+      715213,
+      715214,
+      715215,
+      715410,
+      715411,
+      715412,
+      715413,
+      715414,
+      715415,
+      715610,
+      715611,
+      715612,
+      715613,
+      715614,
+      715615,
+      715810,
+      715811,
+      715812,
+      715813,
+      715814,
+      715815,
+      716011,
+      716012,
+      716013,
+      716014,
+      716015
+    ]
+  },
+  "existing_scenes_compared": {
+    "total": 935,
+    "with_layout": 839
+  }
+}

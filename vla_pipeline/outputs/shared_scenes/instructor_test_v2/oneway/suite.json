@@ -1,0 +1,357 @@
+{
+  "schema": "final_project_scene_v2",
+  "scenes": [
+    {
+      "path": "../test/scene_0000.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710200",
+      "split": "test",
+      "state_sha256": "c5ec581b148b2f76bfb92065916768246272099fcd5fcde866ee39b6f7d9ef03",
+      "preview": "../preview/scene_0000.png"
+    },
+    {
+      "path": "../test/scene_0001.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710201",
+      "split": "test",
+      "state_sha256": "d5b2b2cbcd1073e1568405c887b590db1ca8333f33aa91a8f8254cd8d1356fa4",
+      "preview": "../preview/scene_0001.png"
+    },
+    {
+      "path": "../test/scene_0002.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710202",
+      "split": "test",
+      "state_sha256": "7b8985f8bcbf3e0d36c165ca7507de688d2784b492405fe565476509d1e6ceee",
+      "preview": "../preview/scene_0002.png"
+    },
+    {
+      "path": "../test/scene_0003.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710203",
+      "split": "test",
+      "state_sha256": "c724079c0570555905b136f0447d7b4e2b5e68b566c7c5731164f9d34394adb9",
+      "preview": "../preview/scene_0003.png"
+    },
+    {
+      "path": "../test/scene_0004.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710204",
+      "split": "test",
+      "state_sha256": "626ef1f9c20a66138553297f54094bccaa443069d6da46bbda93b263611bda2d",
+      "preview": "../preview/scene_0004.png"
+    },
+    {
+      "path": "../test/scene_0005.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710205",
+      "split": "test",
+      "state_sha256": "d5530979b794293ada5db5a8fbed137d8b6550168bbaa9e9c9b7d507fa8945e1",
+      "preview": "../preview/scene_0005.png"
+    },
+    {
+      "path": "../test/scene_0006.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710206",
+      "split": "test",
+      "state_sha256": "09adba61466664af021729139257e8ad645e434d234a61a9d0555d3ce869fc5c",
+      "preview": "../preview/scene_0006.png"
+    },
+    {
+      "path": "../test/scene_0007.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710207",
+      "split": "test",
+      "state_sha256": "084adbcc8184a53007a44671d4712151f57be0dcb0cadadd85cd7b38bec208f7",
+      "preview": "../preview/scene_0007.png"
+    },
+    {
+      "path": "../test/scene_0008.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710208",
+      "split": "test",
+      "state_sha256": "2cf7a2b70514ae15c50ecc8f7dca10b1e21972689a94dc8adf4da0d82f5dee12",
+      "preview": "../preview/scene_0008.png"
+    },
+    {
+      "path": "../test/scene_0009.json",
+      "family": "instructor_test_v2_oneway_k02_p1_710209",
+      "split": "test",
+      "state_sha256": "c3c80db15f7349a5501b4223cf9f9bdff1cca4e6ea94b981c2516174e69b766c",
+      "preview": "../preview/scene_0009.png"
+    },
+    {
+      "path": "../test/scene_0010.json",
+      "family": "instructor_test_v2_oneway_k04_p2_710400",
+      "split": "test",
+      "state_sha256": "dfd49e521db9c246723788afa8c9d96d24116263fa2438aebf4d09f7823f1fba",
+      "preview": "../preview/scene_0010.png"
+    },
+    {
+      "path": "../test/scene_0011.json",
+      "family": "instructor_test_v2_oneway_k04_p1_710401",
+      "split": "test",
+      "state_sha256": "8b51d46e7c37e00197dc1ee1d10ef0fe526cee3709475a9b90692b41fcc05b81",
+      "preview": "../preview/scene_0011.png"
+    },
+    {
+      "path": "../test/scene_0012.json",
+      "family": "instructor_test_v2_oneway_k04_p1_710402",
+      "split": "test",
+      "state_sha256": "edc59446d2cb37b10191dc1bfc9c67c72d9dd2cbf61cc32bdc176dc425f1cfdf",
+      "preview": "../preview/scene_0012.png"
+    },
+    {
+      "path": "../test/scene_0013.json",
+      "family": "instructor_test_v2_oneway_k04_p2_710403",
+      "split": "test",
+      "state_sha256": "b7ea3c5859e4b08b438df9b337724bcd9705c9e52d373251a4bf719e3684dc6a",
+      "preview": "../preview/scene_0013.png"
+    },
+    {
+      "path": "../test/scene_0014.json",
+      "family": "instructor_test_v2_oneway_k04_p2_710404",
+      "split": "test",
+      "state_sha256": "255ee829a0fac09599f72dd0a8f627218442694f2a3dae09d758edb92cfab125",
+      "preview": "../preview/scene_0014.png"
+    },
+    {
+      "path": "../test/scene_0015.json",
+      "family": "instructor_test_v2_oneway_k04_p1_710405",
+      "split": "test",
+      "state_sha256": "3a8e336c1fc24230953f476fb2510bb83bae5d98235eacd924fdd7f69d37a8ca",
+      "preview": "../preview/scene_0015.png"
+    },
+    {
+      "path": "../test/scene_0016.json",
+      "family": "instructor_test_v2_oneway_k04_p2_710406",
+      "split": "test",
+      "state_sha256": "80f5897022771888e8d4dc26c755ce02d3c9f3b3bc6f3645af695dc46d8ee5cb",
+      "preview": "../preview/scene_0016.png"
+    },
+    {
+      "path": "../test/scene_0017.json",
+      "family": "instructor_test_v2_oneway_k04_p2_710408",
+      "split": "test",
+      "state_sha256": "eed2ce32eedc2194fc4201f5614a2a3b7cb49ac29c28e62f11ad33b30f35996d",
+      "preview": "../preview/scene_0017.png"
+    },
+    {
+      "path": "../test/scene_0018.json",
+      "family": "instructor_test_v2_oneway_k04_p2_710410",
+      "split": "test",
+      "state_sha256": "8e02bfd18294c6be3a7c5b6aa70ee43a60402c6a486f64d66816c0977407b8e6",
+      "preview": "../preview/scene_0018.png"
+    },
+    {
+      "path": "../test/scene_0019.json",
+      "family": "instructor_test_v2_oneway_k04_p1_710411",
+      "split": "test",
+      "state_sha256": "1c693fcdb2755a5b615cd31fb4de179ef9dd03ca2f2bc38808cf22e835c0e651",
+      "preview": "../preview/scene_0019.png"
+    },
+    {
+      "path": "../test/scene_0020.json",
+      "family": "instructor_test_v2_oneway_k06_p3_710600",
+      "split": "test",
+      "state_sha256": "8f5663e5bc90275391023b38589b419291597ab76d65413b1dbac24ce9f6bdae",
+      "preview": "../preview/scene_0020.png"
+    },
+    {
+      "path": "../test/scene_0021.json",
+      "family": "instructor_test_v2_oneway_k06_p2_710601",
+      "split": "test",
+      "state_sha256": "1769a3b004b6fb457c4686c2c264391f03bcd526c2f139dca1a05fddf27be6c5",
+      "preview": "../preview/scene_0021.png"
+    },
+    {
+      "path": "../test/scene_0022.json",
+      "family": "instructor_test_v2_oneway_k06_p2_710602",
+      "split": "test",
+      "state_sha256": "f2d7a46d09800b56e2d441be0aecb6e8c5a89b2a168cd014d622122ef9f70370",
+      "preview": "../preview/scene_0022.png"
+    },
+    {
+      "path": "../test/scene_0023.json",
+      "family": "instructor_test_v2_oneway_k06_p2_710603",
+      "split": "test",
+      "state_sha256": "e88f501563d2c327015e94df0e223d4ad364b968937c9df8a467f38732a882af",
+      "preview": "../preview/scene_0023.png"
+    },
+    {
+      "path": "../test/scene_0024.json",
+      "family": "instructor_test_v2_oneway_k06_p2_710604",
+      "split": "test",
+      "state_sha256": "f05a4fa49750f48f08eec797f94745a49fd705c10d171cf0e784f14598792c28",
+      "preview": "../preview/scene_0024.png"
+    },
+    {
+      "path": "../test/scene_0025.json",
+      "family": "instructor_test_v2_oneway_k06_p1_710605",
+      "split": "test",
+      "state_sha256": "e6a90cdf5d1de18ba35010def99b7c417c79e2c5844aac7a031e819c6b3518d9",
+      "preview": "../preview/scene_0025.png"
+    },
+    {
+      "path": "../test/scene_0026.json",
+      "family": "instructor_test_v2_oneway_k06_p1_710606",
+      "split": "test",
+      "state_sha256": "0b1f79c386491ffc862d6c3e198fc59475cfbd65ca71ec0b5f2f3dab661d365e",
+      "preview": "../preview/scene_0026.png"
+    },
+    {
+      "path": "../test/scene_0027.json",
+      "family": "instructor_test_v2_oneway_k06_p1_710607",
+      "split": "test",
+      "state_sha256": "9a718d661251b868ea3276c0846327437f0376d163a52f285d17c16030673c60",
+      "preview": "../preview/scene_0027.png"
+    },
+    {
+      "path": "../test/scene_0028.json",
+      "family": "instructor_test_v2_oneway_k06_p1_710609",
+      "split": "test",
+      "state_sha256": "68fcf1326fc1ea125d1cb24cf073c94e8a04d80b07b69596f34259a6006ff792",
+      "preview": "../preview/scene_0028.png"
+    },
+    {
+      "path": "../test/scene_0029.json",
+      "family": "instructor_test_v2_oneway_k06_p3_710610",
+      "split": "test",
+      "state_sha256": "ba701b2fa59cd471df434683d608c935e67ddb167daaeb0da2c002e2f18bba7a",
+      "preview": "../preview/scene_0029.png"
+    },
+    {
+      "path": "../test/scene_0030.json",
+      "family": "instructor_test_v2_oneway_k08_p1_710800",
+      "split": "test",
+      "state_sha256": "403f6dec8493ed0f184502b7b5ff31f58641d91e03eb4a2a0b8278af8975330f",
+      "preview": "../preview/scene_0030.png"
+    },
+    {
+      "path": "../test/scene_0031.json",
+      "family": "instructor_test_v2_oneway_k08_p2_710801",
+      "split": "test",
+      "state_sha256": "c93f5ed614477a0ca324976dedf2c7188c341ae817231a0c9f05413d80556bad",
+      "preview": "../preview/scene_0031.png"
+    },
+    {
+      "path": "../test/scene_0032.json",
+      "family": "instructor_test_v2_oneway_k08_p3_710802",
+      "split": "test",
+      "state_sha256": "0361733482c0c2d558fef69ccfe548093c7f725cc93faa169090b1f859a611c9",
+      "preview": "../preview/scene_0032.png"
+    },
+    {
+      "path": "../test/scene_0033.json",
+      "family": "instructor_test_v2_oneway_k08_p1_710803",
+      "split": "test",
+      "state_sha256": "8f9df88cde512230503f298cd4cc833763e4475ae20ba32388309789e52983bf",
+      "preview": "../preview/scene_0033.png"
+    },
+    {
+      "path": "../test/scene_0034.json",
+      "family": "instructor_test_v2_oneway_k08_p3_710804",
+      "split": "test",
+      "state_sha256": "7e236e09cfde0741371792e166c8f3fa1980dd8dcae4c688c3a2437424e6d782",
+      "preview": "../preview/scene_0034.png"
+    },
+    {
+      "path": "../test/scene_0035.json",
+      "family": "instructor_test_v2_oneway_k08_p1_710805",
+      "split": "test",
+      "state_sha256": "51e5e4163b851cc00f97e94eb7f8a2323f9208124517d2771c4a22cb2e9d98df",
+      "preview": "../preview/scene_0035.png"
+    },
+    {
+      "path": "../test/scene_0036.json",
+      "family": "instructor_test_v2_oneway_k08_p1_710806",
+      "split": "test",
+      "state_sha256": "fb5f78a0e724aedc48b58350ff12a6c8b2460689e8eb30cd5b6e4ca305688f8a",
+      "preview": "../preview/scene_0036.png"
+    },
+    {
+      "path": "../test/scene_0037.json",
+      "family": "instructor_test_v2_oneway_k08_p2_710807",
+      "split": "test",
+      "state_sha256": "ffcf8f7cae1a9ced8aec7850498ee2de5f3b6098299e49e4eb0d48c6a13204c1",
+      "preview": "../preview/scene_0037.png"
+    },
+    {
+      "path": "../test/scene_0038.json",
+      "family": "instructor_test_v2_oneway_k08_p2_710808",
+      "split": "test",
+      "state_sha256": "820918a616bb6bac64d764103635f07a0eccab6fb24dea6a1fb431acb4bc5f13",
+      "preview": "../preview/scene_0038.png"
+    },
+    {
+      "path": "../test/scene_0039.json",
+      "family": "instructor_test_v2_oneway_k08_p1_710809",
+      "split": "test",
+      "state_sha256": "0508885c41114428dc0d1a96ab99b31dc2d1b38132060f503daf6264d58df59f",
+      "preview": "../preview/scene_0039.png"
+    },
+    {
+      "path": "../test/scene_0040.json",
+      "family": "instructor_test_v2_oneway_k10_p2_711000",
+      "split": "test",
+      "state_sha256": "3b39953862bb762f17ebe696bfe4aaae822b4b5acd125d0827ade6f236fae3e2",
+      "preview": "../preview/scene_0040.png"
+    },
+    {
+      "path": "../test/scene_0041.json",
+      "family": "instructor_test_v2_oneway_k10_p2_711001",
+      "split": "test",
+      "state_sha256": "80fcd6c14c101bfcfe38fcaa34288e76ba0159efc8953ebccc732743175256e3",
+      "preview": "../preview/scene_0041.png"
+    },
+    {
+      "path": "../test/scene_0042.json",
+      "family": "instructor_test_v2_oneway_k10_p3_711002",
+      "split": "test",
+      "state_sha256": "c882777a6ca361b303e591326d144740bc0ff7b1977d95437db0b6aa78638e1f",
+      "preview": "../preview/scene_0042.png"
+    },
+    {
+      "path": "../test/scene_0043.json",
+      "family": "instructor_test_v2_oneway_k10_p1_711003",
+      "split": "test",
+      "state_sha256": "ea2cf8de8564abd1b62baf4fea294a1988a31b3f9aef04aeab49901a7bd23248",
+      "preview": "../preview/scene_0043.png"
+    },
+    {
+      "path": "../test/scene_0044.json",
+      "family": "instructor_test_v2_oneway_k10_p3_711004",
+      "split": "test",
+      "state_sha256": "d5e6d762916821b4bac44ee8abeaf8f41708dd8fd2e1798778c250da14bae95f",
+      "preview": "../preview/scene_0044.png"
+    },
+    {
+      "path": "../test/scene_0045.json",
+      "family": "instructor_test_v2_oneway_k10_p2_711005",
+      "split": "test",
+      "state_sha256": "961de4d6718dc45e9e8f8102abead3faccc7de7f5c3b766c26a7ef0664f759d6",
+      "preview": "../preview/scene_0045.png"
+    },
+    {
+      "path": "../test/scene_0046.json",
+      "family": "instructor_test_v2_oneway_k10_p1_711006",
+      "split": "test",
+      "state_sha256": "7e07f3dc9e016107b681f74a1d8b813d25fd4b383c17fd2b9cf672b45d6dd9a6",
+      "preview": "../preview/scene_0046.png"
+    },
+    {
+      "path": "../test/scene_0047.json",
+      "family": "instructor_test_v2_oneway_k10_p1_711007",
+      "split": "test",
+      "state_sha256": "1ffeaf36be9ced266e9ad9a7f7f68aba7e5b5a71792e6a46c4a415806bd75d1f",
+      "preview": "../preview/scene_0047.png"
+    },
+    {
+      "path": "../test/scene_0048.json",
+      "family": "instructor_test_v2_oneway_k10_p3_711008",
+      "split": "test",
+      "state_sha256": "2d8f632f7e99a2d44ae31bf5d05607a60cc5cb5723bb9e50bb2d5c5c16b1272c",
+      "preview": "../preview/scene_0048.png"
+    },
+    {
+      "path": "../test/scene_0049.json",
+      "family": "instructor_test_v2_oneway_k10_p3_711009",
+      "split": "test",
+      "state_sha256": "e92da500fc97edbda1473689dd9ae635dcfd8a7c7298c66708a9de657ac63d34",
+      "preview": "../preview/scene_0049.png"
+    }
+  ],
+  "source": "instructor_generated",
+  "note": "Held-out instructor test scenes with blocked cubes. Selected only by layout rule and a D-state check; no learned model was run on them. Run with --split test --final-test after models and strategies are fixed. Subset oneway."
+}
