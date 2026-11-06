@@ -1,0 +1,58 @@
+{
+  "scope": "Derived playback only; original process.mp4 files remain byte-identical.",
+  "cases": [
+    {
+      "file": "videos/oneway_scene_0030_wall_comparison.mp4",
+      "family": "oneway",
+      "scene": "scene_0030",
+      "fps": 5,
+      "frames": 601,
+      "clock_range_seconds": [
+        0,
+        120
+      ],
+      "video_seconds": 120.2,
+      "mapping": "Nearest recorded preceding frame by trace.wall; inference/ended intervals hold the recorded image. Final sample included. No motion interpolation or synthetic frames."
+    },
+    {
+      "file": "videos/mutual_scene_0050_wall_comparison.mp4",
+      "family": "mutual",
+      "scene": "scene_0050",
+      "fps": 5,
+      "frames": 601,
+      "clock_range_seconds": [
+        0,
+        120
+      ],
+      "video_seconds": 120.2,
+      "mapping": "Nearest recorded preceding frame by trace.wall; inference/ended intervals hold the recorded image. Final sample included. No motion interpolation or synthetic frames."
+    },
+    {
+      "file": "videos/mutual_scene_0090_wall_comparison.mp4",
+      "family": "mutual",
+      "scene": "scene_0090",
+      "fps": 5,
+      "frames": 601,
+      "clock_range_seconds": [
+        0,
+        120
+      ],
+      "video_seconds": 120.2,
+      "mapping": "Nearest recorded preceding frame by trace.wall; inference/ended intervals hold the recorded image. Final sample included. No motion interpolation or synthetic frames."
+    },
+    {
+      "file": "videos/oneway_scene_0040_wall_comparison.mp4",
+      "family": "oneway",
+      "scene": "scene_0040",
+      "fps": 5,
+      "frames": 601,
+      "clock_range_seconds": [
+        0,
+        120
+      ],
+      "video_seconds": 120.2,
+      "mapping": "Nearest recorded preceding frame by trace.wall; inference/ended intervals hold the recorded image. Final sample included. No motion interpolation or synthetic frames."
+    }
+  ],
+  "note": "The short original videos follow simulation time and omit VLM pauses. Comparison clips use trace wall clocks, hold frames during pauses and after a trial ends; 601 samples at5fps =120.2sec including endpoint."
+}

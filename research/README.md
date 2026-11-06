@@ -8,6 +8,7 @@
 | [2_D_results.md](2_D_results.md) | 먼저 끝난 D 실험의 결과와 해석, 영상과 자료 위치 | 보고서의 "결과"를 쓸 때, A·B·C 결과와 비교할 때 |
 | [3_colab_guide.md](3_colab_guide.md) | Colab에서 A, B, C를 돌리는 순서 (네 사람이 동시에) | 조교가 시작을 알린 뒤 |
 | [STUDENT_COMMENTS.md](STUDENT_COMMENTS.md) | C 전략 파일에서 조교가 손본 부분과 스스로 생각해 볼 질문 | C 전략을 설명하거나 발표를 준비할 때 |
+| [로컬120초 시각 보고서](local_pilot_120s_20261106/README.md) | 실제30회 수치, 실행 전후 그림, 원본 영상30개와 시간 동기화 비교 영상4개 | 보고서 결과·그림을 작성할 때. 학생 Colab300초 실험과 별도 자료 |
 
 ## 폴더
 

@@ -1,0 +1,419 @@
+{
+  "protocol": "final_project_v2.0",
+  "condition": "A",
+  "variant": "A",
+  "diagnostic": false,
+  "scene_id": "instructor_test_v2_oneway_k08_p1_710800",
+  "family": "instructor_test_v2_oneway_k08_p1_710800",
+  "split": "test",
+  "scene_sha256": "3fd52dee5086d615703ca8b727cc034b109931f5e7094fc00879cf5c7af3ac22",
+  "input_scene_sha256": "3fd52dee5086d615703ca8b727cc034b109931f5e7094fc00879cf5c7af3ac22",
+  "initial_state_sha256": "403f6dec8493ed0f184502b7b5ff31f58641d91e03eb4a2a0b8278af8975330f",
+  "task_sha256": "40aacb1d9d6832c1972f0625921af154cfb5ba0d45433db5f7d14ce6d3a79544",
+  "configuration": {
+    "condition": "A",
+    "seconds": 120.0,
+    "max_steps": 6000,
+    "action_steps": 240,
+    "observer_steps": 60,
+    "max_calls": 12,
+    "max_attempts": 3,
+    "image_size": 128,
+    "planner_image_size": 512,
+    "planner_tokens": 1024,
+    "seed": 42,
+    "checkpoint": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models\\vla_hier\\pretrained_model",
+    "vlm_model": null,
+    "model_source": "local",
+    "shared_vla": true,
+    "vlm_source": null,
+    "vla_source": null,
+    "models_dir": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models",
+    "vla_hub_id": null,
+    "vlm_hub_id": null,
+    "strategy": null,
+    "operator": "",
+    "input_kind": "gamepad",
+    "gamepad_map": "gamepad_map.json",
+    "video": true,
+    "device": "cuda",
+    "final_test": true,
+    "command": null,
+    "realtime": true
+  },
+  "strategy": null,
+  "events": [],
+  "status": "completed",
+  "feedback_source": "images_and_nonprivileged_execution_metadata",
+  "perception": "camera_images_and_robot_proprioception",
+  "timing_note": "20 Hz maximum; inference counted; synchronous calls may overrun but late actions are discarded",
+  "hardware": {
+    "system": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.16 | packaged by conda-forge | (main, Oct 26 2026, 11:29:01) [MSC v.1944 64 bit (AMD64)]",
+    "machine": "DESKTOP-RO7BEKJ",
+    "packages": {
+      "mujoco": "3.17.0",
+      "numpy": "2.2.6",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.22.1",
+      "lerobot": "0.6.2"
+    },
+    "cuda": true,
+    "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "implementation_sha256": "85355c7fb63e181e1fd8d7851b5b69e3874491575af9c97e88438093b8adc2be",
+  "restored_state_sha256": "403f6dec8493ed0f184502b7b5ff31f58641d91e03eb4a2a0b8278af8975330f",
+  "initial": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "center_zone",
+      "object_2": "right_zone",
+      "object_3": "center_zone",
+      "object_4": "center_zone",
+      "object_5": "right_zone",
+      "object_6": "center_zone",
+      "object_7": "center_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "center_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.06430002060364448,
+          0.24710017182475338,
+          0.8249708981978092
+        ]
+      },
+      "object_2": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.33,
+          0.13999985860234712,
+          0.8249708981978092
+        ]
+      },
+      "object_3": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.07169999005225683,
+          0.49340006112808027,
+          0.8249708981978092
+        ]
+      },
+      "object_4": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.0586002008382559,
+          0.503,
+          0.8249708981978092
+        ]
+      },
+      "object_5": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.2,
+          0.38,
+          0.8249708981978092
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.055199869671520005,
+          0.26360008694006465,
+          0.8249708981978092
+        ]
+      },
+      "object_7": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.017599812372330735,
+          0.37009998905095587,
+          0.8249708981978092
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.008799961815215218,
+          0.20149996788508348,
+          0.8249708981978092
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.059000050352757495,
+          0.3743999388736302,
+          0.8249708981978092
+        ]
+      },
+      "object_10": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.013300061691992012,
+          0.4404000000744964,
+          0.8249708981978092
+        ]
+      }
+    },
+    "acc": 0.2,
+    "macro_f1": 0.2857142857142857,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      },
+      "right_zone": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 3,
+        "f1": 0.5714285714285714
+      }
+    },
+    "n_objects": 10
+  },
+  "initial_image_sha256": "15708ca83329e92dabae9df75421fdef1a1d6455c3262a614ab61b312d34c59e",
+  "models": {
+    "vla": {
+      "role": "vla_hier",
+      "source": "local",
+      "location": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models\\vla_hier\\pretrained_model",
+      "reason": "models directory preferred",
+      "instruction_scope": "whole_task",
+      "action_representation": "absolute_position"
+    }
+  },
+  "checkpoint_manifest": {
+    "action_representation.json": "1d3208bd4aa5b766a00338f7b793f11ff770553aeee41f7aaafda003a52d8e23",
+    "config.json": "ad07cebe347d1331fe6202f7aaac76bb2fb9c54b1f930cfeede9518a8aa356fd",
+    "files_manifest.json": "effc90cb5ec8ce42e3e2ae4666f6d1d57c61b4b79c9ae65f193983d31b0b208e",
+    "model.safetensors": "5e9744b7aa1b6b7bf8a663fc60658c6a5da9c851d89aafb604da914e529cf4ab",
+    "model_info.json": "6d663bd7a9b37589fe1106b429b10cf2c9cfe82fcf5766cca17854953c01280b",
+    "policy_postprocessor.json": "68d350fd71551e0760d07142f4c02bed7c80a1d7eae808f9276bc81b4ef76dd4",
+    "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "7a19a33a67ae76cf7b1aa5e82c19f70f22d02925ff59c1edadcc89211ef03e61",
+    "policy_preprocessor.json": "804d0e6a5d894b4e79aadfbd52228936589eeb8b7549ed3ecd87363c54390094",
+    "policy_preprocessor_step_5_normalizer_processor.safetensors": "6a1fb65d8cd6730473262dff01f37485e00020b8bc4fb84bd31f56987de6dbae"
+  },
+  "vlm_revision": null,
+  "model_load_seconds": 11.598991799983196,
+  "setup_wall_seconds": 14.1106156000169,
+  "stop_reason": "time_limit",
+  "final": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "center_zone",
+      "object_2": "right_zone",
+      "object_3": "center_zone",
+      "object_4": "center_zone",
+      "object_5": "right_zone",
+      "object_6": "center_zone",
+      "object_7": "center_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "center_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.06430002063997318,
+          0.24710017182179506,
+          0.8249709075740622
+        ]
+      },
+      "object_2": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.33000000003803764,
+          0.13999985860878966,
+          0.8249709075740621
+        ]
+      },
+      "object_3": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.07169998999310942,
+          0.493400061109264,
+          0.8249709075740623
+        ]
+      },
+      "object_4": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.05860020080492616,
+          0.5029999999878981,
+          0.8249709075740622
+        ]
+      },
+      "object_5": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.2,
+          0.38,
+          0.8249709075736247
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.05519986966482287,
+          0.2636000869488909,
+          0.8249709075740622
+        ]
+      },
+      "object_7": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.017599812336411964,
+          0.3700999890208353,
+          0.8249709075740623
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.008799961775948108,
+          0.2014999678735515,
+          0.8249709075740623
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.05900005038293944,
+          0.37439993879885514,
+          0.8249709075740622
+        ]
+      },
+      "object_10": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.013300061687723673,
+          0.4404000001008803,
+          0.824970907574062
+        ]
+      }
+    },
+    "acc": 0.2,
+    "macro_f1": 0.2857142857142857,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      },
+      "right_zone": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 3,
+        "f1": 0.5714285714285714
+      }
+    },
+    "n_objects": 10
+  },
+  "summary": {
+    "total_wall_seconds": 120.00037460000021,
+    "deadline_seconds": 120.0,
+    "deadline_overrun_seconds": 0.00037460000021383166,
+    "simulation_seconds": 60.15,
+    "steps": 1203,
+    "planner_calls": 0,
+    "planner_seconds": 0.0,
+    "vla_inference_seconds": 76.86087759985821,
+    "attempts": {}
+  },
+  "history": [],
+  "video": "process.mp4",
+  "artifact_render_seconds": 1.987634600023739,
+  "end_to_end_wall_seconds": 136.20019550004508
+}

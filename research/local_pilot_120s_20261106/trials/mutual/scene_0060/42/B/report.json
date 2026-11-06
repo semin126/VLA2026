@@ -1,0 +1,672 @@
+{
+  "protocol": "final_project_v2.0",
+  "condition": "B",
+  "variant": "B",
+  "diagnostic": false,
+  "scene_id": "instructor_test_v2_mutual_k04_p2_715400",
+  "family": "instructor_test_v2_mutual_k04_p2_715400",
+  "split": "test",
+  "scene_sha256": "b8b611a03cdfb074664e6d2a01c0671be94faa2704ab826f756810695b998dfd",
+  "input_scene_sha256": "b8b611a03cdfb074664e6d2a01c0671be94faa2704ab826f756810695b998dfd",
+  "initial_state_sha256": "0ed8fa77b4bac62a8d2924e5f8e04f6ab01d24ae7be758e443133beade72c74e",
+  "task_sha256": "40aacb1d9d6832c1972f0625921af154cfb5ba0d45433db5f7d14ce6d3a79544",
+  "configuration": {
+    "condition": "B",
+    "seconds": 120.0,
+    "max_steps": 6000,
+    "action_steps": 240,
+    "observer_steps": 60,
+    "max_calls": 12,
+    "max_attempts": 3,
+    "image_size": 128,
+    "planner_image_size": 512,
+    "planner_tokens": 1024,
+    "seed": 42,
+    "checkpoint": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models\\vla_hier\\pretrained_model",
+    "vlm_model": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models\\vlm\\pretrained_model",
+    "model_source": "local",
+    "shared_vla": true,
+    "vlm_source": null,
+    "vla_source": null,
+    "models_dir": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models",
+    "vla_hub_id": null,
+    "vlm_hub_id": null,
+    "strategy": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\runtime\\vla_pipeline\\final_project_v2\\baseline_strategy.py",
+    "operator": "",
+    "input_kind": "gamepad",
+    "gamepad_map": "gamepad_map.json",
+    "video": true,
+    "device": "cuda",
+    "final_test": true,
+    "command": null,
+    "realtime": true
+  },
+  "strategy": {
+    "sha256": "0556edc5dc061df52b898db15db7eaefc5e1dee1d54ff253e7c3298a87e6267f",
+    "path": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\runtime\\vla_pipeline\\final_project_v2\\baseline_strategy.py"
+  },
+  "events": [
+    {
+      "event": "plan_received",
+      "step": 0,
+      "wall": 18.95536889997311,
+      "call": 1,
+      "plan": [
+        {
+          "object": "object_8",
+          "target_zone": "left_zone"
+        },
+        {
+          "object": "object_2",
+          "target_zone": "right_zone"
+        },
+        {
+          "object": "object_9",
+          "target_zone": "left_zone"
+        },
+        {
+          "object": "object_6",
+          "target_zone": "left_zone"
+        }
+      ],
+      "assessments": [
+        {
+          "object": "object_1",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        },
+        {
+          "object": "object_2",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        },
+        {
+          "object": "object_3",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        },
+        {
+          "object": "object_4",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        },
+        {
+          "object": "object_5",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        },
+        {
+          "object": "object_6",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        },
+        {
+          "object": "object_7",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        },
+        {
+          "object": "object_8",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        },
+        {
+          "object": "object_9",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        },
+        {
+          "object": "object_10",
+          "accessible": true,
+          "blockers": [],
+          "reason": "Geometric top-down clearance estimate."
+        }
+      ]
+    },
+    {
+      "event": "action_started",
+      "step": 0,
+      "wall": 18.956935499969404,
+      "instruction": "Pick up the cube number 8 and place it in the left storage zone.",
+      "action": {
+        "object": "object_8",
+        "target_zone": "left_zone"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 240,
+      "wall": 41.37413030001335,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 8 and place it in the left storage zone.",
+        "action": {
+          "object": "object_8",
+          "target_zone": "left_zone"
+        },
+        "steps": 240,
+        "termination": "fixed_action_horizon"
+      }
+    },
+    {
+      "event": "action_started",
+      "step": 240,
+      "wall": 41.411574099969584,
+      "instruction": "Pick up the cube number 2 and place it in the right storage zone.",
+      "action": {
+        "object": "object_2",
+        "target_zone": "right_zone"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 480,
+      "wall": 63.73501140001463,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 2 and place it in the right storage zone.",
+        "action": {
+          "object": "object_2",
+          "target_zone": "right_zone"
+        },
+        "steps": 240,
+        "termination": "fixed_action_horizon"
+      }
+    },
+    {
+      "event": "action_started",
+      "step": 480,
+      "wall": 63.77121049998095,
+      "instruction": "Pick up the cube number 9 and place it in the left storage zone.",
+      "action": {
+        "object": "object_9",
+        "target_zone": "left_zone"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 720,
+      "wall": 86.32160530000692,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 9 and place it in the left storage zone.",
+        "action": {
+          "object": "object_9",
+          "target_zone": "left_zone"
+        },
+        "steps": 240,
+        "termination": "fixed_action_horizon"
+      }
+    },
+    {
+      "event": "action_started",
+      "step": 720,
+      "wall": 86.35443389997818,
+      "instruction": "Pick up the cube number 6 and place it in the left storage zone.",
+      "action": {
+        "object": "object_6",
+        "target_zone": "left_zone"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 960,
+      "wall": 109.12204089999432,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 6 and place it in the left storage zone.",
+        "action": {
+          "object": "object_6",
+          "target_zone": "left_zone"
+        },
+        "steps": 240,
+        "termination": "fixed_action_horizon"
+      }
+    }
+  ],
+  "status": "completed",
+  "feedback_source": "images_and_nonprivileged_execution_metadata",
+  "perception": "camera_images_and_robot_proprioception",
+  "timing_note": "20 Hz maximum; inference counted; synchronous calls may overrun but late actions are discarded",
+  "hardware": {
+    "system": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.16 | packaged by conda-forge | (main, Oct 26 2026, 11:29:01) [MSC v.1944 64 bit (AMD64)]",
+    "machine": "DESKTOP-RO7BEKJ",
+    "packages": {
+      "mujoco": "3.17.0",
+      "numpy": "2.2.6",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.22.1",
+      "lerobot": "0.6.2"
+    },
+    "cuda": true,
+    "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "implementation_sha256": "85355c7fb63e181e1fd8d7851b5b69e3874491575af9c97e88438093b8adc2be",
+  "restored_state_sha256": "0ed8fa77b4bac62a8d2924e5f8e04f6ab01d24ae7be758e443133beade72c74e",
+  "initial": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "right_zone",
+      "object_2": "center_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "center_zone",
+      "object_7": "left_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "left_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.2,
+          0.13999985860234712,
+          0.8249708981978092
+        ]
+      },
+      "object_2": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.08330005273235164,
+          0.31969984035103316,
+          0.8249708981978092
+        ]
+      },
+      "object_3": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.2,
+          0.259999934390824,
+          0.8249708981978092
+        ]
+      },
+      "object_4": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.33,
+          0.259999934390824,
+          0.8249708981978092
+        ]
+      },
+      "object_5": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.2,
+          0.38,
+          0.8249708981978092
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.030800062404814598,
+          0.504899999999997,
+          0.8249708981978092
+        ]
+      },
+      "object_7": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.19999982871502087,
+          0.13999986081048146,
+          0.8249708981978092
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.026900187632122735,
+          0.3145000000008436,
+          0.8249708981978092
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.02700005376126365,
+          0.4982999984478914,
+          0.8249708981978092
+        ]
+      },
+      "object_10": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.33,
+          0.38,
+          0.8249708981978092
+        ]
+      }
+    },
+    "acc": 0.6,
+    "macro_f1": 0.7301587301587301,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 3,
+        "f1": 0.5714285714285714
+      },
+      "right_zone": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.8888888888888888
+      }
+    },
+    "n_objects": 10
+  },
+  "initial_image_sha256": "6458a7f036743d705da350afb522c423ded6abac30ca4094d4dcbd7b26062ed8",
+  "models": {
+    "vla": {
+      "role": "vla_hier",
+      "source": "local",
+      "location": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models\\vla_hier\\pretrained_model",
+      "reason": "models directory preferred",
+      "instruction_scope": "subtask",
+      "action_representation": "absolute_position"
+    },
+    "vlm": {
+      "role": "vlm",
+      "source": "local",
+      "location": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models\\vlm\\pretrained_model",
+      "reason": "models directory preferred"
+    }
+  },
+  "checkpoint_manifest": {
+    "action_representation.json": "1d3208bd4aa5b766a00338f7b793f11ff770553aeee41f7aaafda003a52d8e23",
+    "config.json": "ad07cebe347d1331fe6202f7aaac76bb2fb9c54b1f930cfeede9518a8aa356fd",
+    "files_manifest.json": "effc90cb5ec8ce42e3e2ae4666f6d1d57c61b4b79c9ae65f193983d31b0b208e",
+    "model.safetensors": "5e9744b7aa1b6b7bf8a663fc60658c6a5da9c851d89aafb604da914e529cf4ab",
+    "model_info.json": "6d663bd7a9b37589fe1106b429b10cf2c9cfe82fcf5766cca17854953c01280b",
+    "policy_postprocessor.json": "68d350fd71551e0760d07142f4c02bed7c80a1d7eae808f9276bc81b4ef76dd4",
+    "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "7a19a33a67ae76cf7b1aa5e82c19f70f22d02925ff59c1edadcc89211ef03e61",
+    "policy_preprocessor.json": "804d0e6a5d894b4e79aadfbd52228936589eeb8b7549ed3ecd87363c54390094",
+    "policy_preprocessor_step_5_normalizer_processor.safetensors": "6a1fb65d8cd6730473262dff01f37485e00020b8bc4fb84bd31f56987de6dbae"
+  },
+  "vlm_revision": null,
+  "vlm_checkpoint_manifest": {
+    "config.json": "e64491649d42a3fe784f196542ff77027d992e9ad855a3d75db2ac90abc1d16c",
+    "files_manifest.json": "2a5ba6ac71743b73337f9c45b43d6d4e686f67f1b2ddc715c53182bffa08df12",
+    "generation_config.json": "21be26b895ed58aedbfdc66e16b4a37d0238370123d1637a1500f486a7156122",
+    "model.safetensors": "0f0f1c40aebd3ebbad90f851ab4c8e83db1a3b995601de121367c19a5bb7e952",
+    "model_info.json": "07fed042647f648c0887a97d87c332ee292de3865b3dbf4124e0d22282a37870",
+    "processor_config.json": "5d1a5c1bdaafce7b3c53cb1c55b32f2c58bfaa867184d9202fe826c75f92d10e",
+    "tokenizer.json": "0676fc5f243ffb1aee831e5a4c75dfd9122431447c26d888380e5273fddf48dc",
+    "tokenizer_config.json": "5370f92282939f83536912b993854fb65de0534f13a5570516bb37ecc517f8ae"
+  },
+  "model_load_seconds": 12.277090300049167,
+  "setup_wall_seconds": 14.974696299992502,
+  "initial_prompt_sha256": "cf9b7c312706ab5c96888858516d524085f8a07a37c167e3c925d92f15392651",
+  "stop_reason": "plan_exhausted",
+  "final": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "right_zone",
+      "object_2": "center_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "center_zone",
+      "object_7": "left_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "left_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.2000000000143229,
+          0.1399998586390467,
+          0.8249709075740619
+        ]
+      },
+      "object_2": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.08318356738809586,
+          0.3196075499557498,
+          0.8249709075740617
+        ]
+      },
+      "object_3": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.19999999995195583,
+          0.259999934383196,
+          0.8249709075740618
+        ]
+      },
+      "object_4": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.3300000000003033,
+          0.2599999344193909,
+          0.8249709075740623
+        ]
+      },
+      "object_5": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.2,
+          0.38,
+          0.8249709075740203
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.030800062393267033,
+          0.5048999999901138,
+          0.8249709075740627
+        ]
+      },
+      "object_7": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.19999982868375848,
+          0.13999986083779561,
+          0.8249709075740621
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.02607428221553759,
+          0.3099722037844322,
+          0.8249709075740621
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.027000053783823023,
+          0.4982999984679415,
+          0.8249709075740624
+        ]
+      },
+      "object_10": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.33,
+          0.38,
+          0.8249709075740203
+        ]
+      }
+    },
+    "acc": 0.6,
+    "macro_f1": 0.7301587301587301,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 3,
+        "f1": 0.5714285714285714
+      },
+      "right_zone": {
+        "tp": 4,
+        "fp": 0,
+        "fn": 1,
+        "f1": 0.8888888888888888
+      }
+    },
+    "n_objects": 10
+  },
+  "summary": {
+    "total_wall_seconds": 109.15439420001348,
+    "deadline_seconds": 120.0,
+    "deadline_overrun_seconds": 0,
+    "simulation_seconds": 48.0,
+    "steps": 960,
+    "planner_calls": 1,
+    "planner_seconds": 18.95275540003786,
+    "vla_inference_seconds": 55.02649620064767,
+    "attempts": {
+      "object_8": 1,
+      "object_2": 1,
+      "object_9": 1,
+      "object_6": 1
+    }
+  },
+  "history": [
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 8 and place it in the left storage zone.",
+      "action": {
+        "object": "object_8",
+        "target_zone": "left_zone"
+      },
+      "steps": 240,
+      "termination": "fixed_action_horizon"
+    },
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 2 and place it in the right storage zone.",
+      "action": {
+        "object": "object_2",
+        "target_zone": "right_zone"
+      },
+      "steps": 240,
+      "termination": "fixed_action_horizon"
+    },
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 9 and place it in the left storage zone.",
+      "action": {
+        "object": "object_9",
+        "target_zone": "left_zone"
+      },
+      "steps": 240,
+      "termination": "fixed_action_horizon"
+    },
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 6 and place it in the left storage zone.",
+      "action": {
+        "object": "object_6",
+        "target_zone": "left_zone"
+      },
+      "steps": 240,
+      "termination": "fixed_action_horizon"
+    }
+  ],
+  "video": "process.mp4",
+  "artifact_render_seconds": 2.089980299992021,
+  "end_to_end_wall_seconds": 126.31157799996436
+}

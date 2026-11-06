@@ -1,0 +1,110 @@
+{
+  "status": "passed_with_minor_render_difference",
+  "reports": 30,
+  "independent_scene_families": 10,
+  "per_condition_per_group": 5,
+  "code_commit": "dbc6c693d14b6aaf9c8420157ec0e48b0de1c957",
+  "seconds_budget": 120,
+  "source_archive_sha256": "18a1737344534df77552f207524fdf360b3172908480fe9162961199f7342b1b",
+  "strategy_text_lf_sha256": "02d026f07c1ca947cfba7b7d4f2fd3d2bf33da662da3ed4600dc16f69ec3b40b",
+  "models": {
+    "vla_release": "models-motor-deadline-20261106-motion7k",
+    "vlm_release": "models-planner-20261106-r5",
+    "vla_weights_sha256": "5e9744b7aa1b6b7bf8a663fc60658c6a5da9c851d89aafb604da914e529cf4ab"
+  },
+  "verified": [
+    "No diagnostic adapters",
+    "Same VLA across all30",
+    "Same VLM for all B/C1",
+    "Exact paired physical state, initial B/C1 prompt and first raw VLM output",
+    "Planner images exact in9/10 pairs; 2 RGB channels differ by1 in1 pair; see image_pairs",
+    "A zero VLM calls",
+    "Original C1 strategy SHA",
+    "120sec budgets and identical seeds/steps",
+    "All30 MP4s",
+    "Both family schedules complete without warnings"
+  ],
+  "image_pairs": [
+    {
+      "family": "oneway",
+      "scene": "scene_0030",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 0,
+      "max_channel_difference": 0,
+      "total_rgb_channels": 786432
+    },
+    {
+      "family": "oneway",
+      "scene": "scene_0010",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 0,
+      "max_channel_difference": 0,
+      "total_rgb_channels": 786432
+    },
+    {
+      "family": "oneway",
+      "scene": "scene_0020",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 0,
+      "max_channel_difference": 0,
+      "total_rgb_channels": 786432
+    },
+    {
+      "family": "oneway",
+      "scene": "scene_0000",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 0,
+      "max_channel_difference": 0,
+      "total_rgb_channels": 786432
+    },
+    {
+      "family": "oneway",
+      "scene": "scene_0040",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 0,
+      "max_channel_difference": 0,
+      "total_rgb_channels": 786432
+    },
+    {
+      "family": "mutual",
+      "scene": "scene_0070",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 0,
+      "max_channel_difference": 0,
+      "total_rgb_channels": 786432
+    },
+    {
+      "family": "mutual",
+      "scene": "scene_0080",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 0,
+      "max_channel_difference": 0,
+      "total_rgb_channels": 786432
+    },
+    {
+      "family": "mutual",
+      "scene": "scene_0050",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 2,
+      "max_channel_difference": 1,
+      "total_rgb_channels": 786432
+    },
+    {
+      "family": "mutual",
+      "scene": "scene_0090",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 0,
+      "max_channel_difference": 0,
+      "total_rgb_channels": 786432
+    },
+    {
+      "family": "mutual",
+      "scene": "scene_0060",
+      "first_vlm_raw_equal": true,
+      "changed_rgb_channels": 0,
+      "max_channel_difference": 0,
+      "total_rgb_channels": 786432
+    }
+  ],
+  "scope": "User-authorized 120sec local pilot, separate from student300sec/Colab benchmark. 5 frozen stratified scenes per family; no outcome-based selection. Same partially trained VLA for A/B/C1; A gets whole command, zero VLM calls. Five scenes per condition are exploratory. GPU time may differ from Colab. Never pool overlapping scene repetitions with students as independent scenes."
+}

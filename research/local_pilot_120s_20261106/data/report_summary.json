@@ -1,0 +1,155 @@
+{
+  "finished": true,
+  "reported_trials": 30,
+  "planned_trials": 30,
+  "groups": [
+    {
+      "family": "oneway",
+      "condition": "A",
+      "planned_n": 5,
+      "reported_n": 5,
+      "completed_n": 5,
+      "error_n": 0,
+      "initial_acc_mean": 0.4,
+      "acc_mean": 0.4,
+      "acc_gain_mean": 0.0,
+      "macro_f1_mean": 0.4992063492063492,
+      "scene_success_mean": 0,
+      "total_wall_seconds_mean": 120.10729939999291,
+      "planner_calls_mean": 0
+    },
+    {
+      "family": "oneway",
+      "condition": "B",
+      "planned_n": 5,
+      "reported_n": 5,
+      "completed_n": 5,
+      "error_n": 0,
+      "initial_acc_mean": 0.4,
+      "acc_mean": 0.42,
+      "acc_gain_mean": 0.019999999999999997,
+      "macro_f1_mean": 0.5325396825396825,
+      "scene_success_mean": 0,
+      "total_wall_seconds_mean": 104.36479173999979,
+      "planner_calls_mean": 1
+    },
+    {
+      "family": "oneway",
+      "condition": "C1",
+      "planned_n": 5,
+      "reported_n": 5,
+      "completed_n": 5,
+      "error_n": 0,
+      "initial_acc_mean": 0.4,
+      "acc_mean": 0.42,
+      "acc_gain_mean": 0.019999999999999997,
+      "macro_f1_mean": 0.5242063492063491,
+      "scene_success_mean": 0,
+      "total_wall_seconds_mean": 120.1127918599872,
+      "planner_calls_mean": 2.8
+    },
+    {
+      "family": "mutual",
+      "condition": "A",
+      "planned_n": 5,
+      "reported_n": 5,
+      "completed_n": 5,
+      "error_n": 0,
+      "initial_acc_mean": 0.4,
+      "acc_mean": 0.4,
+      "acc_gain_mean": 0.0,
+      "macro_f1_mean": 0.49246031746031743,
+      "scene_success_mean": 0,
+      "total_wall_seconds_mean": 120.13831538000377,
+      "planner_calls_mean": 0
+    },
+    {
+      "family": "mutual",
+      "condition": "B",
+      "planned_n": 5,
+      "reported_n": 5,
+      "completed_n": 5,
+      "error_n": 0,
+      "initial_acc_mean": 0.4,
+      "acc_mean": 0.42000000000000004,
+      "acc_gain_mean": 0.02,
+      "macro_f1_mean": 0.5257936507936508,
+      "scene_success_mean": 0,
+      "total_wall_seconds_mean": 102.29071301999502,
+      "planner_calls_mean": 1
+    },
+    {
+      "family": "mutual",
+      "condition": "C1",
+      "planned_n": 5,
+      "reported_n": 5,
+      "completed_n": 5,
+      "error_n": 0,
+      "initial_acc_mean": 0.4,
+      "acc_mean": 0.42,
+      "acc_gain_mean": 0.019999999999999997,
+      "macro_f1_mean": 0.5063492063492063,
+      "scene_success_mean": 0,
+      "total_wall_seconds_mean": 120.01448528001784,
+      "planner_calls_mean": 2.4
+    }
+  ],
+  "paired": [
+    {
+      "family": "oneway",
+      "comparison": "B minus A",
+      "paired_scenes": 5,
+      "acc_difference": 0.019999999999999997,
+      "acc_gain_difference": 0.019999999999999997,
+      "macro_f1_difference": 0.033333333333333326,
+      "total_wall_seconds_difference": -15.742507659993134
+    },
+    {
+      "family": "oneway",
+      "comparison": "C1 minus B",
+      "paired_scenes": 5,
+      "acc_difference": 0.0,
+      "acc_gain_difference": 0.0,
+      "macro_f1_difference": -0.008333333333333349,
+      "total_wall_seconds_difference": 15.74800011998741
+    },
+    {
+      "family": "oneway",
+      "comparison": "C1 minus A",
+      "paired_scenes": 5,
+      "acc_difference": 0.019999999999999997,
+      "acc_gain_difference": 0.019999999999999997,
+      "macro_f1_difference": 0.024999999999999977,
+      "total_wall_seconds_difference": 0.005492459994275123
+    },
+    {
+      "family": "mutual",
+      "comparison": "B minus A",
+      "paired_scenes": 5,
+      "acc_difference": 0.02,
+      "acc_gain_difference": 0.02,
+      "macro_f1_difference": 0.03333333333333333,
+      "total_wall_seconds_difference": -17.84760236000875
+    },
+    {
+      "family": "mutual",
+      "comparison": "C1 minus B",
+      "paired_scenes": 5,
+      "acc_difference": -5.551115123125783e-18,
+      "acc_gain_difference": -5.551115123125783e-18,
+      "macro_f1_difference": -0.019444444444444448,
+      "total_wall_seconds_difference": 17.723772260022816
+    },
+    {
+      "family": "mutual",
+      "comparison": "C1 minus A",
+      "paired_scenes": 5,
+      "acc_difference": 0.019999999999999997,
+      "acc_gain_difference": 0.019999999999999997,
+      "macro_f1_difference": 0.013888888888888885,
+      "total_wall_seconds_difference": -0.12383009998593479
+    }
+  ],
+  "scope": "User-authorized 120sec local pilot, separate from student300sec/Colab benchmark. 5 frozen stratified scenes per family; no outcome-based selection. Same partially trained VLA for A/B/C1; A gets whole command, zero VLM calls. Five scenes per condition are exploratory. GPU time may differ from Colab. Never pool overlapping scene repetitions with students as independent scenes.",
+  "averaging": "Means use completed trials only; planned/reported/error counts are explicit. Never claim complete if any scheduled trial is missing/error."
+}

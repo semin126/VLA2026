@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "local_links_checked": 349,
+  "broken_links": 0,
+  "original_videos": 30,
+  "comparison_videos": 4,
+  "source_pre_post_images": 60,
+  "case_montages": 10,
+  "pdf_pages": 10,
+  "browser": {
+    "images_loaded": 71,
+    "video_metadata_ok": 34,
+    "mutual_c1_filter_visible": 5
+  },
+  "original_copy_sha256_match": true,
+  "scope": "Report assets, offline links, actual headless Edge filter and MP4 metadata, copied source hashes, PDF text extraction. No model reruns or changed scores."
+}

@@ -1,0 +1,425 @@
+{
+  "protocol": "final_project_v2.0",
+  "condition": "A",
+  "variant": "A",
+  "diagnostic": false,
+  "scene_id": "instructor_test_v2_mutual_k08_p2_715800",
+  "family": "instructor_test_v2_mutual_k08_p2_715800",
+  "split": "test",
+  "scene_sha256": "8af0df8c291ee1a04146f82744174eca6943982a06e955b3f11f5b7ab53de996",
+  "input_scene_sha256": "8af0df8c291ee1a04146f82744174eca6943982a06e955b3f11f5b7ab53de996",
+  "initial_state_sha256": "2d243e15f0bcdf7c6f1b6ed271871796bfc5805e9c0567c068332a4b91e94815",
+  "task_sha256": "40aacb1d9d6832c1972f0625921af154cfb5ba0d45433db5f7d14ce6d3a79544",
+  "configuration": {
+    "condition": "A",
+    "seconds": 120.0,
+    "max_steps": 6000,
+    "action_steps": 240,
+    "observer_steps": 60,
+    "max_calls": 12,
+    "max_attempts": 3,
+    "image_size": 128,
+    "planner_image_size": 512,
+    "planner_tokens": 1024,
+    "seed": 42,
+    "checkpoint": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models\\vla_hier\\pretrained_model",
+    "vlm_model": null,
+    "model_source": "local",
+    "shared_vla": true,
+    "vlm_source": null,
+    "vla_source": null,
+    "models_dir": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models",
+    "vla_hub_id": null,
+    "vlm_hub_id": null,
+    "strategy": null,
+    "operator": "",
+    "input_kind": "gamepad",
+    "gamepad_map": "gamepad_map.json",
+    "video": true,
+    "device": "cuda",
+    "final_test": true,
+    "command": null,
+    "realtime": true
+  },
+  "strategy": null,
+  "events": [
+    {
+      "event": "late_action_discarded",
+      "step": 1210,
+      "wall": 120.4110340999905
+    }
+  ],
+  "status": "completed",
+  "feedback_source": "images_and_nonprivileged_execution_metadata",
+  "perception": "camera_images_and_robot_proprioception",
+  "timing_note": "20 Hz maximum; inference counted; synchronous calls may overrun but late actions are discarded",
+  "hardware": {
+    "system": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.16 | packaged by conda-forge | (main, Oct 26 2026, 11:29:01) [MSC v.1944 64 bit (AMD64)]",
+    "machine": "DESKTOP-RO7BEKJ",
+    "packages": {
+      "mujoco": "3.17.0",
+      "numpy": "2.2.6",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.22.1",
+      "lerobot": "0.6.2"
+    },
+    "cuda": true,
+    "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "implementation_sha256": "85355c7fb63e181e1fd8d7851b5b69e3874491575af9c97e88438093b8adc2be",
+  "restored_state_sha256": "2d243e15f0bcdf7c6f1b6ed271871796bfc5805e9c0567c068332a4b91e94815",
+  "initial": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "center_zone",
+      "object_2": "center_zone",
+      "object_3": "center_zone",
+      "object_4": "center_zone",
+      "object_5": "center_zone",
+      "object_6": "center_zone",
+      "object_7": "left_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "left_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.0016999780009127104,
+          0.2334000123909146,
+          0.8249708981978092
+        ]
+      },
+      "object_2": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.0834999486465442,
+          0.3348000000126728,
+          0.8249708981978092
+        ]
+      },
+      "object_3": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.07910005284311453,
+          0.42320016767038926,
+          0.8249708981978092
+        ]
+      },
+      "object_4": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.05250017416648945,
+          0.48479999999998435,
+          0.8249708981978092
+        ]
+      },
+      "object_5": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.06979999999993283,
+          0.2345000123664023,
+          0.8249708981978092
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.06719995638021939,
+          0.5052000000541641,
+          0.8249708981978092
+        ]
+      },
+      "object_7": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.19999982871502087,
+          0.13999986081048146,
+          0.8249708981978092
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.05790009183687308,
+          0.32969999998732646,
+          0.8249708981978092
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.018300187630514223,
+          0.4256999999721037,
+          0.8249708981978092
+        ]
+      },
+      "object_10": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.33,
+          0.38,
+          0.8249708981978092
+        ]
+      }
+    },
+    "acc": 0.2,
+    "macro_f1": 0.2857142857142857,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 3,
+        "f1": 0.5714285714285714
+      },
+      "right_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      }
+    },
+    "n_objects": 10
+  },
+  "initial_image_sha256": "12579bf5fe3a76c1971a274aa6ed446331b7da7735f5db4de7e7c82d5c5d2a6d",
+  "models": {
+    "vla": {
+      "role": "vla_hier",
+      "source": "local",
+      "location": "C:\\Users\\HGB\\Desktop\\Guebin\\Activities\\2026\\VLA2026\\vla_pipeline\\outputs\\local_report_backup_120s_20261106\\models\\vla_hier\\pretrained_model",
+      "reason": "models directory preferred",
+      "instruction_scope": "whole_task",
+      "action_representation": "absolute_position"
+    }
+  },
+  "checkpoint_manifest": {
+    "action_representation.json": "1d3208bd4aa5b766a00338f7b793f11ff770553aeee41f7aaafda003a52d8e23",
+    "config.json": "ad07cebe347d1331fe6202f7aaac76bb2fb9c54b1f930cfeede9518a8aa356fd",
+    "files_manifest.json": "effc90cb5ec8ce42e3e2ae4666f6d1d57c61b4b79c9ae65f193983d31b0b208e",
+    "model.safetensors": "5e9744b7aa1b6b7bf8a663fc60658c6a5da9c851d89aafb604da914e529cf4ab",
+    "model_info.json": "6d663bd7a9b37589fe1106b429b10cf2c9cfe82fcf5766cca17854953c01280b",
+    "policy_postprocessor.json": "68d350fd71551e0760d07142f4c02bed7c80a1d7eae808f9276bc81b4ef76dd4",
+    "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "7a19a33a67ae76cf7b1aa5e82c19f70f22d02925ff59c1edadcc89211ef03e61",
+    "policy_preprocessor.json": "804d0e6a5d894b4e79aadfbd52228936589eeb8b7549ed3ecd87363c54390094",
+    "policy_preprocessor_step_5_normalizer_processor.safetensors": "6a1fb65d8cd6730473262dff01f37485e00020b8bc4fb84bd31f56987de6dbae"
+  },
+  "vlm_revision": null,
+  "model_load_seconds": 11.560107400000561,
+  "setup_wall_seconds": 14.009024999977555,
+  "stop_reason": "time_limit",
+  "final": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "center_zone",
+      "object_2": "center_zone",
+      "object_3": "center_zone",
+      "object_4": "center_zone",
+      "object_5": "center_zone",
+      "object_6": "center_zone",
+      "object_7": "left_zone",
+      "object_8": "center_zone",
+      "object_9": "center_zone",
+      "object_10": "left_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.0016999780270387727,
+          0.23340001236940291,
+          0.8249709075740626
+        ]
+      },
+      "object_2": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.08349994867050674,
+          0.3348000000263813,
+          0.8249709075740622
+        ]
+      },
+      "object_3": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.0791000528095548,
+          0.42320016774786445,
+          0.8249709075740622
+        ]
+      },
+      "object_4": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.052500174173781174,
+          0.4848000000285019,
+          0.8249709075740623
+        ]
+      },
+      "object_5": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.06979999996041387,
+          0.234500012362275,
+          0.8249709075740621
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.06719995638768848,
+          0.5052000000940413,
+          0.8249709075740626
+        ]
+      },
+      "object_7": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.19999982869594382,
+          0.13999986082659874,
+          0.8249709075740622
+        ]
+      },
+      "object_8": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.057900091833650476,
+          0.3297000000026928,
+          0.8249709075740624
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.018300187642385772,
+          0.42569999998107727,
+          0.8249709075740621
+        ]
+      },
+      "object_10": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.33,
+          0.38,
+          0.8249709075744966
+        ]
+      }
+    },
+    "acc": 0.2,
+    "macro_f1": 0.2857142857142857,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 3,
+        "f1": 0.5714285714285714
+      },
+      "right_zone": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5,
+        "f1": 0.0
+      }
+    },
+    "n_objects": 10
+  },
+  "summary": {
+    "total_wall_seconds": 120.41197479999391,
+    "deadline_seconds": 120.0,
+    "deadline_overrun_seconds": 0.4119747999939136,
+    "simulation_seconds": 60.5,
+    "steps": 1210,
+    "planner_calls": 0,
+    "planner_seconds": 0.0,
+    "vla_inference_seconds": 76.77897130011115,
+    "attempts": {}
+  },
+  "history": [],
+  "video": "process.mp4",
+  "artifact_render_seconds": 2.226534100016579,
+  "end_to_end_wall_seconds": 136.7510962000233
+}

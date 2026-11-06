@@ -1,0 +1,6 @@
+# Preserve exact recorded bytes so media_manifest SHA256 also matches Git downloads.
+trials/** -text whitespace=cr-at-eol
+data/** -text whitespace=cr-at-eol
+assets/** -text
+videos/** -text
+report.pdf -text
