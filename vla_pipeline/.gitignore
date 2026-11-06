@@ -15,6 +15,7 @@ __pycache__/
 !/models/release_manifest.json
 !/models/release_manifest_planner_r2.json
 !/models/release_manifest_planner_r3.json
+!/models/release_manifest_deadline_20261106.json
 !/models/APACHE-2.0.txt
 !/models/THIRD_PARTY_NOTICES.md
 /assets/number_textures/.write.lock

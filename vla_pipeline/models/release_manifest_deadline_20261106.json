@@ -1,0 +1,148 @@
+{
+  "release": "deadline-starter-20261106-1330",
+  "stage": "diagnostic-starter-unmatched-not-qualified",
+  "validated_motor_policy": false,
+  "release_url": "https://github.com/semin126/VLA2026/releases/tag/models-motor-deadline-20261106-motion7k",
+  "models": {
+    "vlm": {
+      "bundle_release": "models-planner-20261106-r5",
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/models-planner-20261106-r5_vlm_inference.zip",
+      "sha256": "915eb74d7b536bcf34a905a88840d934cd1ecb789f6012ca7ab0f6e33ec39a56",
+      "bytes": 813765386,
+      "metrics": {
+        "task": "VLM planning labels, not robot success",
+        "n": 20,
+        "format_accuracy": 1.0,
+        "plan_pair_f1": 0.9351981351981351,
+        "geometric_accessibility_acc": 1.0,
+        "done_accuracy": 1.0,
+        "exact_plan_accuracy": 0.5
+      },
+      "native_retention12": {
+        "task": "VLM planning labels, not robot success",
+        "n": 12,
+        "format_accuracy": 1.0,
+        "plan_pair_f1": 0.9047619047619048,
+        "geometric_accessibility_acc": 1.0,
+        "done_accuracy": 1.0,
+        "exact_plan_accuracy": 0.75
+      },
+      "colab_validation": {
+        "task": "VLM planning labels, not robot success",
+        "n": 132,
+        "format_accuracy": 0.9924242424242424,
+        "plan_pair_f1": 0.9259323270598953,
+        "geometric_accessibility_acc": 0.9924242424242424,
+        "done_accuracy": 0.9924242424242424,
+        "exact_plan_accuracy": 0.6363636363636364,
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "peak_allocated_bytes": 1475706368,
+        "code_commit": "ccf08149ae1c2bd589aeb030a4f9c2d93f56d5d5",
+        "seconds": 395.61531863799974,
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_matched132_evidence.zip",
+        "evidence_sha256": "8939cdcca5706c5fa57bb4ada88df9a949ca4e59dc072ab0402d915025659605",
+        "scope": "Actual public ZIP, same132 correlated planning-label inputs for R2/R3/R5. No motor success, independent132-scene, A-E timing or T4 claim."
+      },
+      "colab_validation_groups": {
+        "prior_validation92": {
+          "n": 92,
+          "format_accuracy": 1.0,
+          "plan_pair_f1": 0.9531867588932805,
+          "ordered_exact_plan_accuracy": 0.8695652173913043
+        },
+        "new_initial40": {
+          "n": 40,
+          "format_accuracy": 0.975,
+          "plan_pair_f1": 0.863247133843109,
+          "ordered_exact_plan_accuracy": 0.1
+        },
+        "new_initial_ten20": {
+          "n": 20,
+          "format_accuracy": 0.95,
+          "plan_pair_f1": 0.9473684210526315,
+          "ordered_exact_plan_accuracy": 0.0
+        },
+        "new_initial_partial20": {
+          "n": 20,
+          "format_accuracy": 1.0,
+          "plan_pair_f1": 0.7791258466335866,
+          "ordered_exact_plan_accuracy": 0.2
+        }
+      },
+      "real_prompt_regression": {
+        "n": 4,
+        "pair_set_and_done_correct": 4,
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_matched132_evidence.zip"
+      },
+      "use": "Default B/C shared planning preview after matched public-GPU checks; motor remains unqualified.",
+      "known_failure": "Invented object_11 on balanced_initial_validation_250018; retained as format/schema failure, not silently repaired.",
+      "student_pipeline_colab": {
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_student_pipeline_evidence.zip",
+        "sha256": "e12caa08ffc16edd60c2f39703961aaa5fdd186b51a78fb5fcc80dbe5923a727",
+        "bytes": 9214,
+        "code_commit": "04f838f2dafe5d318119b9b33c1f8e5108e40430",
+        "standard_B240_scene_completed": true,
+        "standard_C240_scene_completed": true,
+        "interrupted_C60_scene_completed": false,
+        "event_snapshots_match_disk": true,
+        "known_loop_limitation": "On the interrupted C60 diagnostic, replan incorrectly selects object_6 while object_2 remains unfinished, then returns an empty plan. No automatic correction.",
+        "scope": "One reused validation scene with public R5 and existing motor R2; not three independent scenes, new VLA success or a hierarchy effect. Standard B/C each use only one planner call."
+      }
+    },
+    "vla_single": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vla_single_inference.zip",
+      "sha256": "ea36bb47ff933f84a1e2d91334f727f14bb9bb0c2648cfce762dcf1e0fb9c0f5",
+      "bytes": 726756312,
+      "metrics": {
+        "validation_n": 10,
+        "target_transfer_success_rate": 0.0,
+        "failure_stage": "grasp",
+        "training_updates": 1000
+      },
+      "use": "Loading/strategy diagnostics only; not a working motor baseline",
+      "bundle_release": "models-preview-20261106-r1"
+    },
+    "vla_hier": {
+      "bundle_release": "models-motor-deadline-20261106-motion7k",
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-motor-deadline-20261106-motion7k/models-motor-deadline-20261106-motion7k_vla_hier_inference.zip",
+      "sha256": "4fba574f5689dd6036099593d5247d25f84fe29cb5ccd1a4a0e4525cb0b46aa1",
+      "bytes": 1102175694,
+      "validated_motor_policy": false,
+      "native_validation": {
+        "single20": {
+          "n": 20,
+          "strict_success_rate": 0.7
+        },
+        "selection20": {
+          "n": 20,
+          "strict_success_rate": 0.15
+        }
+      },
+      "use": "Deadline loading/motor/strategy pilot. Single-cube transfer improves; numbered multi-object grounding remains weak. Not a60% sorting or matched A/B research baseline."
+    }
+  },
+  "planner_validation_recipe": {
+    "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/models-planner-20261106-r5_validation_recipe.zip",
+    "sha256": "3cf9dfd0b3b99544956a5683b34d0c3969db30fe06ad88cf8b8632a9ff22e627",
+    "n": 132,
+    "real_prompt_regression_n": 4,
+    "scope": "Planning contexts, not132 independent physical scenes. No training or sealed robot tests."
+  },
+  "motor_validation_recipe": {
+    "url": "https://github.com/semin126/VLA2026/releases/download/models-motor-preview-20261106-r2/motor_validation70_recipe.zip",
+    "sha256": "fa1f71b6e1ea4c6ef147250393b957dd6f4925af4f285d8bacef7f28f5f6138d",
+    "single_cases": 20,
+    "selection_cases": 20,
+    "same_zone_paired_cases": 30,
+    "paired_independent_scene_families": 10,
+    "sealed_test_scenes_included": false
+  },
+  "motor_fairness_warning": "A remains the old full-task r1 model0/10. B/C use partial-task motion7k. Training is not matched, so no hierarchy-effect conclusion. Freeze these versions throughout any pilot batch.",
+  "deadline_profile": {
+    "frozen": true,
+    "purpose": "Allow reproducible pilot runs while improved local training continues.",
+    "vlm": "R5 actual Colab F1.9259/format131of132; not robot success",
+    "vla_hier": "Motion7k local single14of20, selection3of20; Colab candidate checks recorded separately.",
+    "vla_single": "Old r1 full-task0of10; diagnostic only."
+  }
+}
