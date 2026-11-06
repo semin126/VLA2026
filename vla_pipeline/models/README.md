@@ -80,6 +80,13 @@ include one invalid `object_11` response, scored as failure. On 40 new initial
 layouts, R5 pair F1 was 0.8632; on 92 prior contexts it was 0.9532. Ordered exact
 plan accuracy over all 132 was 0.6364: pair F1 does not require the teacher's exact order.
 
+In one reused validation scene, actual student B and standard C (`action_steps=240`)
+both completed with public R5 and the existing motor R2. Each used only one planner
+call. Deliberately interrupted C (`action_steps=60`) failed after a wrong replan
+and an empty plan. These are wiring diagnostics, not a feedback-loop advantage or
+new motor accuracy. [Successful and failed reports with inference code](https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_student_pipeline_evidence.zip)
+also verify that actual plan-event snapshots remain consistent with the disk log.
+
 The following R2/R3 measurements describe the earlier comparison. R3 is an optional preview: on the exact same
 52 public validation inputs, its plan pair F1 improved from 0.7481 to 0.8996 and
 JSON validity from 43/52 to 52/52. However, on the classroom `valid_open` initial

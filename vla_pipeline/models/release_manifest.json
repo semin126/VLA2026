@@ -75,7 +75,19 @@
         "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_matched132_evidence.zip"
       },
       "use": "Default B/C shared planning preview after matched public-GPU checks; motor remains unqualified.",
-      "known_failure": "Invented object_11 on balanced_initial_validation_250018; retained as format/schema failure, not silently repaired."
+      "known_failure": "Invented object_11 on balanced_initial_validation_250018; retained as format/schema failure, not silently repaired.",
+      "student_pipeline_colab": {
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_student_pipeline_evidence.zip",
+        "sha256": "e12caa08ffc16edd60c2f39703961aaa5fdd186b51a78fb5fcc80dbe5923a727",
+        "bytes": 9214,
+        "code_commit": "04f838f2dafe5d318119b9b33c1f8e5108e40430",
+        "standard_B240_scene_completed": true,
+        "standard_C240_scene_completed": true,
+        "interrupted_C60_scene_completed": false,
+        "event_snapshots_match_disk": true,
+        "known_loop_limitation": "On the interrupted C60 diagnostic, replan incorrectly selects object_6 while object_2 remains unfinished, then returns an empty plan. No automatic correction.",
+        "scope": "One reused validation scene with public R5 and existing motor R2; not three independent scenes, new VLA success or a hierarchy effect. Standard B/C each use only one planner call."
+      }
     },
     "vla_single": {
       "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vla_single_inference.zip",

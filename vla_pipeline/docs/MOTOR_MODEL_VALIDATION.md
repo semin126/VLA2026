@@ -135,6 +135,18 @@ python scripts/download_models.py --roles vlm --upgrade
 [R5 모델·검증 입력](https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r5),
 [세 모델의 원본 응답·점수](https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_matched132_evidence.zip)를 확인하세요.
 
+**실제 학생 실행기 연결도 별도로 검사했습니다.** 같은 공개R5와 기존 운반R2로,
+이미 사용했던 한 큐브 validation 씬에서 B와 기본 C(`action_steps=240`)는 모두 완료했습니다.
+각각 VLM을 한 번만 호출했으므로 C 피드백 루프의 우수성을 보인 결과는 아닙니다.
+
+반면 재계획 경로를 검사하려고 작업을60스텝으로 끊은 C는 실패했습니다.
+첫 `object_2` 운반이 끝나기 전에 재계획하여 `object_6`을 잘못 선택했고,
+다음 재계획에서 빈 계획을 반환해 종료했습니다. 실제 동작 중인 이미지에 대한
+재계획이 항상 정확하다고 가정하지 마세요. 계획 로그는 실행 후에도 보존되며
+메모리의 `report.events`와 디스크의 `events.jsonl`이 일치하는 것도 확인했습니다.
+[성공·실패 보고서와 실행 코드](https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_student_pipeline_evidence.zip)를 함께 공개했습니다.
+이 세 실행은 한 씬의 연결 진단이며 독립 성공률이나 동일 예산 B/C 비교가 아닙니다.
+
 ### 이전 VLM R3 비교 기록 (2026-11-06)
 
 모든 추가 학습은 로컬 RTX3090Ti에서 진행했습니다. 공개 R3 ZIP을 실제 Colab
