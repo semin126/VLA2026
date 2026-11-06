@@ -27,6 +27,9 @@
 Colab 장비는 **NVIDIA RTX PRO 6000 Blackwell Server Edition**입니다.
 실행한 전용 노트북 SHA256:
 `2a28d0ac324067cd5725e0dab491d23073ae4f134dbd245bddd1b73849ef2beb`.
+이는 Windows 작업 파일의 CRLF 줄바꿈을 포함한 해시입니다. GitHub의 LF 파일 해시는
+`f9db4a892ec81c6d6470e4d0fa709097dd1610f4d55b4b29eb108aa4aa29b590`이며,
+줄바꿈만 정규화하면 바이트가 일치하고 모든 셀·메타데이터의 JSON 내용이 같음을 확인했습니다.
 검사한 실행 기반 커밋은 `e20789dc28cc7194cc2134286d6f0f6a1e4ed7cd`이며,
 전용 노트북 셀은 위 해시의 파일을 별도로 전달해 그대로 실행했습니다.
 
