@@ -263,6 +263,8 @@ B_STRATEGY = PROJECT / 'final_project_v2/baseline_strategy.py'
 
 이미지는 loop_decision에서 분석할 때 사용하는 입력입니다. 그 배열을 반환 feedback에 그대로 넣으면 JSON으로 저장할 수 없습니다. 분석 결과를 짧은 문자열·수치·불리언·목록·dict로 정리하세요.
 
+`feedback`, `history`, `queued_actions`, `last_model_response`는 호출 시점의 독립된 복사본입니다. 함수 안에서 내용을 편집해 분석해도 실행기의 원래 계획과 이력은 보존됩니다. 실행 흐름과 다음 VLM 문맥에 반영할 내용은 반환값의 `decision`과 `feedback`으로 전달하세요. `events.jsonl`과 `report.json`의 사건 기록도 발생 시점의 내용을 보존하며, `student_decision` 사건에는 반환한 피드백이 함께 저장됩니다.
+
 ### 호출되는 사건
 
 | event | 호출 시점 | 주의 |

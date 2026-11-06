@@ -7,6 +7,7 @@ see live oracle positions, target completion or geometric access judgments.
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from copy import deepcopy
 import json
 import platform
 import random
@@ -296,34 +297,40 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
             last_model_response = None
 
             def event(name, **kw):
-                row = {'event': name, 'step': steps, 'wall': time.perf_counter()-start, **kw}
+                # Queues and feedback keep changing after emission. Preserve the
+                # same snapshot in report.json and the durable events.jsonl.
+                row = deepcopy({'event': name, 'step': steps, 'wall': time.perf_counter()-start, **kw})
                 report['events'].append(row)
                 # Durable per-event progress during a long run.
                 with (out / 'events.jsonl').open('a', encoding='utf-8') as f:
                     f.write(json.dumps(row, ensure_ascii=False) + '\n')
 
             def context(name):
-                return {'event': name, 'feedback': feedback, 'history': list(history[-20:]),
+                # Student hooks receive JSON snapshots, not aliases to mutable
+                # executor actions, history or the last parsed model response.
+                return deepcopy({'event': name, 'feedback': feedback, 'history': list(history[-20:]),
                         'remaining_seconds': max(0, deadline-time.perf_counter()),
                         'remaining_calls': config.max_calls-calls, 'queued_actions': list(queue),
-                        'last_model_response': last_model_response}
+                        'last_model_response': last_model_response})
 
             def decide(name):
                 observed = context(name)
                 observed['observation'] = {'agentview_image': env.render('agentview', config.planner_image_size, config.planner_image_size),
                                            'robot0_eye_in_hand_image': env.render('robot0_eye_in_hand')}
                 answer = strategy.loop_decision(observed)
+                decision_feedback = {}
                 if isinstance(answer, dict):
                     custom_feedback = answer.get('feedback')
                     # Student-chosen image analysis can be passed into the next VLM
                     # prompt, but it must remain ordinary, bounded JSON metadata.
                     if len(json.dumps(custom_feedback, allow_nan=False)) > 12000:
                         raise ValueError('Student feedback exceeds 12000 characters')
-                    feedback['student_feedback'] = custom_feedback
+                    feedback['student_feedback'] = deepcopy(custom_feedback)
+                    decision_feedback['feedback'] = custom_feedback
                     answer = answer.get('decision')
                 if answer not in ('continue', 'replan', 'stop'):
                     raise ValueError('loop_decision must return continue/replan/stop')
-                event('student_decision', trigger=name, decision=answer)
+                event('student_decision', trigger=name, decision=answer, **decision_feedback)
                 return answer
 
             need_plan = config.condition in 'BC'

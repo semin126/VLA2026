@@ -82,6 +82,10 @@ def main():
     for i, (family, scene_path) in enumerate(scenes):
         rc, cplan = run_one(scene_path, args.out / f'C_{i:02d}_{family}', 'C', STUDENT)
         assert rc['status'] == 'completed', (family, rc.get('error'))
+        durable_events = [json.loads(line) for line in
+                          (args.out / f'C_{i:02d}_{family}' / 'events.jsonl').read_text(encoding='utf-8').splitlines()]
+        assert rc['events'] == durable_events, 'Final events changed after their durable snapshot'
+        assert all(len(e['plan']) == 2 for e in rc['events'] if e['event'] == 'plan_received'), 'Consumed queue erased the original plan'
         assert len(cplan.calls) == 2, (family, 'expected 2 planner calls, got', len(cplan.calls))
         assert guidance not in cplan.calls[0], (family, 'guidance leaked into initial prompt')
         assert guidance in cplan.calls[1], (family, 'guidance missing from replan prompt')
@@ -117,9 +121,36 @@ def main():
     assert len(long_plan.calls) == 2, 'Ten-action plan never reached replan'
     assert long_report['summary']['steps'] == 12
 
+    # Hooks may edit their input for analysis; those edits must not alter live
+    # actions, past events or the next context's original VLM response.
+    mutation_strategy = args.out / 'mutation_strategy.py'
+    mutation_strategy.write_text('''from vlapipe.final_project_v2.prompting import build_strategy_prompt
+build_prompt = build_strategy_prompt
+def loop_decision(context):
+    assert len(context['last_model_response']['plan']) == 2
+    assert all(h['termination'] == 'fixed_action_horizon' for h in context['history'])
+    if context['queued_actions']:
+        context['queued_actions'][0]['object'] = 'object_10'
+    context['last_model_response']['plan'].clear()
+    context['history'][0]['termination'] = 'context_mutation'
+    context['feedback']['termination'] = 'context_mutation'
+    return {'decision': 'continue', 'feedback': {'context_edit_test': True}}
+''', encoding='utf-8')
+    isolated = run_trial(scenes[0][1], args.out/'C_metadata_isolation',
+        TrialConfig(condition='C', seconds=30, max_steps=4, action_steps=2,
+                    observer_steps=2, max_calls=1, strategy=str(mutation_strategy), video=False),
+        planner_adapter=FakePlanner(), policy_adapter=IdlePolicy())
+    assert isolated['status'] == 'completed', isolated.get('error')
+    assert [e['action']['object'] for e in isolated['events'] if e['event'] == 'action_started'] == ['object_1','object_2']
+    assert all(h['termination'] == 'fixed_action_horizon' for h in isolated['history'])
+    durable = [json.loads(line) for line in (args.out/'C_metadata_isolation/events.jsonl').read_text(encoding='utf-8').splitlines()]
+    assert isolated['events'] == durable
+    assert all(e['feedback'] == {'context_edit_test': True} for e in isolated['events'] if e['event']=='student_decision')
+
     summary = {'method': 2, 'scenes_checked': len(scenes), 'per_scene': results,
                'B_calls': len(bplan.calls), 'B_C_initial_prompt_identical': identical_initial,
                'ten_action_plan_replanned': len(long_plan.calls) == 2,
+               'event_snapshots_preserved': True, 'student_metadata_isolated': True,
                'note': 'Fake idle VLA / fixed-plan VLM; validates C-loop wiring, not model performance.'}
     (args.out / 'check_c_loop.json').write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps(summary, ensure_ascii=False, indent=2))
