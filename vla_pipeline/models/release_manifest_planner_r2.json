@@ -1,0 +1,181 @@
+{
+  "release": "models-planner-20261106-r2",
+  "stage": "planner-preview-motor-preview-not-qualified",
+  "validated_motor_policy": false,
+  "release_url": "https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r2",
+  "models": {
+    "vlm": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/models-planner-20261106-r2_vlm_inference.zip",
+      "sha256": "8d3e5062d44cb870b2c807c0fbbcf42c0be6335f164233fce5fd7d79fcfc3ade",
+      "bytes": 813764502,
+      "bundle_release": "models-planner-20261106-r2",
+      "metrics": {
+        "task": "VLM planning labels, not robot success",
+        "n": 12,
+        "format_accuracy": 0.9166666666666666,
+        "plan_pair_f1": 0.7884615384615384,
+        "geometric_accessibility_acc": 0.9,
+        "done_accuracy": 0.9166666666666666,
+        "exact_plan_accuracy": 0.5
+      },
+      "use": "Physical-context planner label preview; not robot success",
+      "colab_validation": {
+        "task": "VLM planning labels, not robot success",
+        "n": 52,
+        "format_accuracy": 0.8269230769230769,
+        "plan_pair_f1": 0.7481331533963113,
+        "geometric_accessibility_acc": 0.823076923076923,
+        "done_accuracy": 0.8269230769230769,
+        "exact_plan_accuracy": 0.6346153846153846,
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "peak_allocated_bytes": 1475706368,
+        "code_commit": "f68a4f5718b6f974253dfb0534fcbc0ff60caaeb",
+        "scope": "Actual public artifact CUDA generation; correlated validation rows; no motor-success claim",
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/planner_r2_colab_evidence.zip"
+      },
+      "novel_initial40_validation": {
+        "validation": {
+          "task": "VLM planning labels, not robot success",
+          "n": 40,
+          "format_accuracy": 0.675,
+          "plan_pair_f1": 0.42965664495463257,
+          "geometric_accessibility_acc": 0.675,
+          "done_accuracy": 0.675,
+          "exact_plan_accuracy": 0.0
+        },
+        "by_target_count": {
+          "ten_targets": {
+            "n": 20,
+            "plan_pair_f1": 0.5405460767302872,
+            "format_accuracy": 0.8,
+            "exact_plan_accuracy": 0.0
+          },
+          "one_to_nine_targets": {
+            "n": 20,
+            "plan_pair_f1": 0.3187672131789779,
+            "format_accuracy": 0.55,
+            "exact_plan_accuracy": 0.0
+          }
+        },
+        "seconds": 193.7610968099998,
+        "recipe_sha256": "cf6b911d9b15d94ff9711b37b99963567d7b4b3f7e794066d35601f40122c1f0",
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r3/balanced_initial_comparison_evidence.zip",
+        "scope": "Independent locally generated initial scenes, not completed-state context or physical success"
+      }
+    },
+    "vla_single": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vla_single_inference.zip",
+      "sha256": "ea36bb47ff933f84a1e2d91334f727f14bb9bb0c2648cfce762dcf1e0fb9c0f5",
+      "bytes": 726756312,
+      "metrics": {
+        "validation_n": 10,
+        "target_transfer_success_rate": 0.0,
+        "failure_stage": "grasp",
+        "training_updates": 1000
+      },
+      "use": "Loading/strategy diagnostics only; not a working motor baseline",
+      "bundle_release": "models-preview-20261106-r1"
+    },
+    "vla_hier": {
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-motor-preview-20261106-r2/models-motor-preview-20261106-r2_vla_hier_inference.zip",
+      "sha256": "fa0aec758d75f06790a4a6945eedc5cd5ef15c78e56ca618ade032c79a16e959",
+      "bytes": 1054759121,
+      "bundle_release": "models-motor-preview-20261106-r2",
+      "release_url": "https://github.com/semin126/VLA2026/releases/tag/models-motor-preview-20261106-r2",
+      "validated_motor_policy": false,
+      "metrics": {
+        "validation_n": 10,
+        "target_transfer_success_rate": 0.4,
+        "strict_success_rate": 0.4,
+        "ever_stable_transfer_rate": 0.6,
+        "max_steps": 240,
+        "cached_actions": 10,
+        "full_horizon": true,
+        "training_updates_this_stage": 3000,
+        "training_frames": 23173,
+        "initialization": "Prior delta-target checkpoint008000; previous training is additional to this pose-target stage.",
+        "scope": "Unpaced single-target validation; not mixed-scene accuracy or a reliable60% baseline."
+      },
+      "colab_validation": {
+        "n": 10,
+        "completed": true,
+        "successes": 5,
+        "strict_success_rate": 0.5,
+        "transfer_success_rate": 0.5,
+        "strict_wilson_95": [
+          0.237,
+          0.763
+        ],
+        "max_steps": 240,
+        "cached_actions": 10,
+        "full_horizon": true,
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "seconds": 48.28256478399999,
+        "peak_allocated_bytes": 1886494720,
+        "code_commit": "41bc78a06e62c06d69b017aaf1fd5eca7a063270",
+        "archive_sha256": "fa0aec758d75f06790a4a6945eedc5cd5ef15c78e56ca618ade032c79a16e959",
+        "recipe_sha256": "fa1f71b6e1ea4c6ef147250393b957dd6f4925af4f285d8bacef7f28f5f6138d",
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-motor-preview-20261106-r2/motor_preview_r2_colab_summary_evidence.zip",
+        "full_step_traces_included": false,
+        "scope": "Actual public artifact CUDA inference; same10 frozen scenes as native validation, not20 independent scenes or an A-E time comparison."
+      },
+      "action_representation": {
+        "name": "absolute_position",
+        "version": 1,
+        "external_action": "delta7",
+        "position_low": [
+          -0.46,
+          -0.05,
+          0.805
+        ],
+        "position_high": [
+          0.46,
+          0.63,
+          1.22
+        ],
+        "note": "Head xyz encodes the next commanded end-effector position; rotation remains delta, gripper absolute. No object state is used."
+      },
+      "selection": "Best validation snapshot through4k; no sealed motor tests used. Selection bias possible.",
+      "fairness": "A remains old r1 and is not matched in training to this B/C preview. No A/B hierarchy-effect claim.",
+      "use": "Intermediate B/C transport and loop failure-analysis preview; still below60% and not qualified.",
+      "same_zone_selection_colab_validation": {
+        "sha256": "9267151e40028db11881d24dc09ba7451553c6cbb6ccdde2248bba9e04af7cab",
+        "bytes": 3683,
+        "n_trials": 30,
+        "n_independent_families": 10,
+        "strict_success_rate": 0.1,
+        "scene_cluster_bootstrap_95": [
+          0.0,
+          0.19999999999999998
+        ],
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "code_commit": "723f0aa27677469a03f78d56e7b840706f2dc79f",
+        "scope": "Existing public 3k motor, same-zone selection: ten validation families x three different target commands; same fixed seed42 per trial/full240/cache10. No training or sealed scenes. Not new model performance or A-E task timing. Raw Wilson intervals treating30trials as independent are inappropriate; use the scene-cluster interval.",
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-motor-preview-20261106-r2/motor_preview_r2_selection_colab_evidence.zip",
+        "strict_successes": 3
+      }
+    }
+  },
+  "planner_validation_recipe": {
+    "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/models-planner-20261106-r2_validation_recipe.zip",
+    "sha256": "0edae7963da356dd83b52f992223fa94559253d1ac98a9450c8d24b50ccf4af7",
+    "n": 52
+  },
+  "optional_manifests": {
+    "planner_r3": {
+      "path": "models/release_manifest_planner_r3.json",
+      "scope": "Optional R3 comparison preview: aggregate validation improves, classroom valid_open plan coverage regresses from6/10 to4/10"
+    }
+  },
+  "motor_validation_recipe": {
+    "url": "https://github.com/semin126/VLA2026/releases/download/models-motor-preview-20261106-r2/motor_validation70_recipe.zip",
+    "sha256": "fa1f71b6e1ea4c6ef147250393b957dd6f4925af4f285d8bacef7f28f5f6138d",
+    "single_cases": 20,
+    "selection_cases": 20,
+    "same_zone_paired_cases": 30,
+    "paired_independent_scene_families": 10,
+    "sealed_test_scenes_included": false
+  },
+  "motor_fairness_warning": "A remains old r1 and is not matched in training to this B/C preview. No A/B hierarchy-effect claim."
+}

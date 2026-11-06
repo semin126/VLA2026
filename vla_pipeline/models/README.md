@@ -36,7 +36,7 @@ These are different inputs from the single-target check and must not be pooled.
 
 **A remains the old r1 debug model (0/10).** Its training is not matched to this
 B/C preview, so this combination cannot establish a hierarchy effect in A/B.
-B and C share the exact same `vla_hier` model. Both planner manifests select this
+B and C share the exact same `vla_hier` model. All three planner manifests select this
 same motor; choosing the optional R3 planner will not revert the motor to r1.
 
 To update only B/C while preserving old weights and the chosen planner:
@@ -61,7 +61,26 @@ is moved under `models/_previous/`. Without `--upgrade`, a different existing
 version is preserved and replacement is refused. Unchanged roles can reference
 their original immutable release through `bundle_release` in the manifest.
 
-The recommended planner remains R2. R3 is an optional preview: on the exact same
+The default planner is now **R5**, verified by downloading the public ZIP and
+running actual Colab RTX PRO6000 GPU inference. All training used the local
+RTX3090Ti. On the same 132 planning inputs, pair F1 was 0.6053 (R2), 0.8099 (R3),
+and **0.9259 (R5)**; valid responses were 100/132, 130/132, and 131/132. R5 also
+passed all four real B/C prompt regressions. These correlated planning contexts
+are not 132 independent robot trials or a motor-success result. T4 was not tested.
+
+To install R5 while preserving the old planner:
+
+```powershell
+python scripts/download_models.py --roles vlm --upgrade
+```
+
+Existing local models stay selected until explicitly upgraded. B and C must use
+the same planner and motor. [R5 weights, validation inputs and raw GPU responses](https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r5)
+include one invalid `object_11` response, scored as failure. On 40 new initial
+layouts, R5 pair F1 was 0.8632; on 92 prior contexts it was 0.9532. Ordered exact
+plan accuracy over all 132 was 0.6364: pair F1 does not require the teacher's exact order.
+
+The following R2/R3 measurements describe the earlier comparison. R3 is an optional preview: on the exact same
 52 public validation inputs, its plan pair F1 improved from 0.7481 to 0.8996 and
 JSON validity from 43/52 to 52/52. However, on the classroom `valid_open` initial
 prompt it proposed only 4 of 10 targets, versus R2's 6. These are planning scores;
@@ -75,8 +94,9 @@ python scripts/download_models.py --manifest models/release_manifest_planner_r3.
 ```
 
 This changes the local VLM used by both B and C. Record the chosen version and
-keep it identical for those conditions. To restore R2, use the default manifest
-with `--roles vlm --upgrade`. [R3 release and raw responses](https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r3)
+keep it identical for those conditions. To restore R2, use
+`--manifest models/release_manifest_planner_r2.json --roles vlm --upgrade`.
+The default manifest restores R5. [R3 release and raw responses](https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r3)
 include the expanded 92-row check and the matched 52-row comparison.
 
 On an additional 40 independent initial layouts, R2/R3 pair F1 was 0.4297/0.5765;

@@ -13,6 +13,7 @@ __pycache__/
 !/models/README.md
 !/models/model_sources.json
 !/models/release_manifest.json
+!/models/release_manifest_planner_r2.json
 !/models/release_manifest_planner_r3.json
 !/models/APACHE-2.0.txt
 !/models/THIRD_PARTY_NOTICES.md

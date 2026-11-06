@@ -1,68 +1,81 @@
 {
-  "release": "models-planner-20261106-r2",
+  "release": "models-planner-20261106-r5",
   "stage": "planner-preview-motor-preview-not-qualified",
   "validated_motor_policy": false,
-  "release_url": "https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r2",
+  "release_url": "https://github.com/semin126/VLA2026/releases/tag/models-planner-20261106-r5",
   "models": {
     "vlm": {
-      "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/models-planner-20261106-r2_vlm_inference.zip",
-      "sha256": "8d3e5062d44cb870b2c807c0fbbcf42c0be6335f164233fce5fd7d79fcfc3ade",
-      "bytes": 813764502,
-      "bundle_release": "models-planner-20261106-r2",
+      "bundle_release": "models-planner-20261106-r5",
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/models-planner-20261106-r5_vlm_inference.zip",
+      "sha256": "915eb74d7b536bcf34a905a88840d934cd1ecb789f6012ca7ab0f6e33ec39a56",
+      "bytes": 813765386,
       "metrics": {
         "task": "VLM planning labels, not robot success",
-        "n": 12,
-        "format_accuracy": 0.9166666666666666,
-        "plan_pair_f1": 0.7884615384615384,
-        "geometric_accessibility_acc": 0.9,
-        "done_accuracy": 0.9166666666666666,
+        "n": 20,
+        "format_accuracy": 1.0,
+        "plan_pair_f1": 0.9351981351981351,
+        "geometric_accessibility_acc": 1.0,
+        "done_accuracy": 1.0,
         "exact_plan_accuracy": 0.5
       },
-      "use": "Physical-context planner label preview; not robot success",
+      "native_retention12": {
+        "task": "VLM planning labels, not robot success",
+        "n": 12,
+        "format_accuracy": 1.0,
+        "plan_pair_f1": 0.9047619047619048,
+        "geometric_accessibility_acc": 1.0,
+        "done_accuracy": 1.0,
+        "exact_plan_accuracy": 0.75
+      },
       "colab_validation": {
         "task": "VLM planning labels, not robot success",
-        "n": 52,
-        "format_accuracy": 0.8269230769230769,
-        "plan_pair_f1": 0.7481331533963113,
-        "geometric_accessibility_acc": 0.823076923076923,
-        "done_accuracy": 0.8269230769230769,
-        "exact_plan_accuracy": 0.6346153846153846,
+        "n": 132,
+        "format_accuracy": 0.9924242424242424,
+        "plan_pair_f1": 0.9259323270598953,
+        "geometric_accessibility_acc": 0.9924242424242424,
+        "done_accuracy": 0.9924242424242424,
+        "exact_plan_accuracy": 0.6363636363636364,
         "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
         "peak_allocated_bytes": 1475706368,
-        "code_commit": "f68a4f5718b6f974253dfb0534fcbc0ff60caaeb",
-        "scope": "Actual public artifact CUDA generation; correlated validation rows; no motor-success claim",
-        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/planner_r2_colab_evidence.zip"
+        "code_commit": "ccf08149ae1c2bd589aeb030a4f9c2d93f56d5d5",
+        "seconds": 395.61531863799974,
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_matched132_evidence.zip",
+        "evidence_sha256": "8939cdcca5706c5fa57bb4ada88df9a949ca4e59dc072ab0402d915025659605",
+        "scope": "Actual public ZIP, same132 correlated planning-label inputs for R2/R3/R5. No motor success, independent132-scene, A-E timing or T4 claim."
       },
-      "novel_initial40_validation": {
-        "validation": {
-          "task": "VLM planning labels, not robot success",
+      "colab_validation_groups": {
+        "prior_validation92": {
+          "n": 92,
+          "format_accuracy": 1.0,
+          "plan_pair_f1": 0.9531867588932805,
+          "ordered_exact_plan_accuracy": 0.8695652173913043
+        },
+        "new_initial40": {
           "n": 40,
-          "format_accuracy": 0.675,
-          "plan_pair_f1": 0.42965664495463257,
-          "geometric_accessibility_acc": 0.675,
-          "done_accuracy": 0.675,
-          "exact_plan_accuracy": 0.0
+          "format_accuracy": 0.975,
+          "plan_pair_f1": 0.863247133843109,
+          "ordered_exact_plan_accuracy": 0.1
         },
-        "by_target_count": {
-          "ten_targets": {
-            "n": 20,
-            "plan_pair_f1": 0.5405460767302872,
-            "format_accuracy": 0.8,
-            "exact_plan_accuracy": 0.0
-          },
-          "one_to_nine_targets": {
-            "n": 20,
-            "plan_pair_f1": 0.3187672131789779,
-            "format_accuracy": 0.55,
-            "exact_plan_accuracy": 0.0
-          }
+        "new_initial_ten20": {
+          "n": 20,
+          "format_accuracy": 0.95,
+          "plan_pair_f1": 0.9473684210526315,
+          "ordered_exact_plan_accuracy": 0.0
         },
-        "seconds": 193.7610968099998,
-        "recipe_sha256": "cf6b911d9b15d94ff9711b37b99963567d7b4b3f7e794066d35601f40122c1f0",
-        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
-        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r3/balanced_initial_comparison_evidence.zip",
-        "scope": "Independent locally generated initial scenes, not completed-state context or physical success"
-      }
+        "new_initial_partial20": {
+          "n": 20,
+          "format_accuracy": 1.0,
+          "plan_pair_f1": 0.7791258466335866,
+          "ordered_exact_plan_accuracy": 0.2
+        }
+      },
+      "real_prompt_regression": {
+        "n": 4,
+        "pair_set_and_done_correct": 4,
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/planner_r5_colab_matched132_evidence.zip"
+      },
+      "use": "Default B/C shared planning preview after matched public-GPU checks; motor remains unqualified.",
+      "known_failure": "Invented object_11 on balanced_initial_validation_250018; retained as format/schema failure, not silently repaired."
     },
     "vla_single": {
       "url": "https://github.com/semin126/VLA2026/releases/download/models-preview-20261106-r1/models-preview-20261106-r1_vla_single_inference.zip",
@@ -158,14 +171,20 @@
     }
   },
   "planner_validation_recipe": {
-    "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r2/models-planner-20261106-r2_validation_recipe.zip",
-    "sha256": "0edae7963da356dd83b52f992223fa94559253d1ac98a9450c8d24b50ccf4af7",
-    "n": 52
+    "url": "https://github.com/semin126/VLA2026/releases/download/models-planner-20261106-r5/models-planner-20261106-r5_validation_recipe.zip",
+    "sha256": "3cf9dfd0b3b99544956a5683b34d0c3969db30fe06ad88cf8b8632a9ff22e627",
+    "n": 132,
+    "real_prompt_regression_n": 4,
+    "scope": "Planning contexts, not132 independent physical scenes. No training or sealed robot tests."
   },
   "optional_manifests": {
+    "planner_r2": {
+      "path": "models/release_manifest_planner_r2.json",
+      "scope": "Prior R2 planner for reproducible comparisons; same B/C motor."
+    },
     "planner_r3": {
       "path": "models/release_manifest_planner_r3.json",
-      "scope": "Optional R3 comparison preview: aggregate validation improves, classroom valid_open plan coverage regresses from6/10 to4/10"
+      "scope": "Prior R3 planner for reproducible comparisons; same B/C motor."
     }
   },
   "motor_validation_recipe": {
