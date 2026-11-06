@@ -194,7 +194,23 @@
       },
       "selection": "Best validation snapshot through4k; no sealed motor tests used. Selection bias possible.",
       "fairness": "A remains old r1 and is not matched in training to this B/C preview. No A/B hierarchy-effect claim.",
-      "use": "Intermediate B/C transport and loop failure-analysis preview; still below60% and not qualified."
+      "use": "Intermediate B/C transport and loop failure-analysis preview; still below60% and not qualified.",
+      "same_zone_selection_colab_validation": {
+        "sha256": "9267151e40028db11881d24dc09ba7451553c6cbb6ccdde2248bba9e04af7cab",
+        "bytes": 3683,
+        "n_trials": 30,
+        "n_independent_families": 10,
+        "strict_success_rate": 0.1,
+        "scene_cluster_bootstrap_95": [
+          0.0,
+          0.19999999999999998
+        ],
+        "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+        "code_commit": "723f0aa27677469a03f78d56e7b840706f2dc79f",
+        "scope": "Existing public 3k motor, same-zone selection: ten validation families x three different target commands; same fixed seed42 per trial/full240/cache10. No training or sealed scenes. Not new model performance or A-E task timing. Raw Wilson intervals treating30trials as independent are inappropriate; use the scene-cluster interval.",
+        "evidence_url": "https://github.com/semin126/VLA2026/releases/download/models-motor-preview-20261106-r2/motor_preview_r2_selection_colab_evidence.zip",
+        "strict_successes": 3
+      }
     }
   },
   "planner_validation_recipe": {

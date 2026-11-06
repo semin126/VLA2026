@@ -30,6 +30,10 @@ independent cases or a training improvement. This remains below the60% target.
 [Weights, recipe, and measured evidence](https://github.com/semin126/VLA2026/releases/tag/models-motor-preview-20261106-r2)
 are public. All fitting and training-data generation used the local RTX3090Ti.
 
+The separate same-zone number-selection check scored **3/30** on Colab: ten
+independent scene families with three target commands each (scene-cluster95% interval0–20%).
+These are different inputs from the single-target check and must not be pooled.
+
 **A remains the old r1 debug model (0/10).** Its training is not matched to this
 B/C preview, so this combination cannot establish a hierarchy effect in A/B.
 B and C share the exact same `vla_hier` model. Both planner manifests select this
