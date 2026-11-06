@@ -48,6 +48,7 @@ def parser():
         p.add_argument('--planner-tokens', type=int, default=1024)
         p.add_argument('--max-attempts', type=int, default=3)
         p.add_argument('--checkpoint')
+        p.add_argument('--shared-vla', action='store_true', help='Use the same partial-task VLA for A/B/C; A still receives the whole task and makes no VLM calls')
         p.add_argument('--model-source', choices=['auto','local','hub'], default='auto')
         p.add_argument('--vlm-source', choices=['auto','local','hub'])
         p.add_argument('--vla-source', choices=['auto','local','hub'])
@@ -107,6 +108,8 @@ def parser():
 
 def trial_config(args, condition):
     from vlapipe.final_project_v2.runner import TrialConfig
+    if getattr(args, 'shared_vla', False) and getattr(args, 'a_checkpoint', None):
+        raise ValueError('--shared-vla uses the common --checkpoint; remove --a-checkpoint')
     cfg = TrialConfig(**{k: getattr(args, k) for k in TrialConfig.__dataclass_fields__ if k != 'command' and hasattr(args, k)})
     cfg.command = args.task_command
     cfg.condition = condition

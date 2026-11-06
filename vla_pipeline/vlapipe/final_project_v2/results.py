@@ -14,6 +14,16 @@ from . import PROTOCOL
 from .common import digest, dump
 
 
+def _cohort(report):
+    cfg = report['configuration']
+    return digest({'budgets': {k: cfg[k] for k in ('seconds', 'max_steps', 'action_steps', 'observer_steps',
+                                                   'max_calls', 'max_attempts', 'image_size', 'planner_image_size')},
+                   'planner_tokens': cfg.get('planner_tokens', 512),
+                   'shared_vla': cfg.get('shared_vla', False),
+                   'hardware': report['hardware'], 'split': report['split'], 'task': report['task_sha256'],
+                   'implementation': report.get('implementation_sha256', 'pre_fingerprint')})[:12]
+
+
 def aggregate(root, out=None, include_diagnostic=False):
     root = Path(root).resolve()
     out = Path(out or root / 'comparison').resolve()
@@ -31,20 +41,26 @@ def aggregate(root, out=None, include_diagnostic=False):
     if not reports:
         raise ValueError('No eligible v2 trials; diagnostic trials are excluded by default')
     rows, grouped, paired = [], defaultdict(list), defaultdict(dict)
+    c_strategies = defaultdict(set)
+    for report in reports:
+        if report['condition'] == 'C':
+            c_strategies[_cohort(report)].add((report.get('strategy') or {}).get('sha256', 'unknown'))
     seen = set()
     for r in reports:
         cfg = r['configuration']
-        cohort = digest({'budgets': {k: cfg[k] for k in ('seconds', 'max_steps', 'action_steps', 'observer_steps',
-                                                       'max_calls', 'max_attempts', 'image_size', 'planner_image_size')},
-                         'planner_tokens': cfg.get('planner_tokens', 512),
-                         'hardware': r['hardware'], 'split': r['split'], 'task': r['task_sha256'],
-                         'implementation': r.get('implementation_sha256', 'pre_fingerprint')})[:12]
-        identity = (cohort, r['scene_sha256'], cfg['seed'], r['condition'])
+        cohort = _cohort(r)
+        variant = r['variant']
+        if r['condition'] == 'C' and len(c_strategies[cohort]) > 1:
+            strategy = r.get('strategy') or {}
+            variant = 'C:' + Path(strategy.get('path', 'strategy')).stem + ':' + strategy.get('sha256', 'unknown')[:8]
+        pair_key = variant if r['condition'] == 'C' else r['condition']
+        identity = (cohort, r['scene_sha256'], cfg['seed'], pair_key)
         if identity in seen:
             raise ValueError('Duplicate scene/seed/condition in one cohort; aggregate separate experiment folders')
         seen.add(identity)
-        row = {'cohort': cohort, 'condition': r['variant'], 'scene': r['scene_id'], 'split': r['split'],
+        row = {'cohort': cohort, 'condition': variant, 'scene': r['scene_id'], 'split': r['split'],
                'seed': cfg['seed'], 'status': r['status'], 'stop_reason': r['stop_reason'],
+               'shared_vla': cfg.get('shared_vla', False),
                'acc': r['final']['acc'], 'macro_f1': r['final']['macro_f1'],
                'scene_success': int(r['final']['scene_success']),
                'initial_acc': r.get('initial', r['final'])['acc'],
@@ -64,8 +80,8 @@ def aggregate(root, out=None, include_diagnostic=False):
         row['attempts'] = json.dumps(row['attempts'], sort_keys=True)
         row['acc_gain']=row['acc']-row['initial_acc']
         rows.append(row)
-        grouped[(cohort, r['variant'])].append(row)
-        paired[(cohort, r['scene_sha256'], cfg['seed'])][r['condition']] = r
+        grouped[(cohort, variant)].append(row)
+        paired[(cohort, r['scene_sha256'], cfg['seed'])][pair_key] = r
     with (out / 'results.csv').open('w', newline='', encoding='utf-8-sig') as f:
         writer = csv.DictWriter(f, fieldnames=list(rows[0]))
         writer.writeheader()
@@ -83,7 +99,10 @@ def aggregate(root, out=None, include_diagnostic=False):
                           'model_sources':sorted({(r['vla_source'],r['vlm_source']) for r in group}),
                           'note': 'Initial correct objects are included in ACC; compare ACC gain as well. Error trials retained; completed-only means also shown.'})
     deltas, warnings = [], []
-    for left, right in [('A', 'B'), ('B', 'C'), ('A', 'C')]:
+    c_keys = sorted({key for group in paired.values() for key, report in group.items() if report['condition'] == 'C'})
+    comparisons = [('A', 'B')] + [('B', key) for key in c_keys] + [('A', key) for key in c_keys]
+    comparisons += [(left, right) for i, left in enumerate(c_keys) for right in c_keys[i+1:]]
+    for left, right in comparisons:
         by_cohort = defaultdict(list)
         for (cohort, _, _), group in paired.items():
             if left not in group or right not in group:
@@ -99,10 +118,15 @@ def aggregate(root, out=None, include_diagnostic=False):
                     return report['initial_prompt_sha256']
                 plan = report['_path'].parent/'plan_001.json'
                 return digest(json.loads(plan.read_text(encoding='utf-8'))['prompt']) if plan.is_file() else None
-            if left == 'B' and (not initial_prompt_hash(l) or initial_prompt_hash(l) != initial_prompt_hash(r)
+            if l['condition'] in 'BC' and r['condition'] in 'BC' and (not initial_prompt_hash(l) or initial_prompt_hash(l) != initial_prompt_hash(r)
                                 or l.get('checkpoint_manifest', l['configuration']['checkpoint']) != r.get('checkpoint_manifest', r['configuration']['checkpoint'])
                                 or l.get('vlm_checkpoint_manifest', l['configuration']['vlm_model']) != r.get('vlm_checkpoint_manifest', r['configuration']['vlm_model'])):
                 warnings.append(f'{cohort}: B/C initial prompt or models differ; pair omitted')
+                continue
+            if left == 'A' and l['configuration'].get('shared_vla', False) and (
+                    l.get('checkpoint_manifest', l['configuration']['checkpoint']) !=
+                    r.get('checkpoint_manifest', r['configuration']['checkpoint'])):
+                warnings.append(f'{cohort}: shared-VLA A/B checkpoints differ; pair omitted')
                 continue
             by_cohort[cohort].append((l, r))
         for cohort, group in by_cohort.items():

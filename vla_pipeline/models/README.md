@@ -1,5 +1,16 @@
 # Student inference models
 
+For the current student shared-VLA pilot, use the tested
+`instructor/runtime-conda-fixes` branch and `release_manifest_deadline_20261106.json`.
+Download `--roles vlm,vla_hier`, then run with `--shared-vla`: A receives the
+whole task without a VLM, while B/C receive subtask instructions. All use the
+same motion7k weights. This tests composition with a partial-task-trained VLA;
+it is not a comparison with a separately trained whole-task A.
+See [student Colab instructions](../../research/3_colab_guide.md) and
+[local training and release notes](../docs/INSTRUCTOR_MODEL_TRAINING.md).
+The fixed pilot's local single-transfer result is14/20 and number selection3/20;
+it does not establish60% complete sorting.
+
 Default selection is local-first (`auto`). Install complete release folders here:
 
 ```

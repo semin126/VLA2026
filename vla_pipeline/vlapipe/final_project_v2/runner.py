@@ -46,6 +46,7 @@ class TrialConfig:
     checkpoint: str | None = None
     vlm_model: str | None = None
     model_source: str = 'auto'
+    shared_vla: bool = False
     vlm_source: str | None = None
     vla_source: str | None = None
     models_dir: str | None = None
@@ -72,6 +73,8 @@ class TrialConfig:
             raise ValueError('All budgets/sizes must be positive')
         if self.model_source not in ('auto','local','hub'):
             raise ValueError('model_source must be auto/local/hub')
+        if type(self.shared_vla) is not bool:
+            raise ValueError('shared_vla must be a boolean')
         if any(s is not None and s not in ('auto','local','hub') for s in (self.vlm_source,self.vla_source)):
             raise ValueError('Per-model source must be auto/local/hub')
         if self.condition == 'B' and not self.strategy:
@@ -82,6 +85,14 @@ class TrialConfig:
             raise ValueError('command must be a nonempty string when supplied')
         if self.condition == 'E' and (not self.operator or self.input_kind not in ('gamepad', 'keyboard', 'keyboard-gamepad')):
             raise ValueError('E requires operator and supported input_kind')
+
+
+def resolve_trial_vla(config):
+    """Explicit shared mode uses the partial-task checkpoint for every neural condition."""
+    from .model_sources import resolve_model
+    role = 'vla_hier' if config.shared_vla or config.condition != 'A' else 'vla_single'
+    return resolve_model(role, source=config.vla_source or config.model_source,
+        reference=config.checkpoint, models_dir=config.models_dir, hub_id=config.vla_hub_id)
 
 
 def hardware():
@@ -242,11 +253,10 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
             model = planner_adapter
             if config.condition in 'ABC' and learned is None:
                 import torch
-                from .model_sources import resolve_model
-                choice = resolve_model('vla_single' if config.condition == 'A' else 'vla_hier',
-                    source=config.vla_source or config.model_source, reference=config.checkpoint, models_dir=config.models_dir, hub_id=config.vla_hub_id)
+                choice = resolve_trial_vla(config)
                 config.checkpoint = choice.location
                 report.setdefault('models', {})['vla'] = choice.to_dict()
+                report['models']['vla']['instruction_scope'] = 'whole_task' if config.condition == 'A' else 'subtask'
                 torch.manual_seed(config.seed)
                 learned = SmolVLAPolicy(config.checkpoint, device=config.device)
                 report['models']['vla']['action_representation']=learned.action_representation['name']
