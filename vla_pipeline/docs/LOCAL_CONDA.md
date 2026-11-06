@@ -58,3 +58,5 @@ os.environ['FPV2_TRAIN_VLA'] = '1'
 학습 후 출력하는 `TRAINED_VLA['single']`은 A용, `TRAINED_VLA['hier']`는 B/C용 경로입니다. 비교 노트북의 VLA_SCENE/VLA_SUBTASK에 전달합니다. 단순히 student_strategy.py를 실행하거나 VLM의 JSON 계획을 생성하는 것은 VLA 학습이 아닙니다.
 
 1~2스텝은 설치·입출력·저장·재로딩을 확인하는 검사입니다. 유용하게 학습한 모델, 60% 성공, 전체 정리 완료를 입증하지 않습니다. Windows에서는 영상 코덱에 의존하지 않는 이미지 기반 LeRobot 데이터셋을 사용합니다.
+
+로컬 `scripts/train_vla.py`의 `--expert-only --vision-cache <새 캐시 폴더>` 옵션은 고정된 영상 인코더의 실제 특징을 재사용합니다. 새 BF16 특징 캐시는 값을 비트 그대로 `uint16` 배열에 저장하므로, 종전 FP32 저장에 비해 특징 데이터의 파일 크기가 절반입니다. 일치하는 기존 FP32 캐시도 계속 읽을 수 있습니다. 실제 CUDA에서 원본 RGB 경로·새 캐시·종전 저장 형식의 손실값과 기울기 일치를 확인했습니다. 캐시는 학습용이며 배포 모델의 입력은 RGB 두 장·state16·action7 그대로입니다.

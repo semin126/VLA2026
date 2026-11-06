@@ -44,7 +44,12 @@ class FrozenVisionDataset(Dataset):
             return items
         for item,index in zip(items,indices,strict=True):
             for camera_index,camera in enumerate(self.camera_keys):
-                item[self.feature_key(camera)]=torch.from_numpy(np.array(self.cached_features[index,camera_index],copy=True))
+                feature=torch.from_numpy(np.array(self.cached_features[index,camera_index],copy=True))
+                # NumPy has no native bfloat16 dtype. Reinterpret the recorded
+                # bits rather than numerically converting their uint16 values.
+                if self.cached_features.dtype==np.uint16:
+                    feature=feature.view(torch.bfloat16)
+                item[self.feature_key(camera)]=feature
         return items
 
 
@@ -121,13 +126,15 @@ def attach_frozen_vision_cache(policy,dataset,cache_root,*,compute='bf16',batch_
                         embeddings=[policy.model.vlm_with_expert.embed_image(image) for image in images]
                         if array is None:
                             shape=(len(dataset),len(cameras),*embeddings[0].shape[1:])
-                            array=np.lib.format.open_memmap(stage/'features.npy',mode='w+',dtype=np.float32,shape=shape)
                             embedding_dtype=str(embeddings[0].dtype).split('.')[-1]
+                            storage_dtype='uint16' if embedding_dtype=='bfloat16' else 'float32'
+                            array=np.lib.format.open_memmap(stage/'features.npy',mode='w+',dtype=np.dtype(storage_dtype),shape=shape)
                         count=embeddings[0].shape[0]
                         for i,embedding in enumerate(embeddings):
                             if str(embedding.dtype).split('.')[-1]!=embedding_dtype:
                                 raise ValueError('Camera embedding dtypes differ')
-                            array[cursor:cursor+count,i]=embedding.float().cpu().numpy()
+                            encoded=embedding.contiguous().view(torch.uint16) if storage_dtype=='uint16' else embedding.float()
+                            array[cursor:cursor+count,i]=encoded.cpu().numpy()
                         cursor+=count
                         if cursor%max(batch_size*20,1)==0 or cursor==len(dataset):
                             print(f'Frozen RGB embeddings: {cursor}/{len(dataset)}',flush=True)
@@ -139,7 +146,8 @@ def attach_frozen_vision_cache(policy,dataset,cache_root,*,compute='bf16',batch_
                 array=None
                 with (stage/'features.npy').open('rb') as stream:
                     sha=hashlib.file_digest(stream,'sha256').hexdigest()
-                metadata={'key':key,'source':details,'shape':shape,'storage_dtype':'float32',
+                metadata={'key':key,'source':details,'shape':shape,'storage_dtype':storage_dtype,
+                    'storage_format':'bfloat16_bits_uint16' if storage_dtype=='uint16' else 'float32',
                     'embedding_dtype':embedding_dtype,'features_sha256':sha,
                     'scope':'Real deterministic frozen RGB encoder features; no privileged annotations; inference remains RGB2/state16/action7.'}
                 (stage/'metadata.json').write_text(json.dumps(metadata,indent=2,default=str),encoding='utf-8')
@@ -155,7 +163,13 @@ def attach_frozen_vision_cache(policy,dataset,cache_root,*,compute='bf16',batch_
         if hashlib.file_digest(stream,'sha256').hexdigest()!=metadata['features_sha256']:
             raise ValueError('Frozen image feature cache hash mismatch')
     array=np.load(directory/'features.npy',mmap_mode='r')
-    if list(array.shape)!=metadata['shape'] or array.dtype!=np.float32:
+    storage_dtype=metadata['storage_dtype']
+    if storage_dtype not in ('float32','uint16'):
+        raise ValueError('Unsupported frozen image cache storage dtype')
+    if storage_dtype=='uint16' and (metadata['embedding_dtype']!='bfloat16' or
+                                    metadata.get('storage_format')!='bfloat16_bits_uint16'):
+        raise ValueError('uint16 cache entries must explicitly encode bfloat16 bits')
+    if list(array.shape)!=metadata['shape'] or array.dtype!=np.dtype(storage_dtype):
         raise ValueError('Frozen image cache shape/dtype mismatch')
     # Keep metadata and episode windows native; project only the in-memory Arrow
     # view so the loader reads robot state/actions/text without decoding PNGs.
