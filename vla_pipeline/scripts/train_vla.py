@@ -55,6 +55,7 @@ def main():
     ap.add_argument('--mixed-precision',choices=['no','bf16','fp16'],default='no')
     ap.add_argument('--start-frame-weight',type=float,default=1.0,help='Train-only oversampling of early approach frames; 1 keeps native sampling')
     ap.add_argument('--start-frames',type=int,default=8)
+    ap.add_argument('--frame-weights',type=Path,help='Optional train-only NPY weights indexed by original dataset frame; use identical aligned weights for matched A/B views')
     ap.add_argument('--train-vlm',action='store_true',help='Also adapt the VLA visual-language backbone; independent of the upper-level planner VLM')
     ap.add_argument('--train-vision',action='store_true',help='Also adapt the image encoder (implies --train-vlm)')
     ap.add_argument('--expert-only',action='store_true',help='Explicitly freeze the visual-language backbone, including when the base checkpoint previously trained it')
@@ -77,12 +78,42 @@ def main():
         ap.error('output already exists; choose a fresh path (no implicit overwrite/resume)')
     if args.steps < 1 or args.batch_size < 1 or args.save_every < 0 or args.log_every < 1 or args.start_frame_weight<1 or args.start_frames<1:
         ap.error('steps and batch-size must be positive')
+    frame_sampling = None
+    if args.frame_weights is not None:
+        if args.start_frame_weight != 1:
+            ap.error('--frame-weights and --start-frame-weight cannot be combined')
+        import hashlib
+        import io
+        import json
+        import numpy as np
+        try:
+            if args.frame_weights.suffix.lower() != '.npy':
+                raise ValueError('Use a one-dimensional .npy array')
+            frame_weights_bytes = args.frame_weights.read_bytes()
+            frame_weights = np.load(io.BytesIO(frame_weights_bytes), allow_pickle=False)
+            info = json.loads((args.dataset_root/'meta/info.json').read_text(encoding='utf-8-sig'))
+            if (frame_weights.shape != (info['total_frames'],) or not np.isrealobj(frame_weights)
+                    or not np.isfinite(frame_weights).all() or (frame_weights < 0).any()
+                    or not (frame_weights > 0).any()):
+                raise ValueError('Require one finite nonnegative weight per dataset frame, with a positive weight')
+            frame_sampling = {'scheme':'physical_frame_weights',
+                'replacement':True,'seed':args.seed,'dataset_root':str(args.dataset_root.resolve()),
+                'source':str(args.frame_weights.resolve()),
+                'sha256':hashlib.sha256(frame_weights_bytes).hexdigest(),
+                'frames':len(frame_weights)}
+        except (OSError, ValueError, TypeError, KeyError) as exc:
+            ap.error(str(exc))
     from lerobot.configs.default import DatasetConfig
     from lerobot.configs.train import TrainPipelineConfig
     from lerobot.policies.smolvla.configuration_smolvla import SmolVLAConfig
     from lerobot.scripts import lerobot_train
     from vlapipe.model_loading import install_float_master_factory
     install_float_master_factory()
+    if frame_sampling is not None:
+        from functools import partial
+        from vlapipe.training_sampling import FrameWeightedEpisodeSampler
+        lerobot_train.EpisodeAwareSampler=partial(FrameWeightedEpisodeSampler,frame_weights=frame_weights)
+        print('Train sampler: shared physical frame weights '+frame_sampling['sha256'],flush=True)
     if args.start_frame_weight!=1:
         from functools import partial
         from vlapipe.training_sampling import StartWeightedEpisodeSampler
@@ -137,6 +168,11 @@ def main():
     expected_root=args.out.resolve()/'checkpoints'
     def stamp_and_update(path):
         (Path(path)/'pretrained_model/action_representation.json').write_text(json.dumps(representation,indent=2),encoding='utf-8')
+        if frame_sampling is not None:
+            (Path(path)/'training_frame_sampling.json').write_text(json.dumps(frame_sampling,indent=2),encoding='utf-8')
+            retained_weights=args.out/'frame_weights.npy'
+            if not retained_weights.exists():
+                retained_weights.write_bytes(frame_weights_bytes)
         if os.name=='nt':
             update_windows_last_checkpoint(path,expected_root)
         else:

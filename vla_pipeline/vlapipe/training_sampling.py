@@ -23,3 +23,41 @@ class StartWeightedEpisodeSampler(EpisodeAwareSampler):
                                 generator=self._epoch_generator(epoch))
         for position in order[start:]:
             yield self._frame_index(int(position))
+
+
+class FrameWeightedEpisodeSampler(EpisodeAwareSampler):
+    """Share physical-row sampling weights across whole/subtask episode views."""
+
+    def __init__(self, *args, frame_weights, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.shuffle:
+            self._sampling_weights = None
+            return
+        weights = torch.as_tensor(frame_weights, device='cpu')
+        if weights.ndim != 1 or weights.is_complex():
+            raise ValueError('frame_weights must be a real one-dimensional vector')
+        weights = weights.to(torch.float64)
+        if not torch.isfinite(weights).all() or (weights < 0).any():
+            raise ValueError('frame_weights must be finite and nonnegative')
+        # _starts uses original dataset indices, before optional subset mapping.
+        begin = 0
+        selected = []
+        for first, end in zip(self._starts, self._cum_lengths):
+            length = int(end) - begin
+            stop = int(first) + length
+            if stop > len(weights):
+                raise ValueError('frame_weights does not cover the dataset frame indices')
+            selected.append(weights[int(first):stop])
+            begin = int(end)
+        self._sampling_weights = torch.cat(selected).clone()
+        if not (self._sampling_weights > 0).any():
+            raise ValueError('Selected episodes must contain a positive frame weight')
+
+    def _iter_epoch(self, epoch, start):
+        if not self.shuffle:
+            yield from super()._iter_epoch(epoch, start)
+            return
+        order = torch.multinomial(self._sampling_weights, self._num_frames,
+                                  replacement=True, generator=self._epoch_generator(epoch))
+        for position in order[start:]:
+            yield self._frame_index(int(position))
