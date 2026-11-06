@@ -1,0 +1,588 @@
+{
+  "protocol": "final_project_v2.0",
+  "condition": "D",
+  "variant": "D-state",
+  "diagnostic": false,
+  "scene_id": "instructor_test_v1_k06_free_700650",
+  "family": "instructor_test_v1_k06_free_700650",
+  "split": "test",
+  "scene_sha256": "fc9d2f7291693f3010607b831b636ab572855ee42c387bfc1c5478027f466d82",
+  "input_scene_sha256": "fc9d2f7291693f3010607b831b636ab572855ee42c387bfc1c5478027f466d82",
+  "initial_state_sha256": "1a70723430f52e792d42b34bbda55c537465d95b0b9016c9ebbc50a34af78340",
+  "task_sha256": "40aacb1d9d6832c1972f0625921af154cfb5ba0d45433db5f7d14ce6d3a79544",
+  "configuration": {
+    "condition": "D",
+    "seconds": 300.0,
+    "max_steps": 6000,
+    "action_steps": 240,
+    "observer_steps": 60,
+    "max_calls": 8,
+    "max_attempts": 3,
+    "image_size": 128,
+    "planner_image_size": 512,
+    "planner_tokens": 1024,
+    "seed": 42,
+    "checkpoint": null,
+    "vlm_model": null,
+    "model_source": "auto",
+    "vlm_source": null,
+    "vla_source": null,
+    "models_dir": null,
+    "vla_hub_id": null,
+    "vlm_hub_id": null,
+    "strategy": null,
+    "operator": "",
+    "input_kind": "gamepad",
+    "gamepad_map": "gamepad_map.json",
+    "video": false,
+    "device": "auto",
+    "final_test": true,
+    "command": null,
+    "realtime": true
+  },
+  "strategy": null,
+  "events": [
+    {
+      "event": "action_started",
+      "step": 0,
+      "wall": 0.0009886000188998878,
+      "instruction": "Pick up the cube number 5 and place it in the right storage zone.",
+      "action": {
+        "object": "object_5",
+        "target_zone": "right_zone"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 140,
+      "wall": 7.00396100000944,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 5 and place it in the right storage zone.",
+        "action": {
+          "object": "object_5",
+          "target_zone": "right_zone"
+        },
+        "steps": 140,
+        "termination": "classical_controller_finished"
+      }
+    },
+    {
+      "event": "action_started",
+      "step": 140,
+      "wall": 7.048888400022406,
+      "instruction": "Pick up the cube number 3 and place it in the right storage zone.",
+      "action": {
+        "object": "object_3",
+        "target_zone": "right_zone"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 273,
+      "wall": 13.700152400007937,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 3 and place it in the right storage zone.",
+        "action": {
+          "object": "object_3",
+          "target_zone": "right_zone"
+        },
+        "steps": 133,
+        "termination": "classical_controller_finished"
+      }
+    },
+    {
+      "event": "action_started",
+      "step": 273,
+      "wall": 13.74530120001873,
+      "instruction": "Pick up the cube number 9 and place it in the left storage zone.",
+      "action": {
+        "object": "object_9",
+        "target_zone": "left_zone"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 410,
+      "wall": 20.59897320001619,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 9 and place it in the left storage zone.",
+        "action": {
+          "object": "object_9",
+          "target_zone": "left_zone"
+        },
+        "steps": 137,
+        "termination": "classical_controller_finished"
+      }
+    },
+    {
+      "event": "action_started",
+      "step": 410,
+      "wall": 20.642877000034787,
+      "instruction": "Pick up the cube number 6 and place it in the left storage zone.",
+      "action": {
+        "object": "object_6",
+        "target_zone": "left_zone"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 550,
+      "wall": 27.649219000013545,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 6 and place it in the left storage zone.",
+        "action": {
+          "object": "object_6",
+          "target_zone": "left_zone"
+        },
+        "steps": 140,
+        "termination": "classical_controller_finished"
+      }
+    },
+    {
+      "event": "action_started",
+      "step": 550,
+      "wall": 27.6941084000282,
+      "instruction": "Pick up the cube number 1 and place it in the right storage zone.",
+      "action": {
+        "object": "object_1",
+        "target_zone": "right_zone"
+      }
+    },
+    {
+      "event": "after_action",
+      "step": 696,
+      "wall": 34.99761090002721,
+      "feedback": {
+        "event": "after_action",
+        "instruction": "Pick up the cube number 1 and place it in the right storage zone.",
+        "action": {
+          "object": "object_1",
+          "target_zone": "right_zone"
+        },
+        "steps": 146,
+        "termination": "classical_controller_finished"
+      }
+    },
+    {
+      "event": "action_started",
+      "step": 696,
+      "wall": 35.04191319999518,
+      "instruction": "Pick up the cube number 2 and place it in the right storage zone.",
+      "action": {
+        "object": "object_2",
+        "target_zone": "right_zone"
+      }
+    }
+  ],
+  "status": "completed",
+  "feedback_source": "images_and_nonprivileged_execution_metadata",
+  "perception": "oracle_state",
+  "timing_note": "20 Hz maximum; inference counted; synchronous calls may overrun but late actions are discarded",
+  "hardware": {
+    "system": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.16 | packaged by conda-forge | (main, Oct 26 2026, 11:29:01) [MSC v.1944 64 bit (AMD64)]",
+    "machine": "DESKTOP-RO7BEKJ",
+    "packages": {
+      "mujoco": "3.17.0",
+      "numpy": "2.2.6",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.22.1",
+      "lerobot": "0.6.2"
+    },
+    "cuda": true,
+    "gpu": "NVIDIA GeForce RTX 3090 Ti"
+  },
+  "implementation_sha256": "ced524b2c35a3d8b4daae057ab51404d63d0d7376a47e119f4d5a2927a9b2ae3",
+  "restored_state_sha256": "1a70723430f52e792d42b34bbda55c537465d95b0b9016c9ebbc50a34af78340",
+  "initial": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "center_zone",
+      "object_2": "center_zone",
+      "object_3": "center_zone",
+      "object_4": "right_zone",
+      "object_5": "center_zone",
+      "object_6": "center_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "center_zone",
+      "object_10": "left_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.07900005124744428,
+          0.42940000001265755,
+          0.8249708981978092
+        ]
+      },
+      "object_2": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.0053000512979365245,
+          0.4747000000126567,
+          0.8249708981978092
+        ]
+      },
+      "object_3": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.03140005742278698,
+          0.23049996424251962,
+          0.8249708981978092
+        ]
+      },
+      "object_4": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.33,
+          0.259999934390824,
+          0.8249708981978092
+        ]
+      },
+      "object_5": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.08069999999993283,
+          0.20340001236660654,
+          0.8249708981978092
+        ]
+      },
+      "object_6": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          -0.0547999486464775,
+          0.34340000001267346,
+          0.8249708981978092
+        ]
+      },
+      "object_7": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.19999982871502087,
+          0.13999986081048146,
+          0.8249708981978092
+        ]
+      },
+      "object_8": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.33,
+          0.259999934390824,
+          0.8249708981978092
+        ]
+      },
+      "object_9": {
+        "zone": "center_zone",
+        "stable": true,
+        "held": false,
+        "correct": false,
+        "position": [
+          0.04299994884873255,
+          0.3112000000814655,
+          0.8249708981978091
+        ]
+      },
+      "object_10": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.33,
+          0.38,
+          0.8249708981978092
+        ]
+      }
+    },
+    "acc": 0.4,
+    "macro_f1": 0.5416666666666666,
+    "scene_success": false,
+    "per_zone": {
+      "left_zone": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 2,
+        "f1": 0.75
+      },
+      "right_zone": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 4,
+        "f1": 0.3333333333333333
+      }
+    },
+    "n_objects": 10
+  },
+  "initial_image_sha256": "0ff5b6e6cfbe62bc954eabca4d7a1c035527f353dcda351ec73e83e271c7bd8d",
+  "model_load_seconds": 0.00011470000026747584,
+  "setup_wall_seconds": 0.4431757999700494,
+  "stop_reason": "scene_completed",
+  "final": {
+    "gold": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "predicted": {
+      "object_1": "right_zone",
+      "object_2": "right_zone",
+      "object_3": "right_zone",
+      "object_4": "right_zone",
+      "object_5": "right_zone",
+      "object_6": "left_zone",
+      "object_7": "left_zone",
+      "object_8": "left_zone",
+      "object_9": "left_zone",
+      "object_10": "left_zone"
+    },
+    "objects": {
+      "object_1": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.19848457738333833,
+          0.14760709520561435,
+          0.8249709075740622
+        ]
+      },
+      "object_2": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.3275237835161753,
+          0.1522437636028684,
+          0.8249709072544338
+        ]
+      },
+      "object_3": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.19952998130116034,
+          0.26959579042946547,
+          0.8249709075740621
+        ]
+      },
+      "object_4": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.33000000000220947,
+          0.2599999344393539,
+          0.8249709075740619
+        ]
+      },
+      "object_5": {
+        "zone": "right_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          0.19940363825156107,
+          0.3827229368966984,
+          0.8249709075740627
+        ]
+      },
+      "object_6": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.3268944459840111,
+          0.1639158554863799,
+          0.8249709075740621
+        ]
+      },
+      "object_7": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.19999982870568422,
+          0.13999986083144547,
+          0.824970907574062
+        ]
+      },
+      "object_8": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.33000000004692936,
+          0.25999993439584757,
+          0.8249709075740623
+        ]
+      },
+      "object_9": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.19980054736099956,
+          0.26728673660839136,
+          0.8249709075740624
+        ]
+      },
+      "object_10": {
+        "zone": "left_zone",
+        "stable": true,
+        "held": false,
+        "correct": true,
+        "position": [
+          -0.33,
+          0.38,
+          0.8249709075735964
+        ]
+      }
+    },
+    "acc": 1.0,
+    "macro_f1": 1.0,
+    "scene_success": true,
+    "per_zone": {
+      "left_zone": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      },
+      "right_zone": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 0,
+        "f1": 1.0
+      }
+    },
+    "n_objects": 10
+  },
+  "summary": {
+    "total_wall_seconds": 41.38461639999878,
+    "deadline_seconds": 300.0,
+    "deadline_overrun_seconds": 0,
+    "simulation_seconds": 41.1,
+    "steps": 822,
+    "planner_calls": 0,
+    "planner_seconds": 0.0,
+    "vla_inference_seconds": 0.0,
+    "attempts": {
+      "object_5": 1,
+      "object_3": 1,
+      "object_9": 1,
+      "object_6": 1,
+      "object_1": 1,
+      "object_2": 1
+    }
+  },
+  "history": [
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 5 and place it in the right storage zone.",
+      "action": {
+        "object": "object_5",
+        "target_zone": "right_zone"
+      },
+      "steps": 140,
+      "termination": "classical_controller_finished"
+    },
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 3 and place it in the right storage zone.",
+      "action": {
+        "object": "object_3",
+        "target_zone": "right_zone"
+      },
+      "steps": 133,
+      "termination": "classical_controller_finished"
+    },
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 9 and place it in the left storage zone.",
+      "action": {
+        "object": "object_9",
+        "target_zone": "left_zone"
+      },
+      "steps": 137,
+      "termination": "classical_controller_finished"
+    },
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 6 and place it in the left storage zone.",
+      "action": {
+        "object": "object_6",
+        "target_zone": "left_zone"
+      },
+      "steps": 140,
+      "termination": "classical_controller_finished"
+    },
+    {
+      "event": "after_action",
+      "instruction": "Pick up the cube number 1 and place it in the right storage zone.",
+      "action": {
+        "object": "object_1",
+        "target_zone": "right_zone"
+      },
+      "steps": 146,
+      "termination": "classical_controller_finished"
+    }
+  ],
+  "end_to_end_wall_seconds": 41.91134880000027
+}

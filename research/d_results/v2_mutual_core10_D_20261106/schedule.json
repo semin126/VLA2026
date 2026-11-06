@@ -1,0 +1,96 @@
+{
+  "trials": [
+    {
+      "scene": "../test/scene_0050.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0050/42/D"
+    },
+    {
+      "scene": "../test/scene_0051.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0051/42/D"
+    },
+    {
+      "scene": "../test/scene_0060.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0060/42/D"
+    },
+    {
+      "scene": "../test/scene_0061.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0061/42/D"
+    },
+    {
+      "scene": "../test/scene_0070.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0070/42/D"
+    },
+    {
+      "scene": "../test/scene_0071.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0071/42/D"
+    },
+    {
+      "scene": "../test/scene_0080.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0080/42/D"
+    },
+    {
+      "scene": "../test/scene_0081.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0081/42/D"
+    },
+    {
+      "scene": "../test/scene_0090.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0090/42/D"
+    },
+    {
+      "scene": "../test/scene_0091.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0091/42/D"
+    }
+  ],
+  "configuration": {
+    "D": {
+      "condition": "D",
+      "seconds": 300.0,
+      "max_steps": 6000,
+      "action_steps": 240,
+      "observer_steps": 60,
+      "max_calls": 8,
+      "max_attempts": 3,
+      "image_size": 128,
+      "planner_image_size": 512,
+      "planner_tokens": 1024,
+      "seed": 42,
+      "checkpoint": null,
+      "vlm_model": null,
+      "model_source": "auto",
+      "vlm_source": null,
+      "vla_source": null,
+      "models_dir": null,
+      "vla_hub_id": null,
+      "vlm_hub_id": null,
+      "strategy": null,
+      "operator": "",
+      "input_kind": "gamepad",
+      "gamepad_map": "gamepad_map.json",
+      "video": false,
+      "device": "auto",
+      "final_test": true,
+      "command": null,
+      "realtime": true
+    }
+  }
+}

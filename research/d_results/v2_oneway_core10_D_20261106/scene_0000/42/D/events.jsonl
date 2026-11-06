@@ -1,0 +1,3 @@
+{"event": "action_started", "step": 0, "wall": 0.0007939999923110008, "instruction": "Pick up the cube number 9 and place it in the left storage zone.", "action": {"object": "object_9", "target_zone": "left_zone"}}
+{"event": "after_action", "step": 141, "wall": 7.063285199983511, "feedback": {"event": "after_action", "instruction": "Pick up the cube number 9 and place it in the left storage zone.", "action": {"object": "object_9", "target_zone": "left_zone"}, "steps": 141, "termination": "classical_controller_finished"}}
+{"event": "action_started", "step": 141, "wall": 7.107474200020079, "instruction": "Pick up the cube number 4 and place it in the right storage zone.", "action": {"object": "object_4", "target_zone": "right_zone"}}

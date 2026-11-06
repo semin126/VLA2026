@@ -1,0 +1,1 @@
+{"event": "action_started", "step": 0, "wall": 0.0007773000397719443, "instruction": "Pick up the cube number 6 and place it in the left storage zone.", "action": {"object": "object_6", "target_zone": "left_zone"}}

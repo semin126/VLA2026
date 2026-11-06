@@ -1,0 +1,109 @@
+{
+  "protocol": "final_project_v2.0",
+  "groups": [
+    {
+      "cohort": "113a6d142e97",
+      "condition": "D-state",
+      "n": 10,
+      "errors": 0,
+      "initial_acc": 0.4,
+      "acc": 1.0,
+      "acc_gain": 0.6,
+      "new_correct_objects": 6.0,
+      "macro_f1": 1.0,
+      "scene_success": 1.0,
+      "total_wall_seconds": 42.567833829997106,
+      "planner_calls": 0.0,
+      "completed_only": {
+        "n": 10,
+        "acc": 1.0,
+        "acc_gain": 0.6,
+        "macro_f1": 1.0,
+        "scene_success": 1.0
+      },
+      "model_sources": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "note": "Initial correct objects are included in ACC; compare ACC gain as well. Error trials retained; completed-only means also shown."
+    }
+  ],
+  "paired": [],
+  "warnings": [],
+  "scheduled_coverage": [
+    {
+      "scene": "../test/scene_0000.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0000/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "../test/scene_0001.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0001/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "../test/scene_0010.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0010/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "../test/scene_0011.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0011/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "../test/scene_0020.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0020/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "../test/scene_0021.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0021/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "../test/scene_0030.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0030/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "../test/scene_0031.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0031/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "../test/scene_0040.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0040/42/D",
+      "report_exists": true
+    },
+    {
+      "scene": "../test/scene_0041.json",
+      "condition": "D",
+      "seed": 42,
+      "output": "scene_0041/42/D",
+      "report_exists": true
+    }
+  ],
+  "excluded_diagnostic_reports": [],
+  "note": "Compare within cohorts. E is usually a different hardware cohort. Ten scenes give exploratory evidence."
+}
