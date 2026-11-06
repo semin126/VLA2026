@@ -1,5 +1,8 @@
 # Student inference models
 
+The current study runs **both oneway and mutual**, with **A, B and C1 only**.
+Use `notebooks/Mutual_oneway_C1_20261106.ipynb`; C0/C2 are excluded from this study.
+
 For the current student shared-VLA pilot, use the tested
 `instructor/runtime-conda-fixes` branch and `release_manifest_deadline_20261106.json`.
 Download `--roles vlm,vla_hier`, then run with `--shared-vla`: A receives the

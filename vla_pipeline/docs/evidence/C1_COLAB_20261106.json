@@ -1,0 +1,626 @@
+{
+  "status": "passed",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "notebook_sha256": "2a28d0ac324067cd5725e0dab491d23073ae4f134dbd245bddd1b73849ef2beb",
+  "source": {
+    "project": "/content/fpv2_c1_4d479a9c/vla_pipeline",
+    "commit": "e20789dc28cc7194cc2134286d6f0f6a1e4ed7cd",
+    "branch": "instructor/runtime-conda-fixes",
+    "tracked_changes": false,
+    "student_strategy_sha256": "67c8df9a7382683969f58077f2ca688d14c5ea047cc7631d949d393b59d22bd8"
+  },
+  "planned_final_jobs": 60,
+  "planned_families": [
+    "oneway",
+    "mutual"
+  ],
+  "scope": "Executed exact notebook setup, official downloader (cached public bundles, full hashes), four final-scene schedules without inference, run gate, then exact execution/reporting cells on 3 reused validation trials only. Validation budgets 30sec/300steps/2calls instead of final300sec/6000steps/12calls. Existing locked Python3.12 GPU environment reused, package reinstall skipped; Drive backup skipped. Actual videos, aggregation and ZIP verified. No final20 benchmark, no T4 or fresh-install/Drive certification, no learning in Colab.",
+  "rows": [
+    {
+      "condition": "A",
+      "summary": {
+        "total_wall_seconds": 16.958553260999906,
+        "deadline_seconds": 30.0,
+        "deadline_overrun_seconds": 0,
+        "simulation_seconds": 15.0,
+        "steps": 300,
+        "planner_calls": 0,
+        "planner_seconds": 0.0,
+        "vla_inference_seconds": 4.289777554000466,
+        "attempts": {}
+      },
+      "stop_reason": "step_limit",
+      "models": {
+        "vla": {
+          "role": "vla_hier",
+          "source": "local",
+          "location": "/content/vla_model_inference_20261106/shared_vla_real_v2/models/vla_hier/pretrained_model",
+          "reason": "models directory preferred",
+          "instruction_scope": "whole_task",
+          "action_representation": "absolute_position"
+        }
+      },
+      "checkpoint_manifest": {
+        "action_representation.json": "1d3208bd4aa5b766a00338f7b793f11ff770553aeee41f7aaafda003a52d8e23",
+        "config.json": "ad07cebe347d1331fe6202f7aaac76bb2fb9c54b1f930cfeede9518a8aa356fd",
+        "files_manifest.json": "effc90cb5ec8ce42e3e2ae4666f6d1d57c61b4b79c9ae65f193983d31b0b208e",
+        "model.safetensors": "5e9744b7aa1b6b7bf8a663fc60658c6a5da9c851d89aafb604da914e529cf4ab",
+        "model_info.json": "6d663bd7a9b37589fe1106b429b10cf2c9cfe82fcf5766cca17854953c01280b",
+        "policy_postprocessor.json": "68d350fd71551e0760d07142f4c02bed7c80a1d7eae808f9276bc81b4ef76dd4",
+        "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "7a19a33a67ae76cf7b1aa5e82c19f70f22d02925ff59c1edadcc89211ef03e61",
+        "policy_preprocessor.json": "804d0e6a5d894b4e79aadfbd52228936589eeb8b7549ed3ecd87363c54390094",
+        "policy_preprocessor_step_5_normalizer_processor.safetensors": "6a1fb65d8cd6730473262dff01f37485e00020b8bc4fb84bd31f56987de6dbae"
+      },
+      "restored_state_sha256": "8b9bd302a2c36c3a55bde8de00cbd3908df24443791c7eeb11e3fe5b2a5f3323",
+      "strategy": null,
+      "final": {
+        "gold": {
+          "object_1": "right_zone",
+          "object_2": "right_zone",
+          "object_3": "right_zone",
+          "object_4": "right_zone",
+          "object_5": "right_zone",
+          "object_6": "left_zone",
+          "object_7": "left_zone",
+          "object_8": "left_zone",
+          "object_9": "left_zone",
+          "object_10": "left_zone"
+        },
+        "predicted": {
+          "object_1": "right_zone",
+          "object_2": "center_zone",
+          "object_3": "right_zone",
+          "object_4": "right_zone",
+          "object_5": "right_zone",
+          "object_6": "left_zone",
+          "object_7": "left_zone",
+          "object_8": "left_zone",
+          "object_9": "left_zone",
+          "object_10": "left_zone"
+        },
+        "objects": {
+          "object_1": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.20000000000838325,
+              0.13999985860338282,
+              0.824970907574062
+            ]
+          },
+          "object_2": {
+            "zone": "center_zone",
+            "stable": true,
+            "held": false,
+            "correct": false,
+            "position": [
+              -0.005131391670599318,
+              0.24998935605673997,
+              0.8249709075740623
+            ]
+          },
+          "object_3": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.20000000000878698,
+              0.2599999343724649,
+              0.8249709075740622
+            ]
+          },
+          "object_4": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.3300000000083274,
+              0.25999993440658675,
+              0.8249709075740622
+            ]
+          },
+          "object_5": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.2,
+              0.38,
+              0.8249709075744641
+            ]
+          },
+          "object_6": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.3300000611252362,
+              0.1400000271580016,
+              0.8249709075740622
+            ]
+          },
+          "object_7": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.199999828688398,
+              0.13999986081365157,
+              0.8249709075740619
+            ]
+          },
+          "object_8": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.3300000000112453,
+              0.259999934408543,
+              0.8249709075740624
+            ]
+          },
+          "object_9": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.20000003308956626,
+              0.25999993466972326,
+              0.8249709075740622
+            ]
+          },
+          "object_10": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.33,
+              0.38,
+              0.8249709075744641
+            ]
+          }
+        },
+        "acc": 0.9,
+        "macro_f1": 0.9444444444444444,
+        "scene_success": false,
+        "per_zone": {
+          "left_zone": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "f1": 1.0
+          },
+          "right_zone": {
+            "tp": 4,
+            "fp": 0,
+            "fn": 1,
+            "f1": 0.8888888888888888
+          }
+        },
+        "n_objects": 10
+      }
+    },
+    {
+      "condition": "B",
+      "summary": {
+        "total_wall_seconds": 8.74571378300061,
+        "deadline_seconds": 30.0,
+        "deadline_overrun_seconds": 0,
+        "simulation_seconds": 5.25,
+        "steps": 105,
+        "planner_calls": 1,
+        "planner_seconds": 2.78990570499991,
+        "vla_inference_seconds": 1.5426343260114663,
+        "attempts": {
+          "object_2": 1
+        }
+      },
+      "stop_reason": "scene_completed",
+      "models": {
+        "vla": {
+          "role": "vla_hier",
+          "source": "local",
+          "location": "/content/vla_model_inference_20261106/shared_vla_real_v2/models/vla_hier/pretrained_model",
+          "reason": "models directory preferred",
+          "instruction_scope": "subtask",
+          "action_representation": "absolute_position"
+        },
+        "vlm": {
+          "role": "vlm",
+          "source": "local",
+          "location": "/content/vla_model_inference_20261106/shared_vla_real_v2/models/vlm/pretrained_model",
+          "reason": "models directory preferred"
+        }
+      },
+      "checkpoint_manifest": {
+        "action_representation.json": "1d3208bd4aa5b766a00338f7b793f11ff770553aeee41f7aaafda003a52d8e23",
+        "config.json": "ad07cebe347d1331fe6202f7aaac76bb2fb9c54b1f930cfeede9518a8aa356fd",
+        "files_manifest.json": "effc90cb5ec8ce42e3e2ae4666f6d1d57c61b4b79c9ae65f193983d31b0b208e",
+        "model.safetensors": "5e9744b7aa1b6b7bf8a663fc60658c6a5da9c851d89aafb604da914e529cf4ab",
+        "model_info.json": "6d663bd7a9b37589fe1106b429b10cf2c9cfe82fcf5766cca17854953c01280b",
+        "policy_postprocessor.json": "68d350fd71551e0760d07142f4c02bed7c80a1d7eae808f9276bc81b4ef76dd4",
+        "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "7a19a33a67ae76cf7b1aa5e82c19f70f22d02925ff59c1edadcc89211ef03e61",
+        "policy_preprocessor.json": "804d0e6a5d894b4e79aadfbd52228936589eeb8b7549ed3ecd87363c54390094",
+        "policy_preprocessor_step_5_normalizer_processor.safetensors": "6a1fb65d8cd6730473262dff01f37485e00020b8bc4fb84bd31f56987de6dbae"
+      },
+      "initial_prompt_sha256": "cf9b7c312706ab5c96888858516d524085f8a07a37c167e3c925d92f15392651",
+      "restored_state_sha256": "8b9bd302a2c36c3a55bde8de00cbd3908df24443791c7eeb11e3fe5b2a5f3323",
+      "strategy": {
+        "sha256": "c3133db2709ade474c9915a0ae0fe9a8fc98e8a9d551d1f80c9d26fbcf49d598",
+        "path": "/content/fpv2_c1_4d479a9c/vla_pipeline/final_project_v2/baseline_strategy.py"
+      },
+      "final": {
+        "gold": {
+          "object_1": "right_zone",
+          "object_2": "right_zone",
+          "object_3": "right_zone",
+          "object_4": "right_zone",
+          "object_5": "right_zone",
+          "object_6": "left_zone",
+          "object_7": "left_zone",
+          "object_8": "left_zone",
+          "object_9": "left_zone",
+          "object_10": "left_zone"
+        },
+        "predicted": {
+          "object_1": "right_zone",
+          "object_2": "right_zone",
+          "object_3": "right_zone",
+          "object_4": "right_zone",
+          "object_5": "right_zone",
+          "object_6": "left_zone",
+          "object_7": "left_zone",
+          "object_8": "left_zone",
+          "object_9": "left_zone",
+          "object_10": "left_zone"
+        },
+        "objects": {
+          "object_1": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.19999999999540843,
+              0.13999985860684416,
+              0.8249709075740621
+            ]
+          },
+          "object_2": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.317629801453415,
+              0.14604059636436884,
+              0.8249709073560023
+            ]
+          },
+          "object_3": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.1999999999956114,
+              0.2599999344001497,
+              0.8249709075740621
+            ]
+          },
+          "object_4": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.32999999999178536,
+              0.25999993439919566,
+              0.8249709075740623
+            ]
+          },
+          "object_5": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.2,
+              0.38,
+              0.8249709075740654
+            ]
+          },
+          "object_6": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.33000006112837454,
+              0.14000002714843973,
+              0.8249709075740622
+            ]
+          },
+          "object_7": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.19999982870454067,
+              0.13999986080381444,
+              0.8249709075740621
+            ]
+          },
+          "object_8": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.3300000000038527,
+              0.259999934376903,
+              0.8249709075740623
+            ]
+          },
+          "object_9": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.20000003308633,
+              0.25999993467451415,
+              0.8249709075740627
+            ]
+          },
+          "object_10": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.33,
+              0.38,
+              0.8249709075740654
+            ]
+          }
+        },
+        "acc": 1.0,
+        "macro_f1": 1.0,
+        "scene_success": true,
+        "per_zone": {
+          "left_zone": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "f1": 1.0
+          },
+          "right_zone": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "f1": 1.0
+          }
+        },
+        "n_objects": 10
+      }
+    },
+    {
+      "condition": "C",
+      "summary": {
+        "total_wall_seconds": 8.760062552999443,
+        "deadline_seconds": 30.0,
+        "deadline_overrun_seconds": 0,
+        "simulation_seconds": 5.25,
+        "steps": 105,
+        "planner_calls": 1,
+        "planner_seconds": 2.7976310159992863,
+        "vla_inference_seconds": 1.5469414120034344,
+        "attempts": {
+          "object_2": 1
+        }
+      },
+      "stop_reason": "scene_completed",
+      "models": {
+        "vla": {
+          "role": "vla_hier",
+          "source": "local",
+          "location": "/content/vla_model_inference_20261106/shared_vla_real_v2/models/vla_hier/pretrained_model",
+          "reason": "models directory preferred",
+          "instruction_scope": "subtask",
+          "action_representation": "absolute_position"
+        },
+        "vlm": {
+          "role": "vlm",
+          "source": "local",
+          "location": "/content/vla_model_inference_20261106/shared_vla_real_v2/models/vlm/pretrained_model",
+          "reason": "models directory preferred"
+        }
+      },
+      "checkpoint_manifest": {
+        "action_representation.json": "1d3208bd4aa5b766a00338f7b793f11ff770553aeee41f7aaafda003a52d8e23",
+        "config.json": "ad07cebe347d1331fe6202f7aaac76bb2fb9c54b1f930cfeede9518a8aa356fd",
+        "files_manifest.json": "effc90cb5ec8ce42e3e2ae4666f6d1d57c61b4b79c9ae65f193983d31b0b208e",
+        "model.safetensors": "5e9744b7aa1b6b7bf8a663fc60658c6a5da9c851d89aafb604da914e529cf4ab",
+        "model_info.json": "6d663bd7a9b37589fe1106b429b10cf2c9cfe82fcf5766cca17854953c01280b",
+        "policy_postprocessor.json": "68d350fd71551e0760d07142f4c02bed7c80a1d7eae808f9276bc81b4ef76dd4",
+        "policy_postprocessor_step_0_unnormalizer_processor.safetensors": "7a19a33a67ae76cf7b1aa5e82c19f70f22d02925ff59c1edadcc89211ef03e61",
+        "policy_preprocessor.json": "804d0e6a5d894b4e79aadfbd52228936589eeb8b7549ed3ecd87363c54390094",
+        "policy_preprocessor_step_5_normalizer_processor.safetensors": "6a1fb65d8cd6730473262dff01f37485e00020b8bc4fb84bd31f56987de6dbae"
+      },
+      "initial_prompt_sha256": "cf9b7c312706ab5c96888858516d524085f8a07a37c167e3c925d92f15392651",
+      "restored_state_sha256": "8b9bd302a2c36c3a55bde8de00cbd3908df24443791c7eeb11e3fe5b2a5f3323",
+      "strategy": {
+        "sha256": "02d026f07c1ca947cfba7b7d4f2fd3d2bf33da662da3ed4600dc16f69ec3b40b",
+        "path": "/content/fpv2_c1_4d479a9c/vla_pipeline/final_project_v2/student_strategy_c1_v2.py"
+      },
+      "final": {
+        "gold": {
+          "object_1": "right_zone",
+          "object_2": "right_zone",
+          "object_3": "right_zone",
+          "object_4": "right_zone",
+          "object_5": "right_zone",
+          "object_6": "left_zone",
+          "object_7": "left_zone",
+          "object_8": "left_zone",
+          "object_9": "left_zone",
+          "object_10": "left_zone"
+        },
+        "predicted": {
+          "object_1": "right_zone",
+          "object_2": "right_zone",
+          "object_3": "right_zone",
+          "object_4": "right_zone",
+          "object_5": "right_zone",
+          "object_6": "left_zone",
+          "object_7": "left_zone",
+          "object_8": "left_zone",
+          "object_9": "left_zone",
+          "object_10": "left_zone"
+        },
+        "objects": {
+          "object_1": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.19999999998554657,
+              0.13999985860525432,
+              0.8249709075740626
+            ]
+          },
+          "object_2": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.3226216035505408,
+              0.14630105328171777,
+              0.8249709074778344
+            ]
+          },
+          "object_3": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.20000000001591955,
+              0.25999993437514735,
+              0.8249709075740622
+            ]
+          },
+          "object_4": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.3299999999891598,
+              0.259999934401045,
+              0.8249709075740627
+            ]
+          },
+          "object_5": {
+            "zone": "right_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              0.2,
+              0.38,
+              0.8249709075740653
+            ]
+          },
+          "object_6": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.3300000611141806,
+              0.14000002716534476,
+              0.8249709075740624
+            ]
+          },
+          "object_7": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.19999982871596153,
+              0.13999986082483287,
+              0.824970907574062
+            ]
+          },
+          "object_8": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.3300000000002331,
+              0.25999993437944635,
+              0.8249709075740623
+            ]
+          },
+          "object_9": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.20000003309039854,
+              0.2599999346866227,
+              0.8249709075740621
+            ]
+          },
+          "object_10": {
+            "zone": "left_zone",
+            "stable": true,
+            "held": false,
+            "correct": true,
+            "position": [
+              -0.33,
+              0.38,
+              0.8249709075740653
+            ]
+          }
+        },
+        "acc": 1.0,
+        "macro_f1": 1.0,
+        "scene_success": true,
+        "per_zone": {
+          "left_zone": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "f1": 1.0
+          },
+          "right_zone": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "f1": 1.0
+          }
+        },
+        "n_objects": 10
+      }
+    }
+  ]
+}

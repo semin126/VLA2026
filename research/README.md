@@ -17,27 +17,13 @@
 | `videos/` | D 실행 영상 26개 (MP4, 실제 속도) |
 | `d_results/` | D 실행의 원본 기록 30개 (점수, 사건, 시작·끝 화면, 상태 기록) |
 
-## 지금 상태 (2026-11-06 12:50 기준)
+## 현재 본실험 안내
 
-| 항목 | 상태 |
-|---|---|
-| 테스트 씬 100개 (oneway 50, mutual 50) | 완성 |
-| D 실험 (두 계열 10개씩) | 완료 |
-| A, B, C 실험 | 모델 학습이 끝난 뒤 Colab에서 진행 |
-| 모델 학습 | 진행 중. `1_experiment_setup.md` 5절은 12:28 기록 기준 |
+**oneway와 mutual 모두**, **A·B·C1**을 실행합니다. C0·C2는 이번 본실험에서 제외합니다.
+코드는 `instructor/runtime-conda-fixes`, 모델은 고정 배포 VLM R5 + motion7k입니다.
+전용 노트북 `vla_pipeline/notebooks/Mutual_oneway_C1_20261106.ipynb`와
+[Colab 안내](3_colab_guide.md)를 사용하세요. 네 묶음을 합쳐 20씬 × 3조건 = 60회입니다.
 
-## 조교가 나눠 주기 전에 확인할 것
-
-1. 테스트 씬 묶음(`vla_pipeline/outputs/shared_scenes/instructor_test_v2/`)과 C 전략 파일 3개(`vla_pipeline/final_project_v2/student_strategy_c0_v2.py`, `c1_v2.py`, `c2_v2.py`)를 `c-loop-validation` 브랜치에 올렸는가. 올리지 않았다면 둘을 묶은 `repo_overlay.zip`을 따로 나눠 준다.
-2. `3_colab_guide.md`의 담당 표에 실제 이름을 적었는가.
-3. 최종 모델이 정해졌으면 `1_experiment_setup.md` 5절의 버전과 검증 수치를 고쳤는가.
-4. Colab에서 한 묶음을 먼저 돌려 `3_colab_guide.md`의 절차가 끝까지 되는지 확인했는가. 이 절차는 아직 Colab에서 통째로 돌려 보지 못했다.
-
-## 확인한 것과 확인하지 못한 것
-
-| | 내용 |
-|---|---|
-| 확인함 | D 결과는 공식 실행기로 돌린 값이다. 씬을 고를 때의 확인 값과 30개 모두 스텝 수까지 같았다 |
-| 확인함 | C 전략 3개는 실제 실행기에서 가짜 모델(항상 같은 계획을 내는 VLM, 움직이지 않는 VLA)로 오류 없이 끝까지 돌았다. C0는 계획이 끝날 때만, C1·C2는 운반 직후에 재계획했다 |
-| 확인함 | Colab 안내의 실행 명령은 실행기의 인자 검사를 통과한다 (씬 5개, 전략 파일, 호출 12회, 300초) |
-| 확인 못 함 | Colab에서의 전체 절차, T4 GPU에서의 속도, 실제 모델로 A·B·C를 돌렸을 때의 동작 |
+C1은 실패 대응과 호출 비용을 고려한 사전 선택이며 최고 성능이 입증된 것은 아닙니다.
+D는 기존 참고 자료를 보관하고, C 전략 세 종류의 설명은 배경 학습용으로 남깁니다.
+실제 Colab 검사 범위와 한계는 `vla_pipeline/docs/C1_COLAB_VALIDATION_20261106.md`에 기록합니다.

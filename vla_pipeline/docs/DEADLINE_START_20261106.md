@@ -14,9 +14,13 @@
 전체 과제를 별도 학습한 VLA의 일반적 성능까지 결론 내리지 않습니다.
 새로운 전체 데이터 학습은 로컬에서 계속 진행하며, 이 고정 파일을 중간에 바꾸지 않습니다.
 
+**현재 실험 범위: oneway·mutual 모두, A·B·C1만 실행합니다.**
+전용 노트북은 `notebooks/Mutual_oneway_C1_20261106.ipynb`입니다.
+C1은 사전 선택이며 성능 1위가 확인된 것은 아닙니다.
+
 ## 모델 받기
 
-학생 수정본을 보관한 뒤 `c-loop-validation`의 최신 코드를 받으세요.
+학생 수정본을 보관한 뒤 `instructor/runtime-conda-fixes`의 최신 코드를 받으세요.
 터미널의 작업 폴더가 `vla_pipeline`일 때:
 
 ```powershell
