@@ -173,6 +173,9 @@ REACH_MAX = 0.65   # 실측상 0.78 까지 가능하나 자세 여유를 두어 
 # 3 x 1 분할 — 좌/중/우
 ZONE_NAMES = ("left_zone", "center_zone", "right_zone")
 _zw = (WORK_X[1] - WORK_X[0]) / 3.0
+PUSH_DISTANCE = 0.07  # Fixed directional push contract (metres).
+MAX_PUSH_ATTEMPTS = 2  # Per object, independent of transport attempts.
+
 ZONES = {
     "left_zone": {
         "x": (WORK_X[0], WORK_X[0] + _zw),

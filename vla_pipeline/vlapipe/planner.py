@@ -44,6 +44,45 @@ def instruction_text(obj_name: str, zone: str) -> tuple[str, str]:
     return en, ko
 
 
+PUSH_DIRECTIONS = {
+    'toward_robot': (0.0, -1.0),
+    'away': (0.0, 1.0),
+    'left': (-1.0, 0.0),
+    'right': (1.0, 0.0),
+}
+
+
+def push_instruction(obj_name: str, direction: str) -> str:
+    """Stable English labels shared by demonstration collection and inference.
+
+    Numbered objects use exactly 'Push object N ...', without 'the'.
+    """
+    if direction not in PUSH_DIRECTIONS:
+        raise ValueError(f'Unknown push direction: {direction!r}')
+    obj = C.OBJECT_BY_NAME[obj_name]
+    label = f'object {int(obj_name[7:])}' if re.fullmatch(r'object_\d+', obj_name) else obj['ref_en']
+    suffix = {'toward_robot': 'toward the robot', 'away': 'away from the robot',
+              'left': 'to the left', 'right': 'to the right'}[direction]
+    return f'Push {label} {suffix}.'
+
+
+def push_destination(xy, direction: str) -> tuple[float, float]:
+    """Translate current world XY by C.PUSH_DISTANCE (7 cm), without clipping.
+
+    agentview and C.ZONES: image left = -x, right = +x; toward_robot = -y,
+    away = +y. No live position is supplied to learned agents: only the D-state
+    teacher or privileged demonstration collector may resolve a destination.
+    A destination outside the workspace is not silently repaired.
+    """
+    if direction not in PUSH_DIRECTIONS:
+        raise ValueError(f'Unknown push direction: {direction!r}')
+    x, y = map(float, xy)
+    if not all(math.isfinite(v) for v in (x, y)):
+        raise ValueError('Push origin must be finite XY')
+    dx, dy = PUSH_DIRECTIONS[direction]
+    return x + C.PUSH_DISTANCE * dx, y + C.PUSH_DISTANCE * dy
+
+
 _LIST_MARKER = re.compile(r"^\s*\d+\s*[.)]\s*")
 
 

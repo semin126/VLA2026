@@ -193,8 +193,6 @@ class ScriptedSortingPolicy:
 
         env, q = self.env, self._grasp_quat
         tz = C.TABLE_TOP_Z
-        px, py = self._pick_xy
-        qx, qy = self._place_xy
 
         # ---- 밀기 경로 ----
         if self.phase.startswith("push_"):
@@ -223,6 +221,8 @@ class ScriptedSortingPolicy:
                     self._enter("done")
                 return self._move(t, q, C.GRIPPER_CLOSE_CMD)
 
+        px, py = self._pick_xy
+        qx, qy = self._place_xy
         if self.phase == "hover":
             tgt = [px, py, tz + Z_HOVER]
             if self._at(tgt, POS_TOL):
