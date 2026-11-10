@@ -1,5 +1,9 @@
 # Final project ver2.0 — 학생 실행·수정 안내
 
+**2026-11-10 밀기 인터페이스 추가:** [밀기 행동·방향·시도 한도와 학생 질문](PUSH_ACTION_20261110.md)을
+먼저 확인하세요. 새 밀기 전략은 명시적으로 선택하는 예제이며, 기존 배포 모델의 밀기 능력을
+입증한 것은 아닙니다. 아래 11월 6일 고정 본실험과 새 실험 결과를 구분하세요.
+
 이 안내는 **어느 파일에 무엇을 넣고, 어떤 데이터가 다음 모듈로 전달되는지**를 설명합니다. 기준 폴더는 `vla_pipeline/`입니다. 기존 `vlapipe/student_design.py`는 v1 과제이므로 이 안내에서 수정하지 않습니다.
 
 **2026-11-06 본실험은 oneway·mutual 모두, 조건 A·B·C1입니다.** [전용 Colab 안내](../../research/3_colab_guide.md)와 [전용 노트북](../notebooks/Mutual_oneway_C1_20261106.ipynb)을 사용하세요. `instructor/runtime-conda-fixes`의 고정 명세로 VLM R5 + motion7k를 받고, `--shared-vla`로 A/B/C1 모두 같은 부분 작업 VLA를 사용합니다. C1은 사전 선택이며 성능 1위가 확인된 것은 아닙니다.

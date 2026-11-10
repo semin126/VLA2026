@@ -7,6 +7,7 @@ import math
 from pathlib import Path
 
 from .. import config as C
+from ..planner import PUSH_DIRECTIONS
 
 
 def dump(path, value):
@@ -48,10 +49,15 @@ def public_task(command):
             'objects': [{'object': o['name'], 'description': o['ref_en'],
                          'target_zone': o['home_zone'], 'fixed_release_xy': list(slots[o['name']][:2])} for o in C.OBJECTS],
             'zones': {n: {'label': z['label_en'], 'x': list(z['x']), 'y': list(z['y'])} for n, z in C.ZONES.items()},
-            'available_actions': ['transport'],
+            'available_actions': ['transport', 'push'],
+            'push_distance_m': C.PUSH_DISTANCE,
+            'push_directions': {key: list(xy) for key, xy in PUSH_DIRECTIONS.items()},
+            'push_attempt_limit_per_object': C.MAX_PUSH_ATTEMPTS,
             'note': 'Release coordinates are fixed public goal definitions, NOT current object positions. '
                     'The low-level skill uses each object\'s fixed slot when transporting to its home zone. '
-                    'Transport can also move a blocker to a storage zone. No pushing skill is assumed.'}
+                    'Transport can also move a blocker to a storage zone. '
+                    'Push requests use a fixed directional instruction; successful pushing depends on the installed VLA. '
+                    'Pushes have a separate per-object limit and do not consume transport attempts.'}
 
 
 def task_text(task):
@@ -62,9 +68,14 @@ def task_text(task):
 
 OUTPUT_CONTRACT = '''Return ONE JSON object, without markdown:
 {"assessments": [{"object": "object_1", "accessible": true, "blockers": [], "reason": "visual evidence"}],
- "plan": [{"object": "object_1", "target_zone": "right_zone", "reason": "strategy"}],
+ "plan": [{"object": "object_1", "action": "transport", "target_zone": "right_zone", "reason": "strategy"}],
  "done": false}
-Use only listed object/zone identifiers. Plan entries mean pick-and-place; their order is executed.
+Use only listed object/zone identifiers. Plan entries are executed in order.
+Transport: {"object": "object_1", "action": "transport", "target_zone": "right_zone", "reason": "strategy"}.
+Push: {"object": "object_1", "action": "push", "direction": "toward_robot", "reason": "strategy"}.
+Push direction must be toward_robot (-y), away (+y), left (-x/image left), or right (+x/image right).
+Push distance is fixed at 0.07 m. A push does not require target_zone. Do not output coordinates.
+For legacy transport-only plans, an omitted action still means transport.
 You may transport a blocker to a storage zone before the obstructed object.
 Accessibility and ordering must be your own judgments from the supplied image and context.
 '''
@@ -95,10 +106,19 @@ def parse_response(raw):
                 or any(n not in C.OBJECT_NAMES for n in item['blockers'])):
             raise ValueError('Invalid accessibility assessment')
     for item in value['plan']:
-        if (not isinstance(item, dict) or item.get('object') not in C.OBJECT_NAMES
-                or item.get('target_zone') not in C.ZONES
-                or item.get('action', 'transport') != 'transport'):
-            raise ValueError('Invalid plan object/zone/action')
+        if not isinstance(item, dict) or item.get('object') not in C.OBJECT_NAMES:
+            raise ValueError('Invalid plan object')
+        action = item.get('action', 'transport')
+        if action == 'transport':
+            if not isinstance(item.get('target_zone'), str) or item['target_zone'] not in C.ZONES:
+                raise ValueError('Transport requires a listed target_zone')
+        elif action == 'push':
+            if not isinstance(item.get('direction'), str) or item['direction'] not in PUSH_DIRECTIONS:
+                raise ValueError('Push requires a listed direction')
+            if 'push_to' in item:
+                raise ValueError('Push coordinates are not accepted; use direction')
+        else:
+            raise ValueError('Invalid plan action')
     if value['done'] and value['plan']:
         raise ValueError('done:true must have an empty plan')
     return value

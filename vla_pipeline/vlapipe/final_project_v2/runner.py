@@ -21,7 +21,7 @@ from PIL import Image, ImageDraw
 
 from .. import config as C
 from .. import accessibility as access
-from ..planner import instruction_text
+from ..planner import instruction_text, push_instruction, push_destination
 from ..policy import ScriptedSortingPolicy, SmolVLAPolicy
 from . import PROTOCOL
 from .common import compose_prompt, digest, dump, file_hash, finite_positive, load_strategy, parse_response, public_task, task_text
@@ -234,6 +234,7 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
     dump(out / 'task.json', task)
     steps = calls = 0
     history, attempts, queue = [], {}, []
+    push_attempts = {}
     start = None
     source = panel = None
     trace = {'qpos': [], 'qvel': [], 'actions': [], 'wall': [], 'tasks': [],
@@ -319,6 +320,7 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                 # Student hooks receive JSON snapshots, not aliases to mutable
                 # executor actions, history or the last parsed model response.
                 return deepcopy({'event': name, 'feedback': feedback, 'history': list(history[-20:]),
+                        'execution_attempts': {'transport': dict(attempts), 'push': dict(push_attempts)},
                         'remaining_seconds': max(0, deadline-time.perf_counter()),
                         'remaining_calls': config.max_calls-calls, 'queued_actions': list(queue),
                         'last_model_response': last_model_response})
@@ -426,19 +428,26 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                         stop = 'plan_exhausted'
                         break
                     n = chosen['object']
-                    if attempts.get(n, 0) >= config.max_attempts:
-                        stop = 'object_attempt_limit'
+                    is_push = chosen.get('action', 'transport') == 'push'
+                    counts = push_attempts if is_push else attempts
+                    cap = C.MAX_PUSH_ATTEMPTS if is_push else config.max_attempts
+                    if counts.get(n, 0) >= cap:
+                        stop = 'push_attempt_limit' if is_push else 'object_attempt_limit'
                         break
-                    attempts[n] = attempts.get(n, 0)+1
+                    counts[n] = counts.get(n, 0)+1
                     current = chosen
-                    task_label = instruction_text(n, chosen['target_zone'])[0]
+                    task_label = (push_instruction(n, chosen['direction']) if is_push
+                                  else instruction_text(n, chosen['target_zone'])[0])
                     current_steps = 0
                     if learned is not None:
                         learned.reset()
                     else:
                         teacher = ScriptedSortingPolicy(env)
                         teacher.max_attempts = 1
-                        teacher.set_subtask(chosen)
+                        teacher_task = dict(chosen)
+                        if is_push:
+                            teacher_task['push_to'] = push_destination(env.object_pos(n)[:2], chosen['direction'])
+                        teacher.set_subtask(teacher_task)
                     event('action_started', instruction=task_label, action=chosen)
                 tick = time.perf_counter()
                 if config.condition == 'E':
@@ -493,6 +502,8 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                 action_done = current is not None and (current_steps >= config.action_steps or (teacher is not None and teacher.done))
                 if action_done:
                     feedback = {'event': 'after_action', 'instruction': task_label, 'action': current,
+                                'action_type': current.get('action', 'transport'),
+                                'direction': current.get('direction'),
                                 'steps': current_steps, 'termination': 'fixed_action_horizon' if learned else 'classical_controller_finished'}
                     history.append(feedback.copy())
                     event('after_action', feedback=feedback)
@@ -532,7 +543,8 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                                  'deadline_overrun_seconds': max(0, wall-config.seconds),
                                  'simulation_seconds': steps/C.CONTROL_HZ, 'steps': steps, 'planner_calls': calls,
                                  'planner_seconds': planning_seconds, 'vla_inference_seconds': action_inference_seconds,
-                                 'attempts': attempts}
+                                 'attempts': attempts, 'push_attempts': push_attempts,
+                                 'push_attempt_limit_per_object': C.MAX_PUSH_ATTEMPTS}
             report['history'] = history
             Image.fromarray(env.render('agentview', 512, 512)).save(out / 'after.png')
             if not trace['qpos']:
