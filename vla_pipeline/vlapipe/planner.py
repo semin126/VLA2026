@@ -44,6 +44,47 @@ def instruction_text(obj_name: str, zone: str) -> tuple[str, str]:
     return en, ko
 
 
+GRASP_AXES = {'left-right': 0.0, 'front-back': math.pi / 2}
+
+
+def grasp_axis_yaw(cube_yaw: float, axis: str) -> float:
+    """Nearest cube face axis to world x (left-right) or y (front-back).
+
+    Matches Claude phys_access2.face_yaw, including its first-on-tie rule.
+    Recompute from current object yaw before descent; never snap to world yaw.
+    """
+    if not isinstance(axis, str) or axis not in GRASP_AXES:
+        raise ValueError(f'Unknown grasp axis: {axis!r}')
+    if not math.isfinite(cube_yaw):
+        raise ValueError('Cube yaw must be finite')
+    best = None
+    for k in range(4):
+        angle = cube_yaw + k * math.pi / 2
+        delta = angle - GRASP_AXES[axis]
+        distance = abs(math.atan2(math.sin(delta), math.cos(delta)))
+        if best is None or distance < best[0]:
+            best = distance, angle
+    return best[1]
+
+
+def axis_instruction(obj_name: str, zone: str, axis: str | None = None) -> str:
+    """Stable collector/runner label; None preserves the legacy instruction.
+
+    left-right = fingers open along world x/image horizontal; front-back = y.
+    Matches Claude tools/axis_teacher.py exactly for numbered cubes.
+    """
+    text = instruction_text(obj_name, zone)[0]
+    if axis is None:
+        return text
+    if not isinstance(axis, str) or axis not in GRASP_AXES:
+        raise ValueError(f'Unknown grasp axis: {axis!r}')
+    head = 'Pick up the cube number '
+    if not text.startswith(head):
+        raise ValueError('grasp_axis instruction requires a numbered cube')
+    number, rest = text[len(head):].split(' ', 1)
+    return f'{head}{number} with the fingers {axis} {rest}'
+
+
 PUSH_DIRECTIONS = {
     'toward_robot': (0.0, -1.0),
     'away': (0.0, 1.0),

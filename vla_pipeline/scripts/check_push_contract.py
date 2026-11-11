@@ -15,7 +15,7 @@ import numpy as np
 
 from vlapipe import config as C, numbered
 from vlapipe.env import SortingEnv
-from vlapipe.planner import PUSH_DIRECTIONS, push_destination, push_instruction
+from vlapipe.planner import PUSH_DIRECTIONS, push_destination, push_instruction, axis_instruction
 from vlapipe.policy import ScriptedSortingPolicy
 from vlapipe.final_project_v2.common import dump, parse_response, public_task, task_text
 from vlapipe.final_project_v2 import runner
@@ -124,6 +124,10 @@ class PushChecks(unittest.TestCase):
             self.assertEqual(legacy['stop_reason'], 'object_attempt_limit')
             self.assertEqual(legacy['summary']['attempts'], {'object_1': 3})
             self.assertEqual(legacy['summary']['push_attempts'], {})
+            axis_task = {**transport, 'grasp_axis': 'front-back'}
+            axis_report, axis_policy = trial('axis', [axis_task])
+            self.assertEqual(axis_policy.tasks, [axis_instruction('object_1', 'right_zone', 'front-back')])
+            self.assertEqual(axis_report['history'][0]['grasp_axis'], 'front-back')
             a, policy = trial('A', [], 'A')
             self.assertEqual(a['summary']['planner_calls'], 0)
             expected = task_text(public_task(template('open')['command']))
@@ -142,17 +146,20 @@ class PushChecks(unittest.TestCase):
                 def __init__(self, env):
                     self.env = env
                 def set_subtask(self, subtask):
-                    expected = push_destination(self.env.object_pos('object_1')[:2], 'toward_robot')
-                    np.testing.assert_array_equal(subtask['push_to'], expected)
+                    if subtask.get('action') == 'push':
+                        expected = push_destination(self.env.object_pos('object_1')[:2], 'toward_robot')
+                        np.testing.assert_array_equal(subtask['push_to'], expected)
+                    else:
+                        assert subtask['grasp_axis'] == 'front-back'
                     self.tasks.append(subtask)
                 def select_action(self):
                     return np.array([0, 0, 0, 0, 0, 0, -1], dtype=np.float32)
-            with patch.object(runner, 'classical_next', side_effect=[push, None]), \
+            with patch.object(runner, 'classical_next', side_effect=[push, axis_task, None]), \
                     patch.object(runner, 'ScriptedSortingPolicy', Teacher):
                 cfg = runner.TrialConfig(condition='D', seconds=10, max_steps=8, video=False, device='cpu')
                 d = runner.run_trial(scene, root/'D', cfg)
             self.assertEqual(d['status'], 'completed', d.get('error'))
-            self.assertEqual(len(Teacher.tasks), 1)
+            self.assertEqual(len(Teacher.tasks), 2)
             self.assertNotIn('push_to', push)
 
 

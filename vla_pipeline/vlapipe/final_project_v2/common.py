@@ -7,7 +7,7 @@ import math
 from pathlib import Path
 
 from .. import config as C
-from ..planner import PUSH_DIRECTIONS
+from ..planner import PUSH_DIRECTIONS, GRASP_AXES
 
 
 def dump(path, value):
@@ -50,6 +50,8 @@ def public_task(command):
                          'target_zone': o['home_zone'], 'fixed_release_xy': list(slots[o['name']][:2])} for o in C.OBJECTS],
             'zones': {n: {'label': z['label_en'], 'x': list(z['x']), 'y': list(z['y'])} for n, z in C.ZONES.items()},
             'available_actions': ['transport', 'push'],
+            'grasp_axes': {'left-right': 'fingers open along world x / image left-right',
+                           'front-back': 'fingers open along world y / robot front-back'},
             'push_distance_m': C.PUSH_DISTANCE,
             'push_directions': {key: list(xy) for key, xy in PUSH_DIRECTIONS.items()},
             'push_attempt_limit_per_object': C.MAX_PUSH_ATTEMPTS,
@@ -75,6 +77,10 @@ Transport: {"object": "object_1", "action": "transport", "target_zone": "right_z
 Push: {"object": "object_1", "action": "push", "direction": "toward_robot", "reason": "strategy"}.
 Push direction must be toward_robot (-y), away (+y), left (-x/image left), or right (+x/image right).
 Push distance is fixed at 0.07 m. A push does not require target_zone. Do not output coordinates.
+Transport may optionally include "grasp_axis": "left-right" or "front-back".
+The teacher uses the cube face axis nearest the requested world axis. Omit grasp_axis for legacy grasping.
+Assessments may optionally include "free_axes": ["left-right", "front-back"] (or a subset/empty list).
+Judge each axis from the image: one blocked axis does not prove both axes are blocked.
 For legacy transport-only plans, an omitted action still means transport.
 You may transport a blocker to a storage zone before the obstructed object.
 Accessibility and ordering must be your own judgments from the supplied image and context.
@@ -105,6 +111,12 @@ def parse_response(raw):
                 or not isinstance(item.get('blockers'), list)
                 or any(n not in C.OBJECT_NAMES for n in item['blockers'])):
             raise ValueError('Invalid accessibility assessment')
+        if 'free_axes' in item:
+            axes = item['free_axes']
+            if (not isinstance(axes, list)
+                    or any(not isinstance(a, str) or a not in GRASP_AXES for a in axes)
+                    or len(set(axes)) != len(axes)):
+                raise ValueError('Invalid assessment free_axes')
     for item in value['plan']:
         if not isinstance(item, dict) or item.get('object') not in C.OBJECT_NAMES:
             raise ValueError('Invalid plan object')
@@ -112,7 +124,12 @@ def parse_response(raw):
         if action == 'transport':
             if not isinstance(item.get('target_zone'), str) or item['target_zone'] not in C.ZONES:
                 raise ValueError('Transport requires a listed target_zone')
+            if 'grasp_axis' in item and (not isinstance(item['grasp_axis'], str)
+                                        or item['grasp_axis'] not in GRASP_AXES):
+                raise ValueError('Invalid transport grasp_axis')
         elif action == 'push':
+            if 'grasp_axis' in item:
+                raise ValueError('grasp_axis is only supported for transport')
             if not isinstance(item.get('direction'), str) or item['direction'] not in PUSH_DIRECTIONS:
                 raise ValueError('Push requires a listed direction')
             if 'push_to' in item:

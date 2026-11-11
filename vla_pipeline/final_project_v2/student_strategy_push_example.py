@@ -11,7 +11,10 @@ import json
 def build_prompt(public_task, context):
     return (
         'Use the current image and execution history to choose transport or push. '
-        'Judge grasp clearance and destination occupancy from visual evidence. '
+        'Judge grasp clearance for both finger axes and destination occupancy from visual evidence. '
+        'Transport may specify grasp_axis left-right (world x) or front-back (world y); '
+        'assessments may report free_axes. An obstruction along one axis does not prove the other is blocked. '
+        'Explain whether an axis change is sufficient or whether a blocker must be moved or pushed. '
         'If choosing a push, explain which direction is clear and why moving that object helps. '
         'Use only toward_robot, away, left or right; the push distance is fixed at 7 cm. '
         'A push is not proof of placement: inspect the new image before choosing the next action. '

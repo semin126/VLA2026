@@ -21,7 +21,7 @@ from PIL import Image, ImageDraw
 
 from .. import config as C
 from .. import accessibility as access
-from ..planner import instruction_text, push_instruction, push_destination
+from ..planner import axis_instruction, push_instruction, push_destination
 from ..policy import ScriptedSortingPolicy, SmolVLAPolicy
 from . import PROTOCOL
 from .common import compose_prompt, digest, dump, file_hash, finite_positive, load_strategy, parse_response, public_task, task_text
@@ -437,7 +437,7 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                     counts[n] = counts.get(n, 0)+1
                     current = chosen
                     task_label = (push_instruction(n, chosen['direction']) if is_push
-                                  else instruction_text(n, chosen['target_zone'])[0])
+                                  else axis_instruction(n, chosen['target_zone'], chosen.get('grasp_axis')))
                     current_steps = 0
                     if learned is not None:
                         learned.reset()
@@ -504,6 +504,7 @@ def run_trial(scene_path, out, config: TrialConfig, *, planner_adapter=None, pol
                     feedback = {'event': 'after_action', 'instruction': task_label, 'action': current,
                                 'action_type': current.get('action', 'transport'),
                                 'direction': current.get('direction'),
+                                'grasp_axis': current.get('grasp_axis'),
                                 'steps': current_steps, 'termination': 'fixed_action_horizon' if learned else 'classical_controller_finished'}
                     history.append(feedback.copy())
                     event('after_action', feedback=feedback)

@@ -24,6 +24,7 @@ import numpy as np
 from . import config as C
 from . import scene as scene_mod
 from .controller import yaw_to_grasp_quat
+from .planner import GRASP_AXES, grasp_axis_yaw
 
 # 접근/파지 높이
 Z_HOVER = 0.16      # 물체 위 접근 높이 (테이블 기준)
@@ -91,6 +92,12 @@ class ScriptedSortingPolicy:
     # -- 서브태스크 --------------------------------------------------------
     def set_subtask(self, subtask: dict) -> None:
         """subtask = {'object':…, 'target_zone':…, 'action': transport|clear|push, …}"""
+        if 'grasp_axis' in subtask:
+            axis = subtask['grasp_axis']
+            if not isinstance(axis, str) or axis not in GRASP_AXES:
+                raise ValueError(f'Unknown grasp axis: {axis!r}')
+            if subtask.get('action', 'transport') != 'transport':
+                raise ValueError('grasp_axis is only supported for transport')
         self.subtask = subtask
         self.failure = None
         name = subtask["object"]
@@ -101,7 +108,7 @@ class ScriptedSortingPolicy:
         self._half_z = C.half_size(C.OBJECT_BY_NAME[name])[2]
         p = self.env.object_pos(name)
         self._pick_xy = (float(p[0]), float(p[1]))
-        _, self._grasp_quat = self.env.grasp_pose(name, 0.0)
+        self._grasp_quat = self._pick_quat(name)
         self._place_xy = place_target(self.env, name, subtask["target_zone"])
         self._attempt = 0
         self._enter("hover")
@@ -175,12 +182,17 @@ class ScriptedSortingPolicy:
         full_h = 2.0 * self._half_z
         return C.TABLE_TOP_Z + max(0.012, GRASP_DEPTH_FRAC * full_h)
 
+    def _pick_quat(self, name):
+        if 'grasp_axis' not in self.subtask:
+            return self.env.grasp_pose(name, 0.0)[1]
+        return yaw_to_grasp_quat(grasp_axis_yaw(self.env.object_yaw(name), self.subtask['grasp_axis']))
+
     def _refresh_pick(self) -> None:
         """하강 직전에 물체의 현재 위치/각도를 다시 읽는다 (접근 중 밀렸을 수 있음)."""
         name = self.subtask["object"]
         p = self.env.object_pos(name)
         self._pick_xy = (float(p[0]), float(p[1]))
-        _, self._grasp_quat = self.env.grasp_pose(name, 0.0)
+        self._grasp_quat = self._pick_quat(name)
 
     def _holding(self) -> bool:
         """물체를 아직 쥐고 있는가 (이송 중 낙하 감지용)."""
