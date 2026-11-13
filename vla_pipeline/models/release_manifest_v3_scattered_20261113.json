@@ -14,7 +14,11 @@
       "source": "Planner R8, step 2000 (fine-tuned from the R6 planner on 2000 synthetic layouts with two-axis grasp labels).",
       "use": "B/C planner. Writes the current output contract (assessments with free_axes, plan with grasp_axis).",
       "measured": {
-        "label_validation_80": {"format_accuracy": 1.0, "plan_pair_f1": 0.931, "exact_plan_accuracy": 0.45},
+        "label_validation_80": {
+          "format_accuracy": 1.0,
+          "plan_pair_f1": 0.931,
+          "exact_plan_accuracy": 0.45
+        },
         "known_weakness": "Does not use the narrow gaps between touching cubes: on 36 accessibility scenes its first plan was executable in open 12/12, one-axis-blocked 1/12, fully boxed 0/12. Choose the scattered-scene task (notebook v3.0) for comparisons."
       }
     },
@@ -30,26 +34,92 @@
       }
     },
     "vla_single": {
-      "bundle_release": "models-v3-scattered-20261113",
-      "url": "https://github.com/semin126/VLA2026/releases/download/models-v3-scattered-20261113/models-v3-scattered-20261113_vla_single_inference.zip",
-      "sha256": "06b7942499dc9c01ffa7650a24b01fa1878e4c29c32baf612e37e6f01541561e",
-      "bytes": 1807437636,
-      "source": "access_single_6000 step 6000: same starting model, trained on 300 whole-scene demonstrations of the five-cube accessibility layouts plus replay.",
-      "use": "A: receives only the whole-task command. Trained on clustered five-cube layouts; a matched whole-task model for scattered scenes will be released separately.",
-      "measured": {
-        "target_cubes_left_of_60_per_layout": {"open": 44, "one_axis": 47, "boxed": 37}
+      "bundle_release": "models-v3-scattered-20261113-a2",
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-v3-scattered-20261113-a2/models-v3-scattered-20261113-a2_vla_single_inference.zip",
+      "sha256": "5868f56f9c6008c8a026d577adc468db906baad3f91cfe7102c437d9a982b058",
+      "bytes": 1807437642,
+      "source": "scattered_single_3000 step 3000: the earlier whole-task model continued on 196 whole-scene demonstrations of scattered training scenes (seeds 900000+, separate from the 24 validation scenes).",
+      "use": "A: receives only the whole-task command. Matched to the scattered-scene task.",
+      "replaces": {
+        "bundle_release": "models-v3-scattered-20261113",
+        "sha256": "06b7942499dc9c01ffa7650a24b01fa1878e4c29c32baf612e37e6f01541561e",
+        "note": "Clustered five-cube model; still downloadable from the first release."
       }
     }
   },
   "evidence_36_scenes_seed42": {
     "scenes": "12 families x (open / one-axis-blocked / fully boxed), validation split",
     "target_cubes_left_of_60": {
-      "A": {"open": 44, "one_axis": 47, "boxed": 37},
-      "B": {"open": 34, "one_axis": 43, "boxed": 40},
-      "C_loop_C1": {"open": 34, "one_axis": 43, "boxed": 46},
-      "C_loop_C0": {"open": 26, "one_axis": 44, "boxed": 42}
+      "A": {
+        "open": 44,
+        "one_axis": 47,
+        "boxed": 37
+      },
+      "B": {
+        "open": 34,
+        "one_axis": 43,
+        "boxed": 40
+      },
+      "C_loop_C1": {
+        "open": 34,
+        "one_axis": 43,
+        "boxed": 46
+      },
+      "C_loop_C0": {
+        "open": 26,
+        "one_axis": 44,
+        "boxed": 42
+      }
     },
-    "paired_A_minus_C0_per_scene": {"open": [1.5, [0.58, 2.42]], "one_axis": [0.25, [-0.25, 0.75]], "boxed": [-0.42, [-1.08, 0.25]]},
+    "paired_A_minus_C0_per_scene": {
+      "open": [
+        1.5,
+        [
+          0.58,
+          2.42
+        ]
+      ],
+      "one_axis": [
+        0.25,
+        [
+          -0.25,
+          0.75
+        ]
+      ],
+      "boxed": [
+        -0.42,
+        [
+          -1.08,
+          0.25
+        ]
+      ]
+    },
     "reading": "The hierarchy helps when cubes are spread out; it does not help yet when cubes are packed together."
+  },
+  "evidence_scattered_24_scenes_seed42": {
+    "scenes": "scenes_v3/scattered_validation (24 scenes: 5 with 4, 9 with 5, 10 with 6 misplaced cubes)",
+    "models": "A = vla_single above; B/C = vla_hier and vlm of this release; C loop = student_strategy_c0_v2.py",
+    "target_cubes_left_of_125": {
+      "A": 81,
+      "B": 94,
+      "C": 86
+    },
+    "paired_per_scene": {
+      "A_minus_C": [
+        -0.21,
+        [
+          -1.04,
+          0.58
+        ]
+      ],
+      "B_minus_C": [
+        0.33,
+        [
+          -0.21,
+          0.88
+        ]
+      ]
+    },
+    "reading": "With a matched whole-task model, A and C are level on scattered scenes. The B/C robot policy placed only 31 of 117 instructed target cubes in B (26%): execution, not planning, limits the hierarchy."
   }
 }
