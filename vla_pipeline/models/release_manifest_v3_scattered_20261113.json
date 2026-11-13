@@ -1,0 +1,55 @@
+{
+  "release": "models-v3-scattered-20261113",
+  "stage": "research-preview-not-qualified",
+  "validated_motor_policy": false,
+  "release_url": "https://github.com/semin126/VLA2026/releases/tag/models-v3-scattered-20261113",
+  "notebook": "notebooks/Final_project_v3_0.ipynb",
+  "code_requirement": "Commit 7448f54 or later: grasp-axis instructions (left-right / front-back) and the current planner output contract.",
+  "models": {
+    "vlm": {
+      "bundle_release": "models-v3-scattered-20261113",
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-v3-scattered-20261113/models-v3-scattered-20261113_vlm_inference.zip",
+      "sha256": "b1a636fecd3eecbb91a640a1ae35d7e3f738e1639867149bf1e3977ea504427a",
+      "bytes": 1018597733,
+      "source": "Planner R8, step 2000 (fine-tuned from the R6 planner on 2000 synthetic layouts with two-axis grasp labels).",
+      "use": "B/C planner. Writes the current output contract (assessments with free_axes, plan with grasp_axis).",
+      "measured": {
+        "label_validation_80": {"format_accuracy": 1.0, "plan_pair_f1": 0.931, "exact_plan_accuracy": 0.45},
+        "known_weakness": "Does not use the narrow gaps between touching cubes: on 36 accessibility scenes its first plan was executable in open 12/12, one-axis-blocked 1/12, fully boxed 0/12. Choose the scattered-scene task (notebook v3.0) for comparisons."
+      }
+    },
+    "vla_hier": {
+      "bundle_release": "models-v3-scattered-20261113",
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-v3-scattered-20261113/models-v3-scattered-20261113_vla_hier_inference.zip",
+      "sha256": "ea6ac1a9df855c97bcac68f8a094db054fef77d68d36d9d6c86399f9c34d8db6",
+      "bytes": 1807437537,
+      "source": "access_hier_6000 step 6000: continued from the varied-start grounding model with 1,923 single-transport demonstrations (axis instructions, recovery after a failed grasp) plus replay.",
+      "use": "B/C: executes one instruction such as 'Pick up the cube number 3 with the fingers front-back and place it in the right storage zone.'",
+      "measured": {
+        "per_transport_success_36_scenes": "about 0.25-0.41 per attempt (B condition, seed 42)"
+      }
+    },
+    "vla_single": {
+      "bundle_release": "models-v3-scattered-20261113",
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-v3-scattered-20261113/models-v3-scattered-20261113_vla_single_inference.zip",
+      "sha256": "06b7942499dc9c01ffa7650a24b01fa1878e4c29c32baf612e37e6f01541561e",
+      "bytes": 1807437636,
+      "source": "access_single_6000 step 6000: same starting model, trained on 300 whole-scene demonstrations of the five-cube accessibility layouts plus replay.",
+      "use": "A: receives only the whole-task command. Trained on clustered five-cube layouts; a matched whole-task model for scattered scenes will be released separately.",
+      "measured": {
+        "target_cubes_left_of_60_per_layout": {"open": 44, "one_axis": 47, "boxed": 37}
+      }
+    }
+  },
+  "evidence_36_scenes_seed42": {
+    "scenes": "12 families x (open / one-axis-blocked / fully boxed), validation split",
+    "target_cubes_left_of_60": {
+      "A": {"open": 44, "one_axis": 47, "boxed": 37},
+      "B": {"open": 34, "one_axis": 43, "boxed": 40},
+      "C_loop_C1": {"open": 34, "one_axis": 43, "boxed": 46},
+      "C_loop_C0": {"open": 26, "one_axis": 44, "boxed": 42}
+    },
+    "paired_A_minus_C0_per_scene": {"open": [1.5, [0.58, 2.42]], "one_axis": [0.25, [-0.25, 0.75]], "boxed": [-0.42, [-1.08, 0.25]]},
+    "reading": "The hierarchy helps when cubes are spread out; it does not help yet when cubes are packed together."
+  }
+}
