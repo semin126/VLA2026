@@ -23,14 +23,19 @@
       }
     },
     "vla_hier": {
-      "bundle_release": "models-v3-scattered-20261113",
-      "url": "https://github.com/semin126/VLA2026/releases/download/models-v3-scattered-20261113/models-v3-scattered-20261113_vla_hier_inference.zip",
-      "sha256": "ea6ac1a9df855c97bcac68f8a094db054fef77d68d36d9d6c86399f9c34d8db6",
-      "bytes": 1807437537,
-      "source": "access_hier_6000 step 6000: continued from the varied-start grounding model with 1,923 single-transport demonstrations (axis instructions, recovery after a failed grasp) plus replay.",
+      "bundle_release": "models-v3-scattered-20261114-h2",
+      "url": "https://github.com/semin126/VLA2026/releases/download/models-v3-scattered-20261114-h2/models-v3-scattered-20261114-h2_vla_hier_inference.zip",
+      "sha256": "85b838adab72e063a8348209c50ff22b9e5a3d472700878bdae571d949451d02",
+      "bytes": 1807437554,
+      "source": "scattered_hier_3000 step 3000: access_hier_6000 continued 3000 steps on 1,055 single-transport demonstrations from 240 scattered training scenes (seeds 900000+) plus replay of earlier skills. Checkpoint fixed before evaluation.",
       "use": "B/C: executes one instruction such as 'Pick up the cube number 3 with the fingers front-back and place it in the right storage zone.'",
       "measured": {
-        "per_transport_success_36_scenes": "about 0.25-0.41 per attempt (B condition, seed 42)"
+        "scattered_validation_24_seed42": "B placed 35 of 117 instructed target cubes it tried (previous model: 31)."
+      },
+      "replaces": {
+        "bundle_release": "models-v3-scattered-20261113",
+        "sha256": "ea6ac1a9df855c97bcac68f8a094db054fef77d68d36d9d6c86399f9c34d8db6",
+        "note": "access_hier_6000 (accessibility scenes); still downloadable from the first release."
       }
     },
     "vla_single": {
@@ -96,9 +101,9 @@
     },
     "reading": "The hierarchy helps when cubes are spread out; it does not help yet when cubes are packed together."
   },
-  "evidence_scattered_24_scenes_seed42": {
+  "evidence_scattered_24_scenes_seed42_previous_vla_hier": {
     "scenes": "scenes_v3/scattered_validation (24 scenes: 5 with 4, 9 with 5, 10 with 6 misplaced cubes)",
-    "models": "A = vla_single above; B/C = vla_hier and vlm of this release; C loop = student_strategy_c0_v2.py",
+    "models": "A = vla_single above; B/C = previous vla_hier (access_hier_6000) and vlm of this release; C loop = student_strategy_c0_v2.py",
     "target_cubes_left_of_125": {
       "A": 81,
       "B": 94,
@@ -121,5 +126,96 @@
       ]
     },
     "reading": "With a matched whole-task model, A and C are level on scattered scenes. The B/C robot policy placed only 31 of 117 instructed target cubes in B (26%): execution, not planning, limits the hierarchy."
+  },
+  "evidence_scattered_h2_seed42": {
+    "models": "A = vla_single above; C = vla_hier above (h2) + vlm of this release; C loop = student_strategy_c0_v2.py",
+    "validation_24_scenes": {
+      "scenes": "scenes_v3/scattered_validation",
+      "target_cubes_left_of_125": {
+        "A": 81,
+        "B": 90,
+        "C": 70
+      },
+      "paired_per_scene": {
+        "A_minus_C": [
+          0.46,
+          [
+            -0.17,
+            1.04
+          ]
+        ],
+        "B_minus_C": [
+          0.83,
+          [
+            0.42,
+            1.29
+          ]
+        ],
+        "previous_C_minus_new_C": [
+          0.67,
+          [
+            0.21,
+            1.12
+          ]
+        ]
+      }
+    },
+    "confirmation_23_fresh_scenes": {
+      "scenes": "23 new scattered scenes (seeds 950000+), generated after the model was fixed; used for no training or choice",
+      "target_cubes_left_of_115": {
+        "A": 99,
+        "C": 64
+      },
+      "paired_per_scene": {
+        "A_minus_C": [
+          1.52,
+          [
+            0.91,
+            2.13
+          ]
+        ],
+        "C_better_scenes": 18,
+        "A_better_scenes": 3,
+        "by_misplaced_count": {
+          "4": [
+            1.2,
+            [
+              0.0,
+              2.2
+            ]
+          ],
+          "5": [
+            1.85,
+            [
+              1.0,
+              2.69
+            ]
+          ],
+          "6": [
+            1.0,
+            [
+              -0.2,
+              2.2
+            ]
+          ]
+        }
+      }
+    },
+    "pooled_47_scenes": {
+      "target_cubes_left_of_240": {
+        "A": 180,
+        "C": 134
+      },
+      "paired_per_scene_A_minus_C": [
+        0.98,
+        [
+          0.51,
+          1.43
+        ]
+      ],
+      "C_better_scenes": 32,
+      "A_better_scenes": 8
+    },
+    "reading": "With a robot policy trained on the same kind of scenes, the hierarchy (planner + loop) leaves about one cube fewer per scene than the whole-task model. Execution is still the main loss: C placed 51 of 109 instructed target cubes on the fresh scenes."
   }
 }
