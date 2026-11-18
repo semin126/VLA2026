@@ -1,0 +1,85 @@
+{
+  "run": "final_abcd_h2_s42",
+  "scenes": 24,
+  "targets": 120,
+  "left": {
+    "A": 90,
+    "B": 85,
+    "C": 67,
+    "D": 0
+  },
+  "disturbed_tidy_cubes": {
+    "A": 0,
+    "B": 1,
+    "C": 2,
+    "D": 0
+  },
+  "stop_reasons": {
+    "A": {
+      "time_limit": 24
+    },
+    "B": {
+      "plan_exhausted": 23,
+      "scene_completed": 1
+    },
+    "C": {
+      "student_stopped": 7,
+      "time_limit": 5,
+      "scene_completed": 1,
+      "empty_or_invalid_plan": 5,
+      "object_attempt_limit": 6
+    },
+    "D": {
+      "scene_completed": 24
+    }
+  },
+  "paired": {
+    "A-B": {
+      "mean_per_scene": 0.21,
+      "ci95": [
+        -0.38,
+        0.88
+      ],
+      "B_better_scenes": 7,
+      "A_better_scenes": 8
+    },
+    "A-C": {
+      "mean_per_scene": 0.96,
+      "ci95": [
+        0.38,
+        1.54
+      ],
+      "C_better_scenes": 15,
+      "A_better_scenes": 4
+    },
+    "B-C": {
+      "mean_per_scene": 0.75,
+      "ci95": [
+        0.12,
+        1.33
+      ],
+      "C_better_scenes": 13,
+      "B_better_scenes": 5
+    }
+  },
+  "transports": {
+    "B": {
+      "on_target_boundary": 8,
+      "never_lifted": 46,
+      "dropped_elsewhere": 23,
+      "placed_in_target": 39,
+      "still_held_or_airborne": 4
+    },
+    "C": {
+      "never_lifted": 92,
+      "dropped_elsewhere": 25,
+      "placed_in_target": 63,
+      "on_target_boundary": 21,
+      "still_held_or_airborne": 6
+    }
+  },
+  "success_per_transport": {
+    "B": 0.325,
+    "C": 0.304
+  }
+}
